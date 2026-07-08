@@ -308,7 +308,9 @@ function HistoryManager() {
                     Api. Also, we can add the custom entries to the diagram history. method can be used to print the diagrams.
                 </p>
 
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div >
     );
 }

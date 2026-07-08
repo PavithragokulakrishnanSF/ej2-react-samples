@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective, ResourceFieldsModel, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { tooltipData, editingResources } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -10,7 +9,7 @@ const TooltipTemplate = () => {
     updateSampleSection();
   }, [])
   let ganttInstance = useRef<GanttComponent>(null);
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -23,35 +22,35 @@ const TooltipTemplate = () => {
     baselineEndDate: 'BaselineEndDate',
     child: 'subtasks'
   };
-  const resourceFields: any = {
+  const resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName'
   };
   const taskbarTooltip = (props) => {
     var src = 'src/gantt/images/' + props.ganttProperties.resourceNames + '.png';
     return (
-    <table>
-      <tbody>
-        {props.ganttProperties.resourceNames &&
+      <table>
+        <tbody>
+          {props.ganttProperties.resourceNames &&
+            <tr>
+              <td rowSpan={3} style={{ padding: '3px' }}>
+                <img src={src} height='40px' />
+              </td>
+              <td style={{ padding: '3px' }}>Task done By:</td>
+              <td style={{ padding: '3px' }}>{props.ganttProperties.resourceNames}</td>
+            </tr>
+          }
           <tr>
-            <td rowSpan={3} style={{ padding: '3px' }}>
-              <img src={src} height='40px' />
-            </td>
-            <td style={{ padding: '3px' }}>Task done By:</td>
-            <td style={{ padding: '3px' }}>{props.ganttProperties.resourceNames}</td>
+            <td style={{ padding: '3px' }}>Starts On:</td>
+            <td style={{ padding: '3px' }}>{ganttInstance.current.getFormatedDate(props.StartDate)}</td>
           </tr>
-        }
-        <tr>
-          <td style={{ padding: '3px' }}>Starts On:</td>
-          <td style={{ padding: '3px' }}>{ganttInstance.current.getFormatedDate(props.StartDate)}</td>
-        </tr>
-        <tr>
-          <td style={{ padding: '3px' }}>Ends On:</td>
-          <td style={{ padding: '3px' }}>{ganttInstance.current.getFormatedDate(props.EndDate)}</td>
-        </tr>
-      </tbody>
-    </table>
-  );
+          <tr>
+            <td style={{ padding: '3px' }}>Ends On:</td>
+            <td style={{ padding: '3px' }}>{ganttInstance.current.getFormatedDate(props.EndDate)}</td>
+          </tr>
+        </tbody>
+      </table>
+    );
   };
   const templateTaskbar: any = taskbarTooltip;
   const baselineTooltip = (props) => {
@@ -76,7 +75,7 @@ const TooltipTemplate = () => {
       </tbody>
     </table>);
   };
-  const templateBaseline: any = baselineTooltip; 
+  const templateBaseline: any = baselineTooltip;
   const timelineTooltip = (props) => {
     const tier = props.tier;
     const date = props.date;
@@ -87,18 +86,18 @@ const TooltipTemplate = () => {
     const data = getTooltipData(new Date(date), endDate, tier);
 
     const themeIsDark = document.body.classList.contains('tailwind3-dark') ||
-                      document.body.classList.contains('material3-dark') ||
-                      document.body.classList.contains('highcontrast');
+      document.body.classList.contains('material3-dark') ||
+      document.body.classList.contains('highcontrast');
     const borderColor = themeIsDark ? 'black' : 'white';
 
     return (
       <div style={{ padding: '5px' }}>
-        <div style={{ paddingBottom: '9px', textAlign: 'center' , borderBottom: `2px solid ${borderColor}` }}>
+        <div style={{ paddingBottom: '9px', textAlign: 'center', borderBottom: `2px solid ${borderColor}` }}>
           <span style={{ fontWeight: 'bold', fontSize: '14px' }}>
             {tier === 'topTier' ? props.value : date}
           </span>
         </div>
-        <div style={{ display: 'flex', paddingBottom: '5px',  paddingTop: '9px' }}>
+        <div style={{ display: 'flex', paddingBottom: '5px', paddingTop: '9px' }}>
           <span style={{ fontWeight: 'bold' }}>Active Tasks:</span>
           <span style={{ paddingLeft: '2px' }}>{data.activeTasks}</span>
         </div>
@@ -117,7 +116,7 @@ const TooltipTemplate = () => {
   const getTooltipData = (startDate: Date, endDate: Date, tier: string) => {
     const gantt = ganttInstance.current;
     let activeTasks = [];
-   
+
     if (tier === 'topTier') {
       activeTasks = gantt.currentViewData.filter((task) => {
         const taskStart = new Date(task['StartDate']);
@@ -139,7 +138,7 @@ const TooltipTemplate = () => {
     const milestones = activeTasks.filter((task) => task.Duration === 0);
     const totalProgress = activeTasks.reduce((acc, task) => acc + (task.Progress || 0), 0);
     const overallProgress = (activeTasks.length > 0) ? (totalProgress / activeTasks.length).toFixed(2) : '0';
-   
+
     return {
       activeTasks: activeTasks.length,
       milestones: milestones.length,
@@ -152,11 +151,11 @@ const TooltipTemplate = () => {
     baseline: templateBaseline.bind(this),
     timeline: templateTimeline.bind(this),
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName',
     rightLabel: 'resources'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
   const projectStartDate: Date = new Date('03/26/2025');
@@ -176,7 +175,7 @@ const TooltipTemplate = () => {
             <ColumnDirective field='Duration' ></ColumnDirective>
             <ColumnDirective field='Predecessor' ></ColumnDirective>
             <ColumnDirective field='Progress' ></ColumnDirective>
-            <ColumnDirective field='BaselineStartDate'width={200} ></ColumnDirective>
+            <ColumnDirective field='BaselineStartDate' width={200} ></ColumnDirective>
             <ColumnDirective field='BaselineEndDate' width={200} ></ColumnDirective>
             <ColumnDirective field='resources' ></ColumnDirective>
           </ColumnsDirective>
@@ -192,15 +191,14 @@ const TooltipTemplate = () => {
         <p>Tooltip can be enabled or disabled using <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/tooltipSettings/#showtooltip">tooltipSettings.showTooltip</a> property.In this demo, the
           tooltip template is rendered for <code>taskbar</code>, <code>timeline</code> and <code>baseline</code> using the
           <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/tooltipSettings/#taskbar">tooltipSettings.taskbar</a>,  <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/tooltipSettings/#timeline">tooltipSettings.timeline</a>
-           and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/tooltipSettings/#baseline">tooltipSettings.baseline</a> properties.</p>
+          and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/tooltipSettings/#baseline">tooltipSettings.baseline</a> properties.</p>
         <p>The baseline feature enables the user to view the deviation between the planned dates and the actual dates of the tasks in a project.
           Baselines can be enabled in Gantt Chart by enabling the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#renderbaseline">renderBaseline</a> property along with mapping the data source values for <code>baselineStartDate</code> and <code>baselineEndDate</code> properties.</p>
 
-        <p>Gantt component features are segregated into individual feature-wise modules.To use a selection, inject the
-          <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method.To use markers, inject the
-          <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
-        <br/>
-          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/tooltip#enable-tooltip">documentation section</a>.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules.To use a selection and marker features, we need to inject the 
+          <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.</p>
+        <br />
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/taskbar#customize-tooltip-templates">documentation section</a>.</p>
       </div>
     </div>
   )

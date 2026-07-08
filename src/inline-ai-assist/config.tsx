@@ -13,6 +13,7 @@ export const InlineAIAssistSampleOrder: Object = [
     ]
   },
   { 'path': 'inline-ai-assist/ai-rich-text-editor',
+    'ignoreOnBuild': true,
     'component': 'RichTextEditor',
     'name': 'Rich Text Editor',
     'description':'Demonstrates the Inline AI Assist component in an email draft assistant scenario with AI-powered editing capabilities.',

@@ -1,4 +1,4 @@
-// Import React and necessary components from Syncfusion's EJ2 React Diagrams library for building the BPMN editor.
+// Import React and necessary components from React Diagram library for building the BPMN editor.
 import * as React from "react";
 import {
     SymbolPaletteComponent,
@@ -32,6 +32,8 @@ import { MenuEventArgs } from "@syncfusion/ej2-navigations";
 import "./bpmn-icons.css"; // Importing CSS for BPMN icons
 
 let diagram: Diagram;
+let paletteIconInstance: HTMLElement;
+let paletteSpaceInstance: HTMLElement;
 
 // Function to initialize a node
 const createNode = (id: string, width: number, height: number, offsetX: number, offsetY: number,
@@ -313,6 +315,7 @@ const createNode = (id: string, width: number, height: number, offsetX: number, 
   
   export class BpmnEditor extends SampleBase<{}, {}> {
     rendereComplete() {
+      addEvents();
       diagramInstance.fitToPage();
     }
     render() {
@@ -320,9 +323,9 @@ const createNode = (id: string, width: number, height: number, offsetX: number, 
             <div className="control-pane">
                 <div className="control-section">
                     <div className="sb-mobile-palette-bar">
-                        <div id="palette-icon" style={{ float: "right" }} className="e-ddb-icons1 e-toggle-palette"></div>
+                        <div id="palette-icon" ref={(paletteIcon) => (paletteIconInstance = paletteIcon)} style={{ float: "right" }} className="e-ddb-icons1 e-toggle-palette"></div>
                     </div>
-                    <div id="palette-space" className="sb-mobile-palette">
+                    <div id="palette-space" ref={(paletteSpace) => (paletteSpaceInstance = paletteSpace)} className="sb-mobile-palette">
                         <SymbolPaletteComponent
                         //Sets the default values of a Symbol Palette Component 
                             id="symbolpalette"
@@ -416,11 +419,37 @@ const createNode = (id: string, width: number, height: number, offsetX: number, 
                             The diagram component’s features are segregated into individual feature-wise modules. To enable undo and redo support, inject <code>UndoRedo</code> module into <code>services</code>.
                         </p>
                         <br />
-                    </div>
+                    
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
                 </div>
             </div>
         );
     }
+}
+
+let isMobile: boolean;
+//Enhances webpage functionality for mobile devices with a click event listener.
+function addEvents(): void {
+  isMobile = window.matchMedia('(max-width:550px)').matches;
+  if (isMobile) {
+    let paletteIcon: HTMLElement = paletteIconInstance;
+    if (paletteIcon) {
+      paletteIcon.addEventListener('click', openPalette, false);
+    }
+  }
+}
+// Manages the visibility state of the palette space on the webpage for mobile devices.
+function openPalette(): void {
+  let paletteSpace: HTMLElement = paletteSpaceInstance;
+  isMobile = window.matchMedia('(max-width:550px)').matches;
+  if (isMobile) {
+    if (!paletteSpace.classList.contains('sb-mobile-palette-open')) {
+      paletteSpace.classList.add('sb-mobile-palette-open');
+    } else {
+      paletteSpace.classList.remove('sb-mobile-palette-open');
+    }
+  }
 }
 
 // Define the function getConnectors

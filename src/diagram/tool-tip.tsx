@@ -362,13 +362,15 @@ export class Tooltip extends SampleBase<{}, {}> {
                 </div>
                 <div id='description'>
                     <p>
-                    Using diagram’s <code>tooltip</code> we can define the tooltip for the diagram nodes as well as connector. We can control the <code>animation</code>,
+                    Using diagram’s <code>tooltip</code> we can define the tooltip for the diagram nodes as well as connector. We can control the <code>animation</code>, 
                     <code>position</code>, <code>effects</code> of the tooltip using <code>tooltip</code> property of the diagram. Also, we can define the custom tooltip
                     as either text or HTML element using <code>content</code> property of the tooltip. We can control the different tooltip settings
                     to each connector and node.
                    </p>
                     <br />
-                </div>
+                
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
             </div>
         );
     }

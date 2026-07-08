@@ -1,4 +1,4 @@
-// Import React and necessary components from Syncfusion's EJ2 React Diagrams library to build diagrams.
+// Import React and necessary components from React Diagram library to build diagrams.
 import * as React from "react";
 import {
     HierarchicalTree,
@@ -32,6 +32,7 @@ let toolbarEditor: ToolbarComponent;
 
 // Main function component for Zoom and Pan functionality.
 function ZoomAndPan() {
+    const isMobileView = window.innerWidth <= 550;
 
     React.useEffect(() => {
         // Call functions to update sample section 
@@ -156,7 +157,6 @@ function ZoomAndPan() {
                             clicked={handleToolbarClick}
                         >
                             <ItemsDirective>
-                                {/* Zoom In icon */}
                                 <ItemDirective id='ZoomIn' prefixIcon="e-icons e-zoom-in" tooltipText="Zoom In" />
                                 {/* Zoom Out icon */}
                                 <ItemDirective id='ZoomOut' prefixIcon="e-icons e-zoom-out" tooltipText="Zoom Out" />
@@ -166,13 +166,12 @@ function ZoomAndPan() {
                                 {/* Pan Tool icon */}
                                 <ItemDirective id='PanTool' prefixIcon="e-icons e-pan" tooltipText="Pan Tool" />
                                 <ItemDirective id='Separator2' type="Separator" />
-
+                                {!isMobileView && <ItemDirective id='FitToPage' prefixIcon="e-icons e-zoom-to-fit" tooltipText="Fit To Page" />}
+                                {!isMobileView && <ItemDirective id='Separator3' type="Separator" />}
                                 {/* reset icon */}
                                 <ItemDirective id='Reset' prefixIcon="e-icons e-reset" tooltipText="Reset" />
-                                {/* Fit To Page icon */}
-                                <ItemDirective id='FitToPage' prefixIcon="e-icons e-zoom-to-fit" tooltipText="Fit To Page" />
-                                <ItemDirective id='Separator3' type="Separator" />
-                                {/* Bring Into View icon */}
+                                {!isMobileView && <ItemDirective id='FitToPage' prefixIcon="e-icons e-zoom-to-fit" tooltipText="Fit To Page" />}
+                                {!isMobileView && <ItemDirective id='Separator3' type="Separator" />}
                                 <ItemDirective id='BringIntoView' prefixIcon="e-icons e-bring-to-view" tooltipText="Bring Into View" disabled={true} />
                                 {/* Bring Into Center icon */}
                                 <ItemDirective id='BringIntoCenter' prefixIcon="e-icons e-bring-to-center" tooltipText="Bring Into Center" disabled={true} />
@@ -266,7 +265,9 @@ function ZoomAndPan() {
                     In this sample,  use <code>pan</code>, <code>reset</code>, <code>zoomIn</code>, and <code>ZoomOut</code> options to pan, reset the zoom and zoomin/out the diagram.
                 </p>
                 <br />
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

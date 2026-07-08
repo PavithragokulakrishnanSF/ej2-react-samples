@@ -68,6 +68,9 @@ export class DragAndDropBetween extends SampleBase<{}, {}> {
             <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/treegrid/row/row-drag-and-drop#drag-and-drop-to-another-tree-grid">
             documentation </a>section.
         </p>   
+        <p>
+            Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+        </p>
     </div>
     </div>
         )

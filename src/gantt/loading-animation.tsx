@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { DropDownListComponent, ChangeEventArgs } from '@syncfusion/ej2-react-dropdowns';
-import { GanttComponent, Inject, Filter, ColumnsDirective, ColumnDirective, Selection, VirtualScroll, Sort } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Filter, ColumnsDirective, ColumnDirective, Selection, VirtualScroll, Sort, LabelSettingsModel, SplitterSettingsModel, LoadingIndicatorModel } from '@syncfusion/ej2-react-gantt';
 import { virtualData } from './data';
 import { SampleBase } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
@@ -24,7 +23,7 @@ export class LoadingAnimation extends SampleBase<{}, {}> {
       this.ganttInstance.refresh();
     }
   }
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -33,48 +32,49 @@ export class LoadingAnimation extends SampleBase<{}, {}> {
     progress: 'Progress',
     parentID: 'parentID'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
-  public loadingIndicator: any = {
+  public loadingIndicator: LoadingIndicatorModel = {
     indicatorType: 'Shimmer'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     taskLabel: 'Progress'
   };
+  public projectEndDate: Date = new Date('09/21/2025');
   render() {
     return (
       <div className='control-pane'>
         <div className='col-md-9'>
-            <GanttComponent id='Filtering' ref={gantt => this.ganttInstance = gantt} dataSource={virtualData} treeColumnIndex={1} labelSettings={this.labelSettings}
-            allowSelection={true} allowFiltering={true} allowSorting={true} highlightWeekends={true} enableVirtualization={true}
-            taskFields={this.taskFields} splitterSettings={this.splitterSettings} height='650px' taskbarHeight={25} rowHeight={46} loadingIndicator = {this.loadingIndicator}>
-              <ColumnsDirective>
-                  <ColumnDirective field='TaskID' width={100}/>
-                  <ColumnDirective field='TaskName' headerText='Task Name'/>
-                  <ColumnDirective field='StartDate' width={170}/>
-                  <ColumnDirective field='Duration'/>
-                  <ColumnDirective field='Progress'/>
-              </ColumnsDirective>
-              <Inject services={[Filter, Selection, VirtualScroll, Sort]} />
-            </GanttComponent>
-            </div>
-          <div className='col-md-3 property-section'>
+          <GanttComponent id='LoadingAnimation' ref={gantt => this.ganttInstance = gantt} dataSource={virtualData} treeColumnIndex={1} labelSettings={this.labelSettings}
+            allowSelection={true} allowFiltering={true} allowSorting={true} highlightWeekends={true} enableVirtualization={true} projectEndDate={this.projectEndDate}
+            taskFields={this.taskFields} splitterSettings={this.splitterSettings} height='650px' taskbarHeight={25} rowHeight={46} loadingIndicator={this.loadingIndicator}>
+            <ColumnsDirective>
+              <ColumnDirective field='TaskID' width={100} />
+              <ColumnDirective field='TaskName' headerText='Task Name' width="300px" />
+              <ColumnDirective field='StartDate' width={170} />
+              <ColumnDirective field='Duration' />
+              <ColumnDirective field='Progress' />
+            </ColumnsDirective>
+            <Inject services={[Filter, Selection, VirtualScroll, Sort]} />
+          </GanttComponent>
+        </div>
+        <div className='col-md-3 property-section'>
           <PropertyPane title='Properties'>
             <table id='property' title='Properties' className='property-panel-table' style={{ width: '100%' }}>
-            <tbody>
-            <tr>
-              <td style={{ width: '50%',paddingLeft:0 }}>
-              <div style={{ paddingTop: '10px',paddingLeft:0}}>Indicator Type </div>
-              </td>
-              <td style={{ width: '70%' }}>
-              <div>
-              <DropDownListComponent width="113px" id="seltype" change={this.onChange.bind(this)}
-                dataSource={this.filterType} value="Shimmer" />
-              </div>
-              </td>
-            </tr>
-            </tbody>
+              <tbody>
+                <tr>
+                  <td style={{ width: '50%', paddingLeft: 0 }}>
+                    <div style={{ paddingTop: '10px', paddingLeft: 0 }}>Indicator Type </div>
+                  </td>
+                  <td style={{ width: '70%' }}>
+                    <div>
+                      <DropDownListComponent width="113px" id="seltype" change={this.onChange.bind(this)}
+                        dataSource={this.filterType} value="Shimmer" />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </PropertyPane>
         </div>
@@ -84,7 +84,7 @@ export class LoadingAnimation extends SampleBase<{}, {}> {
 
         <div id="description">
           <p>
-            The Gantt has an option to show a loading indicator in-between the time of fetching the data and binding it to the gantt during initial rendering, refreshing or 
+            The Gantt has an option to show a loading indicator in-between the time of fetching the data and binding it to the gantt during initial rendering, refreshing or
             while performing action like sorting, filtering and more.
           </p>
           <p>
@@ -100,8 +100,9 @@ export class LoadingAnimation extends SampleBase<{}, {}> {
           <p>
             By default <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#enablevirtualmaskrow">enableVirtualMaskRow</a> is set to true which renders Shimmer during virtual scrolling.
           </p>
+          <p>Gantt component features are segregated into individual feature-wise modules. To use virtualscroll, Filter, sorting and selection features, we need to inject <code>VirtualScroll</code>, <code>Filter</code>, <code>Sort</code> and <code>Selection</code> into the <code>Inject Services</code> section.</p>
           <br/>
-          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/nextjs-getting-started#add-syncfusion-react-component">documentation section</a>.</p>
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/loading-animation">documentation section</a>.</p>
         </div>
       </div>
     )

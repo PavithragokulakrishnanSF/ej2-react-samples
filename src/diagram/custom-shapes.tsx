@@ -1,4 +1,4 @@
-// Importing necessary modules from React, ReactDOM, and Syncfusion Diagram library
+// Importing necessary modules from React, ReactDOM, and React Diagram library
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 import './custom.module.css';
@@ -544,7 +544,9 @@ export class HtmlNode extends SampleBase<{}, {}> {
             This example illustrates how an HTML control is hosted inside a node. By setting <code>HTML</code> to the type property of the shape, the template node can be enabled. You can define the content to be hosted by using <code>NodeTemplate</code>.
           </p>
           <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
     );
   }

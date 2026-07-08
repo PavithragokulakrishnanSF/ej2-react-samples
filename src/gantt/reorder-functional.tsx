@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import { GanttComponent, Inject, Selection, Reorder, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, Reorder, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { DropDownListComponent, ChangeEventArgs } from '@syncfusion/ej2-react-dropdowns';
 import { ActionEventArgs } from '@syncfusion/ej2-react-grids';
 import { Column } from '@syncfusion/ej2-grids';
@@ -13,7 +12,7 @@ const ReorderColumn = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -62,11 +61,11 @@ const ReorderColumn = () => {
       columnIndexDropdownObj.current.value = index.toString();
     }
   }
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     rightLabel: 'TaskName'
   };
-  const splitterSettings: any = {
-    columnIndex: 4
+  const splitterSettings: SplitterSettingsModel = {
+    columnIndex: 3
   };
   const projectStartDate: Date = new Date('03/31/2025');
   const projectEndDate: Date = new Date('07/20/2025');
@@ -81,10 +80,10 @@ const ReorderColumn = () => {
             <ColumnsDirective>
               <ColumnDirective field='TaskID' headerText='ID' width='100' ></ColumnDirective>
               <ColumnDirective field='TaskName' headerText='Name' width='250'></ColumnDirective>
-              <ColumnDirective field='StartDate'></ColumnDirective>
-              <ColumnDirective field='EndDate'></ColumnDirective>
-              <ColumnDirective field='Duration'></ColumnDirective>
-              <ColumnDirective field='Progress'></ColumnDirective>
+              <ColumnDirective field='StartDate' headerText='Start Date'></ColumnDirective>
+              <ColumnDirective field='EndDate' headerText='End Date'></ColumnDirective>
+              <ColumnDirective field='Duration' headerText='Duration'></ColumnDirective>
+              <ColumnDirective field='Progress' headerText='Progress'></ColumnDirective>
               <ColumnDirective field='Predecessor' headerText='Dependency'></ColumnDirective>
             </ColumnsDirective>
             <Inject services={[Selection, Reorder]} />
@@ -93,31 +92,31 @@ const ReorderColumn = () => {
         <div className='col-md-3 property-section'>
           <PropertyPane title='Properties'>
             <table id='property' title='Properties' className='property-panel-table' style={{ width: '100%' }}>
-            <tbody>
-              <tr style={{ height: '50px' }}>
-                <td style={{ width: '30%' }}>
-                  <div style={{ paddingTop: '10px' }}> Column </div>
-                </td>
-                <td style={{ width: '50%', paddingRight: '10px' }}>
-                  <div>
-                    <DropDownListComponent width="120px" id="columns" change={columnNameChange.bind(this)}
-                      dataSource={columnNames} fields={{ text: 'name', value: 'id' }} value="TaskID"
-                      ref={columnsDropdownObj} />
-                  </div>
-                </td>
-              </tr>
-              <tr style={{ height: '50px' }}>
-                <td style={{ width: '30%' }}>
-                  <div> Column Index </div>
-                </td>
-                <td style={{ width: '50%', paddingRight: '10px' }}>
-                  <div>
-                    <DropDownListComponent width="120px" id="columnindex" change={columnIndexChange.bind(this)}
-                      dataSource={columnsIndex} fields={{ text: 'name', value: 'id' }} value="0"
-                      ref={columnIndexDropdownObj} />
-                  </div>
-                </td>
-              </tr>
+              <tbody>
+                <tr style={{ height: '50px' }}>
+                  <td style={{ width: '30%' }}>
+                    <div style={{ paddingTop: '10px' }}> Column </div>
+                  </td>
+                  <td style={{ width: '50%', paddingRight: '10px' }}>
+                    <div>
+                      <DropDownListComponent width="120px" id="columns" change={columnNameChange.bind(this)}
+                        dataSource={columnNames} fields={{ text: 'name', value: 'id' }} value="TaskID"
+                        ref={columnsDropdownObj} />
+                    </div>
+                  </td>
+                </tr>
+                <tr style={{ height: '50px' }}>
+                  <td style={{ width: '30%' }}>
+                    <div> Column Index </div>
+                  </td>
+                  <td style={{ width: '50%', paddingRight: '10px' }}>
+                    <div>
+                      <DropDownListComponent width="120px" id="columnindex" change={columnIndexChange.bind(this)}
+                        dataSource={columnsIndex} fields={{ text: 'name', value: 'id' }} value="0"
+                        ref={columnIndexDropdownObj} />
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </PropertyPane>
@@ -134,9 +133,7 @@ const ReorderColumn = () => {
         <p>The location in which the column to be placed will be indicated by two arrows symbols.</p>
         <p>In this demo, you can either reorder columns by dragging and dropping or by selecting column name and column index from dropdown to reorder the columns.
         </p>
-        <b>Injecting Module:</b>
-        <p>Gantt features are segregated into individual feature-wise modules. To use reordering feature, we need to
-          inject <code>Reorder</code> module into the <code>services</code>.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use reordering and selection features, we need to inject <code>Reorder</code> and <code>Selection</code> into the <code>Inject Services</code> section.</p>
         <br/>
         <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/columns/column-reordering">documentation section</a>.</p>
       </div>

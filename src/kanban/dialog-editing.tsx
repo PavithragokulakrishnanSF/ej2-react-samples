@@ -104,7 +104,7 @@ export class KanbanDialogFormTemplate extends React.Component<{}, {}> {
     onChange(args: any): void {
         let key: string = args.target.name;
         let value: string = args.target.value;
-        this.setState({ [key]: value });
+        this.setState((prevState: any) => ({ ...prevState, [key]: value }));
     }
     render(): any {
         let data: KanbanDataModel = this.state;

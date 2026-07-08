@@ -34,7 +34,7 @@ const matchedCurrency: { [key: string]: string } = {
 loadCldr(numberingSystems, chinaCultureData, enCultureData, swissCultureDate, currencyData, deCultureData, arCultureData);
 L10n.load(Locale);
 setCulture('en');
-registerLicense('{SyncfusionJSLicensekey}');
+registerLicense((window as any).syncfusion_license);
 
 /**
  * Mobile View.
@@ -106,15 +106,19 @@ let switcherPopup: Popup;
 let themeSwitherPopup: Popup;
 let searchPopup: Popup;
 let settingsPopup: Popup;
+let productsPopup: Popup;
 let searchInstance: any;
 let settingElement: HTMLElement = select('.sb-setting-btn') as HTMLElement;
 let openedPopup: any;
 let headerThemeSwitch: HTMLElement = document.getElementById('header-theme-switcher');
+let headerProductsSwitch: HTMLElement = document.getElementById('header-products-switcher');
 let prevAction: string;
 let themeDropDown: DropDownList;
 let themeModeDropDown: DropDownList;
 let cultureDropDown: DropDownList;
 let currencyDropDown: DropDownList;
+let productsDropDown: DropDownList;
+let productsList: HTMLElement = document.getElementById('productslist') as HTMLElement;
 let newYear: number = new Date().getFullYear();
 let copyRight: HTMLElement= document.querySelector('.sb-footer-copyright');
 copyRight.innerHTML = "Copyright © 2001 - " + newYear + " Syncfusion<sup>®</sup> Inc.";
@@ -277,6 +281,12 @@ function renderSbPopups(): void {
     relateTo: inputele, position: { X: 'left', Y: 'bottom' }
     , collision: { X: 'flip', Y: 'flip' }
   });
+  productsPopup = new Popup(document.getElementById('products-popup'), {
+    offsetY: 2,
+    zIndex: 10012,
+    relateTo: select('.sb-header-item.sb-table-cell.sb-products-wrapper') as HTMLElement, position: { X: 'left', Y: 'bottom' },
+    collision: { X: 'flip', Y: 'flip' }
+  });
   settingsPopup = new Popup(document.getElementById('settings-popup'), {
     offsetY: 5,
     zIndex: 10012,
@@ -298,6 +308,7 @@ function renderSbPopups(): void {
   searchPopup.hide();
   switcherPopup.hide();
   themeSwitherPopup.hide();
+  productsPopup.hide();
   themeDropDown = new DropDownList({
         index: themeCollection.indexOf(selectedTheme.replace('-dark', '')),
     change: (e: any) => {
@@ -366,6 +377,26 @@ function renderSbPopups(): void {
   currencyDropDown.appendTo('#sb-setting-currency');
   themeDropDown.appendTo('#sb-setting-theme');
   themeModeDropDown.appendTo('#sb-theme-mode');
+  productsDropDown = new DropDownList({
+    index: 0,
+    change: (e: any) => {
+      let productUrl: string = '';
+      const currentTheme = selectedTheme || 'tailwind3';
+
+      if (e.value === 'pdf') {
+        productUrl = `https://document.syncfusion.com/demos/pdf-viewer/react/#/${currentTheme}/pdfviewer/default.html`;
+      } else if (e.value === 'spreadsheet') {
+        productUrl = `https://document.syncfusion.com/demos/spreadsheet-editor/react/#/${currentTheme}/spreadsheet/default.html`;
+      } else if (e.value === 'docx') {
+        productUrl = `https://document.syncfusion.com/demos/docx-editor/react/#/${currentTheme}/document-editor/default.html`;
+      }
+
+      if (productUrl) {
+        window.open(productUrl, '_blank');
+      }
+    }
+  });
+  productsDropDown.appendTo('#sb-setting-products');
 
   /**
    * add header to element
@@ -467,6 +498,10 @@ function sbHeaderClick(action: string, preventSearch?: boolean): void {
       headerThemeSwitch.classList.toggle('active');
       curPopup = themeSwitherPopup;
       break;
+    case 'changeProducts':
+      headerProductsSwitch.classList.toggle('active');
+      curPopup = productsPopup;
+      break;
     case 'toggleSettings':
       settingElement.classList.toggle('active');
       themeDropDown.index = themeCollection.indexOf(selectedTheme);
@@ -475,6 +510,7 @@ function sbHeaderClick(action: string, preventSearch?: boolean): void {
   }
   if (action === 'closePopup') {
     headerThemeSwitch.classList.remove('active');
+    headerProductsSwitch.classList.remove('active');
     settingElement.classList.remove('active');
   }
   if (curPopup && curPopup !== openedPopup) {
@@ -561,6 +597,19 @@ function bindEvents(): void {
     }
   });
   themeList.addEventListener('click', changeTheme);
+  headerProductsSwitch.addEventListener('click', (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    sbHeaderClick('changeProducts');
+  });
+  headerProductsSwitch.addEventListener('keydown', function (e: KeyboardEvent) {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      sbHeaderClick('changeProducts');
+    }
+  });
+  if (productsList) {
+    productsList.addEventListener('click', handleProductSelection);
+  }
   document.addEventListener('click', sbHeaderClick.bind(this, 'closePopup'));
   settingElement.addEventListener('click', (e: MouseEvent) => {
     e.preventDefault();
@@ -1144,3 +1193,30 @@ select('.close-button').addEventListener('click', () => {
     banner.classList.add('sb-hide');
   }
 });
+
+/**
+ * Product Selection Handler - Follows theme dropdown pattern
+ * Works in both Desktop and Mobile modes
+ */
+function handleProductSelection(e: MouseEvent): void {
+  let target: Element = e.target as HTMLElement;
+  target = closest(target, 'li');
+  if (!target) return;
+
+  const productText = select('.switch-text', target)?.textContent || '';
+  const currentTheme = selectedTheme || 'tailwind3';
+  
+  let productUrl: string = '';
+
+  if (productText.includes('PDF')) {
+    productUrl = `https://document.syncfusion.com/demos/pdf-viewer/react/#/${currentTheme}/pdfviewer/default.html`;
+  } else if (productText.includes('Spreadsheet')) {
+    productUrl = `https://document.syncfusion.com/demos/spreadsheet-editor/react/#/${currentTheme}/spreadsheet/default.html`;
+  } else if (productText.includes('Docx') || productText.includes('DOCX')) {
+    productUrl = `https://document.syncfusion.com/demos/docx-editor/react/#/${currentTheme}/document-editor/default.html`;
+  }
+
+  if (productUrl) {
+    window.open(productUrl, '_blank');
+  }
+}

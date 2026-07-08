@@ -1,4 +1,4 @@
-// Import React and necessary components from Syncfusion's EJ2 React Diagrams library to build diagrams.
+// Import React and necessary components from React Diagram library to build diagrams.
 import * as React from "react";
 import {
     HierarchicalTree,
@@ -32,6 +32,8 @@ let toolbarEditor: ToolbarComponent;
 
 export class ZoomAndPan extends SampleBase<{}, {}> {
     render() {
+        // Check if mobile view (screen width <= 550px)
+        const isMobileView = window.innerWidth <= 550;
         return (
             <div className="control-pane">
                 <div className="col-lg-12 control-section">
@@ -61,9 +63,9 @@ export class ZoomAndPan extends SampleBase<{}, {}> {
                                     {/* reset icon */}
                                     <ItemDirective id='Reset' prefixIcon="e-icons e-reset" tooltipText="Reset" />
 
-                                    {/* Fit To Page icon */}
-                                    <ItemDirective id='FitToPage' prefixIcon="e-icons e-zoom-to-fit" tooltipText="Fit To Page" />
-                                    <ItemDirective id='Separator3' type="Separator" />
+                                    {/* Fit To Page icon - Only show on desktop view */}
+                                    {!isMobileView && <ItemDirective id='FitToPage' prefixIcon="e-icons e-zoom-to-fit" tooltipText="Fit To Page" />}
+                                    {!isMobileView && <ItemDirective id='Separator3' type="Separator" />}
 
                                     {/* Bring Into View icon */}
                                     <ItemDirective id='BringIntoView' prefixIcon="e-icons e-bring-to-view" tooltipText="Bring Into View" disabled={true} />
@@ -160,7 +162,9 @@ export class ZoomAndPan extends SampleBase<{}, {}> {
                         In this sample,  use <code>pan</code>, <code>reset</code>, <code>zoomIn</code>, and <code>ZoomOut</code> options to pan, reset the zoom and zoomin/out the diagram.
                     </p>
                     <br />
-                </div>
+                
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
             </div>
         );
     }

@@ -156,7 +156,7 @@ function OverView() {
         </DashboardLayoutComponent>
       </div>
       <div id="action-description">
-                <p>This sample shows an overview of <a target="_blank" href="https://www.syncfusion.com/react-components/react-charts" aria-label="Navigate to explore the Syncfusion React Charts">React Charts</a> that allows users to visualize data easily and take decisions based on it. There are different types of charts to create feature rich apps.</p>
+                <p>This sample shows an overview of <a target="_blank" href="https://www.syncfusion.com/react-components/react-charts" aria-label="Navigate to explore the React Charts">React Charts</a> that allows users to visualize data easily and take decisions based on it. There are different types of charts to create feature rich apps.</p>
                 </div>
                 <div id="description">
                     <p>
@@ -167,6 +167,9 @@ function OverView() {
                     </p>
                     <p>
                     More information on the React Chart types can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/chart/chart-types/line" aria-label="Navigate to the documentation for Line Chart in React Chart component">documentation section</a>.
+                    </p>
+                     <p>
+                    Looking for the full React Charts component overview, features, pricing, and documentation? Visit the  <a target="_blank" href="https://www.syncfusion.com/react-components/react-charts" aria-label="Navigate to the documentation for Line Chart in React Chart component">React Charts</a> page.
                     </p>
                 </div>
 <svg style={{ height: '0' }}>

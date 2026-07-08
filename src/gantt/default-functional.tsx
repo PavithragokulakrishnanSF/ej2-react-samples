@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { useEffect, useRef } from 'react';
-import { GanttComponent, Inject, Selection, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { useEffect } from 'react';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -10,7 +9,7 @@ const Default = () => {
     updateSampleSection();
   }, [])
   let ganttInstance: GanttComponent;
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -18,22 +17,21 @@ const Default = () => {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-    parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  const splitterSettings:any= {
-      columnIndex: 2
+  const splitterSettings: SplitterSettingsModel = {
+    columnIndex: 2
   };
   const projectStartDate: Date = new Date('03/26/2025');
   const projectEndDate: Date = new Date('07/20/2025');
-  const onCreated=(): void=>{
-    if(document.querySelector('.e-bigger'))
-        {
-            ganttInstance.rowHeight=48;
-            ganttInstance.taskbarHeight=28;
-        }
+  const onCreated = (): void => {
+    if (document.querySelector('.e-bigger')) {
+      ganttInstance.rowHeight = 48;
+      ganttInstance.taskbarHeight = 28;
+    }
   }
   return (
     <div className='control-pane'>
@@ -67,11 +65,12 @@ const Default = () => {
           taskbars, timeline units and dependency lines in touch enabled devices.
         </p>
         <p>
-          Gantt component features are segregated into individual feature-wise modules. To use a selection support we need to inject the
-          <code>Selection</code> module.
+          Gantt component features are segregated into individual feature-wise modules. To use selection feature, inject the <code>Selection</code> into the <code>Inject Services</code> section.
         </p>
-        <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/getting-started#adding-gantt-component">documentation section</a>.</p>
+        <br />
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/getting-started">documentation section</a>.</p>
+        <br />
+        <p>Looking for the full React Gantt Chart component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-gantt-chart">React Gantt Chart</a> page.</p>
       </div>
     </div>
   )

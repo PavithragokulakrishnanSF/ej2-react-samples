@@ -1,4 +1,4 @@
-// Importing necessary modules from React, ReactDOM, and Syncfusion Diagram library
+// Importing necessary modules from React, ReactDOM, and React Diagram library
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 import {
@@ -332,7 +332,7 @@ export class GettingStartedNodes extends SampleBase<{}, {}> {
         <div id="description">
           <p>
             This example shows how to add nodes to a diagram control and how to
-            customize the appearance of the nodes. The
+            customize the appearance of the nodes. The 
             <code>style</code> property of the node can be used to customize the
             appearance of the nodes.
           </p>
@@ -344,12 +344,14 @@ export class GettingStartedNodes extends SampleBase<{}, {}> {
 
           <p>
             Here, you can see how to lock nodes to disable editing and how to
-            enable proportional resizing. The
+            enable proportional resizing. The 
             <code>constraints</code> property of the node allows you to
             enable/disable editing and proportional resizing.
           </p>
           <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
     );
   }

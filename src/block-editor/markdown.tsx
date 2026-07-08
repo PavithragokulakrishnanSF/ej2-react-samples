@@ -33,7 +33,7 @@ export class MarkdownBlocks extends React.PureComponent<{}, State> {
   private closeBtnRef: ButtonComponent | null = null;
   private downloadBtnRef: ButtonComponent | null = null;
 
-  private width: string = '220px';
+  private width: string = '240px';
   private enableDock: boolean = true;
   private dockSize: string = '33px';
   private mediaQuery: string = '(min-width: 600px)';
@@ -164,13 +164,13 @@ export class MarkdownBlocks extends React.PureComponent<{}, State> {
     {
       id: 'Team_Sessions',
       name: 'Team Sessions',
-      mdFile: 'src/block-editor/mdfiles/Team Sessions.md',
+      mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Team%20Sessions.md',
       selected: true,
       expanded: true,
       children: [
-        { id: '1', name: 'Meeting minutes.md', mdFile: 'src/block-editor/mdfiles/Meeting minutes.md' },
-        { id: '2', name: 'Brain storming.md', mdFile: 'src/block-editor/mdfiles/Brain storming.md' },
-        { id: '3', name: 'Retrospective.md', mdFile: 'src/block-editor/mdfiles/Retrospective.md' },
+        { id: '1', name: 'Meeting minutes.md', mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Meeting%20minutes.md' },
+        { id: '2', name: 'Brain storming.md', mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Brain%20storming.md' },
+        { id: '3', name: 'Retrospective.md', mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Retrospective.md' },
       ]
     }
   ];
@@ -192,7 +192,7 @@ export class MarkdownBlocks extends React.PureComponent<{}, State> {
   componentDidMount(): void {
     this.onClose();
     setTimeout(() => {
-      this.loadContent('src/block-editor/mdfiles/Team Sessions.md');
+      this.loadContent('https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Team%20Sessions.md');
       this.setState({ breadcrumbItems: [{ text: 'Team' }, { text: 'Team Sessions' }] });
       if (this.closeBtnRef.element && window.innerWidth < 600) {
         this.closeBtnRef.element.style.left = '18px';
@@ -244,7 +244,7 @@ export class MarkdownBlocks extends React.PureComponent<{}, State> {
   private onOpen = () => {
       (this.treeviewRef as any).expandAll();
     if (this.closeBtnRef?.element) {
-      this.closeBtnRef.element.style.left = '202px';
+      this.closeBtnRef.element.style.left = '225px';
       this.closeBtnRef.element.classList.remove('expand-mode');
     }
     if (this.treeviewRef?.element) {
@@ -302,7 +302,7 @@ export class MarkdownBlocks extends React.PureComponent<{}, State> {
 
     if (selectedId === 'Team_Sessions') {
       this.setState({ breadcrumbItems: [{ text: 'Team' }, { text: 'Team Sessions' }] });
-      this.loadContent('src/block-editor/mdfiles/Team Sessions.md');
+      this.loadContent('https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Team%20Sessions.md');
       return;
     }
 

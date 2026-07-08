@@ -1,11 +1,9 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import { GanttComponent, Inject, Selection, Toolbar, ExcelExport, PdfExport, ColumnsDirective, ColumnDirective, PdfExportProperties, DayMarkers } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, Toolbar, ExcelExport, PdfExport, ColumnsDirective, ColumnDirective, PdfExportProperties, DayMarkers, GridLine, ResourceFieldsModel, ToolbarItem, SplitterSettingsModel, TimelineSettingsModel, LabelSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { editingData, editingResources } from './data';
 import { updateSampleSection } from '../common/sample-base';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
-import { SwitchComponent } from '@syncfusion/ej2-react-buttons';
 import './exporting.css'
 
 const Exporting = () => {
@@ -14,7 +12,7 @@ const Exporting = () => {
   }, [])
   let ganttInstance = useRef<GanttComponent>(null);
   let isFitToWidth: any;
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -25,18 +23,18 @@ const Exporting = () => {
     parentID: 'ParentId',
     resourceInfo: 'resources'
   };
-  const resourceFields: any = {
+  const resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     position: "35%"
   };
   const projectStartDate: Date = new Date('03/26/2025');
   const projectEndDate: Date = new Date('09/01/2025');
-  const gridLines: any = 'Both';
-  const toolbar: any = ['ExcelExport', 'CsvExport', 'PdfExport'];
-  const timelineSettings: any = {
+  const gridLines: GridLine = 'Both';
+  const toolbar: ToolbarItem[] = ['ExcelExport', 'CsvExport', 'PdfExport'];
+  const timelineSettings: TimelineSettingsModel = {
     topTier: {
       unit: 'Week',
       format: 'MMM dd, y',
@@ -45,7 +43,7 @@ const Exporting = () => {
       unit: 'Day',
     },
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
   const toolbarClick = (args: ClickEventArgs): void => {
@@ -79,23 +77,15 @@ const Exporting = () => {
         <p>This sample demonstrates client-side exporting of the Gantt, which allows you to export Gantt data to Excel, PDF and CSV formats. Using the Gantt toolbar buttons, you can export Gantt data to the desired format. </p>
       </div>
       <div id="description">
-      <p>Gantt supports client-side exporting, which allows you to export its data to the Excel, PDF and CSV formats. </p>
-          <p>In this demo, we have defined actions in the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#toolbarclick">toolbarClick</a> event to export the Gantt data using the
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#excelexport">excelExport</a>,
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#pdfexport">pdfExport</a>
-            and
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#csvexport">csvExport</a> methods.</p>
-          <p>Injecting Module:</p>
-          <p>To use Excel and CSV export features, we need to inject
-              <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#excelexport">
-              excelExport
-              </a></code> module into the <code>services</code>. </p>
-          <p>To use PDF export feature, we need to inject
-              <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#pdfexport">
-              pdfExport
-              </a></code> module into the <code>services</code>. </p>
+        <p>Gantt supports client-side exporting, which allows you to export its data to the Excel, PDF and CSV formats. </p>
+        <p>In this demo, we have defined actions in the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/index-default#toolbarclick">toolbarClick</a> event to export the Gantt data using the
+          <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#excelexport"> excelExport</a>,
+          <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/index-default#pdfexport"> pdfExport </a>
+          and
+          <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/index-default#csvexport"> csvExport</a> methods.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use PDF export, excel export, toolbar, markers and selection features, we need to inject the <code>PdfExport</code>, <code>ExcelExport</code>, <code>Toolbar</code>, <code>DayMarkers</code> and <code>Selection</code> into the <code>Inject Services</code>section.</p>
         <br/>
-          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/excel-export/excel-export">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/pdf-export/pdf-export">documentation section</a>.</p>
       </div>
     </div>
   )

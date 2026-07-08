@@ -90,6 +90,9 @@ const DateHeaderTemplate = () => {
           week and workweek views. In month view, the date header is not applicable and therefore the same customizations can be
           added beside the date text in the month cells by making use of the <code>renderCells</code> event.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

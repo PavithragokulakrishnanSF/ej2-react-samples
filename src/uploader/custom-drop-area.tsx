@@ -106,33 +106,33 @@ private getLiElement(args: any) {
   }
 public render(): JSX.Element {
     return (
-        <div className = 'control-pane'>
-        <div className='control-section row uploadpreview'>
-            <div className='col-lg-12 control-section upload-custom'>
-            <div className='customdrop_wrapper'>
-                <div className="dropArea_wrap" id="customTarget">
-                <div className="font-icons">
-                    <span className="e-icons sf-icon-pdf"></span>
-                    <span className="e-icons sf-icon-txt"></span>
-                    <span className="e-icons sf-icon-png"></span>
-                </div>
-                <span className="dropText" id="dropText">Drop files here to upload</span>
-            </div>
-            <div id="customdropArea">
-                <span id="drop" className="customdropArea"><a href="" id="browse"><u>Browse</u></a> </span>  
+        <div className='control-pane'>
+            <div className='control-section row uploadpreview'>
+                <div className='col-lg-12 control-section upload-custom'>
+                    <div className='customdrop_wrapper'>
+                        <div className="dropArea_wrap" id="customTarget">
+                            <div className="font-icons">
+                                <span className="e-icons sf-icon-pdf"></span>
+                                <span className="e-icons sf-icon-txt"></span>
+                                <span className="e-icons sf-icon-png"></span>
+                            </div>
+                            <span className="dropText" id="dropText">Drop files here to upload</span>
+                        </div>
+                        <div id="customdropArea">
+                            <span id="drop" className="customdropArea"><a href="" id="browse"><u>Browse</u></a> </span>
                             {/* Render Uploader */}
-            <UploaderComponent id='UploadFiles' type='file' ref = {(scope) => {this.uploadObj = scope}}
-                asyncSettings = {this.asyncSettings} 
-                selected = { this.onSelect.bind(this) }
-                removing= { this.onRemoveFile.bind(this)}
-                progress = { this.onUploadInProgress.bind(this) }
-                success = { this.onUploadSuccess.bind(this) }
-                failure = { this.onUploadFailed.bind(this) }
-                allowedExtensions ={this.allowedExtensions} template = {this.listTemplate as any} dropArea = {this.target}></UploaderComponent>
+                            <UploaderComponent id='UploadFiles' type='file' ref={(scope) => { this.uploadObj = scope }}
+                                asyncSettings={this.asyncSettings}
+                                selected={this.onSelect.bind(this)}
+                                removing={this.onRemoveFile.bind(this)}
+                                progress={this.onUploadInProgress.bind(this)}
+                                success={this.onUploadSuccess.bind(this)}
+                                failure={this.onUploadFailed.bind(this)}
+                                allowedExtensions={this.allowedExtensions} template={this.listTemplate as any} dropArea={this.target}></UploaderComponent>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        </div>
-        </div>
         <div id="action-description">
         <p> This <a href="https://www.syncfusion.com/react-ui-components/react-file-upload"
             target="_blank">&nbsp;React File Upload</a> example demonstrates how to configure custom drop area of the Uploader. 
@@ -148,11 +148,6 @@ public render(): JSX.Element {
             More information on the drag-and-drop can be found on this
             <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/file-source/#drag-and-drop"> documentation section</a>.
         </p>
-        <p>In this example, the backend service used in the saveUrl and removeUrl endpoints for saving and removing files is intended for demonstration purposes only. The uploaded files are subjected to thorough validation, including verification of file names and the application of security checks. Therefore, this service is not recommended for production use, and the configuration of a custom backend save and remove service is advised. Additional implementation details can be found in the
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/async#server-side-configuration-for-save-action">saveUrl</a> and
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/async#server-side-configuration-for-remove-action">removeUrl</a>
-            documentation.
-          </p>
     </div>
         </div>);
     }

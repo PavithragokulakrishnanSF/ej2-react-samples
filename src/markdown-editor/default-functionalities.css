@@ -57,3 +57,9 @@
     width: auto;
     margin: 0;
 }
+
+.e-rte-content .e-pre-source td,
+.e-rte-content .e-pre-source th {
+    border: 1px solid;
+    padding: 2px 5px;
+}

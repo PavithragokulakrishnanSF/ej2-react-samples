@@ -57,6 +57,9 @@ export class ToolbarTemplate extends SampleBase<{}, {}> {
        <p>
            More information about Toolbar template can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/treegrid/tool-bar/tool-bar">documentation section</a>.
        </p>
+       <p>
+            Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+        </p>
     </div>
 
       </div>

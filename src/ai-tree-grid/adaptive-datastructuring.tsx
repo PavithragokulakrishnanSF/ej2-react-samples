@@ -30,6 +30,9 @@ export class AdaptiveDataStructuring extends SampleBase<{}, {}> {
                     <p>
                         Utilizing a specialized AI prompt, the system scans a dataset to identify and restructure hierarchical relationships between records. The AI meticulously corrects any misassigned relationships by adjusting the <code>ParentId</code> fields, aligning them with their respective top-level <code>CategoryId</code>. The resulting dataset, now properly organized, is then bound to the Tree Grid for a coherent and accurate display.
                     </p>
+                    <p>
+                        Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+                    </p>
                 </div>
                 <AIToast/> 
             </div>

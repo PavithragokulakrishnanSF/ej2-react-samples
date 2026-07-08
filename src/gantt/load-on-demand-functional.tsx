@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import {useEffect} from 'react'
-import { GanttComponent, Inject, Selection, ColumnsDirective, ColumnDirective,VirtualScroll } from '@syncfusion/ej2-react-gantt';
+import { useEffect } from 'react';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, ColumnsDirective, ColumnDirective, VirtualScroll } from '@syncfusion/ej2-react-gantt';
 import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -15,7 +14,7 @@ const LoadOnDemand = () => {
     adaptor: new WebApiAdaptor,
     crossDomain: true
   });
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'taskId',
     name: 'taskName',
     startDate: 'startDate',
@@ -35,11 +34,11 @@ const LoadOnDemand = () => {
           taskFields={taskFields} enableVirtualization={true} loadChildOnDemand={true} height='650px' taskbarHeight={25} rowHeight={46}
           projectStartDate={projectStartDate} projectEndDate={projectEndDate}>
           <ColumnsDirective>
-            <ColumnDirective field='taskId' width='120' ></ColumnDirective>
-            <ColumnDirective field='taskName' headerText='Job Name' width='250' clipMode='EllipsisWithTooltip'></ColumnDirective>
-            <ColumnDirective field='startDate'></ColumnDirective>
-            <ColumnDirective field='duration'></ColumnDirective>
-            <ColumnDirective field='progress'></ColumnDirective>
+            <ColumnDirective field='taskId' width='120' headerText='Task ID' ></ColumnDirective>
+            <ColumnDirective field='taskName' headerText='Task Name' width='250' allowReordering={false}></ColumnDirective>
+            <ColumnDirective field='startDate' headerText='Start Date' allowSorting={false}></ColumnDirective>
+            <ColumnDirective field='duration' headerText='Duration' allowEditing={false}></ColumnDirective>
+            <ColumnDirective field='progress' headerText='Progress' allowFiltering={false}></ColumnDirective>
           </ColumnsDirective>
           <Inject services={[Selection, VirtualScroll]} />
         </GanttComponent>
@@ -61,8 +60,9 @@ const LoadOnDemand = () => {
         <p>
           When expanding the root parent node or scrolling vertically, the corresponding tasks are dynamically fetched from the remote server and then updated in the DOM based on the current viewport position.
         </p>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use virtual scroll and selection features, we need to inject <code>VirtualScroll</code> and <code>Selection</code> into the <code>Inject Services</code> section.</p>
         <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/nextjs-getting-started#add-syncfusion-react-component">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/data-binding#load-child-on-demand">documentation section</a>.</p>
       </div>
     </div>
   )

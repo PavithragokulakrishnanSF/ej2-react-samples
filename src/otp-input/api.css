@@ -45,7 +45,7 @@
     width: 80px;
 }
 
-.property-panel-content td {
+.otp-property-panel .property-panel-content td {
     padding: 10px 0px;
     width: 35%;
 }

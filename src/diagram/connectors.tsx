@@ -498,7 +498,7 @@ export class Connectors extends SampleBase<{}, {}> {
             In this example, you can see how to add connectors to connect the
             shapes and how to customize the appearance of the connectors. You
             can use the <code>style</code> property of the connector to
-            customize its stroke style. You can use the
+            customize its stroke style. You can use the 
             <code>cornerRadius</code> property to add connectors with rounded
             corners.
           </p>
@@ -523,7 +523,9 @@ export class Connectors extends SampleBase<{}, {}> {
             <code>services</code>.
           </p>
           <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
     );
   }

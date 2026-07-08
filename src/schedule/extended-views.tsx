@@ -46,6 +46,9 @@ export class ExtendedViews extends SampleBase<{}, {}> {
             In this demo, the <code>interval</code> property has been defined with different values on each view such as 3 on day view, 2 on week view and
             4 on month view – so that 3 days, 2 weeks and 4 months displayed on the respective views. This property is not applicable on agenda and month agenda views.
           </p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

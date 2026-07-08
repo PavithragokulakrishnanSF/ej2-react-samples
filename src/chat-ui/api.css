@@ -11,6 +11,7 @@
 
 .chat-property-section .property-panel-content td {
     padding: 10px 0px;
+    width: 35%;
 }
 
 .chat-property-section .e-multiselect,

@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective, ResourceFieldsModel, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { labelData, editingResources } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -9,7 +8,7 @@ const TasklabelTemplate = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -20,15 +19,15 @@ const TasklabelTemplate = () => {
     resourceInfo: 'resources',
     child: 'subtasks'
   };
-  const resourceFields: any = {
+  const resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName'
   };
-  const LeftLabelTemplate = (props) => {
+  const LeftLabelTemplate = (props: any) => {
     return (<span>{props.TaskName} [ {props.Progress}% ]</span>);
   };
   const templateLeft: any = LeftLabelTemplate;
-  const RightLabelTemplate = (props) => {
+  const RightLabelTemplate = (props: any) => {
     if (props.ganttProperties.resourceInfo) {
       let resources = props.ganttProperties.resourceInfo;
       let out = [];
@@ -56,14 +55,14 @@ const TasklabelTemplate = () => {
     } else {
       return <div></div>
     }
-  };  
-  const templateRight: any = RightLabelTemplate;  
-  const labelSettings: any = {
+  };
+  const templateRight: any = RightLabelTemplate;
+  const labelSettings: LabelSettingsModel = {
     leftLabel: templateLeft.bind(this),
     rightLabel: templateRight.bind(this),
     taskLabel: '${Progress}%'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     position: "35%"
   };
   const projectStartDate: Date = new Date('03/24/2025');
@@ -95,11 +94,9 @@ const TasklabelTemplate = () => {
 
       <div id="description">
         <p>In this demo, the label template is rendered using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#leftlabel">leftLabel</a>, <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#rightlabel">rightLabel</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#tasklabel">taskLabel</a> properties in <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#labelsettings">labelSettings</a>.</p>
-        <p>Gantt component features are segregated into individual feature-wise modules.To use a selection, inject the
-          <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method.To use markers, inject the
-          <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
-        <br/>
-          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/labels#task-labels">documentation section</a>.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules.To use a selection and marker features, we need to inject the <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.</p>
+        <br />
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/labels">documentation section</a>.</p>
       </div>
     </div>
   )

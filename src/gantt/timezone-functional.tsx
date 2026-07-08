@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import { GanttComponent, Inject, Selection, Toolbar,ColumnDirective, ColumnsDirective, TimelineViewMode } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, Toolbar, ColumnDirective, ColumnsDirective, TimelineSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { updateSampleSection } from '../common/sample-base';
 import { ComboBoxComponent, DropDownListComponent, ChangeEventArgs } from '@syncfusion/ej2-react-dropdowns';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
@@ -47,7 +46,7 @@ const Timezone = () => {
     { taskID: 30, taskName: 'Post-Project Review', startDate: new Date('03/10/2025 08:00'), endDate: new Date('03/10/2025 08:00'), duration: 0, progress: '0', predecessor: '29FS', parentID: 1 }
   ];
 
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'taskID',
     name: 'taskName',
     startDate: 'startDate',
@@ -57,7 +56,7 @@ const Timezone = () => {
     parentID: 'parentID'
   };
 
-  const timelineSettings: any = {
+  const timelineSettings: TimelineSettingsModel = {
     timelineUnitSize: 90,
     topTier: {
       unit: 'Day',
@@ -69,41 +68,41 @@ const Timezone = () => {
     }
   };
 
-  const dayWorkingTime: any = [{ from: 0, to: 23 }]; // Updated to match TypeScript code
+  const dayWorkingTime: any = [{ from: 0, to: 23 }];
 
-  const getTimeZonesWithOffsets=():{ id: string; text: string }[]=> {
-        const now: Date = new Date();
-        let zones;
-        if ((Intl as any).supportedValuesOf) {
-            zones = (Intl as any).supportedValuesOf('timeZone');
-            // Ensure UTC is included and comes first
-            if (zones.indexOf('UTC') === -1) {
-                zones.unshift('UTC');
-            }
-        } 
-        const uniqueZones = [];
-        const seen: any = {};
-        for (var i = 0; i < zones.length; i++) {
-            if (!seen[zones[i]]) {
-                seen[zones[i]] = true;
-                uniqueZones.push(zones[i]);
-            }
-        }
-        return uniqueZones.map(function(tz: string): { id: string; text: string } {
-        let formatter: Intl.DateTimeFormat = new (Intl as typeof Intl).DateTimeFormat('en-US', {
-            timeZone: tz,
-            timeZoneName: 'longOffset' as 'long'
-        });
-        let parts = (formatter as any).formatToParts(now) as { type: string; value: string }[];
-        let offsetPart = parts.filter(function(part: { type: string; value: string }): boolean { return part.type === 'timeZoneName'; })[0];
-        let offset: string = offsetPart ? offsetPart.value : 'UTC+00:00';
-        offset = offset.replace('GMT', 'UTC');
-        if (offset === 'UTC' || offset === 'GMT') {
-                offset = 'UTC+00:00';
-        }
-        return { id: tz, text: tz + ' (' + offset + ')' };
-        });
-    };
+  const getTimeZonesWithOffsets = (): { id: string; text: string }[] => {
+    const now: Date = new Date();
+    let zones;
+    if ((Intl as any).supportedValuesOf) {
+      zones = (Intl as any).supportedValuesOf('timeZone');
+      // Ensure UTC is included and comes first
+      if (zones.indexOf('UTC') === -1) {
+        zones.unshift('UTC');
+      }
+    }
+    const uniqueZones = [];
+    const seen: any = {};
+    for (var i = 0; i < zones.length; i++) {
+      if (!seen[zones[i]]) {
+        seen[zones[i]] = true;
+        uniqueZones.push(zones[i]);
+      }
+    }
+    return uniqueZones.map(function (tz: string): { id: string; text: string } {
+      let formatter: Intl.DateTimeFormat = new (Intl as typeof Intl).DateTimeFormat('en-US', {
+        timeZone: tz,
+        timeZoneName: 'longOffset' as 'long'
+      });
+      let parts = (formatter as any).formatToParts(now) as { type: string; value: string }[];
+      let offsetPart = parts.filter(function (part: { type: string; value: string }): boolean { return part.type === 'timeZoneName'; })[0];
+      let offset: string = offsetPart ? offsetPart.value : 'UTC+00:00';
+      offset = offset.replace('GMT', 'UTC');
+      if (offset === 'UTC' || offset === 'GMT') {
+        offset = 'UTC+00:00';
+      }
+      return { id: tz, text: tz + ' (' + offset + ')' };
+    });
+  };
 
 
   const timeZoneList = (args: ChangeEventArgs): void => {
@@ -154,43 +153,28 @@ const Timezone = () => {
     {
       align: 'Left',
       template: () => (
-      <ComboBoxComponent
-        id="timezonelist"
-        value="UTC (UTC+00:00)"
-        placeholder="Select Time Zone"
-        change={timeZoneList}
-        allowFiltering={true}
-        filterType="Contains"
-        dataSource={getTimeZonesWithOffsets()}
-        width="300px"
-        popupWidth="350px"
-        popupHeight="350px"
-        fields={{ value: 'id', text: 'text' }}
-      />
-    ),
+        <ComboBoxComponent
+          id="timezonelist"
+          value="UTC (UTC+00:00)"
+          placeholder="Select Time Zone"
+          change={timeZoneList}
+          allowFiltering={true}
+          filterType="Contains"
+          dataSource={getTimeZonesWithOffsets()}
+          width="300px"
+          popupWidth="350px"
+          popupHeight="350px"
+          fields={{ value: 'id', text: 'text' }}
+        />
+      ),
     },
     {
       align: 'Right',
       template: () => (
-        < ButtonComponent id= "previous-timespan"
-        cssClass= "previous-timespan"
-        onClick= {getPreviousTimeSpan}
-        iconCss= 'e-icons e-chevron-left-fill'/>
-      )
-    },
-    {
-      type: 'Separator',
-      align: 'Right'
-    },
-    {
-      align: 'Right',
-      template: ()=>(
-       <DropDownListComponent id= "timeline"
-        value= {timelineSettings.topTier.unit}
-        placeholder= "Select timeline"
-        change= {timelineUnit}
-        dataSource= {timelineData}
-        width= '100px' />
+        < ButtonComponent id="previous-timespan"
+          cssClass="previous-timespan"
+          onClick={getPreviousTimeSpan}
+          iconCss='e-icons e-chevron-left-fill' />
       )
     },
     {
@@ -200,19 +184,34 @@ const Timezone = () => {
     {
       align: 'Right',
       template: () => (
-        < ButtonComponent id= "next-timespan"
-        cssClass= "next-timespan"
-        onClick= {getNextTimeSpan}
-        iconCss= 'e-icons e-chevron-right-fill'/>
+        <DropDownListComponent id="timeline"
+          value={timelineSettings.topTier.unit}
+          placeholder="Select timeline"
+          change={timelineUnit}
+          dataSource={timelineData}
+          width='100px' />
+      )
+    },
+    {
+      type: 'Separator',
+      align: 'Right'
+    },
+    {
+      align: 'Right',
+      template: () => (
+        < ButtonComponent id="next-timespan"
+          cssClass="next-timespan"
+          onClick={getNextTimeSpan}
+          iconCss='e-icons e-chevron-right-fill' />
       )
     }
   ];
   return (
     <div className="control-pane">
       <div className="control-section">
-        <GanttComponent id="Timezone" ref={ganttInstance} dataSource={timezoneData} taskFields={taskFields} timelineSettings={timelineSettings} 
-        toolbar={toolbar} height="650px" taskbarHeight={25} rowHeight={46} timezone='UTC' 
-        durationUnit="Hour" includeWeekend={true} treeColumnIndex={1} dayWorkingTime={dayWorkingTime}>
+        <GanttComponent id="Timezone" ref={ganttInstance} dataSource={timezoneData} taskFields={taskFields} timelineSettings={timelineSettings}
+          toolbar={toolbar} height="650px" taskbarHeight={25} rowHeight={46} timezone={getTimeZonesWithOffsets()[0].id}
+          durationUnit="Hour" includeWeekend={true} treeColumnIndex={1} dayWorkingTime={dayWorkingTime}>
           <ColumnsDirective>
             <ColumnDirective field="taskID" visible={false} width="80"></ColumnDirective>
             <ColumnDirective field="taskName" headerText="Name" width="250"></ColumnDirective>
@@ -233,7 +232,10 @@ const Timezone = () => {
           For example, in this demo, the timezone of Gantt is set to UTC, and the task named <code>Plan timeline</code> has start time as <code>08:00 am</code> but converted based on UTC and rendered at <code>2.30 am</code>
         </p>
         <p>
-          When a user sets any timezone, dates are converted based on the value set to <code><a target="_blank" className='code' href="https://ej2.syncfusion.com/react/documentation/api/gantt#timezone">timezone</a></code> property of Gantt control.
+          When a user sets any timezone, dates are converted based on the value set to the <code><a target="_blank" className='code' href="https://ej2.syncfusion.com/react/documentation/api/gantt#timezone">timezone</a></code> property of the Gantt control.
+        </p>
+        <p>
+          Gantt component features are segregated into individual feature-wise modules. To use selection and toolbar features, we need to inject the <code>Selection</code> and <code>Toolbar</code> into the <code>Inject Services</code> section.
         </p>
         <br/>
         <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/timezone">documentation section</a>.</p>

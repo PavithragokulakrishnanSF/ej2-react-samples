@@ -184,6 +184,9 @@ const ColumnFormat = () => {
           More information about Column Formatting can be found in this
           <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/treegrid/columns/columns">documentation</a> section.
         </p>
+        <p>
+          Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+        </p>
       </div>
     </div>
   );

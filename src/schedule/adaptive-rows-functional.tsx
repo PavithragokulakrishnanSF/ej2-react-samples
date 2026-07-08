@@ -87,6 +87,9 @@ const AdaptiveRows = () => {
                     the height of the work cells remains static and at the time of exceeding appointments count, the <code>+n more</code>
                     text indicator will be shown at the bottom of the cells.
                 </p>
+                <p>
+                    Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                </p>
             </div>
         </div>
     );

@@ -28,6 +28,9 @@ export class AssistiveGrid extends SampleBase<{}, {}> {
                     <p>The Syncfusion React AI AssistView component is embedded directly within the grid interface, enabling intelligent prompt processing, contextual suggestions, and adaptive responses. 
                         This integration streamlines data management in the grid, making the process faster and intuitive, especially when working with complex datasets and adaptable workflows.
                     </p>
+                    <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                       <a target="_blank"
+                          href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
                 </div>
                 <AIToast/> 
             </div>

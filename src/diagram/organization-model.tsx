@@ -488,10 +488,10 @@ export class OrganizationModel extends SampleBase<{}, {}> {
           <p>
             This example shows how to generate an organizational chart from an
             external data source. The spacing between the objects can also be
-            customized in the chart. The <code>horizontalSpacing</code> and{" "}
-            <code>verticalSpacing</code> properties of
+            customized in the chart. The <code>horizontalSpacing</code> and {" "}
+            <code>verticalSpacing</code> properties of 
             <code>layout</code> can be used to customize the space between
-            objects in a tree. The <code>layoutOrientation</code> property of
+            objects in a tree. The <code>layoutOrientation</code> property of 
             <code>layout</code> can be used to change the orientation of the
             chart. The <code>getLayoutInfo</code> property of
             <code>layout</code> can be used to customize the tree structure. To
@@ -502,13 +502,15 @@ export class OrganizationModel extends SampleBase<{}, {}> {
           <p>
             The diagram component’s features are segregated into individual
             feature-wise modules. To generate diagrams from an external data
-            source, inject
+            source, inject 
             <code>DataBinding</code> module into <code>services</code>. To
-            automatically arrange the objects in an organizational chart, inject
+            automatically arrange the objects in an organizational chart, inject 
             <code>HierarchicalTree</code> module into <code>services</code>.
           </p>
           <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
     );
   }

@@ -243,7 +243,7 @@ function PivotToolbar() {
         pivotObj.chartSettings.chartSeries.legendShape = pivotObj.chartSettings.chartSeries.type === 'Polar' ? 'Rectangle' : 'SeriesType';
     }
     function excelQueryCellInfo(args: ExcelQueryCellInfoEventArgs): void {
-        if ((args?.cell as IAxisSet).axis === 'value' && (args?.cell as IAxisSet).value === undefined) {
+        if ((args?.cell as IAxisSet).axis === 'value' && args.value === undefined) {
             args.style.numberFormat = undefined;
         }
     }

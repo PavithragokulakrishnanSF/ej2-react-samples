@@ -90,6 +90,9 @@ const DayHourLimit = () => {
           In this demo, the Scheduler is made to display from 8 AM to 8 PM and the rest of the hours are hidden, as it is restricted
           to start from <code>08:00</code> hours and end on <code>20:00</code> hours by setting to <code>startHour</code> and <code>endHour</code> properties respectively.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

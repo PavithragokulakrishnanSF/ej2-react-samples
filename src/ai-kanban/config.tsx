@@ -2,9 +2,9 @@ export const AIKanbanSampleOrder: Object = [
     {
         'path': 'ai-kanban/task-recommendation', 
         'component': 'TaskRecommendation', 
-        'name': 'AITask Recommendation', 
+        'name': 'AI Task Recommendation', 
         'description': 'This demo showcases the Kanban AI feature.', 
-        'order': '01',
+        'order': '05',
         'category': 'Kanban',
         'sourceFiles': [
             { 'displayName': 'task-recommendation.tsx', 'path': 'src/ai-kanban/ai-task-recommendation.tsx' }, 
@@ -16,7 +16,7 @@ export const AIKanbanSampleOrder: Object = [
         'component': 'SentimentAnalysis', 
         'name': 'Sentiment Analysis', 
         'description': 'This demo showcases the Kanban AI feature.', 
-        'order': '01',
+        'order': '05',
         'category': 'Kanban',
         'sourceFiles': [
             { 'displayName': 'sentiment-analysis.tsx', 'path': 'src/ai-kanban/ai-sentiment-analysis.tsx' }, 

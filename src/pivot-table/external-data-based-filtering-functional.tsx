@@ -12,11 +12,10 @@ import './external-data-based-filtering.css';
  * PivotView ExternalDataBasedFiltering Sample.
  */
 let Pivot_Data: IDataSet[] = (rData as any).data;
-let startDate: Date = new Date('2024-01-01');
-let endDate: Date = new Date('2024-12-01');
 
 function ExternalDataBasedFiltering () {
-
+    let startDate: Date = new Date('2024-01-01');
+    let endDate: Date = new Date('2024-12-01');
     const [dataSourceSettings, setDataSourceSettings]: any = React.useState({
         enableSorting: true,
         expandAll: true,
@@ -53,8 +52,8 @@ function ExternalDataBasedFiltering () {
 
     function applyDateFilter(): void {
         if (startDate && endDate) {
-            startDate.setHours(0, 0, 0, 0);
-            endDate.setHours(23, 59, 59, 999);
+            startDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+            endDate = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0, 23, 59, 59, 999);
             let pivotData = (Pivot_Data as any).map((item: any) => ({
                 ...item,
                 OrderDate: new Date(item.OrderDate),
@@ -109,7 +108,7 @@ function ExternalDataBasedFiltering () {
                         id='apply'
                         cssClass='e-primary'
                         style={{ width: '80px' }}
-                        onClick={applyDateFilter}
+                        onClick={applyDateFilter.bind(this)}
                     >
                         Apply
                     </ButtonComponent>

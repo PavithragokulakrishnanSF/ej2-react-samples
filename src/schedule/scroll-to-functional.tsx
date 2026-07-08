@@ -65,6 +65,9 @@ const ScrollTo = () => {
       </div>
       <div id='description'>
         <p>In this demo, the way of manually scrolling to specific time on scheduler has been demonstrated by making use of the <code>scrollTo</code> method of Schedule.</p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

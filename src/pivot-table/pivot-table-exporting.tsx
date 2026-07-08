@@ -97,7 +97,7 @@ export class PivotTableExporting extends SampleBase<{}, {}> {
                         displayOption={{ view: 'Both' }} toolbar={this.toolbarOptions} chartSettings={{
                             title: 'Sales Analysis', primaryYAxis: { border: { width: 0 } }, legendSettings: { visible: false, },
                             chartSeries: { type: 'Bar', animation: { enable: false } }
-                        }} toolbarRender={this.toolbarRender} dataBound={this.onDataBound}>
+                        }} toolbarRender={this.toolbarRender.bind(this)} dataBound={this.onDataBound}>
                         <Inject services={[FieldList, Toolbar, ExcelExport, GroupingBar, VirtualScroll]} />
                     </PivotViewComponent>
                 </div>

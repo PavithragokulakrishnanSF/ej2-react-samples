@@ -86,6 +86,9 @@ const Views = () => {
           to be displayed on the Scheduler header bar is based on the values ['Day', 'Week', 'WorkWeek', 'Month'] assigned to
           the <code>views</code> property.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

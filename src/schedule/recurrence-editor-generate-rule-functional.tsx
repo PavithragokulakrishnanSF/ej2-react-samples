@@ -47,6 +47,9 @@ const RuleGenerate = () => {
           displayed on the label placed at the top of it. Also, when the user dynamically change the options in recurrence editor,
           the modified rule value as per the selection will be displayed on it which is retrieved within the <code>change</code> event.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

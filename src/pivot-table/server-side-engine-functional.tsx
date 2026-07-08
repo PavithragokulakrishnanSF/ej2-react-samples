@@ -189,7 +189,7 @@ function ServerSideEngine() {
         <div className='control-pane'>
             <div className='control-section'>
                 <PivotViewComponent id='PivotView' ref={d => pivotObj = d} dataSourceSettings={dataSourceSettings} showFieldList={true} showGroupingBar={true}
-                    width={'100%'} height={'450'} dataBound={onDataBound} allowDataCompression={true} showToolbar={true}
+                    width={'100%'} height={'450'} dataBound={onDataBound.bind(this)} allowDataCompression={true} showToolbar={true}
                     allowPdfExport={true} allowExcelExport={true} gridSettings={{ columnWidth: Browser.isDevice ? 100 : 120, layout: 'Tabular' }} toolbarRender={beforeToolbarRender.bind(this)}
                     toolbar={toolbarOptions} beforeExport={beforeExport.bind(this)}>
                     <Inject services={[FieldList, GroupingBar, Toolbar, PDFExport, ExcelExport]} />

@@ -116,6 +116,9 @@ const GroupCustomWorkDays = () => {
           by making use of the <code>isSlotAvailable</code> function within the <code>actionBegin</code> event checking for <code>eventCreate</code> and
           <code>eventChange</code> request type. The resource header is customized by making use of the <code>resourceHeaderTemplate</code> option.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div >
   );

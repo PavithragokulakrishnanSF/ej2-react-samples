@@ -2,22 +2,20 @@ import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import './ai-models.css';
 
-import { SampleBase, updateSampleSection } from '../common/sample-base';
-import { AIAssistViewComponent, PromptRequestEventArgs } from '@syncfusion/ej2-react-interactive-chat';
+import { updateSampleSection } from '../common/sample-base';
+import { AIAssistViewComponent } from '@syncfusion/ej2-react-interactive-chat';
 import { SidebarComponent } from '@syncfusion/ej2-react-navigations';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { ListViewComponent } from '@syncfusion/ej2-react-lists';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { ToastComponent } from '@syncfusion/ej2-react-notifications';
 import { marked } from 'marked';
+import { getAIResponse } from '../common/ai-service';
+import * as data from './promptResponseData.json';
 
-import {
-  getGeminiAIAssit,
-  getdeepSeekAIAssit,
-  getAzureOpenAIAssist
-} from './ai-services';
+const promptResponseData = (data as any).defaultPromptResponseData || data;
 
-type ModelId = 'gemini' | 'deepseek' | 'openai';
+type ModelId = 'openai' | 'gemini' | 'deepseek';
 interface ConversationItem { id: string; text: string; }
 
 const AIAssistModels = () => {
@@ -41,27 +39,23 @@ const AIAssistModels = () => {
   const [stopStreaming, setStopStreaming] = useState(false);
   const [showHeader] = useState(false);
   const [suggestions] = useState<string[]>([
-    'How can AI help me plan my week?',
-    'What are good habits for continuous learning?'
+    'What are the best tools for organizing tasks?',
+    'How can I maintain work-life balance?'
   ]);
   const [listData, setListData] = useState<ConversationItem[]>([]);
   const [selectedConvId, setSelectedConvId] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<ModelId>('gemini');
+  const [selectedModel, setSelectedModel] = useState<ModelId>('openai');
   const selectedConvIdRef = useRef<string | null>(null);
-
-  // API config
-  const [geminiApiKey] = useState('');
-  const [geminiModel] = useState('');
-  const [deepseekApiKey] = useState<string>('');
+  const abortControllerRef = useRef<AbortController | undefined>();
 
   const attachmentSettings = {
-        saveUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Save',
-        removeUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Remove'
-    };
+    saveUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Save',
+    removeUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Remove'
+  };
 
   const footerToolbarSettings = {
     toolbarPosition: 'Bottom'
-  }
+  };
   // Ensures the base object for storing conversations exists in localStorage.
   const ensureStore = () => {
     if (!localStorage.getItem('aiassist-model')) {
@@ -166,7 +160,7 @@ const AIAssistModels = () => {
 
   // Configures the sidebar layout to be responsive across device sizes.
   const applySidebarConfig = () => {
-    const mobile = window.innerWidth <= 980;
+    const mobile = window.innerWidth <= 680;
     setIsMobile(mobile);
 
     if (sidebarRef.current) {
@@ -299,74 +293,17 @@ const AIAssistModels = () => {
 
     let convId = selectedConvIdRef.current;
     if (!convId) {
-      convId = createNewConversation();
-      setSelectedConvId(convId);
-      selectedConvIdRef.current = convId;
+        convId = createNewConversation();
+        setSelectedConvId(convId);
+        selectedConvIdRef.current = convId;
     }
     updateConversationName(args.prompt, convId);
-
-    if (selectedModel === 'gemini') {
-      await handleGeminiRequest(args);
-    } 
-    else if(selectedModel === 'deepseek') {
-      await handleDeepSeekRequest(args);
-    }
-    else {
-      await handleOpenAIRequest(args);
-    }
-  };
-
-  // Executes a Gemini API call and streams its response into the Assist View.
-  const handleGeminiRequest = async (args: { prompt: string }) => {
-    setStopStreaming(false);
-    try {
-      const fullResponse = await getGeminiAIAssit(geminiApiKey, geminiModel, args.prompt);
-      const streamed = await streamAIResponse(fullResponse);
-      if (!stopStreaming && aiAssistRef.current) {
-        aiAssistRef.current.addPromptResponse(marked.parse(streamed), true);
-        checkAndUpdateLocalStorage();
-      }
-    } catch {
-      const msg = '⚠️ Something went wrong while connecting to the Gemini service. Please check your API key/model.';
-      aiAssistRef.current?.addPromptResponse(marked.parse(msg), true);
-      checkAndUpdateLocalStorage();
-    }
-  };
-
-  // Executes a DeepSeek API call and streams its response into the Assist View.
-  const handleDeepSeekRequest = async (args: PromptRequestEventArgs) => {
-    setStopStreaming(false);
-    try {
-      const fullResponse = await getdeepSeekAIAssit(deepseekApiKey, args.prompt!);
-      const streamed = await streamAIResponse(fullResponse);
-      if (!stopStreaming && aiAssistRef.current) {
-        (aiAssistRef.current as any).addPromptResponse(marked.parse(streamed), true);
-        checkAndUpdateLocalStorage();
-      }
-    } catch {
-      const msg = '⚠️ Something went wrong while connecting to the DeepSeek service. Please check your API key.';
-      (aiAssistRef.current as any)?.addPromptResponse(marked.parse(msg), true);
-      checkAndUpdateLocalStorage();
-    }
-  };
-  
-  const handleOpenAIRequest = async (args: { prompt: string }) => {
-    setStopStreaming(false);
-    try {
-      const fullResponse = await getAzureOpenAIAssist({
-        messages: args.prompt
-      });
-      const streamed = await streamAIResponse(fullResponse);
-      if (!stopStreaming && aiAssistRef.current) {
-        aiAssistRef.current.addPromptResponse(marked.parse(streamed), true);
-        checkAndUpdateLocalStorage();
-      }
-    } catch {
-      const msg =
-        '⚠️ Something went wrong while connecting to the OpenAI service. Please check your Azure endpoint, key, deployment, and API version.';
-      aiAssistRef.current?.addPromptResponse(marked.parse(msg), true);
-      checkAndUpdateLocalStorage();
-    }
+    abortControllerRef.current = new AbortController();
+    const response = selectedModel === 'openai'
+      ? await getAIResponse(args as any, abortControllerRef.current)
+      : '⚠️ Something went wrong while connecting to the AI service. Please check your API key.';
+    aiAssistRef.current?.addPromptResponse(response as string);
+    checkAndUpdateLocalStorage();
   };
 
   // Renders the Assist View banner that greets the user.
@@ -410,6 +347,7 @@ const AIAssistModels = () => {
             promptSuggestions={suggestions}
             promptRequest={promptRequest}
             showHeader={showHeader}
+            enableStreaming={true}
             stopRespondingClick={stopRespondingClick}
             width="auto"
             footerToolbarSettings={footerToolbarSettings}

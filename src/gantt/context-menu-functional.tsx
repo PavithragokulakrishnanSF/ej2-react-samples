@@ -1,10 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import {
-  GanttComponent, EditDialogFieldsDirective, DayMarkers, EditDialogFieldDirective, Inject, Edit, Selection, Toolbar,
-  ContextMenuClickEventArgs, IGanttData, ContextMenuOpenEventArgs, Resize, Sort, ContextMenu, ColumnsDirective, ColumnDirective, EventMarkersDirective, EventMarkerDirective
-} from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, EditDialogFieldsDirective, DayMarkers, EditDialogFieldDirective, Inject, Edit, Selection, Toolbar, ContextMenuClickEventArgs, IGanttData, ContextMenuOpenEventArgs, Resize, Sort, ContextMenu, ColumnsDirective, ColumnDirective, TaskFieldsModel, ResourceFieldsModel, EditSettingsModel, SplitterSettingsModel, GridLine, ToolbarItem, TimelineSettingsModel, LabelSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { editingData, editingResources } from './data';
 import { ContextMenuItemModel } from '@syncfusion/ej2-react-grids';
 import { updateSampleSection } from '../common/sample-base';
@@ -13,7 +9,7 @@ const ContextMenuItem = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -25,26 +21,26 @@ const ContextMenuItem = () => {
     notes: 'info',
     resourceInfo: 'resources'
   };
-  const resourceFields: any = {
+  const resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName'
   };
-  const editSettings: any = {
+  const editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
     allowTaskbarEditing: true,
     showDeleteConfirmDialog: true
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     position: "35%"
   };
   let ganttInstance = useRef<GanttComponent>(null);
   const projectStartDate: Date = new Date('03/25/2025');
-  const projectEndDate: Date = new Date('09/01/2025');
-  const gridLines: any = 'Both';
-  const toolbar: any = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll'];
-  const timelineSettings: any = {
+  const projectEndDate: Date = new Date('09/08/2025');
+  const gridLines: GridLine = 'Both';
+  const toolbar: ToolbarItem[] = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll'];
+  const timelineSettings: TimelineSettingsModel = {
     topTier: {
       unit: 'Week',
       format: 'MMM dd, y',
@@ -53,7 +49,7 @@ const ContextMenuItem = () => {
       unit: 'Day',
     },
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName',
     rightLabel: 'resources'
   };
@@ -111,7 +107,7 @@ const ContextMenuItem = () => {
           <Inject services={[Edit, Selection, Toolbar, DayMarkers, ContextMenu, Resize, Sort]} />
         </GanttComponent>
         <div style={{ float: 'right', margin: '10px' }}>Source:
-          <a href="https://en.wikipedia.org/wiki/Construction" target='_blank'>https://en.wikipedia.org/</a>
+          <a href="https://en.wikipedia.org/wiki/Construction" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Construction</a>
         </div>
       </div>
       <div id="action-description">
@@ -121,7 +117,7 @@ const ContextMenuItem = () => {
       </div>
       <div id="description">
         <p>
-          Gantt has an option to show the context menu while performing right click on it. You can configure the default and custom menu items in the context menu using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#columnmenuitems">contextMenuItems</a> property.
+          Gantt has an option to show the context menu while performing right click on it. You can configure the default and custom menu items in the context menu using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/index-default#contextmenuitems">contextMenuItems</a> property.
           Each menu item will be displayed contextually based on its target. In this demo we have rendered following default and custom menu items
         </p>
         <p>Default items:</p>
@@ -129,8 +125,8 @@ const ContextMenuItem = () => {
           <li><code>AutoFitAll</code> - Auto fit all columns.</li>
           <li><code>AutoFit</code> - Auto fit the current column.</li>
           <li><code>TaskInformation</code> - Edit the current record.</li>
-          <li><code>Indent</code> - Indent the selected record to one level</li>
-          <li><code>Outdent</code> - Outdent the selected record to one level</li>
+          <li><code>Indent</code> - Indent the selected record by one level</li>
+          <li><code>Outdent</code> - Outdent the selected record by one level</li>
           <li><code>DeleteTask</code> - Delete the current record.</li>
           <li><code>Save</code> - Save the edited record.</li>
           <li><code>Cancel</code> - Cancel the edited state.</li>
@@ -148,14 +144,14 @@ const ContextMenuItem = () => {
           </li>
         </ul>
         <p>Custom items:</p>
-        <p>
-          In this demo, custom menu items have been enabled in the context menu to perform expanding and collapsing the parent rows,
-          <li><code>Expand the Row</code> - Used to expand the parent row and it will render where the row is in a collapsed state.</li>
-          <li><code>Collapse the Row</code> - Used to collapse the parent row and it will render  where the row is in a expanded state.</li>
-          To use context menu feature, we need to inject <code>ContextMenu</code> module into the <code>services</code>.
-        </p>
-        <br />
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/recat/documentation/gantt/context-menu">documentation section</a>.</p>
+        <p>In this demo, custom menu items have been enabled in the context menu to expand and collapse parent rows:</p>
+        <ul>
+          <li><code>Expand the Row</code> - Used to expand the parent row when it is in a collapsed state.</li>
+          <li><code>Collapse the Row</code> - Used to collapse the parent row when it is in an expanded state.</li>
+        </ul>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use context menu, edit, toolbar, markers, sort, resize, and selection  features, we need to inject <code>ContextMenu</code>, <code>Edit</code>, <code>Toolbar</code>, <code>DayMarkers</code>, <code>Sort</code>, <code>Resize</code>, and <code>Selection</code>  into the <code>Inject Services</code> section.</p>
+        <br/>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/context-menu">documentation section</a>.</p>
       </div>
     </div>
   )

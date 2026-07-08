@@ -4,7 +4,7 @@ export const AIImageEditorSampleOrder: Object = [
         'component': 'SmartImageEditor', 
         'name': 'Smart Image Editor', 
         'description': 'This demo highlights the advanced features of the Syncfusion React Image Editor.', 
-        'order': '01',
+        'order': '04',
         'category': 'Image Editor',
         'sourceFiles': [
             { 'displayName': 'smart-image-editor.tsx', 'path': 'src/ai-image-editor/ai-smart-image-editor.tsx' }, 

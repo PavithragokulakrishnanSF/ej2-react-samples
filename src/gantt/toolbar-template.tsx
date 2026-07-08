@@ -1,14 +1,13 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, Filter, Toolbar, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, Filter, Toolbar, ColumnsDirective, ColumnDirective, ToolbarItem, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { SampleBase } from '../common/sample-base';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
-import './toolbar-template.css'
+import './toolbar-template.css';
 
 export class ToolbarTemplate extends SampleBase<{}, {}> {
   private ganttInstance: GanttComponent;
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -19,10 +18,10 @@ export class ToolbarTemplate extends SampleBase<{}, {}> {
     parentID: 'ParentId'
   };
   public toolbar: any = ['ExpandAll', 'CollapseAll', { text: 'Quick Filter', tooltipText: 'Quick Filter', id: 'Quick Filter', prefixIcon: 'e-quickfilter' }, { text: 'Clear Filter', tooltipText: 'Clear Filter', id: 'Clear Filter' }];
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
   public projectStartDate: Date = new Date('03/26/2025');
@@ -63,16 +62,13 @@ export class ToolbarTemplate extends SampleBase<{}, {}> {
 
         <div id="description">
           <p>Custom toolbar items can be added by defining the toolbar as a collection of ItemModels.
-          Actions for this customized toolbar items are defined in the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#toolbarclick">toolbarClick</a> event.</p>
+            Actions for this customized toolbar items are defined in the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/index-default#toolbarclick">toolbarClick</a> event.</p>
           <p>In this sample, the custom toolbar element <code>Quick Filter</code> and <code>Clear Filter</code> is rendered along with predefined toolbar items ExpandAll and CollapseAll.
-        While clicking the <code>Quick Filter</code> toolbar item, the filtering occurs for <code>Task Name</code>column.Filtered column can be cleared using <code>Clear Filter</code> toolbar item.</p>
-          <p>Gantt component features are segregated into individual feature-wise modules.To use a selection, inject the
-        <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method.To use a filter, inject the
-        <code>Filter</code> module using the <code>Gantt.Inject(Filter)</code> method.To use a toolbar, inject the
-        <code>Toolbar</code> module using the <code>Gantt.Inject(Toolbar)</code> method.To use markers, inject the
-        <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
-       <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/tool-bar">documentation section</a>.</p>
+            While clicking the <code>Quick Filter</code> toolbar item, the filtering occurs for <code>Task Name</code>column.Filtered column can be cleared using <code>Clear Filter</code> toolbar item.</p>
+          <p>Gantt component features are segregated into individual feature-wise modules.To use selection, filter, toolbar and marker features, we need to inject the 
+          <code>Selection</code> , <code>Filter</code> , <code>Toolbar</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.</p>
+          <br />
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/tool-bar">documentation section</a>.</p>
         </div>
       </div>
     )

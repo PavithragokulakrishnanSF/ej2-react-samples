@@ -4,7 +4,7 @@ export const AITreeGridSampleOrder: Object = [
         'component': 'AdaptiveDataStructuring', 
         'name': 'Adaptive Data Structuring', 
         'description': 'This demo shows the adaptive data structuring AI feature in Tree Grid.', 
-        'order': '01',
+        'order': '11',
         'category': 'Tree Grid',
         'sourceFiles': [
             { 'displayName': 'adaptive-datastructuring.tsx', 'path': 'src/ai-tree-grid/ai-adaptive-datastructuring.tsx' }, 

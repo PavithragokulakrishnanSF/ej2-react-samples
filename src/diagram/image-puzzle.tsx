@@ -714,7 +714,7 @@ export class ImagePuzzle extends SampleBase<{}, {}> {
             </div>
                 <div id="action-description">
                     <p>
-                        This sample showcases an interactive sliding image puzzle game built using the Syncfusion<sup>®</sup> EJ2 React Diagram, transforming images into a 4x4 grid of draggable tiles, with features like move and time tracking.
+                        This sample showcases an interactive sliding image puzzle game built using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>, transforming images into a 4x4 grid of draggable tiles, with features like move and time tracking.
                     </p>
                 </div>
                 <div id="description">

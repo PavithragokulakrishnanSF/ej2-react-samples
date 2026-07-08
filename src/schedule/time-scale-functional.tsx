@@ -148,6 +148,9 @@ const Timescale = () => {
           The grid lines can also be disabled on schedule, by setting `false` to the <code>enable</code> property available within
           <code>timeScale</code>. The time header text can be customized by making use of the <code>majorSlotTemplate</code> and <code>minorSlotTemplate</code> properties.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

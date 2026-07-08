@@ -603,7 +603,7 @@ export class HistoryTimelineDiagramComponent extends SampleBase<{}, {}> {
                     </div>
                     <div id="action-description">
                         <p>
-                            This sample visualizes key milestones in Internet history using the interactive Syncfusion<sup>®</sup> EJ2 React Diagram. Events are presented as nodes on a horizontal timeline, with color-coded sections and customizable event details.
+                            This sample visualizes key milestones in Internet history using the interactive <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>. Events are presented as nodes on a horizontal timeline, with color-coded sections and customizable event details.
                         </p>
                     </div>
                     <div id="description">

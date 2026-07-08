@@ -4,7 +4,7 @@ export const AIGanttSampleOrder: Object = [
         'component': 'SmartTaskPrioritizer', 
         'name': 'Smart Task Prioritizer', 
         'description': 'This demo showcases the Gantt Chart AI feature.', 
-        'order': '01',
+        'order': '03',
         'category': 'Gantt Chart',
         'sourceFiles': [
             { 'displayName': 'task-prioritize.tsx', 'path': 'src/ai-gantt/ai-task-prioritize.tsx' }, 
@@ -16,7 +16,7 @@ export const AIGanttSampleOrder: Object = [
         'component': 'SmartProgressPredictor', 
         'name': 'Smart Progress Predictor', 
         'description': 'This demo showcases the Gantt Chart AI feature.', 
-        'order': '01',
+        'order': '03',
         'category': 'Gantt Chart',
         'sourceFiles': [
             { 'displayName': 'progress-predictor.tsx', 'path': 'src/ai-gantt/ai-progress-predictor.tsx' }, 
@@ -28,7 +28,7 @@ export const AIGanttSampleOrder: Object = [
         'component': 'SmartResourceAllocation', 
         'name': 'Smart Resource Allocation', 
         'description': 'This demo showcases the Gantt Chart AI feature.', 
-        'order': '01',
+        'order': '03',
         'category': 'Gantt Chart',
         'sourceFiles': [
             { 'displayName': 'resource-manager.tsx', 'path': 'src/ai-gantt/ai-resource-manager.tsx' }, 

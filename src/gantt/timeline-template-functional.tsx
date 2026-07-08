@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { useEffect } from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { useEffect, useRef } from 'react';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective, SplitterSettingsModel, TimelineSettingsModel, LabelSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { timelineTemplateData } from './data';
 import { Internationalization } from '@syncfusion/ej2-base';
 import { updateSampleSection } from '../common/sample-base';
@@ -10,7 +9,8 @@ const TimelineTemplate = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const ganttInstance = useRef<any>(null);
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -19,22 +19,21 @@ const TimelineTemplate = () => {
     dependency: 'Predecessor',
     child: 'subtasks'
   };
-  let ganttInstance: any;
- // Create an Internationalization instance
- const intlObj = new Internationalization();
+  // Create an Internationalization instance
+  const intlObj = new Internationalization();
 
- const weekDate = (dateString) => {
-    const date = ganttInstance.locale === 'ar' ? parseArabicDate(dateString) : parseDateString(dateString);
+  const weekDate = (dateString) => {
+    const date = ganttInstance.current?.locale === 'ar' ? parseArabicDate(dateString) : parseDateString(dateString);
     return intlObj.formatDate(date, { skeleton: 'E' });
   };
 
- const formatDate = (dateString) => {
-    const date = ganttInstance.locale === 'ar' ? parseArabicDate(dateString) : parseDateString(dateString);
+  const formatDate = (dateString) => {
+    const date = ganttInstance.current?.locale === 'ar' ? parseArabicDate(dateString) : parseDateString(dateString);
     return intlObj.formatDate(date, { skeleton: 'd' });
   };
 
- const imageString = (date) => {
-    const imageDate = ganttInstance.locale === 'ar' ? parseArabicDate(date) : parseDateString(date);
+  const imageString = (date) => {
+    const imageDate = ganttInstance.current?.locale === 'ar' ? parseArabicDate(date) : parseDateString(date);
     return `src/gantt/images/${imageDate.getDay()}.svg`;
   };
 
@@ -65,8 +64,8 @@ const TimelineTemplate = () => {
     // Fallback to default date parsing
     return new Date(dateString);
   };
- const timelineTemplate =(props): any =>{
-    if (props.tier == 'topTier') {
+  const timelineTemplate = (props): any => {
+    if (props.tier === 'topTier') {
       return (<div
         className="e-header-cell-label e-gantt-top-cell-text"
         style={{
@@ -112,56 +111,57 @@ const TimelineTemplate = () => {
     }
 
   }
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 1
   };
-  const timelineSettings: any = {
+  const timelineSettings: TimelineSettingsModel = {
     topTier: {
       unit: 'Day',
-  },
-  timelineUnitSize: 200,
-    };
-    const labelSettings: any = {
-      leftLabel: 'TaskName',
-    };
-   const projectStartDate = new Date('03/29/2025 01:00:00 PM');
-   const projectEndDate = new Date('04/23/2025');
+    },
+    timelineUnitSize: 200,
+  };
+  const labelSettings: LabelSettingsModel = {
+    leftLabel: 'TaskName',
+  };
+  const projectStartDate = new Date('03/29/2025 01:00:00 PM');
+  const projectEndDate = new Date('04/23/2025');
   return (
     <div className='control-pane'>
       <div className='control-section'>
-      <GanttComponent id='TimelineTemplate' dataSource={timelineTemplateData} ref={gantt => ganttInstance = gantt}
-            splitterSettings={splitterSettings}
-            taskFields={taskFields} height='650px' taskbarHeight={25} rowHeight={46}
-            projectStartDate={projectStartDate} projectEndDate={projectEndDate} timelineSettings={timelineSettings}
-            timelineTemplate={timelineTemplate} labelSettings={labelSettings} treeColumnIndex={1}> 
-            <ColumnsDirective>
-              <ColumnDirective field='TaskID' visible={false}></ColumnDirective>
-              <ColumnDirective field='TaskName' width={300} ></ColumnDirective>
-              <ColumnDirective field='StartDate'></ColumnDirective>
-              <ColumnDirective field='EndDate' ></ColumnDirective>
-              <ColumnDirective field='Duration' ></ColumnDirective>
-              <ColumnDirective field='Progress' ></ColumnDirective>
-            </ColumnsDirective>
-            <Inject services={[Selection, DayMarkers]} />
-          </GanttComponent>
+        <GanttComponent id='TimelineTemplate' ref={ganttInstance} dataSource={timelineTemplateData}
+          splitterSettings={splitterSettings}
+          taskFields={taskFields} height='650px' taskbarHeight={25} rowHeight={46}
+          projectStartDate={projectStartDate} projectEndDate={projectEndDate} timelineSettings={timelineSettings}
+          timelineTemplate={timelineTemplate} labelSettings={labelSettings} treeColumnIndex={1}>
+          <ColumnsDirective>
+            <ColumnDirective field='TaskID' visible={false}></ColumnDirective>
+            <ColumnDirective field='TaskName' width={300} ></ColumnDirective>
+            <ColumnDirective field='StartDate'></ColumnDirective>
+            <ColumnDirective field='EndDate' ></ColumnDirective>
+            <ColumnDirective field='Duration' ></ColumnDirective>
+            <ColumnDirective field='Progress' ></ColumnDirective>
+          </ColumnsDirective>
+          <Inject services={[Selection, DayMarkers]} />
+        </GanttComponent>
       </div>
       <div id="action-description">
-          <p>This sample explains the way of rendering timeline template by mapping template elements to the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#timelineTemplate">timelineTemplate</a> property.</p>
-        </div>
-        <div id="description">
-          <p>
-            In this demo, the timelineTemplate property enables the customization of timeline cells with any HTML content, allowing for enhanced visual appeal and personalized functionality.
-          </p>
-          <p>The template contains these context properties to design the timeline cells:</p>
-          <ul>
-            <li><code>date</code>: Defines the date of timeline date.</li>
-            <li><code>value</code>: Defines the date value to display in the timeline.</li>
-            <li><code>tier</code>: Defines the tier of timeline.</li>
-          </ul>
-          <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/timeline/timeline#timeline-template">documentation section</a>.</p>
-        </div>
+        <p>This sample explains the way of rendering timeline template by mapping template elements to the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#timelinetemplate">timelineTemplate</a> property.</p>
       </div>
+      <div id="description">
+        <p>
+          In this demo, the timelineTemplate property enables the customization of timeline cells with any HTML content, allowing for enhanced visual appeal and personalized functionality.
+        </p>
+        <p>The template contains these context properties to design the timeline cells:</p>
+        <ul>
+          <li><code>date</code>: Defines the date of timeline date.</li>
+          <li><code>value</code>: Defines the date value to display in the timeline.</li>
+          <li><code>tier</code>: Defines the tier of timeline.</li>
+        </ul>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use selection, and marker features, we need to inject the <code>Selection</code>, and <code>DayMarkers</code> into the <code>Inject Services</code> section.</p>
+        <br/>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/time-line/time-line#timeline-template">documentation section</a>.</p>
+      </div>
+    </div>
   )
 }
 export default TimelineTemplate;

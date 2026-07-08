@@ -1178,7 +1178,7 @@ function updatePressure(psi: number) {
     }
 }
 
-// PipelineInstrumentationDiagram component renders a pipeline diagram using Syncfusion's DiagramComponent.
+// PipelineInstrumentationDiagram component renders a pipeline diagram using React Diagram.
 function PipelineInstrumentationDiagram() {
     const [showDiagram, setShowDiagram] = React.useState(false);
     React.useEffect(() => {
@@ -1412,7 +1412,7 @@ function PipelineInstrumentationDiagram() {
             </div>
             <div id="action-description">
                 <p>
-                    This sample visualizes a real-time chemical reactor system as an interactive Pipeline and Instrumentation Diagram (P&ID) using the Syncfusion<sup>®</sup> EJ2 React Diagram, showcasing dynamic fluid flows, tank levels, pressure, and temperature.
+                    This sample visualizes a real-time chemical reactor system as an interactive Pipeline and Instrumentation Diagram (P&ID) using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>, showcasing dynamic fluid flows, tank levels, pressure, and temperature.
                 </p>
             </div>
             <div id="description">

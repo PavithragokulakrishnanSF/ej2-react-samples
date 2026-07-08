@@ -11,7 +11,7 @@ const Firebase = () => {
     useEffect(() => {
         updateSampleSection();
     }, [])
-    let hostUrl: string = "https://realtime-firebase.azurewebsites.net/";
+    let hostUrl: string = "https://firebase-service.syncfusion.com/";
     return (
         <div>
             <div className="control-section">
@@ -26,6 +26,9 @@ const Firebase = () => {
                 <p>To run the service, create a <a target="_blank" href="https://console.firebase.google.com/">Firebase realtime database</a> and then register the database's <code>Rest API link</code>, <code>root node name</code>, and <code>service account key path </code> in the <code>RegisterFirebaseRealtimeDB</code> method to perform the file operations.</p>
                 <p>Checkout this <a target="_blank" href="https://github.com/SyncfusionExamples/firebase-realtime-database-aspcore-file-provider">Firebase Realtime Database file system provider</a> from the GitHub repository to connect with <code>RegisterFirebaseRealtimeDB</code> method.</p>
                 <b>Note: </b>File Manager's upload functionality is restricted in online demos for security reasons. To work with upload functionality, please download <a target="_blank" href="https://github.com/SyncfusionExamples/ej2-firebase-realtime-database-aspcore-file-provider">ej2-firebase-realtime-database-aspcore-file-provider</a> from the GitHub repository.
+                <p>
+                    Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
+                </p>     
             </div>
         </div>
     );

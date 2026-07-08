@@ -138,14 +138,16 @@ const Sorting = () => {
                                 <div>Sort By</div>
                             </td>
                             <td>
-                                <DropDownListComponent
-                                    id="sortBy"
-                                    ref={sortByObj}
-                                    dataSource={sortByData}
-                                    change={change.bind(this)}
-                                    fields={fields}
-                                    index={1}
-                                ></DropDownListComponent>
+                                <div>
+                                    <DropDownListComponent
+                                        id="sortBy"
+                                        ref={sortByObj}
+                                        dataSource={sortByData}
+                                        change={change.bind(this)}
+                                        fields={fields}
+                                        index={1}
+                                    ></DropDownListComponent>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -153,13 +155,15 @@ const Sorting = () => {
                                 <div>Field</div>
                             </td>
                             <td>
-                                <DropDownListComponent
-                                    id="field"
-                                    ref={fieldObj}
-                                    dataSource={fieldData}
-                                    enabled={false}
-                                    index={0}
-                                ></DropDownListComponent>
+                                <div>
+                                    <DropDownListComponent
+                                        id="field"
+                                        ref={fieldObj}
+                                        dataSource={fieldData}
+                                        enabled={false}
+                                        index={0}
+                                    ></DropDownListComponent>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -167,17 +171,19 @@ const Sorting = () => {
                                 <div>Direction</div>
                             </td>
                             <td>
-                                <DropDownListComponent
-                                    id="direction"
-                                    ref={directionObj}
-                                    dataSource={directionData}
-                                    change={change.bind(this)}
-                                    index={0}
-                                ></DropDownListComponent>
+                                <div>
+                                    <DropDownListComponent
+                                        id="direction"
+                                        ref={directionObj}
+                                        dataSource={directionData}
+                                        change={change.bind(this)}
+                                        index={0}
+                                    ></DropDownListComponent>
+                                </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style={{ padding: "10px" }}>
                                 <ButtonComponent
                                     id="sort"
                                     className="e-btn"
@@ -186,7 +192,7 @@ const Sorting = () => {
                                     Sort
                                 </ButtonComponent>
                             </td>
-                            <td>
+                            <td style={{ padding: "10px" }}>
                                 <ButtonComponent
                                     id="clear"
                                     className="e-btn"

@@ -256,10 +256,6 @@ const SAMPLE_CSS = `
   position: absolute;
   display: block;
   right: 15px;
-}
-
-.diagram-logicCircuit .e-toggle-palette::before {
-  content: "\e700"
 }`
 function createNode(
   id: string,
@@ -450,7 +446,9 @@ function LogicCircuit() {
           The` data` property of the shape allows you to define path data of the path shape.
         </p>
         <br />
-      </div>
+      
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
     </div>
   );
 }

@@ -1,11 +1,10 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Edit, Selection, ColumnsDirective, ColumnDirective, RowDD } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Edit, Selection, ColumnsDirective, ColumnDirective, RowDD, EditSettingsModel, LabelSettingsModel, SplitterSettingsModel, SelectionSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class DragAndDrop extends SampleBase<{}, {}> {
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -13,15 +12,15 @@ export class DragAndDrop extends SampleBase<{}, {}> {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-     parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  public selectionSettings: any = {
+  public selectionSettings: SelectionSettingsModel = {
     type: 'Multiple'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 3
   };
-  public editSettings: any = {
+  public editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
@@ -30,7 +29,7 @@ export class DragAndDrop extends SampleBase<{}, {}> {
   };
   public projectStartDate: Date = new Date('03/26/2025');
   public projectEndDate: Date = new Date('07/20/2025');
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
   render() {
@@ -50,7 +49,7 @@ export class DragAndDrop extends SampleBase<{}, {}> {
               <ColumnDirective field='Progress'></ColumnDirective>
               <ColumnDirective field='Predecessor' headerText='Dependency'></ColumnDirective>
             </ColumnsDirective>
-            
+
             <Inject services={[Edit, RowDD, Selection]} />
           </GanttComponent>
         </div>
@@ -58,12 +57,12 @@ export class DragAndDrop extends SampleBase<{}, {}> {
           <p>This sample demonstrates the Gantt component with the row drag and drop feature. You can rearrange the gantt rows by using drag icon in left side of gantt column. Here you can perform drag and drop the gantt rows in to required position.</p>
         </div>
         <div id="description">
-          <p>Row drag and drop feature can be enabled by settting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowrowdraganddrop">allowRowDragAndDrop</a> property as true. In this demo, taskbar drag and drop between rows can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowtaskbardraganddrop">allowTaskbarDragAndDrop</a> as true.</p>
+          <p>Row drag and drop feature can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowrowdraganddrop">allowRowDragAndDrop</a> property as true. In this demo, taskbar drag and drop between rows can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowtaskbardraganddrop">allowTaskbarDragAndDrop</a> as true.</p>
           <p>
-            Gantt component features are segregated into individual feature-wise modules. To use row, drag and drop feature we need to inject <code>RowDD</code> and <code>Edit</code> modules.
+            Gantt component features are segregated into individual feature-wise modules. To use row drag and drop, edit, and selection features, we need to inject <code>RowDD</code>, <code>Selection</code> and <code>Edit</code> into <code>Inject Services</code> modules.
           </p>
           <br/>
-            <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/drag-and-drop">documentation section</a>.</p>
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/rows/drag-and-drop">documentation section</a>.</p>
         </div>
       </div>
     )

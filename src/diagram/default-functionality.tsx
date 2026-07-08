@@ -25,7 +25,7 @@ import "./font-icons.css";
 import { ToolbarComponent, ItemsDirective, ItemDirective } from "@syncfusion/ej2-react-navigations";
 import { DropDownButton, DropDownButtonComponent } from "@syncfusion/ej2-react-splitbuttons";
 import { UploaderComponent } from "@syncfusion/ej2-react-inputs";
-
+import { DialogComponent, ButtonPropsModel } from '@syncfusion/ej2-react-popups';
 
 /**
  * Diagram Default sample
@@ -182,6 +182,7 @@ let gridlines: GridlinesModel = {
 };
 let selectedItems: any[];
 let diagramInstance: DiagramComponent;
+let unsavedDialogInstance: DialogComponent;
 let toolbarEditor: ToolbarComponent;
 
 let data = [{ text: 'JPG' }, { text: 'PNG' }, { text: 'SVG' },]
@@ -229,6 +230,21 @@ let zoomData = [
   { text: 'Zoom In' }, { text: 'Zoom Out' }, { text: 'Zoom to Fit' }, { text: 'Zoom to 50%' },
   { text: 'Zoom to 100%' }, { text: 'Zoom to 200%' }
 ]
+
+let buttons: ButtonPropsModel[] = [
+  {
+    buttonModel: { content: 'Save', isPrimary: true },
+    'click': () => saveButtonClick()
+  },
+  {
+    buttonModel: { content: "Don't Save" },
+    'click': () => dontSaveButtonClick()
+  },
+  {
+    buttonModel: { content: 'Cancel' },
+    'click': () => cancelButtonClick()
+  },
+];
 
 export class Default extends SampleBase<{}, {}> {
   rendereComplete() {
@@ -454,6 +470,12 @@ export class Default extends SampleBase<{}, {}> {
             <div
               id="diagram-space" className="sb-mobile-diagram"
             >
+              <style>{`
+                #diagram-unsaved-dialog .e-footer-content {
+                    padding: 10px 0px 10px 0px;
+                    text-align: center;
+                }
+              `}</style>
               <DiagramComponent
                 id="diagram"
                 ref={diagram => (diagramInstance = diagram)}
@@ -584,40 +606,44 @@ export class Default extends SampleBase<{}, {}> {
                   var obj: any = args.element;
                   obj.annotations[0].style = { color: 'white', fill: 'transparent' }
                 }}
+                created={(): void => {
+                  diagramInstance.fitToPage();
+                }}
               />
+              <DialogComponent id='diagram-unsaved-dialog' ref={unsavedDialog => (unsavedDialogInstance = unsavedDialog)} isModal={false} width='300px' target='#diagram' header='Unsaved Changes' content='Do you want to save your changes?' buttons={buttons} style={{ display: 'none' }}>
+              </DialogComponent>
             </div>
           </div>
         </div>
         <div id="action-description">
           <p>
-            This sample visualizes the processing of an order placed using
-            credit card with built-in flow shapes.
+            This sample demonstrates a credit card order-processing workflow created using built-in flow shapes in the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>.
           </p>
         </div>
         <div id="description">
           <p>
-            This example shows how to create a simple flow chart using the
-            diagram control. The <code>nodes</code> property can be used to
-            define different stages of a process. To define the flow between
-            different stages, the <code>connectors</code> property can be used.
-            The <code>getNodeDefaults</code> and{" "}
-            <code>getConnectorDefaults</code> properties define the default
-            behavior of shapes and connectors.
+            This sample demonstrates how to create, edit, and manage a credit card order-processing workflow using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>. The workflow is designed with nodes and connectors, where each node represents a specific stage in the order process and each connector defines the flow between stages.
+          </p>
+          <p>
+            The <code>nodes</code> property is used to define the workflow stages, and the <code>connectors</code> property
+            is used to establish the relationships between these stages. The <code>getNodeDefaults</code> and 
+            <code>getConnectorDefaults</code> properties are configured to apply common appearance and behavior settings to
+            nodes and connectors.
           </p>
 
           <p>
-            To easily build flow diagrams, few shapes are predefined and added
-            to symbol palette. You can drag-and-drop predefined shapes into the
-            drawing area. The <code>symbols</code> property allows you to add
-            predefined symbols to the palette.
+            A symbol palette with predefined flowchart shapes and connectors is provided to help users build diagrams
+            through drag-and-drop interactions. The symbols displayed in the palette are configured using the 
+            <code>symbols</code> property.
           </p>
-
-          <p>In this example, undo and redo support is enabled.</p>
-          <p style={{ fontWeight: 500 }}>Injecting Module</p>
           <p>
-            The diagram component’s features are segregated into individual
-            feature-wise modules. To enable undo and redo support, inject{" "}
-            <code>UndoRedo</code> module into <code>services</code>.
+            The sample includes a toolbar with common diagram-editing actions, such as <strong>New</strong>, <strong>Open</strong>, <strong>Save</strong>, <strong>Export</strong>, <strong>Print</strong>, <strong>Cut</strong>, <strong>Copy</strong>, <strong>Paste</strong>, <strong>Undo</strong>, and <strong>Redo</strong>. It also provides options for drawing shapes and connectors, panning, zooming, rotating,
+            flipping, grouping, aligning, and distributing diagram elements.
+          </p>
+          <p>
+            The read-only <code>isModified</code> property is used to track unsaved changes in the diagram. When users
+            attempt to click the <strong>New</strong> or <strong>Open</strong> button in the toolbar, or try to close the
+            browser tab without saving the current changes, a confirmation dialog is displayed.
           </p>
           <br />
         </div>
@@ -637,6 +663,44 @@ function getPorts(): PointPortModel[] {
 }
 
 let isMobile: boolean;
+let pendingAction: (() => void) | null = null;
+
+function showConfirm(action: () => void) {
+  pendingAction = action;
+  unsavedDialogInstance.isModal = true;
+  unsavedDialogInstance.show();
+  document.getElementById('diagram-unsaved-dialog').style.display = 'flex';
+}
+
+function hideConfirm() {
+  unsavedDialogInstance.hide();
+  document.getElementById('diagram-unsaved-dialog').style.display = 'none';
+}
+
+function saveButtonClick() {
+  download(diagramInstance.saveDiagram());
+  hideConfirm();
+  if (pendingAction) {
+    pendingAction();
+  }
+}
+function dontSaveButtonClick() {
+  hideConfirm();
+  if (pendingAction) {
+    pendingAction();
+  }
+}
+function cancelButtonClick() {
+  hideConfirm();
+}
+// Browser / tab close protection
+window.addEventListener('beforeunload', function (e: BeforeUnloadEvent) {
+  if (diagramInstance && diagramInstance.isModified) {
+    e.preventDefault();
+    e.returnValue = 'You have unsaved changes.\n\nDo you want to continue without saving?';
+  }
+});
+
 // Adds EventListener for the palette toggle and keeps state in sync on resize.
 function addEvents(): void {
   const mq = window.matchMedia('(max-width:550px)');
@@ -772,7 +836,11 @@ function toolbarClick(args: any) {
       diagramInstance.tool = DiagramTools.ZoomPan;
       break;
     case 'New Diagram':
-      diagramInstance.clear();
+      if (diagramInstance.isModified) {
+        showConfirm(() => diagramInstance.clear());
+      } else {
+        diagramInstance.clear();
+      }
       historyChange(args);
       break;
     case 'Print Diagram':
@@ -1030,7 +1098,11 @@ function onUploadSuccess(args: any) {
 
 //Load the diagraming object.
 function loadDiagram(event: any) {
-  diagramInstance.loadDiagram(event.target.result);
+  if (diagramInstance.isModified) {
+    showConfirm(() => diagramInstance.loadDiagram(event.target.result));
+  } else {
+    diagramInstance.loadDiagram(event.target.result);
+  }
 }
 
 //To enable and disable undo/redo button.

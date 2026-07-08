@@ -38,6 +38,10 @@
     padding: 10px 0px 0px 1px;
 }
 
+.e-kanban .header-icon {
+    font-size: 0px;
+}
+
 .kanban-overview.e-kanban .Open::before {
     content: '\e700';
     color: #0251cc;

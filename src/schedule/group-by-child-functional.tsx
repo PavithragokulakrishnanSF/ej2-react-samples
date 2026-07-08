@@ -66,6 +66,9 @@ const GroupByChild = () => {
           if the colors of parent level needs to be applied to child events, then it is necessary to define the
           <code>resourceColorField</code> option within the <code>eventSettings</code> property with the parent level resource name value.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

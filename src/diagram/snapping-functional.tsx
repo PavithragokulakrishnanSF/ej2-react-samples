@@ -523,7 +523,9 @@ function handleSnapToLinesChange(args: any) {
                     The <code>constraints</code> property controls the visibility of gridlines and enables or disables snapping.
                 </p>
                 <br />
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

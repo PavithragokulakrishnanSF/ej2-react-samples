@@ -8,14 +8,12 @@ import { ListViewComponent } from '@syncfusion/ej2-react-lists';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { ToastComponent } from '@syncfusion/ej2-react-notifications';
 import { marked } from 'marked';
+import { getAIResponse } from '../common/ai-service';
+import * as data from './promptResponseData.json';
 
-import {
-  getGeminiAIAssit,
-  getdeepSeekAIAssit,
-  getAzureOpenAIAssist
-} from './ai-services';
+const promptResponseData = (data as any).defaultPromptResponseData || data;
 
-type ModelId = 'gemini' | 'deepseek' | 'openai';
+type ModelId = 'openai' | 'gemini' | 'deepseek';
 interface ConversationItem { id: string; text: string; }
 
 export default class AIAssistModels extends SampleBase<{}, {}> {
@@ -35,26 +33,22 @@ export default class AIAssistModels extends SampleBase<{}, {}> {
   private stopStreaming = false;
   private showHeader = false;
   private suggestions: string[] = [
-    'How can AI help me plan my week?',
-    'What are good habits for continuous learning?'
+    'What are the best tools for organizing tasks?',
+    'How can I maintain work-life balance?'
   ];
 
   private listData: ConversationItem[] = [];
-  // CHANGED: make nullable so "New Thread" truly clears it
   private selectedConvId: string | null = null;
-  private selectedModel: ModelId = 'gemini';
+  private selectedModel: ModelId = 'openai';
+  private abortController: AbortController | undefined;
 
-  // API configuration (kept as fields)
-  private geminiApiKey = '';
-  private geminiModel = '';
-  private deepseekApiKey = '';
-  attachmentSettings = {
-      saveUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Save',
-      removeUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Remove'
+  private attachmentSettings = {
+    saveUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Save',
+    removeUrl: 'https://services.syncfusion.com/react/production/api/FileUploader/Remove'
   };
-  footerToolbarSettings = {
+  private footerToolbarSettings = {
     toolbarPosition: 'Bottom'
-  }
+  };
   // Handles initial setup once the component mounts.
   componentDidMount(): void {
     this.ensureStore();
@@ -283,77 +277,23 @@ export default class AIAssistModels extends SampleBase<{}, {}> {
     return streamed;
   }
 
-  private promptRequest = async (args: { prompt: string }) => {
+  private promptRequest = async (args: PromptRequestEventArgs) => {
     if (!args.prompt || !args.prompt.trim()) return;
 
     let convId = this.selectedConvId;
     if (!convId) {
-      convId = this.createNewConversation();
-      this.selectedConvId = convId;
+        convId = this.createNewConversation();
+        this.selectedConvId = convId;
     }
 
     this.updateConversationName(args.prompt, convId);
-
-    if (this.selectedModel === 'gemini') {
-      await this.handleGeminiRequest(args);
-    } else if (this.selectedModel === 'deepseek') {
-      await this.handleDeepSeekRequest(args);
-    } else {
-      await this.handleOpenAIRequest(args);
-    }
+    this.abortController = new AbortController();
+    const response = this.selectedModel === 'openai'
+      ? await getAIResponse(args as any, this.abortController)
+      : '⚠️ Something went wrong while connecting to the AI service. Please check your API key.';
+    this.aiAssist?.addPromptResponse(response as string);
+    this.checkAndUpdateLocalStorage();
   };
-
-  private async handleGeminiRequest(args: { prompt: string }): Promise<void> {
-    this.stopStreaming = false;
-    try {
-      const fullResponse = await getGeminiAIAssit(this.geminiApiKey, this.geminiModel, args.prompt);
-      const streamed = await this.streamAIResponse(fullResponse);
-      if (!this.stopStreaming && this.aiAssist) {
-        this.aiAssist.addPromptResponse(marked.parse(streamed), true);
-        this.checkAndUpdateLocalStorage();
-      }
-    } catch {
-      const msg = '⚠️ Something went wrong while connecting to the Gemini service. Please check your API key/model.';
-      this.aiAssist?.addPromptResponse(marked.parse(msg), true);
-      this.checkAndUpdateLocalStorage();
-    }
-  }
-
-  // Handles DeepSeek API interaction and updates the Assist View with responses.
-  private async handleDeepSeekRequest(args: PromptRequestEventArgs): Promise<void> {
-    this.stopStreaming = false; // FIX: use field, not setState
-    try {
-      const fullResponse = await getdeepSeekAIAssit(this.deepseekApiKey, args.prompt!);
-      const streamed = await this.streamAIResponse(fullResponse);
-      if (!this.stopStreaming && this.aiAssist) {
-        this.aiAssist.addPromptResponse(marked.parse(streamed), true);
-        this.checkAndUpdateLocalStorage();
-      }
-    } catch {
-      const msg = '⚠️ Something went wrong while connecting to the DeepSeek service. Please check your API key.';
-      this.aiAssist.addPromptResponse(marked.parse(msg), true);
-      this.checkAndUpdateLocalStorage();
-    }
-  }
-
-  private async handleOpenAIRequest(args: { prompt: string }): Promise<void> {
-    this.stopStreaming = false;
-    try {
-      const fullResponse = await getAzureOpenAIAssist({
-        messages: args.prompt
-      });
-      const streamed = await this.streamAIResponse(fullResponse);
-      if (!this.stopStreaming && this.aiAssist) {
-        this.aiAssist.addPromptResponse(marked.parse(streamed), true);
-        this.checkAndUpdateLocalStorage();
-      }
-    } catch {
-      const msg =
-        '⚠️ Something went wrong while connecting to the OpenAI service. Please check your Azure endpoint, key, deployment, and API version.';
-      this.aiAssist?.addPromptResponse(marked.parse(msg), true);
-      this.checkAndUpdateLocalStorage();
-    }
-  }
 
   // Renders the banner content displayed at the top of the Assist View.
   private bannerTemplate = (): React.ReactNode => (
@@ -398,6 +338,7 @@ export default class AIAssistModels extends SampleBase<{}, {}> {
               promptSuggestions={this.suggestions}
               promptRequest={this.promptRequest}
               showHeader={this.showHeader}
+              enableStreaming={true}
               stopRespondingClick={this.stopRespondingClick}
               width="auto" enableAttachments={true}  attachmentSettings={this.attachmentSettings} footerToolbarSettings={this.footerToolbarSettings}
             >

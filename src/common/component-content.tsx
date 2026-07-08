@@ -23,7 +23,7 @@ declare let window: MyWindow;
 let samLength: number;
 // Regex for hidden code removal
 let reg: RegExp = /.*custom code start([\S\s]*?)custom code end.*/g;
-let aiControlRegex: RegExp = /^(?:ai-(?!assistview\b)[a-z-]+(?:\/[A-Za-z0-9-]+)?|dashboards(?:\/[A-Za-z0-9-]+)?)$/;
+let aiControlRegex: RegExp = /^(?:block-editor\/ai-[a-z-]+|ai-(?!assistview\b)[a-z-]+(?:\/[A-Za-z0-9-]+)?|ai-assistview\/ai-[a-z-]+|inline-ai-assist\/ai-[a-z-]+|dashboards(?:\/[A-Za-z0-9-]+)?)$/;
 let hash: string[];
 let catRegex: RegExp = /(-| )/g;
 let propRegex: RegExp = /-3/;
@@ -298,6 +298,9 @@ function sourceFileList(node: any): void {
 function generatepath(path:any): void{
     let splitPath: string = path.split('/')[1];
     if ((aiControlRegex).test(path)) {
+        if (splitPath.startsWith('ai-')) {
+            splitPath = splitPath.substring(3);
+        }
         path = path.split('/')[0] + '/' + 'ai-' + splitPath;
     }
     let tsx:any = [{path:`src/${path}.tsx`,displayName:`${splitPath}.tsx`},{path:`src/${path}.jsx`,displayName:`${splitPath}.jsx`}]
@@ -381,7 +384,10 @@ function renderSourceTabContent(): void {
     
     let openNew: HTMLFormElement = (select('#openNew') as HTMLFormElement);
     if (openNew) {
-        openNew.href = location.href.split('#')[0]  + path + '/';
+	    let baseUrl: string = location.href.split('#')[0];
+        // Remove trailing index.html (if present)
+        baseUrl = baseUrl.replace(/index\.html$/i, '');
+        openNew.href = baseUrl + path + '/';
     }
     if (Browser.isDevice) {
         if (window.sampleOrder.indexOf(location.hash.split('/').slice(2).join('/')) == -1) {
@@ -408,6 +414,9 @@ function renderSampleHeader(): void {
      * Sammple Header Name
      */
     let controlElem: Element = select('[control-name="' + hash[2].toLowerCase() + '"]');
+    if (hash[2].startsWith('ai-') && ['ai-assistview', 'ai-smart-paste', 'ai-smart-textarea'].indexOf(hash[2]) === -1) {
+        controlElem = select('[control-name="ai-grid"]');
+    }
     controlName = controlElem ? controlElem.getAttribute('name') : toInitiaUpper(hash[2]);
     sampleNameElement.innerHTML = controlName;
     sampleNameElement.setAttribute('title', controlName);

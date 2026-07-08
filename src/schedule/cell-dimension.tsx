@@ -52,6 +52,9 @@ export class CellDimension extends SampleBase<{}, {}> {
           <p>
             In this demo, the height and width of the Scheduler cells are set by overriding the default CSS class.
           </p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

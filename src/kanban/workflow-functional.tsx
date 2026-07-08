@@ -37,8 +37,8 @@ const Workflow = () => {
                     </div>
                 </div>
                 <div className="e-card-custom-footer">
-                    {props.Tags.split(",").map((tag: string) => (
-                        <div className="e-card-tag-field">{tag}</div>
+                    {props.Tags.split(",").map((tag: string, index: number) => (
+                        <div key={`tag-${index}`} className="e-card-tag-field">{tag}</div>
                     ))}
                 </div>
             </div>

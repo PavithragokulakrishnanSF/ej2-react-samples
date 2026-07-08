@@ -721,15 +721,15 @@ function segmentDecoratorSizeChange(args: any) {
           In this example, you can see how to add connectors to connect the
           shapes and how to customize the appearance of the connectors. You
           can use the <code>style</code> property of the connector to
-          customize its stroke style. You can use the
+          customize its stroke style. You can use the 
           <code>cornerRadius</code> property to add connectors with rounded
           corners.
         </p>
 
         <p>
         To change the appearance, click on different styles in the property panel to modify the connector type, decorator shapes, and decorator sizes.
-        The <code>type</code> property of the connector defines its segment type. The <code>shape</code> property specifies the shapes for the source, target, and segment decorators. You can adjust the size of the source and target decorators by setting their
-        <code>width</code>and <code>height</code>. Additionally, the<code>segmentThumbSize</code>property allows you to modify the size of the segment decorator when the connector is selected.
+        The <code>type</code> property of the connector defines its segment type. The <code>shape</code> property specifies the shapes for the source, target, and segment decorators. You can adjust the size of the source and target decorators by setting their 
+        <code>width</code>and <code>height</code>. Additionally, the <code>segmentThumbSize</code>property allows you to modify the size of the segment decorator when the connector is selected.
         </p>
 
         <p>
@@ -745,7 +745,9 @@ function segmentDecoratorSizeChange(args: any) {
           <code>services</code>.
         </p>
         <br />
-      </div>
+      
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
     </div>
   );
 }

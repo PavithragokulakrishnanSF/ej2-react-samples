@@ -116,6 +116,7 @@ color:white;
 .fluent2-highcontrast .sb-src-code,
 .fluent2-highcontrast .sb-api-section,
 .fluent2-highcontrast .sb-theme-popup,
+.fluent2-highcontrast .sb-products-popup,
 .fluent2-highcontrast .copy-tooltip,
 .fluent2-highcontrast .e-icons.copycode,
 .fluent2-highcontrast #search-input-wrapper input,
@@ -130,7 +131,10 @@ color:white;
 .fluent2-highcontrast .sb-switch-popup li:hover,
 .fluent2-highcontrast .theme-wrapper:hover,
 .fluent2-highcontrast .theme-wrapper.active,
+.fluent2-highcontrast .products-wrapper:hover,
+.fluent2-highcontrast .products-wrapper.active,
 .fluent2-highcontrast .sb-theme-popup li:hover,
+.fluent2-highcontrast .sb-products-popup li:hover,
 .fluent2-highcontrast .sb-search-result .e-list-item:hover,
 .fluent2-highcontrast .sb-left-pane .e-listview .e-list-item:hover {
     background-color: rgba(255, 255, 255, 0.12);
@@ -227,4 +231,7 @@ color:white;
 .fluent2-highcontrast.e-bigger .e-listview .e-icon-wrapper .e-list-text,
 .fluent2-highcontrast.e-bigger .sb-control-navigation .e-treeview .tree-text {
     width: calc(100% - 70px);
+}
+.fluent2-highcontrast .sb-products-popup {
+    border: unset;
 }

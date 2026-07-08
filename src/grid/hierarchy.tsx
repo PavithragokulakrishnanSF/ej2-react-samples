@@ -70,6 +70,9 @@ export class Hierarchy extends SampleBase<{}, {}> {
                         Grid features are segregated into individual feature-wise modules.         
                         To use Hierarchy Grid feature, we need to inject <code>DetailRow</code> using the <code>Grid.Inject(DetailRow)</code> section.
                     </p>
+                    <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                        <a target="_blank"
+                            href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
                 </div>
             </div>
         )

@@ -195,12 +195,18 @@ body.material3-dark,
 .material3-dark .sb-search-result,
 .material3-dark .sb-src-code,
 .material3-dark .sb-api-section,
-.material3-dark .copy-tooltip,
+.material3-dark .sb-theme-popup, .material3-dark .sb-products-popup, .material3-dark  .copy-tooltip,
 .material3-dark .e-icons.copycode,
 .material3-dark #search-input-wrapper input,
 .material3-dark #search-input-wrapper input::placeholder {
     color: #ffffff;
     background: #2B2831;
+}
+
+	.material3-dark .sb-products-popup {
+    color: #ffffff;
+    background: #2B2831;
+    border: unset;
 }
 
 .material3-dark .sb-theme-popup {
@@ -234,7 +240,10 @@ body.material3-dark,
 .material3-dark .sb-switch-popup li:hover,
 .material3-dark .theme-wrapper:hover,
 .material3-dark .theme-wrapper.active,
+.material3-dark .products-wrapper:hover,
+.material3-dark .products-wrapper.active,
 .material3-dark .sb-theme-popup li:hover,
+.material3-dark .sb-products-popup li:hover,
 .material3-dark .sb-search-result .e-list-item:hover,
 .material3-dark .sb-left-pane .e-listview .e-list-item:hover,
 .material3-dark .sb-control-navigation .e-treeview .e-list-item.e-active>.e-fullrow,

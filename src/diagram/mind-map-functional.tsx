@@ -1,8 +1,8 @@
-// Importing necessary modules from React, ReactDOM, and Syncfusion Diagram library
+// Importing necessary modules from React, ReactDOM, and React Diagram library
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 import {
-  // Syncfusion Diagram components and utilities
+  // React Diagram components and utilities
   MindMap as MindMapModule,
   HierarchicalTree,
   ConnectorConstraints,
@@ -492,6 +492,9 @@ function MindMap() {
               connector.constraints &= ~ConnectorConstraints.Select;
               return connector;
             }}
+            created={() => {
+              diagramInstance.fitToPage();
+            }}
             getCustomTool={getTool}
             scrollSettings={{
               //Sets the scroll padding
@@ -515,7 +518,7 @@ function MindMap() {
         <p>
           This example shows how to generate a mind map from an external data
           source. The <code>type</code> property of the <code>layout</code>{" "}
-          can be used to enable the mind map layout algorithm. The
+          can be used to enable the mind map layout algorithm. The 
           <code>getBranch</code> property can also be used to define the
           branches at both left and right sides.
         </p>
@@ -525,11 +528,13 @@ function MindMap() {
           The diagram component’s features are segregated into individual
           feature-wise modules. To generate diagrams from an external data
           source, inject <code>DataBinding</code> module into{" "}
-          <code>services</code>. To automatically generate a mind map, inject
+          <code>services</code>. To automatically generate a mind map, inject 
           <code>Mindmap</code> module into <code>services</code>.
         </p>
         <br />
-      </div>
+      
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
     </div>
   );
 }

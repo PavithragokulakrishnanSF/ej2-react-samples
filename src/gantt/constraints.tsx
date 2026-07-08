@@ -1,21 +1,11 @@
 import * as React from 'react';
-import {
-  GanttComponent,
-  Inject,
-  ColumnsDirective,
-  ColumnDirective,
-  Selection,
-  Toolbar,
-  DayMarkers,
-  Edit,
-} from '@syncfusion/ej2-react-gantt';
-
+import { GanttComponent, Inject, ColumnsDirective, ColumnDirective, Selection, Toolbar, DayMarkers, Edit, TaskFieldsModel, EditSettingsModel, ToolbarItem, LabelSettingsModel, SplitterSettingsModel, EventMarkerModel } from '@syncfusion/ej2-react-gantt';
 import { constraintData } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class Constraints extends SampleBase<{}, {}> {
 
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: "TaskID",
     name: "TaskName",
     startDate: "StartDate",
@@ -29,7 +19,7 @@ export class Constraints extends SampleBase<{}, {}> {
     notes: "info",
   };
 
-  public editSettings: any = {
+  public editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
@@ -37,7 +27,7 @@ export class Constraints extends SampleBase<{}, {}> {
     showDeleteConfirmDialog: true,
   };
 
-  public toolbar: any = [
+  public toolbar: ToolbarItem[] = [
     "Add",
     "Edit",
     "Update",
@@ -61,23 +51,23 @@ export class Constraints extends SampleBase<{}, {}> {
       7: "Finish No Later Than",
     };
     return map[value] || "Unknown";
-    };  
+  };
   public templateRight: any = this.RightLabelTemplate;
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: "TaskName",
-   rightLabel: this.templateRight.bind(this)
+    rightLabel: this.templateRight.bind(this)
   };
 
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 4,
   };
 
-  public projectEndDate: Date = new Date("09/28/2025");
   public projectStartDate: Date = new Date("03/25/2025");
+  public projectEndDate: Date = new Date("09/06/2025");
 
-  public eventMarkers: any[] = [
+  public eventMarkers: EventMarkerModel[] = [
     { day: new Date("03/25/2025"), label: "Project StartDate" },
-    { day: new Date("08/31/2025"), label: "Project EndDate" },
+    { day: new Date("08/28/2025"), label: "Project EndDate" },
   ];
 
   render() {
@@ -106,7 +96,7 @@ export class Constraints extends SampleBase<{}, {}> {
               <ColumnDirective
                 field="TaskName"
                 headerText="Job Name"
-                width="200"
+                width="230"
                 clipMode="EllipsisWithTooltip"
               />
               <ColumnDirective field="StartDate" />
@@ -120,53 +110,53 @@ export class Constraints extends SampleBase<{}, {}> {
             <Inject services={[Edit, Selection, Toolbar, DayMarkers]} />
           </GanttComponent>
           <div style={{ float: 'right', margin: '10px' }}>Source:
-            <a href="https://en.wikipedia.org/wiki/Construction" target='_blank'>https://en.wikipedia.org/</a>
+            <a href="https://en.wikipedia.org/wiki/Construction" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Construction</a>
           </div>
         </div>
 
         <div id="action-description">
-        <p>
-         This sample illustrates how to apply and visualize task constraints in a Gantt Chart. Task constraints define specific scheduling rules that determine when a task can start or finish, based on project requirements or dependencies.
-        </p>
-      </div>
+          <p>
+            This sample illustrates how to apply and visualize task constraints in a Gantt Chart. Task constraints define specific scheduling rules that determine when a task can start or finish, based on project requirements or dependencies.
+          </p>
+        </div>
 
-      <div id="description">
-        <p>
-	        In Gantt Chart, task constraints define the rules that limit a task's start or end date based on project scheduling needs. The following constraint types are supported:</p>
+        <div id="description">
+          <p>
+            In Gantt Chart, task constraints define the rules that limit a task's start or end date based on project scheduling needs. The following constraint types are supported:</p>
           <ul>
-	          <li><code>As Soon As Possible</code> - Task starts as early as possible. Default for auto-scheduled tasks.</li>
-	          <li><code>As Late As Possible</code> - Task finishes as late as possible without delaying dependent tasks.</li>
-	          <li><code>Must Start On</code> - Task must start on the specified date.</li>
-	          <li><code>Must Finish On</code> - Task must finish on the specified date.</li>
-	          <li><code>Start No Earlier Than</code> - Task cannot start before the specified date.</li>
-	          <li><code>Start No Later Than</code> - Task must start on or before the specified date.</li>
-	          <li><code>Finish No Earlier Than</code> - Task cannot finish before the specified date.</li>
-	          <li><code>Finish No Later Than</code> - Task must finish on or before the specified date.</li>
+            <li><code>As Soon As Possible</code> - Task starts as early as possible. This is the default constraint type for auto-scheduled tasks.</li>
+            <li><code>As Late As Possible</code> - Task finishes as late as possible without delaying dependent tasks.</li>
+            <li><code>Must Start On</code> - Task must start on the specified date.</li>
+            <li><code>Must Finish On</code> - Task must finish on the specified date.</li>
+            <li><code>Start No Earlier Than</code> - Task cannot start before the specified date.</li>
+            <li><code>Start No Later Than</code> - Task must start on or before the specified date.</li>
+            <li><code>Finish No Earlier Than</code> - Task cannot finish before the specified date.</li>
+            <li><code>Finish No Later Than</code> - Task must finish on or before the specified date.</li>
           </ul>
           <br />
           <p>
-            You can assign constraints to a task using the <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/taskFieldsModel/#constraintType">taskFields.constraintType</a></code> and <code><a target="_blank" href="https://ej2.syncfusion.com/documentation/api/gantt/taskFieldsModel/#constraintDate">taskFields.constraintDate</a></code> properties.
+            You can assign constraints to a task using the <code><a target="_blank" rel="noopener noreferrer" href="https://ej2.syncfusion.com/react/documentation/api/gantt/taskfieldsmodel#constrainttype">taskFields.constraintType</a></code> and <code><a target="_blank" rel="noopener noreferrer" href="https://ej2.syncfusion.com/react/documentation/api/gantt/taskfieldsmodel#constraintdate">taskFields.constraintDate</a></code> properties.
             Constraints can also be updated interactively through the task edit dialog.
           </p>
-        <p><strong>Handling constraint violation popup:</strong></p>
-        <p>
-          To control or suppress the constraint violation dialog, handle the <code>actionBegin</code> event with <code>requestType</code> as <code>validateTaskViolation</code>. 
-          Use <code>args.validateMode</code> to specify how to respond to constraint conflicts. Available properties include:
-        </p>
-        <ul>
+          <p><strong>Handling constraint violation popup:</strong></p>
+          <p>
+            To control or suppress the constraint violation dialog, handle the <code>actionBegin</code> event with <code>requestType</code> as <code>validateTaskViolation</code>.
+            Use <code>args.validateMode</code> to specify how to respond to constraint conflicts. Available properties include:
+          </p>
+          <ul>
             <li><code>respectMustStartOn</code></li>
             <li><code>respectMustFinishOn</code></li>
             <li><code>respectStartNoLaterThan</code></li>
             <li><code>respectFinishNoLaterThan</code></li>
-        </ul>
-        <p>
+          </ul>
+          <p>
             These options are false by default, which means the violation popup appears. To suppress the popup and cancel conflicting changes silently, set the relevant flag(s) to <strong>true</strong>.
-        </p>
-        <br />
-        <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/task-constraints">documentation section</a>.</p>
+          </p>
+          <p>Gantt component features are segregated into individual feature-wise modules. To use editing, toolbar, day markers and selection features, we need to inject <code>Edit</code>, <code>Toolbar</code>, <code>DayMarkers</code> and <code>Selection</code> into the <code>Inject Services</code> section.</p>
+          <br/>
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" rel="noopener noreferrer" href="https://ej2.syncfusion.com/react/documentation/gantt/task-constraints">documentation section</a>.</p>
+        </div>
       </div>
-    </div>
     );
   }
 }

@@ -481,7 +481,7 @@ const EventCalendar = () => {
                 <div className="leftside">
                 </div>
                 <SidebarComponent id="sidebar-left" className="sidebar-treeview" ref={calendarSidebarObj} width={'320px'} height={'550px'}
-                    target={'.main-content'} mediaQuery={'(min-width: 600px)'} isOpen={true} >
+                    enableGestures={false} target={'.main-content'} mediaQuery={'(min-width: 600px)'} isOpen={true} >
                     <div className="table-content">
                         <CalendarComponent ref={calendarObj} id="calendar" value={currentDate} change={valueChange} cssClass='selected-date-calendar' />
                         <div className="calendar-list-container">
@@ -512,7 +512,7 @@ const EventCalendar = () => {
                         </div>
                         <div className="unplanned-container">
                             <div id="plannedOpen" className="e-icons e-chevron-left-double"></div>
-                            <SidebarComponent ref={unPlannedSidebarObj} id="sidebar-right" position={'Right'} width={'300px'} target={'.main-content'} type="Push" isOpen={false} created={unplannedSideBarCreated} close={unplannedSidebarClosed}>
+                            <SidebarComponent ref={unPlannedSidebarObj} id="sidebar-right" position={'Right'} width={'300px'} enableGestures={false} target={'.main-content'} type="Push" isOpen={false} created={unplannedSideBarCreated} close={unplannedSidebarClosed}>
                                 <div id="unplanned-events-toolbar">
                                     <button className="e-icons e-exit-full-screen" title="Open/Close Sidebar" onClick={unplannedSideBarCollapse}></button>
                                     <h4 id="headerText">Unplanned Events</h4>
@@ -546,6 +546,9 @@ const EventCalendar = () => {
                 <p>The Schedule component is configured to show the appointments in colors based on their type to identify
                     the appointment type.</p>
                 <p>The right sidebar displays the list of unplanned events, which can be useful for the user to plan them later.</p>
+                <p>
+                    Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                </p>
             </div>
         </div>
     );

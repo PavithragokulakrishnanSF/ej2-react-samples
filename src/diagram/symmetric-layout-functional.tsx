@@ -1,4 +1,4 @@
-// Import React and necessary components from Syncfusion's EJ2 React Diagrams library to build Symmetric Layout diagrams.
+// Import React and necessary components from React Diagram library to build Symmetric Layout diagrams.
 import * as React from "react";
 import {
     BasicShapeModel,
@@ -175,7 +175,7 @@ function SymmetricLayout() {
                     This view is well suited for large networks and is commonly used in
                     network component diagrams. It is typically used with simple
                     straight line links. This example shows how to arrange nodes in a
-                    symmetrical structure. The
+                    symmetrical structure. The 
                     <code>layout</code> property of the diagram can be used to enable
                     it.
                 </p>
@@ -190,7 +190,9 @@ function SymmetricLayout() {
                     into <code>services</code>.
                 </p>
                 <br />
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

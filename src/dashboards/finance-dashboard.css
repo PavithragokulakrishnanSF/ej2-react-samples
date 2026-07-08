@@ -109,9 +109,13 @@
 }
 
 /* increase panel header height */
-.e-panel-header {
+#ratiocardtemplate,
+#piecardtemplate,
+#quarterlycardtemplate
+{
   height: 52px !important;
 }
+
 
 /* Make Syncfusion circular gauge fill its panel responsively */
 .gauge-center {
@@ -126,8 +130,6 @@
   width: 100% !important;
   height: 100% !important;
 }
-
-
 
 #main-finance-div {
   display: flex;
@@ -210,7 +212,7 @@
   white-space: nowrap;
 }
 
-app-page:is(.material3-dark, .bootstrap5_3-dark, .fluent-dark, .fluent2-dark, .fluent2-highcontrast,
+app-finance-page:is(.material3-dark, .bootstrap5_3-dark, .fluent-dark, .fluent2-dark, .fluent2-highcontrast,
   .bootstrap5_3-dark, .tailwind-dark, .tailwind3-dark,
   .material3-dark, .bootstrap-dark, .highcontrast) :is(#currentcard, #netprofitcard,
   #investmentcard, #goodssold, #cashcard, #npvcard,
@@ -253,10 +255,6 @@ body:not(:is(.material3-dark, .bootstrap5_3-dark, .fluent-dark, .fluent2-dark, .
   fill: #0d6efd;
 }
 
-.material3-dark .e-card:hover {
-  background-color: #191c1f;
-}
-
 .fluent-dark .cs-title,
 .fluent2-dark .cs-title,
 .fluent2-highcontrast .cs-title,
@@ -278,14 +276,14 @@ body:not(:is(.material3-dark, .bootstrap5_3-dark, .fluent-dark, .fluent2-dark, .
   color: #000000;
 }
 
-.fluent .e-panel-header,
-.fluent2 .e-panel-header,
-.bootstrap5_3 .e-panel-header,
-.tailwind .e-panel-header,
-.tailwind3 .e-panel-header,
-.material3 .e-panel-header,
-.bootstrap5_3 .e-panel-header {
+.fluent2 .app-finance-page .e-panel-header,
+.tailwind3 .app-finance-page .e-panel-header,
+.bootstrap5_3 .app-finance-page .e-panel-header {
   background-color: #f9fafb;
+}
+
+.material3-dark .app-finance-page .e-card:hover {
+  background-color: #191c1f;
 }
 
 .tailwind3 #finance-dashboard_sidebar_section .e-dashboardlayout.e-control .e-panel:active,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GanttComponent, Inject, Edit, Selection, DayMarkers, ColumnMenu, Toolbar, Filter, Reorder, Sort, Resize, ColumnsDirective, ColumnDirective, EditDialogFieldsDirective, EditDialogFieldDirective, EventMarkersDirective, EventMarkerDirective, AddDialogFieldsDirective, AddDialogFieldDirective} from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Edit, Selection, DayMarkers, ColumnMenu, Toolbar, Filter, Reorder, Sort, Resize, ColumnsDirective, ColumnDirective, EditDialogFieldsDirective, EditDialogFieldDirective, AddDialogFieldsDirective, AddDialogFieldDirective, SplitterSettingsModel, TimelineSettingsModel, EditSettingsModel, LabelSettingsModel, ResourceFieldsModel, ToolbarItem } from '@syncfusion/ej2-react-gantt';
 import { ComboBox } from '@syncfusion/ej2-dropdowns';
 import { DataManager } from '@syncfusion/ej2-data';
 import { getUniqueID, isNullOrUndefined } from '@syncfusion/ej2-base';
@@ -14,7 +14,7 @@ const GanttDialogEditing = () => {
 
   const ganttInstance = React.useRef<GanttComponent>(null);
 
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -31,12 +31,12 @@ const GanttDialogEditing = () => {
     work: 'Work',
   };
 
-  const resourceFields = {
+  const resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName',
   };
 
-  const editSettings: any = {
+  const editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
@@ -45,13 +45,13 @@ const GanttDialogEditing = () => {
     mode: 'Dialog',
   };
 
-  const toolbar = ['Add', 'Edit', 'Delete', 'ExpandAll', 'CollapseAll'];
+  const toolbar: ToolbarItem[] = ['Add', 'Edit', 'Delete', 'ExpandAll', 'CollapseAll'];
 
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 4,
   };
 
-  const timelineSettings: any = {
+  const timelineSettings: TimelineSettingsModel = {
     showTooltip: true,
     topTier: {
       unit: 'Week',
@@ -63,13 +63,14 @@ const GanttDialogEditing = () => {
     },
   };
 
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     rightLabel: 'TaskName',
   };
   const actionComplete = (args: any) => {
     if (args.requestType === 'openAddDialog' || args.requestType === 'openEditDialog') {
       const gantt = (document.getElementById('Dialog') as any)?.ej2_instances[0];
       const tabObj = (document.getElementById(`${gantt.element.id}_Tab`) as any)?.ej2_instances[0];
+      const selectedTab = tabObj.selected;
       if (tabObj) {
         tabObj.selected = function (args: any) {
           if (args.selectedIndex === 1) {
@@ -125,6 +126,9 @@ const GanttDialogEditing = () => {
               gridObj.refresh();
             }
           }
+          if (selectedTab) {
+            selectedTab.call(tabObj, args);
+          }
         };
       }
     }
@@ -133,12 +137,12 @@ const GanttDialogEditing = () => {
   return (
     <div className='control-pane'>
       <div className='control-section'>
-        <GanttComponent id="Dialog" ref={ganttInstance} dataSource={dialogData} taskFields={taskFields} resourceFields={resourceFields} resources={dataResources} 
-        editSettings={editSettings} toolbar={toolbar} renderBaseline={true} treeColumnIndex={1} taskMode="Custom" allowSelection={true} showColumnMenu={true}
-        splitterSettings={splitterSettings} gridLines="Both" highlightWeekends={true} timelineSettings={timelineSettings} labelSettings={labelSettings} allowResizing={true} 
-        taskbarHeight={25} rowHeight={46} height="650px" projectStartDate={new Date('03/30/2025')} projectEndDate={new Date('08/07/2025')} actionComplete={actionComplete}>
+        <GanttComponent id="Dialog" ref={ganttInstance} dataSource={dialogData} taskFields={taskFields} resourceFields={resourceFields} resources={dataResources}
+          editSettings={editSettings} toolbar={toolbar} renderBaseline={true} treeColumnIndex={1} taskMode="Custom" allowSelection={true} showColumnMenu={true}
+          splitterSettings={splitterSettings} gridLines="Both" highlightWeekends={true} timelineSettings={timelineSettings} labelSettings={labelSettings} allowResizing={true}
+          taskbarHeight={25} rowHeight={46} height="650px" projectStartDate={new Date('03/30/2025')} projectEndDate={new Date('07/19/2025')} actionComplete={actionComplete}>
           <ColumnsDirective>
-            <ColumnDirective field="TaskID" headerText="Task ID" width="95" />
+            <ColumnDirective field="TaskID" headerText="Task ID" width="110" />
             <ColumnDirective field="TaskName" headerText="Task Name" width="200" />
             <ColumnDirective field="StartDate" headerText="Start Date" />
             <ColumnDirective field="Duration" headerText="Duration" />
@@ -150,8 +154,8 @@ const GanttDialogEditing = () => {
           <AddDialogFieldsDirective>
             <AddDialogFieldDirective
               type="General"
-              fields={['TaskID','TaskName','StartDate','Duration','EndDate','Progress']}/>
-            <AddDialogFieldDirective type="Dependency"/>
+              fields={['TaskID', 'TaskName', 'StartDate', 'Duration', 'EndDate', 'Progress']} />
+            <AddDialogFieldDirective type="Dependency" />
             <AddDialogFieldDirective
               type="Resources"
               additionalParams={{
@@ -165,7 +169,7 @@ const GanttDialogEditing = () => {
                     field: 'resourceName',
                     headerText: 'Resource Name',
                     width: 180,
-                    template: '<div class="image"><img src="src/gantt/images/${resourceName}.png" style="height:25px;width:25px" /><div style="display:inline-block;width:100%;position:relative;left:5px">${resourceName}</div></div>',
+                    template: '<div><img src="src/gantt/images/${resourceName}.png" style="height:25px;width:25px" /><div style="display:inline-block;width:100%;position:relative;left:5px">${resourceName}</div></div>',
                   },
                   { field: 'unit', width: 92 },
                   {
@@ -176,8 +180,8 @@ const GanttDialogEditing = () => {
                   },
                 ],
                 filterSettings: { type: 'Menu' },
-              }}/>
-            <AddDialogFieldDirective type="Segments"/>
+              }} />
+            <AddDialogFieldDirective type="Segments" />
             <AddDialogFieldDirective
               type="Advanced"
               fields={['ConstraintType', 'ConstraintDate', 'isManual', 'Work']}
@@ -186,7 +190,7 @@ const GanttDialogEditing = () => {
           <EditDialogFieldsDirective>
             <EditDialogFieldDirective
               type="General"
-              fields={['TaskID','TaskName','StartDate','Duration','EndDate','Progress']}/>
+              fields={['TaskID', 'TaskName', 'StartDate', 'Duration', 'EndDate', 'Progress']} />
             <EditDialogFieldDirective
               type="Dependency"
               additionalParams={{
@@ -194,7 +198,7 @@ const GanttDialogEditing = () => {
                 toolbar: ['Add', 'Edit', 'Delete', 'Search'],
                 editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
                 searchSettings: { fields: ['name'], ignoreCase: true },
-              }}/>
+              }} />
             <EditDialogFieldDirective
               type="Resources"
               additionalParams={{
@@ -208,7 +212,7 @@ const GanttDialogEditing = () => {
                     field: 'resourceName',
                     headerText: 'Resource Name',
                     width: 180,
-                    template: '<div class="image"><img src="src/gantt/images/${resourceName}.png" style="height:25px;width:25px" /><div style="display:inline-block;width:100%;position:relative;left:5px">${resourceName}</div></div>',
+                    template: '<div><img src="src/gantt/images/${resourceName}.png" style="height:25px;width:25px" /><div style="display:inline-block;width:100%;position:relative;left:5px">${resourceName}</div></div>',
                   },
                   { field: 'unit', width: 92 },
                   {
@@ -219,7 +223,7 @@ const GanttDialogEditing = () => {
                   },
                 ],
                 filterSettings: { type: 'Menu' },
-              }}/>
+              }} />
             <EditDialogFieldDirective
               type="Segments"
               additionalParams={{
@@ -229,35 +233,35 @@ const GanttDialogEditing = () => {
                 allowResizing: true,
                 toolbar: ['Add', 'Edit', 'Delete'],
                 editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
-                filterSettings: { type: 'Menu' },}}/>
+                filterSettings: { type: 'Menu' },
+              }} />
             <EditDialogFieldDirective
               type="Advanced"
               fields={['ConstraintType', 'ConstraintDate', 'isManual', 'Work']}
             />
           </EditDialogFieldsDirective>
-          <EventMarkersDirective>
-            <EventMarkerDirective day={new Date('07/11/2025')} label="Project approval and kick-off" />
-          </EventMarkersDirective>
+
           <Inject services={[Selection, Edit, DayMarkers, ColumnMenu, Toolbar, Filter, Reorder, Sort, Resize]} />
         </GanttComponent>
       </div>
       <div id="action-description">
         <p>This sample illustrates the phases of a software development project, with tasks like analysis, design, development, testing, and documentation. This also demonstrates CRUD operations in a Gantt Chart.
-            </p>
-        </div>
-                    
-        <div id="description">
-            <p>This sample demonstrates how to fully customize the dialog editing interface in the React Gantt Chart using the <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/addDialogFieldSettings/">addDialogFields</a></code> and <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/editDialogFieldSettings/">editDialogFields</a></code> properties along with <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/editDialogFieldSettings/#additionalparams">additionalParams</a></code>. It showcases how to override default input and grid components within each tab and organize custom fields across multiple tabs for a structured editing experience.
-                The following tab-level customizations are included:</p>
-		         <ul>
-		        	<li><b>Dependency Tab</b> - Includes additional toolbar items and improved task naming to simplify task relationship management.</li>
-              <li><b>Resource Tab</b> - Combines resource images and names, introduces a Role column, and supports column menu options for flexible configuration.</li>
-              <li><b>Segments Tab</b> - Enhanced with extra toolbar options for efficient segment editing and control.</li>
-              <li><b>Advanced Tab</b> - Organizes Work and Task Mode input fields for quick access and improved clarity.</li>
-		        </ul>
-            <br/>
-            <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/managing-tasks/editing-tasks#dialog-editing">documentation section</a>.</p>
-        </div>
+        </p>
+      </div>
+
+      <div id="description">
+        <p>This sample demonstrates how to fully customize the dialog editing interface in the React Gantt Chart using the <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/addDialogFieldSettings/">addDialogFields</a></code> and <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/editDialogFieldSettings/">editDialogFields</a></code> properties along with <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/editDialogFieldSettings/#additionalparams">additionalParams</a></code>. It showcases how to override default input and grid components within each tab and organize custom fields across multiple tabs for a structured editing experience.
+          The following tab-level customizations are included:</p>
+        <ul>
+          <li><b>Dependency Tab</b> - Includes additional toolbar items and improved task naming to simplify task relationship management.</li>
+          <li><b>Resource Tab</b> - Combines resource images and names, introduces a Role column, and supports column menu options for flexible configuration.</li>
+          <li><b>Segments Tab</b> - Enhanced with extra toolbar options for efficient segment editing and control.</li>
+          <li><b>Advanced Tab</b> - Organizes Work and Task Mode input fields for quick access and improved clarity.</li>
+        </ul>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use edit, columnMenu, filter, reorder, sort, resize, toolbar, markers and selection features, we need to inject <code>Edit</code>, <code>ColumnMenu</code>, <code>Filter</code>, <code>Reorder</code>, <code>Sort</code>, <code>Resize</code>, <code>Toolbar</code>, <code>DayMarkers</code> and <code>Selection</code> into the <code>Inject Services</code> section.</p>
+        <br/>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/managing-tasks/editing-tasks#edit-tasks-via-dialog">documentation section</a>.</p>
+      </div>
     </div>
   );
 };

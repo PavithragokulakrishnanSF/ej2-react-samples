@@ -90,7 +90,6 @@ import { AITreeGridSampleOrder } from '../ai-tree-grid/config';
 import { AIQuerybuilderSampleOrder } from '../ai-querybuilder/config';
 import { AIImageEditorSampleOrder } from '../ai-image-editor/config';
 import { AIPivotTableSampleOrder } from '../ai-pivot-table/config';
-import { AIRichTextEditorSampleOrder } from '../ai-rich-text-editor/config';
 import { AIKanbanSampleOrder } from '../ai-kanban/config';
 import { AISchedulerSampleOrder } from '../ai-schedule/config';
 import { AIMapsSampleOrder } from '../ai-maps/config';
@@ -110,40 +109,8 @@ export let samplesList: any = [
         'name': 'Smart TextArea', 'category': 'Smart Components', 'order': '01', 'path': 'ai-smart-textarea', 'samples': SmartTextAreaSampleOrder
     },
     {
-        'name': 'Diagram', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-diagram', 'samples': AIDiagramSampleOrder
-    },
-    {
-        'name': 'Query Builder', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-querybuilder', 'samples': AIQuerybuilderSampleOrder
-    },
-    {
-        'name': 'Rich Text Editor', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-rich-text-editor', 'samples': AIRichTextEditorSampleOrder
-    },
-    {
-        'name': 'Kanban', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-kanban', 'samples': AIKanbanSampleOrder
-    },
-    {
-        'name': 'Data Grid', 'category': 'Smart AI Solutions', 'type':'update', 'order': '01', 'path': 'ai-grid', 'samples': AIGridSampleOrder
-    },
-    {
-        'name': 'Pivot Table', 'category': 'Smart AI Solutions', 'type':'update', 'order': '01', 'path': 'ai-pivot-table', 'samples': AIPivotTableSampleOrder
-    },
-    {
-        'name': 'Tree Grid', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-tree-grid', 'samples': AITreeGridSampleOrder
-    },
-    {
-        'name': 'Gantt Chart', 'category': 'Smart AI Solutions', 'order': '01',  'path': 'ai-gantt', 'samples': AIGanttSampleOrder
-    },
-    {
-        'name': 'ComboBox', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-combo-box', 'samples': ComboBoxAISampleOrder
-    },
-    {
-        'name': 'Image Editor', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-image-editor', 'samples': AIImageEditorSampleOrder
-    },
-    {
-        'name': 'Scheduler', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-schedule', 'samples': AISchedulerSampleOrder
-    },
-    {
-        'name': 'Maps', 'category': 'Smart AI Solutions', 'order': '01', 'path': 'ai-maps', 'samples': AIMapsSampleOrder
+        'name': 'AI-Powered Samples', 'category': 'Smart AI Solutions', 'order': '02', 'path': 'ai-grid', 
+        'samples': (AIGridSampleOrder as any).concat(AIDiagramSampleOrder, ComboBoxAISampleOrder, AITreeGridSampleOrder, AIQuerybuilderSampleOrder, AIImageEditorSampleOrder, AIPivotTableSampleOrder, AIKanbanSampleOrder, AISchedulerSampleOrder, AIMapsSampleOrder, AIGanttSampleOrder)
     },
     {
         'name': 'Data Grid', 'type':'update', 'category': 'Grids', 'order': '03', 'path': 'grid', 'samples': GridSampleOrder
@@ -152,7 +119,7 @@ export let samplesList: any = [
         'name': 'Pivot Table', 'category': 'Grids', 'type': 'update', 'order': '03', 'path': 'pivot-table', 'samples': PivotViewSampleOrder
     },
     {
-        'name': 'Tree Grid', 'category': 'Grids', 'order': '03', 'path': 'treegrid', 'samples': TreeGridSampleOrder, 'ftName' :'treegrid', 'type':'update'
+        'name': 'Tree Grid', 'category': 'Grids', 'order': '03', 'path': 'treegrid', 'samples': TreeGridSampleOrder, 'ftName' :'treegrid'
     },
     {
         'name': 'AI AssistView', 'category': 'Interactive Chat', 'order': '06', 'path': 'ai-assistview', 'samples': AIAssistViewSampleOrder, 'ftName': 'ai-assistview', 'type':'update'
@@ -221,7 +188,7 @@ export let samplesList: any = [
         'name': 'Kanban', 'category': 'Data Visualization', 'order': '08', 'path': 'kanban', 'samples': KanbanSampleOrder, 'ftName': 'kanban'
     },
     {
-        'name': 'Sankey', 'category': 'Data Visualization', 'order': '08', 'path': 'sankey', 'samples': SankeyOrder, 'ftName': 'sankey', 'type': 'preview'
+        'name': 'Sankey', 'category': 'Data Visualization', 'order': '08', 'path': 'sankey', 'samples': SankeyOrder, 'ftName': 'sankey'
     },
     {
         'name': 'Query Builder', 'category': 'Forms', 'path': 'query-builder', 'samples': QueryBuilderSampleOrder      
@@ -236,7 +203,7 @@ export let samplesList: any = [
         'name': 'Image Editor', 'category': 'File Viewers & Editors', 'ftName': 'image-editor', 'order': '04', 'path': 'image-editor', 'samples': ImageEditorSampleOrder
     },
     {
-        'name': 'Scheduler', 'category': 'Calendars', 'order': '02', 'path': 'schedule', 'samples': ScheduleSampleOrder, 'ftName': 'scheduler'
+        'name': 'Scheduler', 'category': 'Calendars', 'order': '02', 'type':'update', 'path': 'schedule', 'samples': ScheduleSampleOrder, 'ftName': 'scheduler'
     },
     {
         'name': 'Gantt Chart', 'category': 'Calendars', 'order': '02', 'type':'update', 'path': 'gantt', 'samples': GanttSampleOrder

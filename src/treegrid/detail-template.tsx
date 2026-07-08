@@ -80,6 +80,9 @@ export class DetailTemplate extends SampleBase<{}, {}> {
                         Tree Grid features are segregated into individual feature-wise modules. To use detail template feature, we need to
     inject <code>DetailRow</code> using the <code>services</code> section.
 </p>
+                    <p>
+                        Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+                    </p>
                 </div>
             </div>
         )

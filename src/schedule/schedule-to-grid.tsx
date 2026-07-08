@@ -195,6 +195,9 @@ class ScheduleToGrid extends SampleBase<{}, {}> {
           DataGrid. Within the <code>dragStop</code> event, the DataGrid's <code>addRecord</code> method is used to add the
           dropped event to the target DataGrid, and the <code>deleteEvent</code> method is used to remove the dragged event from the
           Scheduler.</p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

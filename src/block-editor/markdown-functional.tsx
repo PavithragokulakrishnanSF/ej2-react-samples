@@ -31,7 +31,7 @@ const MarkdownBlocks = () => {
   const closeBtnRef = useRef<ButtonComponent | null>(null);
   const downloadBtnRef = useRef<ButtonComponent | null>(null);
 
-  const [width] = useState<string>('220px');
+  const [width] = useState<string>('240px');
   const [enableDock] = useState<boolean>(true);
   const [dockSize] = useState<string>('33px');
   const [mediaQuery] = useState<string>('(min-width: 600px)');
@@ -165,13 +165,13 @@ const MarkdownBlocks = () => {
     {
       id: 'Team_Sessions',
       name: 'Team Sessions',
-      mdFile: 'src/block-editor/mdfiles/Team Sessions.md',
+      mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Team%20Sessions.md',
       selected: true,
       expanded: true,
       children: [
-        { id: '1', name: 'Meeting minutes.md', mdFile: 'src/block-editor/mdfiles/Meeting minutes.md' },
-        { id: '2', name: 'Brain storming.md', mdFile: 'src/block-editor/mdfiles/Brain storming.md' },
-        { id: '3', name: 'Retrospective.md', mdFile: 'src/block-editor/mdfiles/Retrospective.md' },
+        { id: '1', name: 'Meeting minutes.md', mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Meeting%20minutes.md' },
+        { id: '2', name: 'Brain storming.md', mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Brain%20storming.md' },
+        { id: '3', name: 'Retrospective.md', mdFile: 'https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Retrospective.md' },
       ]
     }
   ];
@@ -224,7 +224,7 @@ const MarkdownBlocks = () => {
   const onOpen = () => {
       (treeviewRef.current as any).expandAll();
     if (closeBtnRef.current?.element) {
-      closeBtnRef.current.element.style.left = '202px';
+      closeBtnRef.current.element.style.left = '225px';
       closeBtnRef.current.element.classList.remove('expand-mode');
     }
     if (treeviewRef.current?.element) {
@@ -282,7 +282,7 @@ const MarkdownBlocks = () => {
 
     if (selectedId === 'Team_Sessions') {
       setBreadcrumbItems([{ text: 'Team' }, { text: 'Team Sessions' }]);
-      loadContent('src/block-editor/mdfiles/Team Sessions.md');
+      loadContent('https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Team%20Sessions.md');
       return;
     }
 
@@ -320,7 +320,7 @@ const MarkdownBlocks = () => {
   useEffect(() => {
     updateSampleSection();
     setTimeout(() => {
-      loadContent('src/block-editor/mdfiles/Team Sessions.md');
+      loadContent('https://ej2.syncfusion.com/react/demos/src/block-editor/mdfiles/Team%20Sessions.md');
       setBreadcrumbItems([{ text: 'Team' }, { text: 'Team Sessions' }]);
 
       if (closeBtnRef.current?.element && window.innerWidth < 600) {

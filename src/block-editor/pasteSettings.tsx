@@ -10,7 +10,7 @@ export class PasteSettings extends SampleBase<{}, {}> {
     private blockEditorRef = React.createRef<BlockEditorComponent>();
     private formatOptionRef = React.createRef<DropDownListComponent>();
     private deniedTagsRef = React.createRef<TextBoxComponent>();
-    private allowedStylePropertiesRef = React.createRef<TextBoxComponent>();
+    
 
     private pasteSettings = {
         deniedTags: ['script', 'iframe'],
@@ -46,21 +46,17 @@ export class PasteSettings extends SampleBase<{}, {}> {
 
     private deniedTagChange = () => {
         if (!this.deniedTagsRef.current?.value) return;
-        this.onPasteCleanupSettingsChange(this.deniedTagsRef.current.value, 'deniedTags');
+        this.onPasteCleanupSettingsChange(this.deniedTagsRef.current.value);
     };
 
-    private allowStyleChange = () => {
-        if (!this.allowedStylePropertiesRef.current?.value) return;
-        this.onPasteCleanupSettingsChange(this.allowedStylePropertiesRef.current.value, 'allowedStyles');
-    };
-
-    private onPasteCleanupSettingsChange = (value: string, settingsProperty: string) => {
+    
+    private onPasteCleanupSettingsChange = (value: string) => {
         if (!this.blockEditorRef.current) {
             return;
         }
         if (value) {
             const arrayValue = value.split(',').map(item => item.trim().replace(/^['"]|['"]$/g, ''));
-            this.pasteSettings[settingsProperty] = arrayValue.filter(prop => prop !== '');
+            this.pasteSettings.deniedTags = arrayValue.filter(prop => prop !== '');
             this.blockEditorRef.current.dataBind();
         }
     };
@@ -117,21 +113,7 @@ export class PasteSettings extends SampleBase<{}, {}> {
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div>Allowed Style Properties</div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <TextBoxComponent 
-                                                    ref={this.allowedStylePropertiesRef}
-                                                    cssClass="e-input"
-                                                    placeholder="'href', 'style'"
-                                                    blur={this.allowStyleChange}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -156,10 +138,6 @@ export class PasteSettings extends SampleBase<{}, {}> {
                         <ul>
                             <li><code>['a[!href]']</code> - paste the content by filtering anchor tags that don’t have the 'href' attribute.</li>
                             <li><code>['a[href, target]']</code> - paste the content by filtering anchor tags that have the 'href' and 'target' attributes</li>
-                        </ul>
-                        <li>Fill the <code>allowed style</code> properties to paste the content by accepting these style attributes and removing other attributes. For example:</li>
-                        <ul>
-                            <li><code>['color', 'margin']</code> - This will allow only the style properties 'color' and 'margin' in each pasted element.</li>
                         </ul>
                     </ul>
                 </div>

@@ -4,7 +4,7 @@ export const ComboBoxAISampleOrder: Object = [
         'component': 'ComboBoxSemanticSearch',
         'name': 'Semantic Searching (Embedding)',
         'description': 'This demo shows the semantic search AI feature in Combo Box.',
-        'order': '01',
+        'order': '12',
         'category': 'ComboBox',
         'sourceFiles': [
             { 'displayName': 'semantic-searching.tsx', 'path': 'src/ai-combo-box/ai-semantic-searching.tsx' },

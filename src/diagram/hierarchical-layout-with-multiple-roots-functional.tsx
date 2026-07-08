@@ -133,7 +133,9 @@ function HierarchicalLayoutWithMultipleRoots() {
                 <p>
                     This example shows how to create a complex hierarchical layout with multiple root nodes.
                 </p>
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
     </div>
   );
 }

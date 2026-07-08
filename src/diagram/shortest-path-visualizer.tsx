@@ -526,7 +526,7 @@ export class ShortestPathVisualizerDiagram extends SampleBase<{}, {}> {
 
                 <div id="action-description">
                     <p>
-                        This sample demonstrates an interactive shortest path algorithm visualization using the Syncfusion<sup>®</sup> EJ2 React Diagram, featuring a dynamic graph where users select source and destination nodes to view animated optimal paths.
+                        This sample demonstrates an interactive shortest path algorithm visualization using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>, featuring a dynamic graph where users select source and destination nodes to view animated optimal paths.
                     </p>
                 </div>
 

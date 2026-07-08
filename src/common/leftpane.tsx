@@ -49,14 +49,36 @@ function showHideControlTree(): void {
     reverse ? viewSwitch(controlList, controlTree, reverse) : viewSwitch(controlTree, controlList, reverse);
 }
 
+function updateGroupItemAttributes(): void {
+    const groupItems: NodeListOf<Element> = document.querySelectorAll('#controlList .e-list-group-item.e-level-1');
+    groupItems.forEach((groupItem: Element) => {
+        let sibling: Element = groupItem.nextElementSibling;
+        while (sibling && !sibling.classList.contains('e-list-group-item')) {
+            if (!groupItem.hasAttribute('group-name')) {
+                const groupName: string = sibling.getAttribute('group-name');
+                if (groupName) {
+                    groupItem.setAttribute('group-name', groupName);
+                }
+            }
+            sibling.removeAttribute('group-name');
+            sibling = sibling.nextElementSibling;
+        }
+    });
+}
+
 export function setSelectList(): void {
     const listItems: any = document.querySelectorAll('#controlList .e-list-item.e-level-1');
     for (const listItem of listItems) {
         listItem.tabIndex = 0;
     }
+    updateGroupItemAttributes();
     let hash: string[] = location.hash.split('/');
     let list: ListView = (select('#controlList') as any).ej2_instances[0];
-    let control: Element = select('[control-name="' + hash[2] + '"]') || select('[control-name="grid"]');
+    let controlName: string = hash[2];
+    if (controlName && controlName.startsWith('ai-') && ['ai-assistview', 'ai-smart-paste', 'ai-smart-textarea'].indexOf(controlName) === -1) {
+        controlName = 'ai-grid';
+    }
+    let control: Element = select('[control-name="' + controlName + '"]') || select('[control-name="grid"]');
     if (control) {
         let data: any = list.dataSource;
         let samples: any = controlSampleData[control.getAttribute('control-name')];
@@ -167,7 +189,7 @@ export class LeftPane extends React.Component<{}, {}> {
                                 'name': list[k].name
                             }
                         });
-                    this.controlSampleData[list[k].path] = this.getSamples(list[k].samples);
+                    this.controlSampleData[list[k].path] = this.getSamples(list[k].samples, list[k].path);
                     controlSampleData = this.controlSampleData;
                 }
             }
@@ -178,11 +200,20 @@ export class LeftPane extends React.Component<{}, {}> {
     /**
      * ListView Data Source Function
      */
-    private getSamples(samples: any): any {
+    private getSamples(samples: any, groupPath?: string): any {
         let tempSamples: any = [];
+        let groupName: string = '';
+        let sampleNameAttr: string ='';
+        let isAISample: boolean = !!groupPath && groupPath.startsWith('ai-') && ['ai-assistview', 'ai-smart-paste', 'ai-smart-textarea'].indexOf(groupPath) === -1;
         for (let i: number = 0; i < samples.length; i++) {
             tempSamples[i] = samples[i];
+            groupName = tempSamples[i].path.split('/')[0];
+            sampleNameAttr = samples[i].name.toLowerCase().replace(/ /g, '-');
             tempSamples[i].data = { 'sample-name': samples[i].name, 'data-path': '/' + samples[i].path };
+            if (isAISample) {
+                tempSamples[i].data['group-name'] = groupName;
+                tempSamples[i].data['ai-sample-name'] = sampleNameAttr;
+            }
             tempSamples[i].id = i.toString();
             sampleOrder.push(samples[i].path);
         }

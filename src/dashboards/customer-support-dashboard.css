@@ -221,7 +221,7 @@
   text-align: center;
 }
 
-.material3-dark .e-card:hover {
+.material3-dark .app-customer-support-page .e-card:hover {
   background-color: #191c1f;
 }
 
@@ -318,13 +318,9 @@
   border-left-color: #6c8cff;
 }
 
-.fluent .e-panel-header,
-.fluent2 .e-panel-header,
-.bootstrap5_3 .e-panel-header,
-.tailwind .e-panel-header,
-.tailwind3 .e-panel-header,
-.material3 .e-panel-header,
-.bootstrap5_3 .e-panel-header {
+.fluent2 .app-customer-support-page .e-panel-header,
+.tailwind3 .app-customer-support-page .e-panel-header,
+.bootstrap5_3 .app-customer-support-page .e-panel-header {
   background-color: #f9fafb;
 }
 

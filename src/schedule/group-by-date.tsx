@@ -72,6 +72,9 @@ export class GroupByDate extends SampleBase<{}, {}> {
             The different work days for the each resources are provided by using the <code>workDaysField</code> property and the Scheduler
             will be displayed the provided dates alone when <code>hideNonWorkingDays</code> property set as <code>true</code>.
           </p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

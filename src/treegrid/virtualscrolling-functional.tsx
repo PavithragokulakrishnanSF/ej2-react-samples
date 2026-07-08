@@ -166,7 +166,7 @@ const VirtualScrolling = () => {
     };
 
     const actionBegin = (args: any) => {
-        if(args.requestType === 'save') {
+        if(args.requestType === 'save' && args.action !== 'edit') {
             args.data.TaskID = 10000 + Math.floor(Math.random() * 10001);
         }
     }    
@@ -273,6 +273,9 @@ const VirtualScrolling = () => {
                     More information on the Virtual Scrolling can be found in <a target="_blank"
                         href="https://ej2.syncfusion.com/react/documentation/treegrid/virtual-scroll"
                         aria-label="Navigate to the documentation for virtual-scroll in React TreeGrid control">documentation </a> section.
+                </p>
+                <p>
+                    Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
                 </p>
             </div>
         </div>

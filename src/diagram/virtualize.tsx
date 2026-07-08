@@ -163,7 +163,7 @@ export class VirtualizationModel extends SampleBase<{}, {}> {
                 </div>
                 <div id="description">
                     <p>
-                        Drawing huge amounts of nodes and connectors on initial loading slows the rendering process down. Syncfusion
+                        Drawing huge amounts of nodes and connectors on initial loading slows the rendering process down. <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>
                         virtualization support helps improve the performance on initial rendering. Virtualization can be enabled by
                         adding the <code>Virtualization</code> flag to the <code>constraints</code> property of the diagram.
                     </p>

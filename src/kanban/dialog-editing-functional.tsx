@@ -73,7 +73,7 @@ const DialogEditing = () => {
         const onChange = (args: any): void => {
             let key: string = args.target.name;
             let value: string = args.target.value;
-            setState({ [key]: value });
+            setState((prevState: any) => ({ ...prevState, [key]: value }));
         };
         let data: KanbanDataModel = state;
         return (

@@ -1,11 +1,10 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Toolbar, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Toolbar, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel, ToolbarItem } from '@syncfusion/ej2-react-gantt';
 import { zoomingData } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class Zooming extends SampleBase<{}, {}> {
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -15,15 +14,15 @@ export class Zooming extends SampleBase<{}, {}> {
     dependency: 'Predecessor',
     child: 'subtasks'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  public splitterSettings: any ={
-   columnIndex: 3
+  public splitterSettings: SplitterSettingsModel = {
+    columnIndex: 3
   };
   public projectStartDate: Date = new Date('03/26/2025');
   public projectEndDate: Date = new Date('06/01/2025');
-  public toolbar: any = ['ZoomIn','ZoomOut','ZoomToFit'];
+  public toolbar: ToolbarItem[] = ['ZoomIn', 'ZoomOut', 'ZoomToFit'];
   render() {
     return (
       <div className='control-pane'>
@@ -42,36 +41,40 @@ export class Zooming extends SampleBase<{}, {}> {
             <Inject services={[Toolbar]} />
           </GanttComponent>
         </div>
-      <div id="action-description">
-      <p>This sample visualizes the various phases involved in the manufacturing process of a product,
-        which transforms from a conceptual model to a sellable product.</p>
-      </div>
+        <div id="action-description">
+          <p>This sample visualizes the various phases involved in the manufacturing process of a product,
+            which transforms from a conceptual model to a sellable product.</p>
+        </div>
 
-      <div id="description">
+        <div id="description">
           <p>
-        The sample demonstrates the zooming support in Gantt Chart. 
+            The sample demonstrates the zooming support in Gantt Chart.
             You can zoom in or zoom out the project timeline dynamically with following toolbar buttons.
 
-        <li><code>ZoomIn</code> - To perform zoom in action on Gantt timeline.</li>
-        <li><code>ZoomOut </code> - To perform zoom out action on Gantt timeline.</li>
-        <li><code>ZoomToFit </code> - To show all tasks with timeline fit into available chart width.</li>
-        
-        The zooming feature enables you to view the tasks in the project clearly from minute to year timespan. You need to include 
-        <code>ZoomIn</code>, <code>ZoomOut </code> and <code>ZoomToFit </code> buttons in the toolbar for performing zooming actions in Gantt Chart.
-        <li><code>ZoomIn</code> - If the user clicks on the <code>ZoomIn</code> icon we have increased the timeline cell width, 
-            when the cell size exceeds the specified range then we have changed the timeline view mode.</li>
-        <li><code>ZoomOut </code> - If the user clicks on the <code>ZoomOut</code> icon we have decrease the timeline cell width, when the cell size falls
-             behind the specified range then we have changed the timeline view mode based on the zooming levels.</li>
-        <li><code>ZoomToFit </code> - In project, if the tasks are rendered in different time ranges, when the user clicks on the  <code>ZoomToFit</code> icon, 
-            then all the tasks are rendered within the current viewable chart container width.</li>
-    </p>
-    <p>
-        To use a zoom support related icons, inject the <code>Toolbar</code> module into the <code>services</code>.
-    </p>
-      <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/timeline/zooming">documentation section</a>.</p>
-    </div>
-    </div>
+            <li><code>ZoomIn</code> - To perform zoom in action on Gantt timeline.</li>
+            <li><code>ZoomOut </code> - To perform zoom out action on Gantt timeline.</li>
+            <li><code>ZoomToFit </code> - To show all tasks with timeline fit into available chart width.</li>
+
+            The zooming feature enables you to view the tasks in the project clearly from minute to year timespan. You need to include
+            <code>ZoomIn</code>, <code>ZoomOut </code> and <code>ZoomToFit </code> buttons in the toolbar for performing zooming actions in Gantt Chart.
+            <li><code>ZoomIn</code> - If the user clicks on the <code>ZoomIn</code> icon we have increased the timeline cell width,
+              when the cell size exceeds the specified range then we have changed the timeline view mode.</li>
+            <li><code>ZoomOut </code> - If the user clicks on the <code>ZoomOut</code> icon we have decrease the timeline cell width, when the cell size falls
+              behind the specified range then we have changed the timeline view mode based on the zooming levels.</li>
+            <li><code>ZoomToFit </code> - In project, if the tasks are rendered in different time ranges, when the user clicks on the  <code>ZoomToFit</code> icon,
+              then all the tasks are rendered within the current viewable chart container width.</li>
+          </p>
+          <p>
+            To use a zoom support related icons, inject the <code>Toolbar</code> module into the <code>services</code>.
+          </p>
+          <br />
+          <p>
+		      Gantt component features are segregated into individual feature-wise modules. To use a zooming feature, we need to inject the <code>Toolbar</code> into the <code>Inject Services</code> section.
+	        </p>
+          <br/>
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/time-line/zooming">documentation section</a>.</p>
+        </div>
+      </div>
     )
   }
 }

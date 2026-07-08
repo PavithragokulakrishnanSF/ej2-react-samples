@@ -115,6 +115,7 @@ function DynamicBindingComponent() {
       pivot.loadPersistData(JSON.stringify(entireReportSettings));
       shouldAutoConfigRef.current = false;
       pivot.refresh();
+      pivot.engineModule = new PivotEngine();
       if (reportSettings.type) delete reportSettings.type;
       return;
     }
@@ -165,13 +166,19 @@ function DynamicBindingComponent() {
             setCurrentData(csvArray);
           } else {
             // No inline and no URL → fall back to currentData
-            reportSettings.dataSource = currentData;
-            reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+              if (reportSettings.type === 'JSON' && !reportSettings.url) {
+                  reportSettings.dataSource = Pivot_Data;
+              } else {
+                  reportSettings.dataSource = currentData;
+                  reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+              }
           }
         } catch (e) {
           // Fallback on any error
-          reportSettings.dataSource = currentData;
-          reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+          if (!(reportSettings.url !== '' && reportSettings.type === 'CSV')) {
+            reportSettings.dataSource = currentData;
+            reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+          }
         }
       } else {
         setCurrentData(reportSettings.dataSource);
@@ -464,7 +471,7 @@ function DynamicBindingComponent() {
         }
         if (itemId === 'remote_report') {
             setDialogType('JSON Report');
-            setRemoteUrl('https://api.jsonbin.io/v3/b/6912d9ecd0ea881f40e12335');
+            setRemoteUrl('https://cdn.syncfusion.com/data/report.json');
             setDialogOpen(true);
             return;
         }
@@ -669,6 +676,10 @@ function DynamicBindingComponent() {
                 jsonData && typeof jsonData === 'object' && 'record' in jsonData
                     ? jsonData.record
                     : jsonData;
+            if (jsonData?.chartSettings?.zoomSettings) {
+                jsonData.chartSettings.zoomSettings.toolbarPosition = {};
+                jsonData.chartSettings.zoomSettings.accessibility = {};
+            }
             const looksLikeReport =
                 !Array.isArray(unwrappedData) &&
                 (unwrappedData?.dataSourceSettings ||
@@ -681,6 +692,7 @@ function DynamicBindingComponent() {
                 const reportSettings =
                     unwrappedData.dataSourceSettings ?? unwrappedData;
                 const isOlapReport = reportSettings?.providerType === 'SSAS';
+                reportSettings.dataSource = Pivot_Data;
                 const pivot = pivotObj.current;
                 if (pivot) {
                     resetPivot();
@@ -797,7 +809,7 @@ function DynamicBindingComponent() {
                                         try { const cats = await discoverCatalogs(olapProxyUrl); setOlapCatalogs(cats); setSelectedCatalog(''); }
                                         catch (err: any) { setOlapUiMessage(`Load catalogs failed: ${err.message}`); }
                                         finally { setLoadingCatalogs(false); }
-                                    }} cssClass="e-input" style={{ width: '100%' }} />
+                                    }} style={{ width: '100%' }} />
                             </div>
 
                             <div className="olap-row">
@@ -810,7 +822,7 @@ function DynamicBindingComponent() {
                                         try { const cubes = await discoverCubes(olapProxyUrl, v); setOlapCubes(cubes); setSelectedCube(''); }
                                         catch (err: any) { setOlapUiMessage(`Load cubes failed: ${err.message}`); }
                                         finally { setLoadingCubes(false); }
-                                    }} cssClass="e-input" style={{ width: '100%' }} />
+                                    }} style={{ width: '100%' }} />
                             </div>
 
                             <div className="olap-row">
@@ -819,10 +831,7 @@ function DynamicBindingComponent() {
                                     placeholder={loadingCubes ? 'Loading…' : 'Select cube'} enabled={!!selectedCatalog || loadingCubes}
                                     change={async (e) => {
                                         const v = e.value; setSelectedCube(v);
-                                        const pivot = pivotObj.current;
-                                        const isOlap = pivot && (pivot.dataSourceSettings as any)?.providerType === 'SSAS';
-                                        if (isOlap && v) { await applyOlapBinding({ cube: v }); }
-                                    }} cssClass="e-input" style={{ width: '100%' }} />
+                                    }} style={{ width: '100%' }} />
                             </div>
 
                             {olapUiMessage && <div style={{ color: 'var(--e-error, #b00020)', fontSize: '14px' }}>{olapUiMessage}</div>}
@@ -839,29 +848,30 @@ function DynamicBindingComponent() {
                         </div>
                     </DialogComponent>
                 )}
-
-                <PivotViewComponent
-                    id='PivotView'
-                    ref={pivotObj}
-                    dataSourceSettings={dataSourceSettings}
-                    width={'100%'}
-                    height={500}
-                    showFieldList
-                    showToolbar
-                    allowCalculatedField={true}
-                    allowPdfExport={true}
-                    allowExcelExport={true}
-                    allowNumberFormatting={true}
-                    allowConditionalFormatting={true}
-                    toolbar={toolbarOptions}
-                    toolbarRender={toolbarRender}
-                    dataBound={onDataBound}
-                    enginePopulated={onEnginePopulated}
-                    displayOption={{ view: 'Both' }}
-                    gridSettings={{ columnWidth: Browser.isDevice ? 100 : 120 }}
-                >
-                    <Inject services={[FieldList, Toolbar, CalculatedField, PDFExport, ExcelExport, ConditionalFormatting, NumberFormatting]} />
-                </PivotViewComponent>
+                <div className='pivot-table-control-section'>
+                    <PivotViewComponent
+                        id='PivotView'
+                        ref={pivotObj}
+                        dataSourceSettings={dataSourceSettings}
+                        width={'100%'}
+                        height={500}
+                        showFieldList
+                        showToolbar
+                        allowCalculatedField={true}
+                        allowPdfExport={true}
+                        allowExcelExport={true}
+                        allowNumberFormatting={true}
+                        allowConditionalFormatting={true}
+                        toolbar={toolbarOptions}
+                        toolbarRender={toolbarRender}
+                        dataBound={onDataBound}
+                        enginePopulated={onEnginePopulated}
+                        displayOption={{ view: 'Both' }}
+                        gridSettings={{ columnWidth: Browser.isDevice ? 100 : 120 }}
+                    >
+                        <Inject services={[FieldList, Toolbar, CalculatedField, PDFExport, ExcelExport, ConditionalFormatting, NumberFormatting]} />
+                    </PivotViewComponent>
+                </div>
             </div>
 
             <div id="action-description">

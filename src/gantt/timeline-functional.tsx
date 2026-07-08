@@ -1,21 +1,21 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import { GanttComponent, TimelineViewMode, Inject, Selection, Sort, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, TimelineViewMode, Inject, Selection, Sort, DayMarkers, ColumnsDirective, ColumnDirective, TimelineSettingsModel, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectData } from './data';
-import { isNullOrUndefined } from '@syncfusion/ej2-base';
 import { updateSampleSection } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
-import { CheckBoxComponent, CheckBox } from '@syncfusion/ej2-react-buttons';
-import { NumericTextBoxComponent, NumericTextBox } from '@syncfusion/ej2-react-inputs';
-import { DropDownListComponent, DropDownList } from '@syncfusion/ej2-react-dropdowns';
+import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
+import { NumericTextBoxComponent } from '@syncfusion/ej2-react-inputs';
+import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
+import { isNullOrUndefined } from '@syncfusion/ej2-base';
+
 
 const Timeline = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'taskID',
     name: 'taskName',
     startDate: 'startDate',
@@ -36,21 +36,21 @@ const Timeline = () => {
   let bottomTierCount = useRef<NumericTextBoxComponent>(null);
   let timelineUnitSize = useRef<NumericTextBoxComponent>(null);
   let multitaskbarcheckbox = useRef<CheckBoxComponent>(null);
-  const projectStartDate = new Date('02/05/2025');
-  const projectEndDate = new Date('03/23/2025');
-  const timelineSettings: any = {
+  const timelineSettings: TimelineSettingsModel = {
     topTier: {
       format: 'MMM dd, yyyy',
       unit: 'Week',
     },
     bottomTier: {
       unit: 'Day',
-    }
+    },
+    viewStartDate: new Date('02/09/2025'),
+    viewEndDate: new Date('03/23/2025')
   };
-  let labelSettings: any = {
+  let labelSettings: LabelSettingsModel = {
     rightLabel: 'taskName'
   };
-  let splitterSettings: any = {
+  let splitterSettings: SplitterSettingsModel = {
     columnIndex: 1
   };
   const yearformat: { [key: string]: Object }[] = [
@@ -154,28 +154,28 @@ const Timeline = () => {
     let topUnit: string = tier === 'top' ? unit : ganttInstance.current.timelineSettings.topTier.unit;
     let bottomUnit: string = tier === 'bottom' ? unit : ganttInstance.current.timelineSettings.bottomTier.unit;
     let units: string[] = ['None', 'Hour', 'Day', 'Week', 'Month', 'Year'];
-    let bootomCellUnit: string;
+    let bottomCellUnit: string;
     let unitWidth: number;
     if (units.indexOf(topUnit) === 0 && units.indexOf(bottomUnit) === 0) {
-      bootomCellUnit = 'Day';
+      bottomCellUnit = 'Day';
     } else if (units.indexOf(topUnit) === 0 && units.indexOf(bottomUnit) > 0) {
-      bootomCellUnit = bottomUnit;
+      bottomCellUnit = bottomUnit;
     } else if (units.indexOf(topUnit) > 0 && units.indexOf(bottomUnit) === 0) {
-      bootomCellUnit = topUnit;
+      bottomCellUnit = topUnit;
     } else if (units.indexOf(topUnit) <= units.indexOf(bottomUnit)) {
-      bootomCellUnit = topUnit;
+      bottomCellUnit = topUnit;
     } else {
-      bootomCellUnit = bottomUnit;
+      bottomCellUnit = bottomUnit;
     }
-    if (bootomCellUnit === 'Year') {
+    if (bottomCellUnit === 'Year') {
       unitWidth = 2000;
-    } else if (bootomCellUnit === 'Month') {
+    } else if (bottomCellUnit === 'Month') {
       unitWidth = 300;
-    } else if (bootomCellUnit === 'Week') {
+    } else if (bottomCellUnit === 'Week') {
       unitWidth = 150;
-    } else if (bootomCellUnit === 'Day') {
+    } else if (bottomCellUnit === 'Day') {
       unitWidth = 33;
-    } else if (bootomCellUnit === 'Hour') {
+    } else if (bottomCellUnit === 'Hour') {
       unitWidth = 25;
     }
     timelineUnitSize.current.value = unitWidth;
@@ -183,21 +183,21 @@ const Timeline = () => {
   let startDateValue: Date = new Date('02/05/2025');
   let endDateValue: Date = new Date('03/23/2025');
   const changeDateRange = (args: any): void => {
-    ganttInstance.current.timelineSettings.viewStartDate = isNullOrUndefined(args.startDate) ? 'auto' : args.startDate;
-    ganttInstance.current.timelineSettings.viewEndDate = isNullOrUndefined(args.endDate) ? 'auto' : args.endDate; 
+    ganttInstance.current.timelineSettings.viewStartDate = isNullOrUndefined(args.startDate) ? startDateValue : args.startDate;
+    ganttInstance.current.timelineSettings.viewEndDate = isNullOrUndefined(args.endDate) ? endDateValue : args.endDate;
   }
   return (
     <div className='control-pane'>
       <div className='control-section'>
         <div className='col-lg-8'>
           <GanttComponent id='Timeline' ref={ganttInstance} dataSource={projectData} renderBaseline={true} allowSorting={true}
-            treeColumnIndex={1} allowSelection={true} projectStartDate={projectStartDate} projectEndDate={projectEndDate}
+            treeColumnIndex={1} allowSelection={true}
             taskFields={taskFields} timelineSettings={timelineSettings} highlightWeekends={true}
             height='650px' taskbarHeight={25} rowHeight={46} labelSettings={labelSettings} splitterSettings={splitterSettings}>
             <ColumnsDirective>
               <ColumnDirective field='taskID' visible={false} ></ColumnDirective>
               <ColumnDirective field='taskName' headerText='Name' width='250'></ColumnDirective>
-              <ColumnDirective field='StartDate' headerText='Start Date'></ColumnDirective>
+              <ColumnDirective field='startDate' headerText='Start Date'></ColumnDirective>
               <ColumnDirective field='endDate' headerText='End Date'></ColumnDirective>
               <ColumnDirective field='duration' headerText='Duration'></ColumnDirective>
               <ColumnDirective field='predecessor' headerText='Dependency'></ColumnDirective>
@@ -207,117 +207,116 @@ const Timeline = () => {
           </GanttComponent>
         </div>
         <div className='col-lg-4 property-section'>
-        <PropertyPane title="Properties">
-          <table id="property" className="property-panel-table" title="Properties" style={{ width: '100%' }}>
-            <colgroup>
-              <col style={{ width: '35%' }} />
-              <col style={{ width: '65%' }} />
-            </colgroup>
-            <tbody>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Timeline Range</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <DateRangePickerComponent startDate={startDateValue} endDate={endDateValue} change={changeDateRange.bind(this)}></DateRangePickerComponent>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Timeline Unit Size</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <NumericTextBoxComponent ref={timelineUnitSize} format="n" value={33} min={10} change={unitWidth.bind(this)} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={2} style={{width: '35%'}}>
-                  <div><b>Top Tier</b></div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Count</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <NumericTextBoxComponent ref={topTierCount} id="count" format="n" min={1} max={50} value={1} className="form-control" change={topTierCountchange.bind(this)} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Unit</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <DropDownListComponent ref={topTierUnit} id="unit" tabIndex={1} dataSource={unit} fields={unitField} value="Week" change={topUnitChange.bind(this)} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Format</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <DropDownListComponent ref={topTierformat} id="topformat" tabIndex={1} dataSource={weekformat} fields={formatField} value="MMM dd, yyyy" change={topFormatChange.bind(this)} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={2} style={{width: '35%'}}>
-                  <div><b>Bottom Tier</b></div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Count</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <NumericTextBoxComponent ref={bottomTierCount} id="count" format="n" min={1} max={50} value={1} className="form-control" change={bottomTierCountchange.bind(this)} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Unit</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <DropDownListComponent ref={bottomTierUnit} id="unit" tabIndex={1} dataSource={unit} fields={unitField} value="Day" change={bottomUnitChange.bind(this)} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Format</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div>
-                    <DropDownListComponent ref={bottomTierformat} id="btFormat" tabIndex={1} dataSource={dayformat} fields={formatField} value="" change={bottomFormatChange.bind(this)} />
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{width: '35%'}}>
-                  <div>Multiple Taskbars</div>
-                </td>
-                <td style={{width: '65%'}}>
-                  <div id='multitaskbar' style={{paddingTop: '0px', paddingLeft: '0px'}}>
-                    <CheckBoxComponent ref={multitaskbarcheckbox} id="multitaskbarCheck" onClick={multitaskbarCheck.bind(this)} className="checkbox" checked={false} />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </PropertyPane>
-
+          <PropertyPane title="Properties">
+            <table id="property" className="property-panel-table" title="Properties" style={{ width: '100%' }}>
+              <colgroup>
+                <col style={{ width: '35%' }} />
+                <col style={{ width: '65%' }} />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Timeline Range</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <DateRangePickerComponent startDate={startDateValue} endDate={endDateValue} change={changeDateRange.bind(this)}></DateRangePickerComponent>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Timeline Unit Size</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <NumericTextBoxComponent ref={timelineUnitSize} format="n" value={33} min={10} change={unitWidth.bind(this)} />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={2} style={{width: '35%'}}>
+                    <div><b>Top Tier</b></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Count</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <NumericTextBoxComponent ref={topTierCount} id="count" format="n" min={1} max={50} value={1} className="form-control" change={topTierCountchange.bind(this)} />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Unit</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <DropDownListComponent ref={topTierUnit} id="unit" tabIndex={1} dataSource={unit} fields={unitField} value="Week" change={topUnitChange.bind(this)} />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Format</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <DropDownListComponent ref={topTierformat} id="topformat" tabIndex={1} dataSource={weekformat} fields={formatField} value="MMM dd, yyyy" change={topFormatChange.bind(this)} />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={2} style={{width: '35%'}}>
+                    <div><b>Bottom Tier</b></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Count</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <NumericTextBoxComponent ref={bottomTierCount} id="count" format="n" min={1} max={50} value={1} className="form-control" change={bottomTierCountchange.bind(this)} />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Unit</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <DropDownListComponent ref={bottomTierUnit} id="unit" tabIndex={1} dataSource={unit} fields={unitField} value="Day" change={bottomUnitChange.bind(this)} />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Format</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div>
+                      <DropDownListComponent ref={bottomTierformat} id="btFormat" tabIndex={1} dataSource={dayformat} fields={formatField} value="" change={bottomFormatChange.bind(this)} />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{width: '35%'}}>
+                    <div>Multiple Taskbars</div>
+                  </td>
+                  <td style={{width: '65%'}}>
+                    <div id='multitaskbar' style={{paddingTop: '0px', paddingLeft: '0px'}}>
+                      <CheckBoxComponent ref={multitaskbarcheckbox} id="multitaskbarCheck" onClick={multitaskbarCheck.bind(this)} className="checkbox" checked={false} />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </PropertyPane>
         </div>
       </div>
       <style>
@@ -334,15 +333,19 @@ const Timeline = () => {
       <div id="description">
         <p>This demo illustrates how to customize the timeline settings in a Gantt Chart. It covers:</p>
         <ul>
-            <li><b>Timeline Date Range:</b> Define the timeline view's start and end dates using <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelinesettings#viewstartdate">viewStartDate</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelinesettings#viewenddate">viewEndDate</a>.</li>
-            <li><b>Timeline Cell Width:</b> Adjusted using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineSettingsModel/#timelineunitsize">timelineUnitSize</a> property.</li>
-            <li><b>Cell Combination:</b> Merge multiple timeline cells using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineTierSettings/#count">count</a> property.</li>
-            <li><b>Timeline Units:</b> Supports minutes, hours, days, weeks, months, and years. Units can be configured for both top and bottom tiers.</li>
-            <li><b>Timeline Format:</b> Customizable by modifying the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineTierSettings/#format">format</a> value for each tier.</li>
-            <li><b>Multiple Taskbars:</b> Enabled with <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#enablemultitaskbar">enableMultiTaskbar</a> to display multiple taskbars within a collapsed parent row.</li>
+          <li><b>Timeline Cell Width:</b> Adjusted using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineSettingsModel/#timelineunitsize">timelineUnitSize</a> property.</li>
+          <li><b>Timeline Units:</b> Supports minutes, hours, days, weeks, months, and years. Units can be configured for both top and bottom tiers.</li>
+          <li><b>Timeline Format:</b> Customizable by modifying the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineTierSettings/#format">format</a> value for each tier.</li>
+          <li><b>Cell Combination:</b> Merge multiple timeline cells using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineTierSettings/#count">count</a> property.</li>
+          <li><b>Tooltip Visibility:</b> Controlled with the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineSettings/#showtooltip">showTooltip</a> property (enabled by default).</li>
+          <li><b>Multiple Taskbars:</b> Enabled with <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#enablemultitaskbar">enableMultiTaskbar</a> to display multiple taskbars within a parent row.</li>
+          <li><b>Timeline Date Range:</b> Define the timeline view's start and end dates using <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelinesettings#viewstartdate">viewStartDate</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelinesettings#viewenddate">viewEndDate</a>.</li>
         </ul>
+        <br />
         <p>These settings highlight how the timeline can be customized to support different tiers, unit sizes, and ranges, while also enabling multiple task visualization within the same view.</p>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/timeline/timeline">documentation section</a>.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use selection, sorting and markers features, we need to inject the <code>Selection</code>, <code>Sort</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.</p>
+        <br/>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/time-line/time-line">documentation section</a>.</p>
       </div>
     </div>
   )

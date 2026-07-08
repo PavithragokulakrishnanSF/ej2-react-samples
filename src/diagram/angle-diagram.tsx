@@ -601,7 +601,7 @@ export class AngleDiagram extends SampleBase<{}, {}> {
         </div>
         <div id="action-description">
           <p>
-            This sample demonstrates an interactive solar panel tilt system built with the Syncfusion<sup>®</sup> EJ2 React Diagram. Adjust
+            This sample demonstrates an interactive solar panel tilt system built with the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>. Adjust
             the panel angle to see real-time changes in system efficiency based on the sun&apos;s position and location.
           </p>
         </div>

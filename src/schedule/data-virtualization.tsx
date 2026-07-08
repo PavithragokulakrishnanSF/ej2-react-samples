@@ -54,6 +54,9 @@ export class DataVirtualization extends SampleBase<{}, {}> {
                         using the instance of <code><a aria-label="Data Manager" target="_blank" className='code' href="http://ej2.syncfusion.com/documentation/data/api-dataManager.html">DataManager</a></code>.
                         To enable the on-demand loading of events in the Scheduler, set the <code>enableLazyLoading</code> property to <code>true</code> within the view-specific settings.
                     </p>
+                    <p>
+                        Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                    </p>
                 </div>
             </div>
         );

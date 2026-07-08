@@ -15,15 +15,6 @@
   border-radius: 0px !important;
 }
 
-.e-Menu {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.e-btn-icon .e-menu .e-icons {
-  font-size: 16px;
-}
-
 .cs-toolbar {
   display: flex;
   justify-content: space-between;
@@ -46,21 +37,6 @@
   display: flex;
   min-height: 100vh;
   background: #f7f7fb;
-}
-
-/* Top bar for toggle button */
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  height: 48px;
-  padding: 0 12px;
-  border-bottom: 1px solid rgb(245, 246, 248);
-  background: rgb(245, 246, 248);
-}
-
-.topbar-title {
-  font-weight: 600;
 }
 
 /* Sidebar */
@@ -408,10 +384,6 @@
   fill: #0d6efd;
 }
 
-.material3-dark .e-card:hover {
-  background-color: #191c1f;
-}
-
 .fluent-dark .cs-title,
 .fluent2-dark .cs-title,
 .fluent2-highcontrast .cs-title,
@@ -451,14 +423,14 @@
   color: #000000;
 }
 
-.fluent .e-panel-header,
-.fluent2 .e-panel-header,
-.bootstrap5_3 .e-panel-header,
-.tailwind .e-panel-header,
-.tailwind3 .e-panel-header,
-.material3 .e-panel-header,
-.bootstrap5_3 .e-panel-header {
+.fluent2 .app-hr-management-page .e-panel-header,
+.tailwind3 .app-hr-management-page .e-panel-header,
+.bootstrap5_3 .app-hr-management-page .e-panel-header {
   background-color: #f9fafb;
+}
+
+.material3-dark .app-hr-management-page .e-card:hover {
+  background-color: #191c1f;
 }
 
 .tailwind3 .overall_hr_management .e-dashboardlayout.e-control .e-panel:active,

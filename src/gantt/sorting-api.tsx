@@ -1,10 +1,9 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, Sort, SortDirection, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, Sort, SortDirection, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { editingData } from './data';
 import { SampleBase } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
-import { DropDownListComponent, DropDownList } from '@syncfusion/ej2-react-dropdowns';
+import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 
 export class SortingAPI extends SampleBase<{}, {}> {
@@ -31,7 +30,7 @@ export class SortingAPI extends SampleBase<{}, {}> {
   private clearSort(): void {
     this.ganttInstance.clearSorting();
   }
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -39,12 +38,12 @@ export class SortingAPI extends SampleBase<{}, {}> {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-    parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
   public projectStartDate: Date = new Date('03/26/2025');
@@ -60,78 +59,73 @@ export class SortingAPI extends SampleBase<{}, {}> {
               taskFields={this.taskFields} labelSettings={this.labelSettings} height='650px' taskbarHeight={25} rowHeight={46}
               projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate}>
               <ColumnsDirective>
-              <ColumnDirective field='TaskID' visible={false} headerText='ID' width='80' ></ColumnDirective>
-              <ColumnDirective field='TaskName' headerText='TaskName' width='250'></ColumnDirective>
-              <ColumnDirective field='StartDate' headerText='StartDate'></ColumnDirective>
-              <ColumnDirective field='EndDate' headerText='EndDate'></ColumnDirective>
-              <ColumnDirective field='Duration' headerText='Duration'></ColumnDirective>
-              <ColumnDirective field='Progress' headerText='Progress'></ColumnDirective>
-            </ColumnsDirective>
+                <ColumnDirective field='TaskID' visible={false} headerText='ID' width='80'></ColumnDirective>
+                <ColumnDirective field='TaskName' headerText='Task Name' width='250'></ColumnDirective>
+                <ColumnDirective field='StartDate' headerText='Start Date'></ColumnDirective>
+                <ColumnDirective field='EndDate' headerText='End Date'></ColumnDirective>
+                <ColumnDirective field='Duration' headerText='Duration'></ColumnDirective>
+                <ColumnDirective field='Progress' headerText='Progress'></ColumnDirective>
+              </ColumnsDirective>
               <Inject services={[Selection, DayMarkers, Sort]} />
             </GanttComponent>
           </div>
           <div className='col-lg-3 property-section'>
             <PropertyPane title='Properties'>
               <table id="property" className="property-panel-table" title="Properties" style={{ width: '100%' }}>
-              <tbody>
-                <tr>
-                  <td style={{ width: '100%' }}>
-                    <div style={{ fontSize: '15px' }}>
-                      Column
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ width: '100%', paddingRight: '10px' }}>
-                    <div>
-                      <DropDownListComponent ref={DropDownList => this.dropdownColumns = DropDownList} id='columns' width="150px" tabIndex={1} dataSource={this.dropdownColumnsData} fields={{ text: 'type', value: 'id' }}
-                        value='TaskName'></DropDownListComponent>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ width: '100%' }}>
-                    <div style={{ fontSize: '15px' }}>
-                      Direction
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ width: '100%', paddingRight: '10px' }}>
-                    <div>
-                      <DropDownListComponent ref={DropDownList => this.dropdownDirection = DropDownList} id='direction' width="150px" tabIndex={1} dataSource={this.dropdownDirectionData} fields={{ text: 'type', value: 'id' }}
-                        value='Ascending'></DropDownListComponent>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ width: '100%' }}>
-                    <div>
-                      <ButtonComponent onClick={this.sortColumn.bind(this)} style={{ marginRight: '5px',  width: '80px' }}> Sort </ButtonComponent>
-                      <ButtonComponent onClick={this.clearSort.bind(this)} style={{ width: '80px' }}> Clear </ButtonComponent>
-                    </div>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td style={{ width: '100%' }}>
+                      <div style={{ fontSize: '15px' }}>
+                        Column
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ width: '100%', paddingRight: '10px' }}>
+                      <div>
+                        <DropDownListComponent ref={DropDownList => this.dropdownColumns = DropDownList} id='columns' width="150px" tabIndex={1} dataSource={this.dropdownColumnsData} fields={{ text: 'type', value: 'id' }}
+                          value='TaskName'></DropDownListComponent>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ width: '100%' }}>
+                      <div style={{ fontSize: '15px' }}>
+                        Direction
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ width: '100%', paddingRight: '10px' }}>
+                      <div>
+                        <DropDownListComponent ref={DropDownList => this.dropdownDirection = DropDownList} id='direction' width="150px" tabIndex={1} dataSource={this.dropdownDirectionData} fields={{ text: 'type', value: 'id' }}
+                          value='Ascending'></DropDownListComponent>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ width: '100%' }}>
+                      <div>
+                        <ButtonComponent onClick={this.sortColumn.bind(this)} style={{ marginRight: '5px', width: '80px' }}> Sort </ButtonComponent>
+                        <ButtonComponent onClick={this.clearSort.bind(this)} style={{ width: '80px' }}> Clear </ButtonComponent>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </PropertyPane>
           </div>
         </div>
         <div id="action-description">
-          <p> The sorting feature enables you to order data in a particular direction. It can be enabled by setting <code>allowSorting</code> to <code>true</code>.</p>
+          <p>The sorting feature enables you to order data in a particular direction. It can be enabled by setting the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#allowsorting">allowSorting</a> to true.</p>
         </div>
 
         <div id="description">
-        <p>The sorting feature enables you to order data in a particular direction. It can be enabled by setting the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#allowselection">allowSelection</a> to true.</p>
-        <p>To sort a Gantt column, click the column header. The icons (ascending) and (descending) specify the sort direction of a column.</p>
-        <p>By default, the multi-sorting feature is enabled in Gantt. To sort multiple columns, hold the <strong>CTRL</strong> key, and then click the column header. To clear sort for a column, hold the <strong>SHIFT</strong> key, and then click the column header.</p>
-        <p>In this demo, select the column and direction from the properties panel, and then click the Sort button. Use the Clear button to remove sort for the sorted column.</p>
-
-        <p>Gantt component features are segregated into individual feature-wise modules. To use a selection, inject the
-          <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method.To use sort, inject the
-          <code>Sort</code> module using the <code>Gantt.Inject(Sort)</code> method.To use markers, inject the
-          <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
-          <br/>
+          <p>To sort a Gantt column, click the column header. The icons (ascending) and (descending) specify the sort direction of a column.</p>
+          <p>By default, the multi-sorting feature is enabled in Gantt. To sort multiple columns, hold the <strong>CTRL</strong> key, and then click the column header. To clear sort for a column, hold the <strong>SHIFT</strong> key, and then click the column header.</p>
+          <p>In this demo, select the column and direction from the properties panel, and then click the Sort button. Use the Clear button to remove sort for the sorted column.</p>
+          <p>Gantt component features are segregated into individual feature-wise modules. To use a selection, markers and sorting features, we need to inject the <code>Selection</code>, <code>DayMarkers</code> and <code>Sort</code> into the <code>Inject Services</code> section.</p>
+          <br />
           <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/sorting">documentation section</a>.</p>
         </div>
       </div>

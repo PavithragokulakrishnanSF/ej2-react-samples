@@ -156,38 +156,33 @@ const CustomTemplate = () => {
     }
 
     return (
-        <div className = 'control-pane' ref={dropContainerRef}>
-			<div className='control-section uploadpreview'>
+        <div className='control-pane' ref={dropContainerRef}>
+            <div className='control-section uploadpreview'>
                 <div className='col-lg-9'>
                     <div className='template_wrapper'>
                         {/* Render Uploader */}
                         <div id='dropArea' className='dropArea' ref={dropRef}>
                             <span id='drop' className='file-name-span drop'> Drop files here or <a href="" id='browse'><u>Browse</u></a> </span>
-                            <UploaderComponent id='UploadFiles' type = 'file' ref = {uploadObj} asyncSettings = {asyncSettings} success={onSuccess.bind(this)} removing= {onRemoveFile.bind(this)} selected= {onFileSelect.bind(this)} progress = {onFileUpload.bind(this)} failure = {onUploadFailed.bind(this)} dropArea = {dropElement}></UploaderComponent>
+                            <UploaderComponent id='UploadFiles' type='file' ref={uploadObj} asyncSettings={asyncSettings} success={onSuccess.bind(this)} removing={onRemoveFile.bind(this)} selected={onFileSelect.bind(this)} progress={onFileUpload.bind(this)} failure={onUploadFailed.bind(this)} dropArea={dropElement}></UploaderComponent>
                         </div>
                     </div>
-				</div>
-				<div className='property-section template-panel col-lg-3'>
-					<PropertyPane title='Properties'>
-						<div className='custom-panel'>
-							<button className="e-btn e-css" ref={buttonRef} id="clearbtn" title="Clear All">Clear All</button>
-						</div>
-					</PropertyPane>
-				</div>
-			</div>
-			<div id="action-description">
-				<p>This <a href="https://www.syncfusion.com/react-ui-components/react-file-upload" target="_blank">&nbsp;React File Upload</a> example demonstrates how to customize the file list with template. Browse or select the files to view the file list template.</p>
-			</div>
-			<div id="description">
-				<p>The Uploader component allows to customize its file list using template property. The template used for each file in file list.</p>
-				<p>For more information, you can refer to the Template section from this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/template/#custom-template">documentation section</a>.</p>
-                <p>In this example, the backend service used in the saveUrl and removeUrl endpoints for saving and removing files is intended for demonstration purposes only. The uploaded files are subjected to thorough validation, including verification of file names and the application of security checks. Therefore, this service is not recommended for production use, and the configuration of a custom backend save and remove service is advised. Additional implementation details can be found in the
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/async#server-side-configuration-for-save-action">saveUrl</a> and
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/async#server-side-configuration-for-remove-action">removeUrl</a>
-            documentation.
-          </p>
-			</div>
-		</div>
+                </div>
+                <div className='property-section template-panel col-lg-3'>
+                    <PropertyPane title='Properties'>
+                        <div className='custom-panel'>
+                            <button className="e-btn e-css" ref={buttonRef} id="clearbtn" title="Clear All">Clear All</button>
+                        </div>
+                    </PropertyPane>
+                </div>
+            </div>
+            <div id="action-description">
+                <p>This <a href="https://www.syncfusion.com/react-ui-components/react-file-upload" target="_blank">&nbsp;React File Upload</a> example demonstrates how to customize the file list with template. Browse or select the files to view the file list template.</p>
+            </div>
+            <div id="description">
+                <p>The Uploader component allows to customize its file list using template property. The template used for each file in file list.</p>
+                <p>For more information, you can refer to the Template section from this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/template/#custom-template">documentation section</a>.</p>
+            </div>
+        </div>
     );
 }
 export default CustomTemplate;

@@ -4,7 +4,7 @@ export const AISchedulerSampleOrder: Object = [
         'component': 'SmartEventWindow', 
         'name': 'Smart Event Window', 
         'description': 'This demo demonstrates how AI can be utilized to convert natural language context into scheduler events.', 
-        'order': '01',
+        'order': '10',
         'category': 'Scheduler',
         'sourceFiles': [
             { 'displayName': 'smart-event-window.tsx', 'path': 'src/ai-schedule/ai-smart-event-window.tsx' }, 

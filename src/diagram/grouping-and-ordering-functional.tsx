@@ -1,4 +1,4 @@
-// Import React and necessary components from Syncfusion's EJ2 React Diagrams library for building diagrams.
+// Import React and necessary components from React Diagram library for building diagrams.
 import * as React from "react";
 import {
     DiagramComponent,
@@ -556,7 +556,9 @@ function GroupandOrder() {
                     In this sample, node annotation styles such as font family, font size, bold, italic, underline, and fontcolor can be customized.
                 </p>
                 <br />
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

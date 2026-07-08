@@ -62,10 +62,6 @@ const SAMPLE_CSS = `
     width: 35% !important;
 }
 
-.e-bigger .default-sidebar {
-    width: 0% !important;
-}
-
 #defaultToolbar .sb-icons {
     font-size: 20px !important;
 }

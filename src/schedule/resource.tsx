@@ -92,6 +92,9 @@ export class Resource extends SampleBase<{}, {}> {
                 <div id="description">
                     <p>In this example, the resource appointments are dynamically shown or hidden on the Scheduler, by passing the
                         filtered event data of selected resources to the <code>query</code> option of the <code>eventSettings</code>.</p>
+                    <p>
+                        Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                    </p>
                 </div>
             </div>
         );

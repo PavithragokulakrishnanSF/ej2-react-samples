@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GanttComponent, Inject, Edit, Selection, ColumnsDirective, ColumnDirective, RowDD } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Edit, Selection, ColumnsDirective, ColumnDirective, RowDD, EditSettingsModel, LabelSettingsModel, SplitterSettingsModel, SelectionSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -9,7 +8,7 @@ const DragAndDrop = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -19,13 +18,13 @@ const DragAndDrop = () => {
     dependency: 'Predecessor',
     parentID: 'ParentId'
   };
-  const selectionSettings: any = {
+  const selectionSettings: SelectionSettingsModel = {
     type: 'Multiple'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 3
   };
-  const editSettings: any = {
+  const editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
@@ -34,7 +33,7 @@ const DragAndDrop = () => {
   };
   const projectStartDate: Date = new Date('03/26/2025');
   const projectEndDate: Date = new Date('07/20/2025');
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
   return (
@@ -60,12 +59,12 @@ const DragAndDrop = () => {
         <p>This sample demonstrates the Gantt component with the row drag and drop feature. You can rearrange the gantt rows by using drag icon in left side of gantt column. Here you can perform drag and drop the gantt rows in to required position.</p>
       </div>
       <div id="description">
-        <p>Row drag and drop feature can be enabled by settting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowrowdraganddrop">allowRowDragAndDrop</a> property as true. In this demo, taskbar drag and drop between rows can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowtaskbardraganddrop">allowTaskbarDragAndDrop</a> as true.</p>
+        <p>Row drag and drop feature can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowrowdraganddrop">allowRowDragAndDrop</a> property as true. In this demo, taskbar drag and drop between rows can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#allowtaskbardraganddrop">allowTaskbarDragAndDrop</a> as true.</p>
         <p>
-          Gantt component features are segregated into individual feature-wise modules. To use row, drag and drop feature we need to inject <code>RowDD</code> and <code>Edit</code> modules.
+          Gantt component features are segregated into individual feature-wise modules. To use row drag and drop, edit, and selection features, we need to inject <code>RowDD</code>, <code>Selection</code> and <code>Edit</code> into <code>Inject Services</code> modules.
         </p>
         <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/drag-and-drop">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/rows/drag-and-drop">documentation section</a>.</p>
       </div>
     </div>
   )

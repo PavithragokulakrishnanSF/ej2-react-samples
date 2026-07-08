@@ -2299,7 +2299,7 @@ export class CustomerSupportDashboard extends SampleBase<{}, any> {
               </SidebarComponent>
 
               <div className="cs-content">
-                <div className="app-page" style={{ padding: '16px', background: '#ffffff' }}>
+                <div className="app-customer-support-page" style={{ padding: '16px', background: '#ffffff' }}>
                   {this.renderDashboard()}
                 </div>
               </div>

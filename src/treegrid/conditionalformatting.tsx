@@ -96,6 +96,9 @@ export class Format extends SampleBase<{}, {}> {
           In this demo, we have customized the column values by adding icons for Priority column and highlighted the Progress column
             based on certain condition using queryCellInfo event.
         </p>
+        <p>
+          Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+        </p>
 </div>
 
       </div>

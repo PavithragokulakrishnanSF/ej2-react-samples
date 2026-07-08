@@ -15,13 +15,19 @@ const DirectoryUpload = () => {
     }, [])
     const [isDirectoryUpload, setIsDirectoryUpload] = useState<boolean>(false);
     let fmObj = useRef<FileManagerComponent>(null);
-    let hostUrl: string = "https://ej2-aspcore-service.azurewebsites.net/";   
-    const items = (): ItemModel[] => {
-        return [
-        { text: fmObj.current?.localeObj.getConstant('Folder') },
-        { text: fmObj.current?.localeObj.getConstant('File') }
-        ];
-    };    
+    const dropBtnRef = useRef<DropDownButtonComponent>(null);
+    let hostUrl: string = "https://physical-service.syncfusion.com/";
+    const OnCreated=() => {
+        if (fmObj.current && dropBtnRef.current) {
+            const fm = fmObj.current;
+            const uploadText = fm.localeObj.getConstant('Upload');
+            dropBtnRef.current.content = `<span class="e-tbar-btn-text">${uploadText}</span>`;
+            dropBtnRef.current.items = [
+                { text: fm?.localeObj?.getConstant('Folder') || 'Folder' },
+                { text: fm?.localeObj?.getConstant('File') || 'File' },
+            ];
+        }
+    }
     const onSelect= (args) => {
         if (args.item.text === fmObj.current?.localeObj.getConstant('Folder')) {
             setIsDirectoryUpload(true);
@@ -38,8 +44,7 @@ const DirectoryUpload = () => {
     }
     const uploadTemplate = () => {
         return(
-            <DropDownButtonComponent id="dropButton" cssClass= "e-tbar-btn e-tbtn-txt" onClick={uploadClick} items={items()} iconCss='e-icons e-fe-upload' select={onSelect}>
-                <span className="e-tbar-btn-text">Upload</span>
+            <DropDownButtonComponent ref={dropBtnRef} id="dropButton" cssClass= "e-tbar-btn e-tbtn-txt" onClick={uploadClick} iconCss='e-icons e-fe-upload' select={onSelect} created={OnCreated}>
             </DropDownButtonComponent>
             );
     }
@@ -85,6 +90,9 @@ const DirectoryUpload = () => {
                 <p>
                     <b>Note: </b>File Manager's upload functionality is restricted in the online demos for security reasons. If you need to test upload functionality, please install 
                     <a target="_blank" href="https://www.syncfusion.com/downloads"> Syncfusion Essential Studio </a>on your machine and run the demo.
+                </p>
+                <p>
+                    Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
                 </p>
             </div>
         </div>

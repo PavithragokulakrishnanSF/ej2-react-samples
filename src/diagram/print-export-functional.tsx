@@ -213,14 +213,16 @@ function PrintExport() {
             <div id="description">
                 <p>
                     This example shows how to print the diagram and how to export the
-                    diagram as image (*.jpg, *.png, and *bmp) and in SVG format. The{" "}
+                    diagram as image (*.jpg, *.png, and *bmp) and in SVG format. The {" "}
                     <code>exportDiagram</code> method can be used to export the diagram.
                     The <code>exportDiagram</code> method takes the exporting options
                     (file formats, mode of export, and the region to export) as input.
                     The <code>print</code> method can be used to print the diagrams.
                 </p>
                 <br />
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GanttComponent, Inject, Selection, ColumnDirective, ColumnsDirective, VirtualScroll } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, ColumnDirective, ColumnsDirective, VirtualScroll, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { virtualData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -9,7 +8,7 @@ const Virtualscroll = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -18,10 +17,10 @@ const Virtualscroll = () => {
     progress: 'Progress',
     parentID: 'parentID'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     taskLabel: 'Progress'
   };
   const projectStartDate: Date = new Date('04/01/2025');
@@ -29,12 +28,12 @@ const Virtualscroll = () => {
   return (
     <div className='control-pane'>
       <div className='control-section'>
-        <GanttComponent id='SplitTasks' dataSource={virtualData} treeColumnIndex={1} labelSettings={labelSettings}
+        <GanttComponent id='VirtualScroll' dataSource={virtualData} treeColumnIndex={1} labelSettings={labelSettings}
           allowSelection={true} highlightWeekends={true} enableVirtualization={true} enableTimelineVirtualization={true}
           taskFields={taskFields} splitterSettings={splitterSettings} height='650px' taskbarHeight={25} rowHeight={46} projectStartDate={projectStartDate} projectEndDate={projectEndDate}>
           <ColumnsDirective>
             <ColumnDirective field='TaskID' />
-            <ColumnDirective field='TaskName' headerText='Task Name' width={200} />
+            <ColumnDirective field='TaskName' headerText='Task Name' width={300} />
             <ColumnDirective field='StartDate' />
             <ColumnDirective field='Duration' />
             <ColumnDirective field='Progress' />
@@ -53,8 +52,9 @@ const Virtualscroll = () => {
           <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#enablevirtualization">enableVirtualization</a> property as true. Additionally, the Gantt component now includes the timeline virtualization feature by setting the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#enabletimelinevirtualization">enableTimelineVirtualization</a> to true.</p>
         <p>This demo highlights the utilization of row and timeline virtualization features within the Gantt.</p>
         <p>By default during Virtual scroll Shimmer effect is enabled you can disable this by changing <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#enablevirtualmaskrow">enableVirtualMaskRow</a> to false</p>
-      <br/>
-      <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/virtual-scroll">documentation section</a>.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use virtual scroll and selection features, we need to inject <code>VirtualScroll</code> and <code>Selection</code> into the <code>Inject Services</code> section.</p>
+        <br/>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/virtual-scroll">documentation section</a>.</p>
       </div>
     </div>
   )

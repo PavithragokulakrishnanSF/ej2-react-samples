@@ -1,7 +1,7 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import { GanttComponent, Inject, Selection } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, LabelSettingsModel, SplitterSettingsModel, ColumnsDirective,
+  ColumnDirective, } from '@syncfusion/ej2-react-gantt';
 import { DropDownListComponent, ChangeEventArgs } from '@syncfusion/ej2-react-dropdowns';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { projectNewData } from './data';
@@ -64,7 +64,7 @@ const ShowHideColumn = () => {
     }
   }
 
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -74,10 +74,10 @@ const ShowHideColumn = () => {
     dependency: 'Predecessor',
     parentID: 'ParentId'
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 4
   };
   const projectStartDate: Date = new Date('03/26/2025');
@@ -90,50 +90,59 @@ const ShowHideColumn = () => {
           ref={ganttObj} allowResizing={true} dataSource={projectNewData} highlightWeekends={true} splitterSettings={splitterSettings}
           taskFields={taskFields} labelSettings={labelSettings} height='650px' taskbarHeight={25} rowHeight={46}
           projectStartDate={projectStartDate} projectEndDate={projectEndDate}>
+            <ColumnsDirective>
+              <ColumnDirective field="TaskID" width="60"></ColumnDirective>
+              <ColumnDirective field="TaskName" width="280"></ColumnDirective>
+              <ColumnDirective field="StartDate"></ColumnDirective>
+              <ColumnDirective field="EndDate"></ColumnDirective>
+              <ColumnDirective field="Duration"></ColumnDirective>
+              <ColumnDirective field="Predecessor"></ColumnDirective>
+              <ColumnDirective field="Progress"></ColumnDirective>
+            </ColumnsDirective>
           <Inject services={[Selection]} />
         </GanttComponent>
       </div>
       <div className='col-md-3 property-section'>
         <PropertyPane title='Properties'>
           <table id='property' title='Properties' className='property-panel-table' style={{ width: '100%' }}>
-          <tbody>
-            <tr>
-              <td style={{ width: '30%' }}>
-                <div> Column </div>
-              </td>
-              <td style={{ width: '70%', paddingRight: '10px' }}>
-                <div id='columnddl'>
-                  <DropDownListComponent width="120px" id="dropDown" change={change.bind(this)}
-                    dataSource={columnsName} fields={{ text: 'name', value: 'id' }}
-                    ref={dropdownObj} />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ width: '30%' }}>
-                <div>
-                  <ButtonComponent id='hide'
-                    ref={hideButtonObj} onClick={hideButtonClick.bind(this)}> Hide </ButtonComponent>
-                </div>
-              </td>
-              <td style={{ width: '70%' }}>
-                <div>
-                  <ButtonComponent id='show'
-                    ref={showButtonObj} onClick={showButtonClick.bind(this)}> Show </ButtonComponent>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ width: '30%' }}>
-                <div style={{ paddingTop: '10px' }}> Hidden Columns</div>
-              </td>
-              <td style={{ width: '70%', padding: '10px 10px 10px 0px' }}>
-                <div>
-                  <textarea id='hiddencolumns' style={{ resize: 'none', height: '65px', backgroundColor: '#fff', padding: '6px' }}
-                    className='form-control'></textarea>
-                </div>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td style={{ width: '30%' }}>
+                  <div> Column </div>
+                </td>
+                <td style={{ width: '70%', paddingRight: '10px' }}>
+                  <div id='columnddl'>
+                    <DropDownListComponent width="120px" id="dropDown" change={change.bind(this)}
+                      dataSource={columnsName} fields={{ text: 'name', value: 'id' }}
+                      ref={dropdownObj} />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style={{ width: '30%' }}>
+                  <div>
+                    <ButtonComponent id='hide'
+                      ref={hideButtonObj} onClick={hideButtonClick.bind(this)}> Hide </ButtonComponent>
+                  </div>
+                </td>
+                <td style={{ width: '70%' }}>
+                  <div>
+                    <ButtonComponent id='show'
+                      ref={showButtonObj} onClick={showButtonClick.bind(this)}> Show </ButtonComponent>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style={{ width: '30%' }}>
+                  <div style={{ paddingTop: '10px' }}> Hidden Columns</div>
+                </td>
+                <td style={{ width: '70%', padding: '10px 10px 10px 0px' }}>
+                  <div>
+                    <textarea id='hiddencolumns' style={{ resize: 'none', height: '65px', backgroundColor: '#fff', padding: '6px' }}
+                      className='form-control'></textarea>
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </PropertyPane>
@@ -150,11 +159,12 @@ const ShowHideColumn = () => {
           The visibility of column is toggled based on the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/columnModel/#headertext">columns -&gt; headerText</a> value.
         </p>
 
-        <p>The <a target="_blank" href="https://ej2.syncfusion.com/raect/documentation/api/gantt/columnModel/#visible">columns -&gt; visible</a> property specifies the visibility of a column.
+        <p>The <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/columnModel/#visible">columns -&gt; visible</a> property specifies the visibility of a column.
           To hide a column at the initial rendering, set the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/columnModel/#visible">columns -&gt; visible</a> property to false.
         </p>
-      <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/nextjs-getting-started#add-syncfusion-react-component">documentation section</a>.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use selection feature, we need to inject <code>Selection</code> into the <code>Inject Services</code> section.</p>
+        <br/>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/columns/columns#show-or-hide-columns">documentation section</a>.</p>
       </div>
     </div>
   )

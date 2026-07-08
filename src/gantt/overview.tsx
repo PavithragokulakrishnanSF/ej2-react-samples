@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { GanttComponent, DayMarkers, Inject, Edit, Selection, Toolbar,ExcelExport, PdfExport, ColumnsDirective, ColumnDirective, EventMarkersDirective, EventMarkerDirective, HolidaysDirective, HolidayDirective, ColumnMenu, Sort, Filter, Resize } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, DayMarkers, Inject, Edit, Selection, Toolbar, ExcelExport, PdfExport, ColumnsDirective, ColumnDirective, EventMarkersDirective, EventMarkerDirective, HolidaysDirective, HolidayDirective, ColumnMenu, Sort, Filter, Resize, LabelSettingsModel, ResourceFieldsModel, SplitterSettingsModel, TimelineSettingsModel, GridLine, ToolbarItem } from '@syncfusion/ej2-react-gantt';
 import { overviewData, editingResources } from './data';
 import { SampleBase } from '../common/sample-base';
-import { DropDownList } from '@syncfusion/ej2-react-dropdowns';
 import './overview.css';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { SidebarComponent } from '@syncfusion/ej2-react-navigations';
 import { SwitchComponent } from '@syncfusion/ej2-react-buttons';
-import { MultiSelectComponent, CheckBoxSelection} from '@syncfusion/ej2-react-dropdowns';
-import { DropDownListComponent, ChangeEventArgs } from '@syncfusion/ej2-react-dropdowns';
+import { MultiSelectComponent, CheckBoxSelection } from '@syncfusion/ej2-react-dropdowns';
+import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { NumericTextBoxComponent } from '@syncfusion/ej2-react-inputs';
 import { extend } from '@syncfusion/ej2-base';
 import { SliderComponent } from '@syncfusion/ej2-react-inputs';
@@ -54,7 +53,7 @@ export class Overview extends SampleBase<{}, {}> {
     public statusTemplate: any = this.statustemplate.bind(this);
     public priorityTemplate: any = this.prioritytemplate.bind(this);
 
-    public taskFields: any = {
+    public taskFields: TaskFieldsModel = {
         id: 'TaskId',
         name: 'TaskName',
         startDate: 'StartDate',
@@ -67,17 +66,17 @@ export class Overview extends SampleBase<{}, {}> {
         constraintDate: 'ConstraintDate',
         resourceInfo: 'resource'
     };
-    public resourceFields: any = {
+    public resourceFields: ResourceFieldsModel = {
         id: 'resourceId',
         name: 'resourceName'
     };
-    public splitterSettings: any = {
+    public splitterSettings: SplitterSettingsModel = {
         columnIndex: 4
     };
     public projectStartDate: Date = new Date('01/25/2025');
     public projectEndDate: Date = new Date('01/30/2026');
-    public gridLines: any = 'Vertical';
-    public toolbarOptions: any = ['ExpandAll', 'CollapseAll', 'ZoomIn', 'ZoomOut', 'ZoomToFit', 'ExcelExport', 'CsvExport', 'PdfExport']
+    public gridLines: GridLine = 'Both';
+    public toolbarOptions: ToolbarItem[] = ['ExpandAll', 'CollapseAll', 'ZoomIn', 'ZoomOut', 'ZoomToFit', 'ExcelExport', 'CsvExport', 'PdfExport']
 
     public change(args: any) {
         let gantt = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
@@ -91,7 +90,8 @@ export class Overview extends SampleBase<{}, {}> {
             gantt.setSplitterPosition('57%', 'position');
         }
     };
-    public timelineSettings: any = {
+    public timelineSettings: TimelineSettingsModel = {
+        timelineUnitSize: 60,
         showTooltip: true,
         topTier: {
             unit: 'Month',
@@ -103,32 +103,32 @@ export class Overview extends SampleBase<{}, {}> {
             format: 'dd'
         },
     };
-    public rightLabel =(props: any) =>{
-        if(props.ganttProperties.resourceInfo && props.ganttProperties.resourceInfo.length !==0)
-        {
-            <div id = "rightLabel">
-                <img src="src/gantt/images/${ganttProperties.resourceNames}.png" style={{height:'25px', width:'25px'}} />
-                <span style={{marginLeft:'3px'}}> ${props.Assignee}</span>  
-            </div>
+    public rightLabel = (props: any) => {
+        if (props.ganttProperties.resourceInfo && props.ganttProperties.resourceInfo.length !== 0) {
+            return (
+                <div id="rightLabel">
+                    <img src={`src/gantt/images/${props.ganttProperties.resourceNames}.png`} style={{ height: '25px', width: '25px' }} />
+                    <span style={{ marginLeft: '3px' }}>{props.Assignee}</span>
+                </div>
+            );
         }
     }
-    public labelSettings: any = {
+    public labelSettings: LabelSettingsModel = {
         taskLabel: '${Progress}%',
-        rightLabel: this.rightLabel
+        rightLabel: this.rightLabel as any
     };
     public toolbarClick(args: ClickEventArgs): void {
-        debugger
         if (args.item.id === "Overview_excelexport") {
-          this.ganttInstance.excelExport();
+            this.ganttInstance.excelExport();
         }
         else if (args.item.id === "Overview_csvexport") {
-          this.ganttInstance.csvExport();
+            this.ganttInstance.csvExport();
         }
         else if (args.item.id === "Overview_pdfexport") {
-          this.ganttInstance.pdfExport();
+            this.ganttInstance.pdfExport();
         }
-      }
-    
+    }
+
     public eventMarkerDay1: Date = new Date('2025-03-13');
     public eventMarkerDay2: Date = new Date('2025-04-18');
     public eventMarkerDay3: Date = new Date('2025-05-30');
@@ -155,7 +155,7 @@ export class Overview extends SampleBase<{}, {}> {
     public prioritytemplate(props: any) {
         let pri = this.PriorityIconStyle(props.taskData.Priority);
         let priCon = this.PriorityContent(props.taskData.Priority);
-        let priClass=this.PriorityIcon(props.taskData.Priority);
+        let priClass = this.PriorityIcon(props.taskData.Priority);
         if (props.taskData.Priority) {
             return (
                 <div className='columnTemplate1' style={{display:'flex'}}>
@@ -171,7 +171,7 @@ export class Overview extends SampleBase<{}, {}> {
         }
     };
 
-    public columnTemplate(props:any): any {
+    public columnTemplate(props: any): any {
         var src = 'src/gantt/images/' + props.ganttProperties.resourceNames + '.png';
         if ((props.ganttProperties.resourceNames)) {
             let gantt = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
@@ -184,11 +184,11 @@ export class Overview extends SampleBase<{}, {}> {
             }
             else {
                 return (
-                    <div className='columnTemplate' style={{display: 'flex', alignItems: 'center',gap: '8px',height: '100%'}}>
+                    <div className='columnTemplate' style={{ display: 'flex', alignItems: 'center', gap: '8px', height: '100%' }}>
                         <div><img src={src} height='25px' width='25px' /></div>
-                        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: '16px'}}>
-                            <span style={{  fontSize:'12px' }}>{props.Assignee}</span>
-                            <span style={{fontSize: '9px', textAlign:'left'}} >{props.taskData.Department}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: '16px' }}>
+                            <span style={{ fontSize: '12px' }}>{props.Assignee}</span>
+                            <span style={{ fontSize: '9px', textAlign: 'left' }} >{props.taskData.Department}</span>
                         </div>
                     </div>);
             }
@@ -198,35 +198,34 @@ export class Overview extends SampleBase<{}, {}> {
     }
 
     public load(): void {
-        let themeCollection: any = ['bootstrap5', 'bootstrap', 'bootstrap4', 'fluent', 'fabric', 'fusionnew', 'material3', 'material', 'highcontrast', 'tailwind','fluent2','tailwind3','bootstrap5_3'];
-        let theme = document.body.className.split(' ').find(function(cls) { return themeCollection.includes(cls); }) || '';
+        let themeCollection: any = ['bootstrap5', 'bootstrap', 'bootstrap4', 'fluent', 'fabric', 'fusionnew', 'material3', 'material', 'highcontrast', 'tailwind', 'fluent2', 'tailwind3', 'bootstrap5_3'];
+        let theme = document.body.className.split(' ').find(function (cls) { return themeCollection.includes(cls); }) || '';
         this.CurrentTheme = theme ? true : false;
     };
 
     public pdfQueryCellInfo = (args): void => {
-        if(args.data.ganttProperties.resourceNames){
+        if (args.data.ganttProperties.resourceNames) {
             if (args.column.headerText === 'Assignee' && args.data.taskData.resourcesImage) {
-                args.image = { height: 30, width: 30, base64: args.data.taskData.resourcesImage};
-                args.value = `${args.data.Assignee}\n${args.data.taskData.Department}`; 
+                args.image = { height: 30, width: 30, base64: args.data.taskData.resourcesImage };
+                args.value = `${args.data.Assignee}\n${args.data.taskData.Department}`;
             }
         }
 
         // Set font color for Status or Priority columns
         if (args.column.field === 'Status' || args.column.field === 'Priority') {
-            const style = args.column.field === 'Status' ?this.StatusContent(args.value) : this.PriorityContent(args.value);// args.value is the cell's value (e.g., "Completed" for Status, "High" for Priority)
+            const style = args.column.field === 'Status' ? this.StatusContent(args.value) : this.PriorityContent(args.value);// args.value is the cell's value (e.g., "Completed" for Status, "High" for Priority)
             const rgbMatch = style.color.match(/rgb\(\d+,\s*\d+,\s*\d+\)/);
             if (rgbMatch) {
                 const rgbValues = rgbMatch[0].slice(4, -1).split(', ').map(Number);
                 args.style.fontColor = new PdfColor(rgbValues[0], rgbValues[1], rgbValues[2]);
-            }   
+            }
         }
     };
-    
-    public pdfQueryTaskbarInfo=(args: any): void=>{
-        if(this.ganttInstance.labelSettings.rightLabel && args.data.taskData.resourcesImage)
-        {
-            args.labelSettings.rightLabel.image= [{base64: args.data.taskData.resourcesImage, height: 25, width: 25}];
-            args.labelSettings.rightLabel.value=args.data.ganttProperties.resourceNames;
+
+    public pdfQueryTaskbarInfo = (args: any): void => {
+        if (this.ganttInstance.labelSettings.rightLabel && args.data.taskData.resourcesImage) {
+            args.labelSettings.rightLabel.image = [{ base64: args.data.taskData.resourcesImage, height: 25, width: 25 }];
+            args.labelSettings.rightLabel.value = args.data.ganttProperties.resourceNames;
         }
     };
 
@@ -237,17 +236,17 @@ export class Overview extends SampleBase<{}, {}> {
                 this.display = 'flex'; this.padding = '2px 10px'; this.gap = '10px'; this.width = '96px'; this.height = '24px'; this.border = 'solid 1px ${this.statusStyleColor}';
                 break;
             case "Open":
-                this.display= 'flex'; this.justifyContent='center'; this.gap= '10px'; this.width= '96px'; this.height= '24px'; this.border = 'solid 1px red';
+                this.display = 'flex'; this.justifyContent = 'center'; this.gap = '10px'; this.width = '96px'; this.height = '24px'; this.border = 'solid 1px red';
                 break;
             case "On Hold":
                 this.statusStyleColor = (this.CurrentTheme) ? "#766B7C" : "#CDCBD7";
-                this.display = 'flex'; this.justifyContent = 'center'; this.gap= '10px'; this.width= '96px'; this.height = '24px'; this.border = 'solid 1px ${statusStyleColor}';
+                this.display = 'flex'; this.justifyContent = 'center'; this.gap = '10px'; this.width = '96px'; this.height = '24px'; this.border = `solid 1px ${this.statusStyleColor}`;
                 break;
             case "Completed":
                 this.statusStyleColor = (this.CurrentTheme) ? "#00A653" : "#92FFC8";
-                this.display = 'flex'; this.padding = '2px 10px'; this.gap = '10px'; this.width = '96px'; this.height = '24px'; this.border = 'solid 1px ${statusStyleColor}';
+                this.display = 'flex'; this.padding = '2px 10px'; this.gap = '10px'; this.width = '96px'; this.height = '24px'; this.border = `solid 1px ${this.statusStyleColor}`;
                 break;
-            
+
         }
         return { display: this.display, padding: this.padding, gap: this.gap, width: this.width, height: this.height, border: this.border, justifyContent: this.justifyContent, color: this.color };
     };
@@ -268,7 +267,7 @@ export class Overview extends SampleBase<{}, {}> {
             case "Completed":
                 this.statusContentstyleColor = (this.CurrentTheme) ? "rgb(0, 166, 83)" : "rgb(146, 255, 200)";
                 this.width = "74px"; this.height = "22px"; this.fontStyle = 'normal'; this.fontWeight = '400'; this.fontSize = '14px'; this.lineHeight = '20px'; this.textAlign = 'center'; this.color = this.statusContentstyleColor;
-          
+
         }
         return {
             width: this.width, height: this.height, fontStyle: this.fontStyle, fontWeight: this.fontWeight, fontSize: this.fontSize, lineHeight: this.lineHeight, textAlign: this.textAlign, color: this.color,
@@ -295,18 +294,18 @@ export class Overview extends SampleBase<{}, {}> {
                 this.marginTop = '2px'; this.backgroundPri = this.priorityStyle;
                 break;
         }
-        return { marginTop:this.marginTop,display: this.display, padding: this.padding, gap: this.gap, width: this.width, height: this.height, backgroundPri: this.backgroundPri };
+        return { marginTop: this.marginTop, display: this.display, padding: this.padding, gap: this.gap, width: this.width, height: this.height, backgroundPri: this.backgroundPri };
     };
 
     public PriorityContent(priority: any) {
         switch (priority) {
             case "Low":
                 this.priorityContentStyle = (this.CurrentTheme) ? "rgb(0, 166, 83)" : "rgb(253, 255, 136)";
-                this.width = "28px"; this.height = "22px"; this.fontStyle = 'normal'; this.marginLeft ='3px'; this.fontSize = '14px'; this.lineHeight = '20px'; this.textAlign = 'center'; this.color = this.priorityContentStyle;
+                this.width = "28px"; this.height = "22px"; this.fontStyle = 'normal'; this.marginLeft = '3px'; this.fontSize = '14px'; this.lineHeight = '20px'; this.textAlign = 'center'; this.color = this.priorityContentStyle;
                 break;
             case "Normal":
                 this.priorityContentStyle = (this.CurrentTheme) ? "rgb(113, 0, 166)" : "#rgb(227, 169, 255)";
-                this.width = "28px"; this.height = "22px"; this.fontStyle = 'normal'; this.marginLeft ='3px'; this.fontSize = '14px'; this.lineHeight = '20px'; this.textAlign = 'center'; this.color = this.priorityContentStyle;
+                this.width = "28px"; this.height = "22px"; this.fontStyle = 'normal'; this.marginLeft = '3px'; this.fontSize = '14px'; this.lineHeight = '20px'; this.textAlign = 'center'; this.color = this.priorityContentStyle;
                 break;
             case "Critical":
                 this.priorityContentStyle = (this.CurrentTheme) ? "rgb(255, 55, 64)" : "rgb(255, 181, 184)";
@@ -321,7 +320,7 @@ export class Overview extends SampleBase<{}, {}> {
             width: this.width, height: this.height, fontStyle: this.fontStyle, marginLeft: this.marginLeft, fontSize: this.fontSize, lineHeight: this.lineHeight, textAlign: this.textAlign, color: this.color
         };
     };
-    public PriorityIcon =(priority):any=>{
+    public PriorityIcon = (priority): any => {
         switch (priority) {
             case "Low":
                 this.IconClass = "e-icons e-arrow-down e-icon-style";
@@ -358,13 +357,13 @@ export class Overview extends SampleBase<{}, {}> {
         showOn: 'Hover'
     };
     public onChanged(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         gantt.rowHeight = args.value;
     }
 
     // Grid lines
     public gridLinesChange(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         if (args.checked) {
             gantt.gridLines = 'Both';
         } else {
@@ -375,7 +374,7 @@ export class Overview extends SampleBase<{}, {}> {
     // Show Event marekrs
     public tempEvents: any;
     public showEventMarkers(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         if (args.checked) {
             gantt.eventMarkers = this.tempEvents;
         } else {
@@ -396,11 +395,10 @@ export class Overview extends SampleBase<{}, {}> {
         }
     }
 
-
     // Show tasklabels
     public tempLabels: any;
     public taskLabelChange(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         if (args.checked) {
             gantt.labelSettings.rightLabel = this.tempLabels;
         } else {
@@ -440,14 +438,14 @@ export class Overview extends SampleBase<{}, {}> {
     ];
     public durationFields: any = { text: 'Text', value: 'id' };
     public durationValue = 'Day';
-    public changeDuraiton(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+    public changeDuration(args: any) {
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         gantt.durationUnit = args.value;
     }
 
     // Timeline unit width
     public unitChange(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         var width = args.value;
         gantt.timelineSettings.timelineUnitSize = width;
     }
@@ -457,9 +455,9 @@ export class Overview extends SampleBase<{}, {}> {
         { id: "ResourceView", Text: "Resource View" },
         { id: "ProjectView", Text: "Project View" }
     ];
-    public viewFileds: any = { text: 'Text', value: 'id' };
+    public viewFields: any = { text: 'Text', value: 'id' };
     public typeChange(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         gantt.viewType = args.value;
         if ((document.getElementsByClassName('checkeddependency')[0] as any).hidden !== true) {
             (document.querySelectorAll('.e-switch')[2] as any).ej2_instances[0].checked = true;
@@ -475,7 +473,7 @@ export class Overview extends SampleBase<{}, {}> {
     ];
     public modeFields: any = { value: 'ID', text: 'Text' };
     public modeChange(args: any) {
-        const gantt: any = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
+        const gantt: GanttComponent = (document.getElementsByClassName('e-gantt')[0] as any).ej2_instances[0];
         if (args.value == 'Grid') {
             gantt.setSplitterPosition('100%', 'position');
         }
@@ -593,7 +591,7 @@ export class Overview extends SampleBase<{}, {}> {
                                 <li className="list-field stack-container">
                                     <label htmlFor="durationUnit" className="gantt-labels-style">Duration unit:</label>
                                     <div style={{ paddingLeft: '10px' }}>
-                                        <DropDownListComponent id="games" dataSource={this.durationUnit} fields={this.durationFields} change={this.changeDuraiton} value={this.durationValue} popupHeight="220px" />
+                                        <DropDownListComponent id="games" dataSource={this.durationUnit} fields={this.durationFields} change={this.changeDuration} value={this.durationValue} popupHeight="220px" />
                                     </div>
                                 </li>
 
@@ -615,7 +613,7 @@ export class Overview extends SampleBase<{}, {}> {
                                 <li className="list-field stack-container">
                                     <label htmlFor="viewType" className="gantt-labels-style">View type:</label>
                                     <div style={{ paddingLeft: '10px' }}>
-                                        <DropDownListComponent id="viewType" dataSource={this.viewTypeData} placeholder='View Type' fields={this.viewFileds} change={this.typeChange} />
+                                        <DropDownListComponent id="viewType" dataSource={this.viewTypeData} placeholder='View Type' fields={this.viewFields} change={this.typeChange} />
                                     </div>
                                 </li>
 
@@ -650,15 +648,15 @@ export class Overview extends SampleBase<{}, {}> {
                                 height='650px' taskbarHeight={25} rowHeight={46} gridLines={this.gridLines} allowFiltering={true} allowSorting={true} allowResizing={true} showColumnMenu={true}
                                 toolbar={this.toolbarOptions} resourceFields={this.resourceFields} resources={editingResources} pdfQueryTaskbarInfo={this.pdfQueryTaskbarInfo.bind(this)}>
                                 <ColumnsDirective>
-                                    <ColumnDirective field='WBSCode' headerText='WBS ID' width='120'></ColumnDirective>
+                                    <ColumnDirective field='WBSCode' headerText='WBS ID' width='110'></ColumnDirective>
                                     <ColumnDirective field='TaskName' headerText='Product Release' width='250'></ColumnDirective>
                                     <ColumnDirective field='Assignee' headerText='Assignee' allowSorting={false} width='150' template={this.template}></ColumnDirective>
                                     <ColumnDirective field='Status' headerText='Status' minWidth="100" width="120" template={this.statusTemplate}></ColumnDirective>
                                     <ColumnDirective field='Priority' headerText='Priority' minWidth='80' width='100' template={this.priorityTemplate}></ColumnDirective>
                                     <ColumnDirective field='WBSPredecessor' headerText='WBS Predecessor' width='190' />
-                                    <ColumnDirective field='ConstraintType' headerText='Constraint Type' width='200' />
-                                    <ColumnDirective field='ConstraintDate' headerText='Constraint Date' width='200' />
-                                    <ColumnDirective field='Progress' headerText='Completion(%)' width='200' />
+                                    <ColumnDirective field='ConstraintType' headerText='Constraint Type' width='180' />
+                                    <ColumnDirective field='ConstraintDate' headerText='Constraint Date' width='180' />
+                                    <ColumnDirective field='Progress' headerText='Completion(%)' width='170' />
                                     <ColumnDirective field='TimeLog' headerText='Work Log' width='130' />
                                 </ColumnsDirective>
                                 <EventMarkersDirective>
@@ -675,25 +673,25 @@ export class Overview extends SampleBase<{}, {}> {
                             </GanttComponent>
                         </div>
                     </div>
-
-                    <div style={{ float: 'right', margin: '10px' }}>Source:
-                        <a href="https://en.wikipedia.org/wiki/Construction" target='_blank'>https://en.wikipedia.org/</a>
-                    </div>
                 </div>
                 <div id="action-description">
-                    <p>This sample provides an overview of the React Gantt Chart, showcasing its key features through an e-commerce platform redesign project 
+                    <p>This sample provides an overview of the React Gantt Chart, showcasing its key features through an e-commerce platform redesign project
                         timeline. It visualizes task hierarchies, dependencies, milestones, and resource allocations, enabling efficient project tracking from planning to deployment.
                     </p>
                 </div>
 
                 <div id="description">
-                    <p>This demo presents an e-commerce platform redesign project, demonstrating key features such as task organization, customizable timeline views, 
-                        resource management, and interactive controls. Users can <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/sorting">sort</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/filtering/filtering">filter tasks</a>, <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/columns/column-resizing"> resize</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/columns/column-reordering">reorder columns</a>, track progress with <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/baseline"> baselines</a>, 
-                        and highlight key dates with <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/event-markers">event markers</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/holidays"> holidays</a>. The <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/tool-bar"> toolbar </a> offers intuitive options to add, edit, delete, search, and expand or 
-                        collapse tasks. Additionally, users can configure <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#workweek"> working days</a>, <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/scheduling-tasks#weekendnon-working-days"> highlight weekends</a>, set <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#projectstartdate"> project date ranges</a>.
+                    <p>This demo presents an e-commerce platform redesign project, demonstrating key features such as task organization, customizable timeline views,
+                        resource management, and interactive controls. Users can <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/sorting">sort</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/filtering/filtering">filter tasks</a>, <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/columns/column-resizing"> resize</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/columns/column-reordering">reorder columns</a>, track progress with <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/baseline"> baselines</a>,
+                        and highlight key dates with <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/event-markers">event markers</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/holidays"> holidays</a>. The <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/tool-bar"> toolbar </a> offers intuitive options to add, edit, delete, search, and expand or
+                        collapse tasks. Additionally, users can configure <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#workweek"> working days</a>, <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/index-default#highlightweekends"> highlight weekends</a>, set <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#projectstartdate"> project date ranges</a>.
+                    </p>
+                    <p>Gantt component features are segregated into individual feature-wise modules. To use a Filter, Edit, Toolbar, Sorting, Resize, pdf Export, Excel and CSV Export, Column menu, Selection and markers features, we need to inject the <code>Filter</code>, <code>Toolbar</code>, <code>Sort</code>, <code>Resize</code>, <code>PdfExport</code>, <code>ExcelExport</code>, <code>ColumnMenu</code>, <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.
                     </p>
                     <br/>
-                    <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/getting-started#adding-gantt-component">documentation section</a>.</p>
+                    <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/getting-started">documentation section</a>.</p>
+                    <br />
+                    <p>Looking for the full React Gantt Chart component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-gantt-chart">React Gantt Chart</a> page.</p>
                 </div>
             </div>
         )

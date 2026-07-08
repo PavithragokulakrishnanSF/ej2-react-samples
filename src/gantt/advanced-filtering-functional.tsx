@@ -1,8 +1,7 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
-import { GanttComponent, Inject, Filter, ColumnsDirective, ColumnDirective, Selection } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Filter, ColumnsDirective, ColumnDirective, Selection, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { QueryBuilderComponent } from '@syncfusion/ej2-react-querybuilder';
 import { Query } from '@syncfusion/ej2-data';
@@ -14,17 +13,17 @@ const AdvancedFiltering = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  
+
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [isSideBar, setIsSideBar] = useState(false);
-  const [querybuilderevent, setQuerybuilderevent] = useState(false);
+  const [queryBuilderEvent, setQueryBuilderEvent] = useState(false);
   const [create, setCreate] = useState('');
   const [predicateValue, setPredicateValue] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState(new Query());
   let ganttRef = useRef<GanttComponent>(null);
   let sidebarRef = useRef<SidebarComponent>(null);
   let queryBuilderRef = useRef<QueryBuilderComponent>(null);
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -32,12 +31,12 @@ const AdvancedFiltering = () => {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-    parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  const projectStartDate = new Date('03/30/2025');
-  const projectEndDate = new Date('07/20/2025');
-  const splitterSettings: any = { columnIndex: 2 };
-  const labelSettings: any = { rightLabel: 'TaskName' };
+  const projectStartDate: Date = new Date('03/30/2025');
+  const projectEndDate: Date = new Date('06/21/2025');
+  const splitterSettings: SplitterSettingsModel = { columnIndex: 2 };
+  const labelSettings: LabelSettingsModel = { rightLabel: 'TaskName' };
   const target = '#ganttsidebar-parent';
 
   const rowSelected = () => {
@@ -51,8 +50,8 @@ const AdvancedFiltering = () => {
   const triggerSidebar = () => {
     setSidebarToggle(prev => !prev);
     setIsSideBar(true);
-    if (querybuilderevent) {
-        setCreate(queryBuilderRef.current?.getSqlFromRules());
+    if (queryBuilderEvent) {
+      setCreate(queryBuilderRef.current?.getSqlFromRules() || '');
     }
     if (sidebarRef.current) {
       sidebarRef.current.isOpen = true;
@@ -60,7 +59,7 @@ const AdvancedFiltering = () => {
   };
 
   const created = () => {
-    setQuerybuilderevent(true);
+    setQueryBuilderEvent(true);
     if (create && create !== '') {
       queryBuilderRef.current?.setRulesFromSql(create);
     }
@@ -70,22 +69,22 @@ const AdvancedFiltering = () => {
     const predicateValue = queryBuilderRef.current?.getPredicate(args.rule);
     setPredicateValue(predicateValue);
     if (args.Type === "DeleteRule" && predicateValue !== null) {
-        setSearchQuery(new Query().where(predicateValue));
+      setSearchQuery(new Query().where(predicateValue));
     } else if (predicateValue === null && args.Type === "DeleteRule") {
-        setSearchQuery(new Query().select(['TaskID', 'TaskName', 'StartDate', 'Duration', 'EndDate', 'Progress', 'Predecessor']));
+      setSearchQuery(new Query().select(['TaskID', 'TaskName', 'StartDate', 'Duration', 'EndDate', 'Progress', 'Predecessor']));
     }
   }, []);
-  
+
   const handleClose = () => {
     setSidebarToggle(false);
     setIsSideBar(false);
-    setCreate(queryBuilderRef.current?.getSqlFromRules());
+    setCreate(queryBuilderRef.current?.getSqlFromRules() || '');
     if (sidebarRef.current) {
       sidebarRef.current.hide();
     }
   };
 
-const handleApply = () => {
+  const handleApply = () => {
     if (predicateValue) {
       setSearchQuery(new Query().where(predicateValue));
     } else {
@@ -115,10 +114,10 @@ const handleApply = () => {
 
   return (
     <div className='control-pane'>
-      <div className='control-section' style={{ paddingTop: '0px' }}>
-        <div id='ganttsidebar-parent' style={{overflow: 'hidden'}}>
+      <div className='control-section' style={{ paddingTop: '0px', paddingBottom: '60px' }}>
+        <div id='ganttsidebar-parent'>
           <ButtonComponent id='filter-btn' onClick={triggerSidebar}>
-            <span className='e-quickfilter' style={{padding: '3px'}} ></span>
+            <span className='e-quickfilter' style={{ padding: '3px' }} ></span>
             Advanced Filters
           </ButtonComponent>
           {isSideBar && (
@@ -146,7 +145,7 @@ const handleApply = () => {
               </div>
             </SidebarComponent>
           )}
-          <GanttComponent id='AdvancedFiltering' ref={ganttRef} dataSource={projectNewData} treeColumnIndex={0} 
+          <GanttComponent id='AdvancedFiltering' ref={ganttRef} dataSource={projectNewData} treeColumnIndex={0}
             allowFiltering={true} includeWeekend={true}
             projectStartDate={projectStartDate} projectEndDate={projectEndDate} taskFields={taskFields}
             splitterSettings={splitterSettings}
@@ -158,7 +157,7 @@ const handleApply = () => {
               <ColumnDirective field='StartDate' headerText='Start Date'></ColumnDirective>
               <ColumnDirective field='Duration' headerText='Duration'></ColumnDirective>
               <ColumnDirective field='EndDate' headerText='End Date'></ColumnDirective>
-              <ColumnDirective field='Progress' headerText='End Date'></ColumnDirective>
+              <ColumnDirective field='Progress' headerText='Progress'></ColumnDirective>
               <ColumnDirective field='Predecessor' headerText='Predecessor' width={190}></ColumnDirective>
             </ColumnsDirective>
             <Inject services={[Filter, Selection]} />
@@ -170,11 +169,12 @@ const handleApply = () => {
       </div>
       <div id="description">
         <p>
-        In this example, the process involves retrieving the complex query from the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/query-builder/getting-started">QueryBuilder</a>
-        component and subsequently integrating it into the Gantt Chart by updating its <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#query">Query</a> Property.
-        The QueryBuilder component tool is located in a <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/sidebar/getting-started">SideBar</a> component that appears when you click on the toolbar.
+          In this example, the process involves retrieving the complex query from the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/query-builder/getting-started">QueryBuilder</a>
+          component and subsequently integrating it into the Gantt Chart by updating its <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#query">Query</a> Property.
+          The QueryBuilder component tool is located in a <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/sidebar/getting-started">SideBar</a> component that appears when you click on the toolbar.
         </p>
-        <br></br>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use filtering and selection features, we need to inject <code>Filter</code> and <code>Selection</code> into the <code>Inject Services</code> section.</p>
+        <br/>
         <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/filtering/filtering">documentation section</a>.</p>
       </div>
     </div>

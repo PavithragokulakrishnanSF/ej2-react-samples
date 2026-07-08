@@ -1,11 +1,11 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, ColumnsDirective, ColumnDirective, Toolbar, CriticalPath, Edit } from '@syncfusion/ej2-react-gantt';
-import { projectNewData } from './data';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, ColumnsDirective, ColumnDirective, TimelineSettingsModel, Toolbar, CriticalPath, Edit, EditSettingsModel, LabelSettingsModel, ToolbarItem, EventMarkerModel, EventMarkersDirective,
+  EventMarkerDirective, DayMarkers } from '@syncfusion/ej2-react-gantt';
+import { criticalPathData } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class Critical extends SampleBase<{}, {}> {
-    public taskFields: any = {
+    public taskFields: TaskFieldsModel = {
         id: 'TaskID',
         name: 'TaskName',
         startDate: 'StartDate',
@@ -13,27 +13,41 @@ export class Critical extends SampleBase<{}, {}> {
         duration: 'Duration',
         progress: 'Progress',
         dependency: 'Predecessor',
-         parentID: 'ParentId'
+        parentID: 'ParentId'
     };
-    public editSettings: any = {
+    public editSettings: EditSettingsModel = {
         allowAdding: true,
         allowEditing: true,
         allowDeleting: true,
         allowTaskbarEditing: true,
         showDeleteConfirmDialog: true
     };
-    public toolbar: any = ['Add', 'Edit','Delete','CriticalPath'];
-    public labelSettings: any = {
-        leftLabel: 'TaskName'
+    public toolbar: ToolbarItem[] = ['Add', 'Edit', 'Delete', 'CriticalPath'];
+    public splitterSettings = {
+        columnIndex: 2
     };
-    public projectStartDate: Date = new Date('03/26/2025');
+    public labelSettings: LabelSettingsModel = {
+        rightLabel: 'TaskName'
+    };
+    public timelineSettings: TimelineSettingsModel = {
+        topTier: {
+            format: 'MMM dd, yyyy',
+            unit: 'Week',
+        },
+        bottomTier: {
+            unit: 'Day',
+        },
+        viewEndDate: new Date('06/07/2025')
+    };
+    public eventMarkers: Date = new Date('04/02/2025');
+    public projectStartDate: Date = new Date('03/30/2025');
     render() {
         return (
             <div className='control-pane'>
                 <div className='control-section'>
-                    <GanttComponent id='Critical' dataSource={projectNewData} treeColumnIndex={1}
-                        taskFields={this.taskFields} labelSettings={this.labelSettings} height='650px' taskbarHeight={25} rowHeight={46}
-                        projectStartDate={this.projectStartDate} enableCriticalPath={true} editSettings={this.editSettings} toolbar={this.toolbar}>
+                    <GanttComponent id='Critical' dataSource={criticalPathData} treeColumnIndex={1}
+                        taskFields={this.taskFields} splitterSettings={this.splitterSettings} labelSettings={this.labelSettings} height='650px' taskbarHeight={25} rowHeight={46}
+                        projectStartDate={this.projectStartDate} enableCriticalPath={true} editSettings={this.editSettings} toolbar={this.toolbar} timelineSettings={this.timelineSettings}>
                         <ColumnsDirective>
                             <ColumnDirective field='TaskID' width='80' ></ColumnDirective>
                             <ColumnDirective field='TaskName' headerText='Job Name' width='250' clipMode='EllipsisWithTooltip'></ColumnDirective>
@@ -42,7 +56,15 @@ export class Critical extends SampleBase<{}, {}> {
                             <ColumnDirective field='Progress'></ColumnDirective>
                             <ColumnDirective field='Predecessor'></ColumnDirective>
                         </ColumnsDirective>
-                        <Inject services={[Selection, Toolbar, CriticalPath, Edit]} />
+                         <EventMarkersDirective>
+                            <EventMarkerDirective
+                                day={this.eventMarkers}
+                                cssClass="e-custom-event-marker"
+                                label="Project planning and kickoff"
+                                top="138px"
+                            ></EventMarkerDirective>
+                        </EventMarkersDirective>
+                        <Inject services={[Selection, Toolbar, CriticalPath, Edit, DayMarkers]} />
                     </GanttComponent>
                 </div>
                 <div id="action-description">
@@ -58,12 +80,9 @@ export class Critical extends SampleBase<{}, {}> {
                         The critical path is a series of tasks (or sometimes only a single task) that controls the calculated
                         finish date of the project. If a task in a critical path is delayed, then the entire project will be delayed.
                     </p>
-                    <p>
-                        Gantt control features are segregated into individual feature-wise modules. To use a critical path, inject the
-                        <code>CriticalPath</code> module.
-                    </p>
-                    <br />
-                    <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/critical-path/">documentation section</a>.</p>
+                    <p>Gantt component features are segregated into individual feature-wise modules. To use Critical path, selection, edit, and toolbar features, we need to inject <code>CriticalPath</code>, <code>Selection</code>, <code>Edit</code>, <code>DayMarkers</code> and <code>Toolbar</code> into the <code>Inject Services</code> section.</p>
+                    <br/>
+                    <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" rel="noopener noreferrer" href="https://ej2.syncfusion.com/react/documentation/gantt/critical-path/">documentation section</a>.</p>
                 </div>
             </div>
         )

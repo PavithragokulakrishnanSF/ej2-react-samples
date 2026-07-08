@@ -226,6 +226,9 @@ const ShowHideColumn = () => {
           of a column. To hide a column at the initial rendering, set the{" "}
           <code>columns-&gt;visible</code> property to false.
         </p>
+        <p>
+              Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+          </p>
       </div>
     </div>
   );

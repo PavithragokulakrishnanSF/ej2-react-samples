@@ -74,6 +74,9 @@ export class CalendarIntegration extends SampleBase<{}, {}> {
                         within the Scheduler’s <code>dataBinding</code> event. Within this <code>dataBinding</code> event, the event fields
                         needs to be mapped properly and then assigned to the result.
                     </p>
+                    <p>
+                        Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                    </p>
                 </div>
             </div>
         );

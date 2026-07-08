@@ -237,7 +237,7 @@ export class PivotOverview extends SampleBase<{}, {}> {
         this.pivotObj.chartSettings.chartSeries.legendShape = this.pivotObj.chartSettings.chartSeries.type === 'Polar' ? 'Rectangle' : 'SeriesType';
     }
     excelQueryCellInfo(args: ExcelQueryCellInfoEventArgs): void {
-        if ((args?.cell as IAxisSet).axis === 'value' && (args?.cell as IAxisSet).value === undefined) {
+        if ((args?.cell as IAxisSet).axis === 'value' && args.value === undefined) {
             args.style.numberFormat = undefined;
         }
     }

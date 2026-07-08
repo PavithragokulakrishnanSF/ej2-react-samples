@@ -39,7 +39,7 @@ function AiSentimentAnalysis() {
                         <tbody>
                             <tr>
                                 <td className="e-image">
-                                    <img src={data.ImageURL} alt="" />
+                                    <img crossOrigin="anonymous" src={data.ImageURL} alt="" />
                                 </td>
                                 <td className="e-title">
                                     <div className="e-card-stacked">

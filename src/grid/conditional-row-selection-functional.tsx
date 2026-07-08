@@ -78,6 +78,10 @@ function ConditionalRowSelection() {
                         href="https://ej2.syncfusion.com/react/documentation/api/grid/column/#isprimarykey">
                         columns -&gt; isPrimaryKey</a></code> property.</p>
                 <p>More information on the conditional row selection can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/grid/selection/row-selection"> documentation section</a>.</p>
+                <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                    <a target="_blank"
+                        href="https://www.syncfusion.com/react-components/react-data-grid">
+                        React Data Grid component</a> page.</p>
             </div>
         </div>
     )

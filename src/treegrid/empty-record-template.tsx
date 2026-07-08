@@ -138,6 +138,9 @@ export class EmptyRecordTemplate extends SampleBase<{}, {}> {
                 <div id='description'>
                     <p>The Tree Grid provides a way to use custom content when it has no data to present. Custom content, such as images, text, or other components, can be used when the Tree Grid does not contain any records to display. This feature replaces the default message of "No records to display" typically shown in the Tree Grid.</p>
                     <p>More information on the empty record template can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/treegrid/overview"> documentation</a> section.</p>
+                    <p>
+                        Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+                    </p>
                 </div>
             </div>
         )

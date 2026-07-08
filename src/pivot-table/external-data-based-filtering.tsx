@@ -13,14 +13,14 @@ import { DataManager, Query, JsonAdaptor } from '@syncfusion/ej2-data';
  */
 
 let Pivot_Data: IDataSet[] = (rData as any).data;
-let startDate: Date = new Date('2024-01-01');
-let endDate: Date = new Date('2024-12-01');
 interface IState {
     dataSourceSettings: any;
 }
 
 export class ExternalDataBasedFiltering extends SampleBase<{}, IState> {
     public pivotObj: PivotViewComponent;
+    public startDate: Date = new Date('2024-01-01');
+    public endDate: Date = new Date('2024-12-01');
 
      constructor(props: {}) {
         super(props);
@@ -52,25 +52,25 @@ export class ExternalDataBasedFiltering extends SampleBase<{}, IState> {
     }
 
     setStartDate(args): void {
-        startDate = args.value;
+        this.startDate = args.value;
     }
 
     setEndDate(args): void {
-        endDate = args.value;
+        this.endDate = args.value;
     }
 
     applyDateFilter(): void {
-        if (startDate && endDate) {
-            startDate.setHours(0, 0, 0, 0);
-            endDate.setHours(23, 59, 59, 999);
+        if (this.startDate && this.endDate) {
+            this.startDate = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), 1);
+            this.endDate = new Date(this.endDate.getFullYear(), this.endDate.getMonth() + 1, 0, 23, 59, 59, 999);
             let pivotData = (Pivot_Data as any).map((item: any) => ({
                 ...item,
                 OrderDate: new Date(item.OrderDate),
             }));
             new DataManager({ json: pivotData, adaptor: new JsonAdaptor() }).executeQuery(
                 new Query()
-                    .where('OrderDate', 'greaterthanorequal', startDate)
-                    .where('OrderDate', 'lessthanorequal', endDate)
+                    .where('OrderDate', 'greaterthanorequal', this.startDate)
+                    .where('OrderDate', 'lessthanorequal', this.endDate)
             )
             .then((e: any) => {
                 this.setState({
@@ -93,7 +93,7 @@ export class ExternalDataBasedFiltering extends SampleBase<{}, IState> {
                             placeholder='Choose a start date'
                             min={new Date(2019, 0, 1)}
                             max={new Date(2024, 10, 31)}
-                            value={startDate}
+                            value={this.startDate}
                             width={200}
                             format='MMM yyyy'
                             start='Year'
@@ -107,7 +107,7 @@ export class ExternalDataBasedFiltering extends SampleBase<{}, IState> {
                             placeholder='Choose an end date'
                             min={new Date(2019, 1, 1)}
                             max={new Date(2024, 11, 31)}
-                            value={endDate}
+                            value={this.endDate}
                             width={200}
                             format='MMM yyyy'
                             start='Year'
@@ -119,7 +119,7 @@ export class ExternalDataBasedFiltering extends SampleBase<{}, IState> {
                             id='apply'
                             cssClass='e-primary'
                             style={{ width: '80px' }}
-                            onClick={this.applyDateFilter}
+                            onClick={this.applyDateFilter.bind(this)}
                         >
                             Apply
                         </ButtonComponent>

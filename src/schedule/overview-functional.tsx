@@ -150,6 +150,9 @@ const Overview = () => {
   }
 
   const updateLiveTime = (): void => {
+    if (scheduleObj && scheduleObj.current === null) {
+      return;
+    }
     let scheduleTimezone: string = scheduleObj ? scheduleObj.current.timezone : 'Etc/GMT';
     let liveTime;
     if (scheduleObj.current.isAdaptive) {
@@ -722,7 +725,7 @@ const Overview = () => {
       </div >
       <div id="action-description">
         <p>
-          This <a aria-label="React scheduler example" href="https://www.syncfusion.com/react-ui-components/react-scheduler" target="_blank">React Scheduler example</a> demonstrates the overview of React Scheduler with its overall features. Use the toolbar buttons
+          This <a aria-label="React scheduler example" href="https://www.syncfusion.com/react-components/react-scheduler" target="_blank">React Scheduler</a> example demonstrates the overview of React Scheduler with its overall features. Use the toolbar buttons
           to play with Scheduler functionalities.
         </p>
       </div>
@@ -733,6 +736,9 @@ const Overview = () => {
           Restful web services and bind the data fields using <code>eventSettings.fields</code>.
         </p>
         <p>In this demo, React Scheduler features such as Multiple views, Templates (Date Header, Quick Info), Resources, Grouping, Timezone, Timescale, etc... are used along with multiple resources.</p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

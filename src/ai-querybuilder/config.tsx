@@ -4,7 +4,7 @@ export const AIQuerybuilderSampleOrder: Object = [
         'component': 'NaturalLanguageQuery', 
         'name': 'Natural Language Query', 
         'description': 'This demo shows the natural language query AI feature in query builder.', 
-        'order': '01',
+        'order': '08',
         'category': 'Query Builder',
         'sourceFiles': [
             { 'displayName': 'natural-language-query.tsx', 'path': 'src/ai-querybuilder/ai-natural-language-query.tsx' }, 

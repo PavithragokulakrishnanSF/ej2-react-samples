@@ -76,6 +76,9 @@ export class ExportToExcel extends SampleBase<{}, {}> {
           </p>
           <p>To start using Excel exporting functionality in Scheduler, we need to inject <code>ExcelExport</code> module into the services.
           </p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

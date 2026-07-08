@@ -255,6 +255,10 @@ e-listview .e-icon-wrapper .e-list-text {
     font-size: 25px;
 }
 
+.sb-icon-products:before{
+    content: '\e92f';
+}
+
 /**sb-switcher*/
 
 .sb-switch-popup {
@@ -329,11 +333,11 @@ div#sample-header {
 }
 
 .sb-settings-wrapper {
-    padding: 0 20px 0px 10px;
+    padding: 0 5px 0px 5px;
 }
 
 .sb-search-wrapper {
-    padding: 0px 10px 0px 13px;
+    padding: 0px 9px 0px 9px;
 }
 
 .sb-search-btn,
@@ -501,6 +505,12 @@ div#sample-header {
     display: none;
 }
 
+.products-wrapper>div {
+    float: left;
+    padding-left: 3px;
+    line-height: 32px;
+    letter-spacing: .5px;
+}
 
 /*sb-header-popup*/
 
@@ -593,6 +603,69 @@ div#sample-header {
 
 .sb-theme-popup li:hover.active .sb-theme-select {
     color: rgb(255, 109, 63);
+}
+
+.sb-products-popup {
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.36);
+    border-radius: 4px;
+    width: 175px;
+    z-index: 1001;
+}
+
+.sb-products-popup li {
+    line-height: 30px;
+    cursor: default;
+    padding-top: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sb-products-popup li:hover {
+    background: rgb(238, 238, 238);
+}
+
+.sb-products-popup li.active {
+    background: rgb(238, 238, 238);
+}
+.sb-products-text {
+  font-size: 13px;
+  font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif";
+  opacity: 54;
+}
+
+.sb-products-switcher,
+.sb-products-switcher-wrapper {
+  display: inline-block;
+}
+
+.sb-products-switcher {
+  font-size: 20px;
+}
+
+.products-wrapper:hover,
+.products-wrapper.active {
+  background-color: rgb(216, 216, 216);
+}
+#sb-products-switcher {
+  z-index: 1003 !important;
+}
+
+.products-wrapper {
+  height: 32px;
+  margin-top: 5px;
+  margin-left: 8px;
+  cursor: default;
+  padding: 0px 10px;
+  border-radius: 2px;
+}
+
+.products-wrapper>div {
+  float: left;
+  padding-left: 3px;
+  line-height: 32px;
+  letter-spacing: .5px;
 }
 
 .e-search-overlay {
@@ -733,7 +806,7 @@ div#sample-header {
 
 .sb-setting-icons {
     padding-right: 14px;
-    font-size: 18px;
+    font-size: 22px;
     color: #9e9e9e;
 }
 
@@ -1482,6 +1555,9 @@ propertye pane
     .theme-wrapper {
         display: none;
     }
+    .products-wrapper {
+        display: none;
+    }
 
     .sb-setting-theme-section {
         display: block;
@@ -2047,7 +2123,8 @@ propertye pane
 }
 
 .sb-control-navigation .e-treeview .tree-text {
-    width: calc(100% - 65px);
+    max-width: 100%;
+    width: fit-content;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -2845,4 +2922,16 @@ RTE toolbar not visible in fullscreen
 /* Surface Duo (narrow pane) */
 @media screen and (max-width: 540px) {
     .e-bigger .ai-toast.e-toast { max-width: calc(100% - 8%) !important; box-sizing: border-box; }
+}
+.tailwind3.e-bigger span.e-badge.sb-badge.e-samplestatus.New, 
+.tailwind3 span.e-badge.sb-badge.e-samplestatus.New {
+margin-top: 2px;
+padding: 4px 8px
+}
+
+/* Hide Other Products section in desktop mode */
+@media (min-width: 851px) {
+    .sb-setting-products-section {
+        display: none !important;
+    }
 }

@@ -80,6 +80,9 @@ export class EditorCustomField extends SampleBase<{}, {}> {
             Here, the additional field (any of the form elements) is needed to be provided with the common class
             <code>e-field</code>, so as to handle and process those additional data into the default event object.
           </p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

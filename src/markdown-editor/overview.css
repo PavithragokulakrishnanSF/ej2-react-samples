@@ -101,3 +101,9 @@
 .sb-header.e-view.hide-header {
     display: none;
 }
+
+.splitter-default-content td,
+.splitter-default-content th {
+    border: 1px solid;
+    padding: 2px 5px;
+}

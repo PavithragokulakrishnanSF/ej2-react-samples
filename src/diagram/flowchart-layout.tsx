@@ -22,11 +22,6 @@ Diagram.Inject(ConnectorEditing);
 let diagramInstance: DiagramComponent;
 const SAMPLE_CSS = `
   /* Container for diagram and property panel */
-    .diagram-flowchartLayout .control-section {
-        width: 75%;
-        float: left; /* Keep the diagram section on the left */
-        border-right: 1px solid #D5D5D5;
-    }
     .diagram-flowchartLayout .property-panel-header {
         font-size: larger;
         margin-left: 10px;
@@ -37,11 +32,6 @@ const SAMPLE_CSS = `
     }
 
     /* Property panel style */
-    .diagram-flowchartLayout .flow-property-section {
-        width: 24%; /* Adjusted to fill the remaining space */
-        float: right; /* Ensure the property panel is on the right */
-        padding: 10px;
-    }
 
     /* Align labels and inputs within the property panel */
     .diagram-flowchartLayout .row {
@@ -98,7 +88,7 @@ export class FlowchartLayoutSample extends SampleBase<{}, {}> {
         return (
             <div className="diagram-flowchartLayout">
                 <style>{SAMPLE_CSS}</style>
-                <div className="control-section">
+                <div className=" col-lg-9 control-section">
                     <div className="control-wrapper">
                         <div style={{ width: '100%', background: 'white', border: '1px solid #D5D5D5' }}>
                             <DiagramComponent
@@ -135,7 +125,7 @@ export class FlowchartLayoutSample extends SampleBase<{}, {}> {
                     </div>
                 </div>
                 <div className="flow-property-section">
-                    <div className="property-panel-header" style={{ marginLeft: '10px' }}>Properties</div>
+                    <div className="col-lg-3 property-panel-header" style={{ marginLeft: '10px' }}>Properties</div>
                     <div
                         className="row property-panel-content"
                         style={{ paddingTop: '10px' }}
@@ -213,14 +203,14 @@ export class FlowchartLayoutSample extends SampleBase<{}, {}> {
                     <p>
                         This example shows how to generate a flowchart layout from an external data source. The spacing between
                         the objects
-                        can also be customized in the chart. The
-                        <code>horizontalSpacing</code> and
-                        <code>verticalSpacing</code> properties of
-                        <code>layout</code> can be used to customize the space between objects in a tree. The
-                        <code>orientation</code> property of
-                        <code>layout</code> can be used to change the orientation of the chart. The
-                        <code>flowchartLayoutSettings</code> property of
-                        <code>layout</code> can be used to configure the flow chart layout settings. The
+                        can also be customized in the chart. The 
+                        <code>horizontalSpacing</code> and 
+                        <code>verticalSpacing</code> properties of 
+                        <code>layout</code> can be used to customize the space between objects in a tree. The 
+                        <code>orientation</code> property of 
+                        <code>layout</code> can be used to change the orientation of the chart. The 
+                        <code>flowchartLayoutSettings</code> property of 
+                        <code>layout</code> can be used to configure the flow chart layout settings. The 
                         <code>yesBranchDirection</code> and <code>noBranchDirection</code> properties of the flowchartLayoutSettings is used to define the flow direction of the yes and no branch connectors.
                     </p>
 
@@ -228,14 +218,16 @@ export class FlowchartLayoutSample extends SampleBase<{}, {}> {
                     <p>
                         The diagram component’s features are segregated into individual feature-wise modules. To generate diagrams from
                         an external
-                        data source, inject
-                        <code>DataBinding</code> module using
+                        data source, inject 
+                        <code>DataBinding</code> module using 
                         <code>Diagram.Inject(DataBinding)</code> method. To automatically arrange the objects in a flowchart layout
-                        format, inject
-                        <code>FlowchartLayout</code> module using
+                        format, inject 
+                        <code>FlowchartLayout</code> module using 
                         <code>Diagram.Inject(FlowchartLayout)</code> method.
                     </p>
-                </div>
+                
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
             </div>
         );
     }

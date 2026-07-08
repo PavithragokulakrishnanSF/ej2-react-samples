@@ -1,4 +1,4 @@
-// Importing necessary modules from React, ReactDOM, and Syncfusion Diagram library
+// Importing necessary modules from React, ReactDOM, and React Diagram library
 import * as ReactDOM from "react-dom";
 import * as React from "react";
 import {
@@ -192,7 +192,9 @@ function PertChart() {
           <code>services</code>.
         </p>
         <br />
-      </div>
+      
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
     </div>
   );
 }

@@ -146,81 +146,83 @@ export class OlapSample extends SampleBase<{}, {}> {
                         more:
                     </p>
                     <table>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '10px 0', width: '230px;' }}>
-                                <code>Create new report:</code>
-                            </td>
-                            <td>Allows user to create new reports at runtime.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Rename report:</code>
-                            </td>
-                            <td>Allows user to change current report name dynamically through UI.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Remove report:</code>
-                            </td>
-                            <td>Allows user to remove current report from the report collection at runtime.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Save as option:</code>
-                            </td>
-                            <td>Allows user to save report locally in browser memory.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Report list:</code>
-                            </td>
-                            <td>Swap between reports within the report collection.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Pivot Table:</code>
-                            </td>
-                            <td>Allows user to view data in cross-tabulation format.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Pivot Chart and its types:</code>
-                            </td>
-                            <td>Allows user to view data in graphical format. The chart types include column, bar, line, area, etc. It
-                                also has options for showing and hiding legends and displaying chart series of different measures on
-                                single and multiple axes.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Show MDX query:</code>
-                            </td>
-                            <td>View the MDX query of the current pivot table that is used to fetch the data from the cube.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Export:</code>
-                            </td>
-                            <td>Provides options to save data in PDF, Excel, and CSV document types.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Hide subtotals and grand totals:</code>
-                            </td>
-                            <td>Hide grand totals and subtotals based on hierarchies in rows and columns.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Conditional formatting:</code>
-                            </td>
-                            <td>Allows user to customize cells base on certain conditions.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                                <code>Field List:</code>
-                            </td>
-                            <td>Provides option to alter the report dynamically through UI.</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '10px 0', width: '230px' }}>
+                                    <code>Create new report:</code>
+                                </td>
+                                <td>Allows user to create new reports at runtime.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Rename report:</code>
+                                </td>
+                                <td>Allows user to change current report name dynamically through UI.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Remove report:</code>
+                                </td>
+                                <td>Allows user to remove current report from the report collection at runtime.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Save as option:</code>
+                                </td>
+                                <td>Allows user to save report locally in browser memory.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Report list:</code>
+                                </td>
+                                <td>Swap between reports within the report collection.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Pivot Table:</code>
+                                </td>
+                                <td>Allows user to view data in cross-tabulation format.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Pivot Chart and its types:</code>
+                                </td>
+                                <td>Allows user to view data in graphical format. The chart types include column, bar, line, area, etc. It
+                                    also has options for showing and hiding legends and displaying chart series of different measures on
+                                    single and multiple axes.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Show MDX query:</code>
+                                </td>
+                                <td>View the MDX query of the current pivot table that is used to fetch the data from the cube.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Export:</code>
+                                </td>
+                                <td>Provides options to save data in PDF, Excel, and CSV document types.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Hide subtotals and grand totals:</code>
+                                </td>
+                                <td>Hide grand totals and subtotals based on hierarchies in rows and columns.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Conditional formatting:</code>
+                                </td>
+                                <td>Allows user to customize cells base on certain conditions.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                    <code>Field List:</code>
+                                </td>
+                                <td>Provides option to alter the report dynamically through UI.</td>
+                            </tr>
+                        </tbody>
                     </table><br />
                     <p>
                         More information on the olap can be found in this <a target="_blank"

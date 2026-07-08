@@ -12,7 +12,7 @@ const Azure = () => {
         updateSampleSection();
     }, [])
 
-    let hostUrl: string = "https://ej2-azure-aspcore-service.azurewebsites.net/";
+    let hostUrl: string = "https://azure-service.syncfusion.com/";
     return(
         <div>
             <div className="control-section">
@@ -35,6 +35,9 @@ const Azure = () => {
                 
                 <p><b>Note: </b>File Manager’s upload functionality is restricted in online demos for security reasons. To work with upload functionality, please download <a target="_blank" href="https://github.com/SyncfusionExamples/ej2-azure-aspcore-file-provider">Azure Blob Provider</a> from the GitHub repository.</p>
                 <p><b>NuGet Package:</b> NuGet package of <a target="_blank" href="https://www.nuget.org/packages/Syncfusion.EJ2.FileManager.AzureFileProvider.AspNet.Core"><b>ASP.NET Core Azure file system provider</b></a> is now available on <a target="_blank" href="https://www.nuget.org/">nuget.org</a>.</p>
+                <p>
+                    Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
+                </p>
             </div>
         </div>
     );

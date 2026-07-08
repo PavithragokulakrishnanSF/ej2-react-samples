@@ -155,13 +155,32 @@ body.bootstrap5_3-dark,
 .bootstrap5_3-dark .sb-switch-popup li:hover,
 .bootstrap5_3-dark .theme-wrapper:hover,
 .bootstrap5_3-dark .theme-wrapper.active,
+.bootstrap5_3-dark .products-wrapper:hover,
+.bootstrap5_3-dark .products-wrapper.active,
 .bootstrap5_3-dark .sb-theme-popup li:hover,
+.bootstrap5_3-dark .sb-products-popup li:hover,
 .bootstrap5_3-dark .sb-search-result .e-list-item:hover,
 .bootstrap5_3-dark .sb-left-pane .e-listview .e-list-item:hover,
 .bootstrap5_3-dark .sb-themeswitch-btn:hover,
 .bootstrap5_3-dark .sb-themeswitch-btn.active {
     background-color: #363636;
 
+}
+
+.bootstrap5_3-dark .sb-products-popup {
+  background-color: #343a40;
+  border: 1px solid #495057;
+  color: #ffffff;
+}
+
+/* List items */
+.bootstrap5_3-dark .sb-products-popup li {
+  color: #ffffff;
+}
+
+/* Hover state */
+.bootstrap5_3-dark .sb-products-popup li:hover {
+  background-color: #363636;
 }
 
 .bootstrap5_3-dark .sb-left-pane .e-treeview .e-list-item.e-active>.e-fullrow {

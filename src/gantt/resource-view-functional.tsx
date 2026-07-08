@@ -1,8 +1,7 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
-import { GanttComponent, DayMarkers, Inject, Selection, Toolbar, Edit, Resize, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, DayMarkers, Inject, Selection, Toolbar, Edit, Resize, ColumnsDirective, ColumnDirective, EditSettingsModel, LabelSettingsModel, ResourceFieldsModel, SplitterSettingsModel, ToolbarItem, TaskType } from '@syncfusion/ej2-react-gantt';
 import { resourcesData, resourceCollection } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -11,7 +10,7 @@ const ResourceView = () => {
     updateSampleSection();
   }, [])
   let ganttInstance = useRef<GanttComponent>(null);
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -23,14 +22,14 @@ const ResourceView = () => {
     work: 'work',
     child: 'subtasks'
   };
-  const taskType: any = "FixedWork";
-  const resourceFields: any = {
+  const taskType: TaskType = "FixedWork";
+  const resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName',
     unit: 'resourceUnit',
     group: 'resourceGroup'
   };
-  const editSettings: any = {
+  const editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
@@ -39,12 +38,12 @@ const ResourceView = () => {
   };
   const toolbar: any = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll',
     { text: 'Show/Hide Overallocation', tooltipText: 'Show/Hide Overallocation', id: 'showhidebar' }];
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 3
   };
   const projectStartDate: Date = new Date('03/26/2025');
   const projectEndDate: Date = new Date('05/18/2025');
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     rightLabel: 'resources',
     taskLabel: 'Progress'
   };
@@ -93,13 +92,9 @@ const ResourceView = () => {
         <p><code>Unit</code>: To map resource unit.</p>
         <p><code>Group</code>: To map resource group.</p>
         <p>
-          The Gantt control features are segregated into individual feature-wise modules. To use a selection, inject the
-          <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method. To use markers, inject the
-          <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.
-          To edit,  inject the <code>Toolbar</code> module using the <code>Gantt.Inject(Toolbar)</code> method and <code>Edit</code> module
-          using the <code>Gantt.Inject(Edit)</code> method.
+          The Gantt control features are segregated into individual feature-wise modules. To use a selection, markers, toolbar, edit, and resize features, we need to inject the <code>Selection</code>, <code>DayMarkers</code>, <code>Toolbar</code>, <code>Edit</code> and <code>Resize</code> into the <code>Inject Services</code> section.
         </p>
-        <br/>
+        <br />
         <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/resource-view">documentation section</a>.</p>
       </div>
     </div>

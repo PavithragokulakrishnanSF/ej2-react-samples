@@ -9,9 +9,9 @@ const SAMPLE_CSS = `
      .control-fluid {
          padding: 0px !important;
      }`;
-const titleStyle: React.CSSProperties = { width: "400px", textAlign: "center", fontSize: "17px", margin: "auto" };
+const titleStyle: React.CSSProperties = { "width": "100%", textAlign: "center", fontSize: "17px", margin: "auto" };
 const width100 = { width: "100%" };
-const sparklineStyle1: React.CSSProperties = { width: "150px", height: "50px", textAlign: "center" };
+const sparklineStyle1: React.CSSProperties = { height: "50px", textAlign: "center" };
 import { loadSparkLineTheme } from './theme-color';
 function Default() {
     React.useEffect(() => {
@@ -38,7 +38,7 @@ function Default() {
                         <div style={{ "textAlign": "center" }}>(From 2005 to 2014)</div>
                         <br />
                         <br />
-                        <table style={width100}>
+                        <table style={width100} className="cols-sample-area row">
                             <tbody>
                                 <tr>
                                     <td style={{ "textAlign": "center" }}></td>
@@ -67,7 +67,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>Australia</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='a-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -97,7 +97,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='a-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type='Area' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Area' valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -120,7 +120,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='a-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -143,7 +143,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='a-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 12 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -169,7 +169,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>Canada</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='c-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -200,7 +200,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='c-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type='Area' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Area' valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -223,7 +223,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='c-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -246,7 +246,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='c-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 10.20 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -272,7 +272,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>China</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='ch-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -303,7 +303,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='ch-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -326,7 +326,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='ch-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -349,7 +349,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='ch-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 12 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -375,7 +375,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>France</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='f-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -406,7 +406,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='f-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -429,7 +429,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='f-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -452,7 +452,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='f-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 11.5 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -478,7 +478,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>Germany</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='g-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -509,7 +509,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='g-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -532,7 +532,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='g-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -555,7 +555,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='g-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 8 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -581,7 +581,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>India</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='i-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -612,7 +612,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='i-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -635,7 +635,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='i-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -658,7 +658,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='i-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 19 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -684,7 +684,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>Russia</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='r-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -715,7 +715,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='r-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -738,7 +738,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='r-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -761,7 +761,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='r-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 9.5 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -787,7 +787,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>Sweden</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='sw-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -818,7 +818,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='sw-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -841,7 +841,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='sw-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -864,7 +864,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='sw-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 10 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -890,7 +890,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>United Kingdom</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='uk-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -920,7 +920,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='uk-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -943,7 +943,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='uk-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -967,7 +967,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='uk-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 10 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -993,7 +993,7 @@ function Default() {
                                     <td style={{ "textAlign": "center" }}><b>United Sates</b></td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='us-spark1-container'
-                                            height='50px' width='150px' lineWidth={2} type='Line' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Line' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             format={"n"}
                                             useGroupingSeparator={true}
@@ -1023,7 +1023,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='us-spark2-container'
-                                            height='50px' width='150px' lineWidth={2} type={'Area'} valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type={'Area'} valueType='Category'
                                             fill='#3C78EF' opacity={1} border={{ color: '#fc5070', width: 2 }} negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -1046,7 +1046,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='us-spark3-container'
-                                            height='50px' width='150px' lineWidth={2} type='WinLoss' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='WinLoss' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070'
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',
@@ -1069,7 +1069,7 @@ function Default() {
                                     </td>
                                     <td>
                                         <SparklineComponent load={load.bind(this)} id='us-spark4-container'
-                                            height='50px' width='150px' lineWidth={2} type='Column' valueType='Category'
+                                            height='50px' width='90%' lineWidth={2} type='Column' valueType='Category'
                                             fill='#3C78EF' negativePointColor='#fc5070' axisSettings={{ minY: 13 }}
                                             tooltipSettings={{
                                                 visible: true, format: '${xval} : ${yval}',

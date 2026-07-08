@@ -634,7 +634,7 @@ function initPeriodicTable(): { nodes: NodeModel[], connectors: ConnectorModel[]
     return { nodes, connectors: blockResult.connectors };
 }
 
-// PeriodicTable component renders the periodic table using Syncfusion's DiagramComponent.
+// PeriodicTable component renders the periodic table using React Diagram.
 export class PeriodicTable extends SampleBase<{}, {}> {
     private periodicTableModel = initPeriodicTable();
 
@@ -741,7 +741,7 @@ export class PeriodicTable extends SampleBase<{}, {}> {
                 </div>
                 <div id="action-description">
                     <p>
-                        This sample demonstrates an interactive Periodic Table of Elements built using the Syncfusion<sup>®</sup> EJ2 React Diagram, displaying all known elements with categorization by color, detailed hover information, and highlighting by period or group.
+                        This sample demonstrates an interactive Periodic Table of Elements built using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>, displaying all known elements with categorization by color, detailed hover information, and highlighting by period or group.
                     </p>
                 </div>
                 <div id="description">

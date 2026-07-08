@@ -37,6 +37,9 @@ export class IBMServer extends SampleBase<{},{}> {
                     <p>Checkout this <a target="_blank" href="https://github.com/SyncfusionExamples/filemanager-ibm-cos-node-file-provider"> IBM Cloud Object Storage file provider </a> from the GitHub repository.</p>
                     
                     <p><b>Note: </b>File Manager’s upload functionality is restricted in online demos for security reasons. To work with upload functionality, please download <a target="_blank" href="https://github.com/SyncfusionExamples/ej2-filemanager-ibm-cos-node-file-provider">IBM Cloud Object Storage file provider</a> from the GitHub repository.</p>
+                    <p>
+                        Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
+                    </p>
                 </div>
             </div>
         );

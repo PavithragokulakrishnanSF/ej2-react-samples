@@ -1,7 +1,7 @@
 // Importing required React and ReactDOM modules
 import * as ReactDOM from "react-dom";
 import * as React from "react";
-// Importing required Syncfusion Diagram components and services
+// Importing required React Diagram components and services
 import {
     UndoRedo, DiagramContextMenu,
     DiagramComponent,
@@ -462,7 +462,9 @@ function Events() {
                     how to hook all the diagram events and how to handle its <code>arguments</code>.
                 </p>
                 <br />
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

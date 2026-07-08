@@ -98,7 +98,9 @@ export class Sorting extends SampleBase<{}, {}> {
                                     <div>Sort By</div>
                                 </td>
                                 <td>
-                                    <DropDownListComponent id='sortBy' ref={(sortDrop) => { this.sortByObj = sortDrop }} dataSource={this.sortByData} change={this.change.bind(this)} fields={this.fields} index={1}></DropDownListComponent>
+                                    <div>
+                                        <DropDownListComponent id='sortBy' ref={(sortDrop) => { this.sortByObj = sortDrop }} dataSource={this.sortByData} change={this.change.bind(this)} fields={this.fields} index={1}></DropDownListComponent>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -106,7 +108,9 @@ export class Sorting extends SampleBase<{}, {}> {
                                     <div>Field</div>
                                 </td>
                                 <td>
-                                    <DropDownListComponent id='field' ref={(fieldDrop) => { this.fieldObj = fieldDrop }} dataSource={this.fieldData} enabled={false} index={0}></DropDownListComponent>
+                                    <div>
+                                        <DropDownListComponent id='field' ref={(fieldDrop) => { this.fieldObj = fieldDrop }} dataSource={this.fieldData} enabled={false} index={0}></DropDownListComponent>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -114,14 +118,16 @@ export class Sorting extends SampleBase<{}, {}> {
                                     <div>Direction</div>
                                 </td>
                                 <td>
-                                    <DropDownListComponent id='direction' ref={(directionDrop) => { this.directionObj = directionDrop }} dataSource={this.directionData} index={0}></DropDownListComponent>
+                                    <div>
+                                        <DropDownListComponent id='direction' ref={(directionDrop) => { this.directionObj = directionDrop }} dataSource={this.directionData} index={0}></DropDownListComponent>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style={{ padding: "10px" }}>
                                     <ButtonComponent id='sort' className="e-btn" onClick={this.sortClick.bind(this)}>Sort</ButtonComponent>
                                 </td>
-                                <td>
+                                <td style={{ padding: "10px" }}>
                                     <ButtonComponent id='clear' className="e-btn" onClick={this.clearClick.bind(this)}>Clear</ButtonComponent>
                                 </td>
                             </tr>

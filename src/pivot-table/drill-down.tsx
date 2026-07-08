@@ -229,7 +229,7 @@ export class DrillDown extends SampleBase<{}, {}> {
                             <tbody>
                             <tr style={{ height: '50px' }}>
                                     <td>
-                                        <div className='hdrlabel' style={{ height: '50px' }}>
+                                        <div className='hdrlabel'>
                                             Drill Down:
                                         </div>
                                     </td>
@@ -311,6 +311,7 @@ export class DrillDown extends SampleBase<{}, {}> {
                 <div id="description">
                 <p>In this sample, drill down can be performed based on the option selected from the <b>Drill Down</b> dropdown list. The available options are described in detail below.</p>
                 <table>
+                <tbody>
                 <tr>
                     <td style={{ verticalAlign: 'top', padding: '10px 0', width: '150px' }}>
                         <code>All headers :</code>
@@ -347,6 +348,7 @@ export class DrillDown extends SampleBase<{}, {}> {
                     <td style={{ paddingTop: '3px' }}>Allows to expand specific header(s) within the respective field available in the pivot table's row or column axes.
                             It can be achieved by specifying the respective field name and its member(s), aka header name(s), inside the <code>drilledMembers</code> property in the <code>dataSourceSettings</code>.</td>
                 </tr>
+                </tbody>
                 </table><br />
                 <p>
                     More information on the drill down can be found in this <a target="_blank"

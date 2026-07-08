@@ -792,6 +792,9 @@ export class EventManagement extends SampleBase<{}, {}> {
             <li>Ability to filter and view unscheduled event sessions by technical event.</li>
             <li>Detailed agenda view that displays event information including speakers, audience size, and session descriptions.</li>
           </ul>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

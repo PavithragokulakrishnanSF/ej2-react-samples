@@ -516,13 +516,9 @@
   flex-direction: row;
 }
 
-.fluent .e-panel-header,
-.fluent2 .e-panel-header,
-.bootstrap5_3 .e-panel-header,
-.tailwind .e-panel-header,
-.tailwind3 .e-panel-header,
-.material3 .e-panel-header,
-.bootstrap5_3 .e-panel-header {
+.fluent2 .app-commerce-page .e-panel-header,
+.tailwind3 .app-commerce-page .e-panel-header,
+.bootstrap5_3 .app-commerce-page .e-panel-header {
   background-color: #f9fafb;
 }
 

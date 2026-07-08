@@ -1,6 +1,5 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective, GridLine, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { SampleBase } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
@@ -20,8 +19,8 @@ export class GridLines extends SampleBase<{}, {}> {
     this.ganttInstance.gridLines = lines;
     this.ganttInstance.refresh();
   };
-  public gridLines: any = 'Both';
-  public taskFields: any = {
+  public gridLines: GridLine = 'Both';
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -31,10 +30,10 @@ export class GridLines extends SampleBase<{}, {}> {
     dependency: 'Predecessor',
     parentID: 'ParentId'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
   public projectStartDate: Date = new Date('03/26/2025');
@@ -50,43 +49,43 @@ export class GridLines extends SampleBase<{}, {}> {
               treeColumnIndex={1} gridLines={this.gridLines} splitterSettings={this.splitterSettings}
               projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate}>
               <ColumnsDirective>
-              <ColumnDirective field='TaskID' width='80' ></ColumnDirective>
-              <ColumnDirective field='TaskName' width='250'></ColumnDirective>
-              <ColumnDirective field='StartDate'></ColumnDirective>
-              <ColumnDirective field='EndDate'></ColumnDirective>
-              <ColumnDirective field='Duration'></ColumnDirective>
-              <ColumnDirective field='Predecessor'></ColumnDirective>
-              <ColumnDirective field='Progress'></ColumnDirective>
-            </ColumnsDirective>
+                <ColumnDirective field='TaskID' width='80' ></ColumnDirective>
+                <ColumnDirective field='TaskName' width='250'></ColumnDirective>
+                <ColumnDirective field='StartDate'></ColumnDirective>
+                <ColumnDirective field='EndDate'></ColumnDirective>
+                <ColumnDirective field='Duration'></ColumnDirective>
+                <ColumnDirective field='Predecessor'></ColumnDirective>
+                <ColumnDirective field='Progress'></ColumnDirective>
+              </ColumnsDirective>
               <Inject services={[Selection, DayMarkers]} />
             </GanttComponent>
           </div>
           <div className='col-lg-3 property-section'>
             <PropertyPane title='Properties'>
               <table id="property" className="property-panel-table" title="Properties" style={{ width: '100%' }}>
-              <tbody>
-                <tr>
-                  <td style={{ width: '100%' }}>
-                    <div style={{ fontSize: '15px'}}>
-                      Grid Lines
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ width: '50%', padding: '10px 10px 10px 0px' }}>
-                    <div>
-                      <DropDownListComponent ref={dropdown => this.dropdownObj = dropdown} id='gridLines' dataSource={this.linesData} fields={{ text: 'type', value: 'id' }}
-                        value='Both' change={this.changeLine.bind(this)}></DropDownListComponent>
-                    </div>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td style={{ width: '100%' }}>
+                      <div style={{ fontSize: '15px' }}>
+                        Grid Lines
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ width: '50%', padding: '10px 10px 10px 0px' }}>
+                      <div>
+                        <DropDownListComponent ref={dropdown => this.dropdownObj = dropdown} id='gridLines' dataSource={this.linesData} fields={{ text: 'type', value: 'id' }}
+                          value='Both' change={this.changeLine.bind(this)}></DropDownListComponent>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </PropertyPane>
           </div>
         </div>
         <div id="action-description">
-          <p>This sample demonstrates the visibility of Gantt lines that separate the rows and columns.In this sample, you can change the gridlines from the property panel.</p>
+          <p>This sample demonstrates the visibility of Gantt lines that separate the rows and columns. In this sample, you can change the gridlines from the property panel.</p>
         </div>
 
         <div id="description">
@@ -99,10 +98,9 @@ export class GridLines extends SampleBase<{}, {}> {
             <li><code>Vertical</code> - Shows the vertical line.</li>
           </ul>
           <p> In this demo, you can modify the visibility of gridlines by selecting values in dropdown.</p>
-          <p>Gantt component features are segregated into individual feature-wise modules.To use a selection, inject the <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code>
-            method.To use markers, inject the <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
+          <p>Gantt component features are segregated into individual feature-wise modules. To use a selection and marker features, we need to inject the <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.</p>
           <br/>
-          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/nextjs-getting-started#add-syncfusion-react-component">documentation section</a>.</p>
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/style-and-appearance#configure-grid-lines">documentation section</a>.</p>
         </div>
       </div>
     )

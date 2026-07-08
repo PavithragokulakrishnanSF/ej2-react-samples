@@ -101,7 +101,7 @@ export class DonutWithGradient extends SampleBase<{}, {}> {
     public onChartLoad(args: IAccLoadedEventArgs): void {
         document.getElementById('container').setAttribute('title', '');
     };
-
+        
     public load(args: IAccLoadedEventArgs): void {
         let selectedTheme: string = location.hash.split('/')[1];
         selectedTheme = selectedTheme ? selectedTheme : 'Fluent2';

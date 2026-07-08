@@ -149,7 +149,6 @@ const Legend = () => {
                         }}
                         format={"n"}
                         useGroupingSeparator={true}
-                        rangeColorValuePath="WinPercentage"
                         equalColorValuePath="Winner"
                         leafItemSettings={{
                             // To config leafitem customization for treemap

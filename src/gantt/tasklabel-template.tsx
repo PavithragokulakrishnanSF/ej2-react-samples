@@ -1,11 +1,10 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective, LabelSettingsModel, ResourceFieldsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { labelData, editingResources } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class TasklabelTemplate extends SampleBase<{}, {}> {
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -16,7 +15,7 @@ export class TasklabelTemplate extends SampleBase<{}, {}> {
     resourceInfo: 'resources',
     child: 'subtasks'
   };
-  public resourceFields: any = {
+  public resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName'
   };
@@ -29,23 +28,23 @@ export class TasklabelTemplate extends SampleBase<{}, {}> {
     if(props.ganttProperties.resourceInfo) {
       let resources = props.ganttProperties.resourceInfo;
       let out = [];
-    for (let index = 0; index < resources.length; index++) {
+      for (let index = 0; index < resources.length; index++) {
         let src = 'src/gantt/images/' + resources[index].resourceName + '.png';
-        let img = <img src = {src} height='40px' alt={resources[index].resourceName}/>;
-        let span = <span style = {{ marginLeft: '5px' , marginRight: '5px' }}>{resources[index].resourceName}</span>;
-        out.push(img,span);
-    }
-    return (<div>{out}</div>);
+        let img = <img src={src} height='40px' alt={resources[index].resourceName} />;
+        let span = <span style={{ marginLeft: '5px', marginRight: '5px' }}>{resources[index].resourceName}</span>;
+        out.push(img, span);
+      }
+      return (<div>{out}</div>);
     } else {
-      return <div></div>
+      return <div></div>;
     }
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: this.templateLeft.bind(this),
     rightLabel: this.templateRight.bind(this),
     taskLabel: '${Progress}%'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     position: "35%"
   };
   public projectStartDate: Date = new Date('03/24/2025');
@@ -77,13 +76,11 @@ export class TasklabelTemplate extends SampleBase<{}, {}> {
         </div>
 
         <div id="description">
-        <p>In this demo, the label template is rendered using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#leftlabel">leftLabel</a>, <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#rightlabel">rightLabel</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#tasklabel">taskLabel</a> properties in <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#labelsettings">labelSettings</a>.</p>
+          <p>In this demo, the label template is rendered using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#leftlabel">leftLabel</a>, <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#rightlabel">rightLabel</a> and <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/labelSettingsModel/#tasklabel">taskLabel</a> properties in <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#labelsettings">labelSettings</a>.</p>
 
-          <p>Gantt component features are segregated into individual feature-wise modules.To use a selection, inject the
-        <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method.To use markers, inject the
-        <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
-          <br/>
-          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/labels#task-labels">documentation section</a>.</p>
+          <p>Gantt component features are segregated into individual feature-wise modules.To use a selection and marker features, we need to inject the <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.</p>
+          <br />
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/labels">documentation section</a>.</p>
         </div>
       </div>
     )

@@ -279,7 +279,7 @@ function CustomSorting () {
                                     </div>
                                 </td>
                                 <td>
-                                    <div>
+                                    <div id="custom-sorting-members">
                                         <MultiSelectComponent ref={(scope) => { membersOrder = scope; }} select={onMembersSelect.bind(this)}
                                             removed={onMembersRemove.bind(this)} open={open.bind(this)}
                                             width={"98%"} placeholder="Select headers" id="etype"

@@ -974,6 +974,9 @@ export class TableReservation extends SampleBase<{}, {}> {
               <li>Drag-and-drop functionality to create table reservations by moving customers from the waiting list to available time slots or the cancelled appointments list.</li>
               <li>Checks for table category compatibility, seating capacity, meal period alignment, and time slot availability while creating reservations for waiting customers.</li>
             </ul>
+            <p>
+              Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+            </p>
           </div>
         </div>
       );

@@ -26,6 +26,7 @@ import "./font-icons.css";
 // Global variables to hold instances of Diagram and Palette components.
 let diagramInstance: DiagramComponent;
 let paletteSpaceInstance: HTMLElement;
+let paletteIconInstance: HTMLElement;
 
 // Predefined styles for different types of nodes in the diagram.
 const nodeStyles = {
@@ -169,6 +170,10 @@ const SAMPLE_CSS = `
 `;
 
 export class Serialization extends SampleBase<{}, {}> {
+    renderComplete() {
+        addEvents();
+
+    }
     render() {
         return (
             <div className="control-pane diagram-serialization">
@@ -185,19 +190,11 @@ export class Serialization extends SampleBase<{}, {}> {
                                 case "Load":
                                     document.getElementsByClassName("e-file-select-wrap")[0].querySelector("button").click();
                                     break;
-                                case null:
-                                    if (args.item.id === 'palette-icon') openPalette();
-                                    break;
                                 default:
                                     download(diagramInstance.saveDiagram());
                             }
                         }}
                         items={[
-                            {
-                                id: 'palette-icon',
-                                prefixIcon: 'e-ddb-icons2 e-toggle-palette',
-                                align: 'Right',
-                            },
                             {
                                 text: "New",
                                 tooltipText: "New",
@@ -218,6 +215,9 @@ export class Serialization extends SampleBase<{}, {}> {
                         ]}
                     />
                     <div style={{ width: "100%", height: "80%" }}>
+                        <div className="sb-mobile-palette-bar">
+                            <div id="palette-icon" ref={(paletteIcon) => (paletteIconInstance = paletteIcon)} style={{ float: "right" }} className="e-ddb-icons1 e-toggle-palette"></div>
+                        </div>
                         <div id="palettespace" ref={palettespace => (paletteSpaceInstance = palettespace)} className="sb-mobile-palette">
                             <SymbolPaletteComponent
                                 id="symbolpalette"
@@ -253,20 +253,20 @@ export class Serialization extends SampleBase<{}, {}> {
                                         'Data': { width: 50, height: 40 },
                                     };
 
-                                    symbol.style.strokeColor = strokeColor;
-                                    symbol.width = dimensions[symbol.id] ? dimensions[symbol.id].width : 50;
-                                    symbol.height = dimensions[symbol.id] ? dimensions[symbol.id].height : 50;
-                                }}
-                                symbolMargin={{ left: 15, right: 15, top: 15, bottom: 15 }}
-                                getSymbolInfo={(symbol: NodeModel): SymbolInfo => {
-                                    return { fit: true };
-                                }}
-                                width={"100%"}
-                                height={"700px"}
-                                symbolHeight={60}
-                                symbolWidth={60}
-                            />
-                        </div>
+                                symbol.style.strokeColor = strokeColor;
+                                symbol.width = dimensions[symbol.id] ? dimensions[symbol.id].width : 50;
+                                symbol.height = dimensions[symbol.id] ? dimensions[symbol.id].height : 50;
+                            }}
+                            symbolMargin={{ left: 15, right: 15, top: 15, bottom: 15 }}
+                            getSymbolInfo={(symbol: NodeModel): SymbolInfo => {
+                                return { fit: true };
+                            }}
+                            width={"100%"}
+                            height={"700px"}
+                            symbolHeight={60}
+                            symbolWidth={60}
+                        />
+                    </div>
 
                         <div id="diagram-space" className="sb-mobile-diagram">
                             <DiagramComponent
@@ -346,7 +346,9 @@ export class Serialization extends SampleBase<{}, {}> {
                         which will receive the file information and handle the removal of files from the server.
                     </p>
                     <br />
-                </div>
+                
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
             </div>
         );
     }
@@ -396,12 +398,26 @@ function download(data: string): void {
     }
 }
 
-// Toggle the visibility of the palette on mobile devices.
-function openPalette(): void {
-    // Checks if the current viewport width is less than or equal to 550 pixels.
-    const isMobile = window.matchMedia('(max-width:550px)').matches;
-    if (isMobile) {
-        // Toggles the class to show or hide the palette.
-        paletteSpaceInstance.classList.toggle('sb-mobile-palette-open');
+let isMobile: boolean;
+//Enhances webpage functionality for mobile devices with a click event listener.
+function addEvents(): void {
+  isMobile = window.matchMedia('(max-width:550px)').matches;
+  if (isMobile) {
+    let paletteIcon: HTMLElement = paletteIconInstance;
+    if (paletteIcon) {
+      paletteIcon.addEventListener('click', openPalette, false);
     }
+  }
+}
+// Manages the visibility state of the palette space on the webpage for mobile devices.
+function openPalette(): void {
+  let paletteSpace: HTMLElement = paletteSpaceInstance;
+  isMobile = window.matchMedia('(max-width:550px)').matches;
+  if (isMobile) {
+    if (!paletteSpace.classList.contains('sb-mobile-palette-open')) {
+      paletteSpace.classList.add('sb-mobile-palette-open');
+    } else {
+      paletteSpace.classList.remove('sb-mobile-palette-open');
+    }
+  }
 }

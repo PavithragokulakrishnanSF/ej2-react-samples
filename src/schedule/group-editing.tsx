@@ -90,6 +90,9 @@ export class GroupEditing extends SampleBase<{}, {}> {
             instances visible on the UI. The <code>allowMultiple</code> option when set as true within the <code>resource</code> property, will allow the user
             to select multiple resources from the resource field of editor window, while trying to create appointments.
           </p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

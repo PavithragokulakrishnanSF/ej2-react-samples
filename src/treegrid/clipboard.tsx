@@ -120,6 +120,9 @@ export class Clipboard extends SampleBase<{}, {}> {
         <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/treegrid/clipboard/">
             documentation section</a>.
     </p>
+    <p>
+        Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+    </p>
 </div>
     </div>);
     }

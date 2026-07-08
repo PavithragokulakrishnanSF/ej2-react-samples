@@ -60,6 +60,9 @@ function Scrolling() {
                     exceeds its element height and horizontal scrollbar will appear when the
                     total column width exceeds the element width.
                 </p>
+                <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+            <a target="_blank"
+              href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
 
             </div>
         </div>

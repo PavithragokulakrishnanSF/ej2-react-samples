@@ -1,11 +1,10 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, HolidaysDirective, HolidayDirective, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, HolidaysDirective, HolidayDirective, ColumnsDirective, ColumnDirective, LabelSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class Holidays extends SampleBase<{}, {}> {
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -13,10 +12,13 @@ export class Holidays extends SampleBase<{}, {}> {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-    parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     rightLabel: 'TaskName'
+  };
+  public splitterSettings = {
+    columnIndex: 1
   };
   public projectStartDate: Date = new Date('03/25/2025');
   public projectEndDate: Date = new Date('07/20/2025');
@@ -26,10 +28,10 @@ export class Holidays extends SampleBase<{}, {}> {
         <div className='control-section'>
           <GanttComponent id='Holidays' dataSource={projectNewData} highlightWeekends={true} treeColumnIndex={1}
             taskFields={this.taskFields} labelSettings={this.labelSettings} height='650px' taskbarHeight={25} rowHeight={46}
-            projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate}>
+            projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate} splitterSettings={this.splitterSettings}>
             <ColumnsDirective>
               <ColumnDirective field='TaskID' visible={false} width='80' ></ColumnDirective>
-              <ColumnDirective field='TaskName' width='250'></ColumnDirective>
+              <ColumnDirective field='TaskName' width='280'></ColumnDirective>
               <ColumnDirective field='StartDate'></ColumnDirective>
               <ColumnDirective field='EndDate'></ColumnDirective>
               <ColumnDirective field='Duration'></ColumnDirective>
@@ -37,16 +39,16 @@ export class Holidays extends SampleBase<{}, {}> {
               <ColumnDirective field='Progress'></ColumnDirective>
             </ColumnsDirective>
             <HolidaysDirective>
-                <HolidayDirective from='03/28/2025' to='03/28/2025' label='Good Friday'></HolidayDirective>
-                <HolidayDirective from='03/30/2025' to='03/30/2025' label='Easter Sunday'></HolidayDirective>
-                <HolidayDirective from='05/26/2025' to='05/26/2025' label='Memorial Day'></HolidayDirective>
-                <HolidayDirective from='07/04/2025' to='07/04/2025' label='Independence Day'></HolidayDirective>
+              <HolidayDirective from='03/28/2025' to='03/28/2025' label='Good Friday'></HolidayDirective>
+              <HolidayDirective from='03/30/2025' to='03/30/2025' label='Easter Sunday'></HolidayDirective>
+              <HolidayDirective from='05/26/2025' to='05/26/2025' label='Memorial Day'></HolidayDirective>
+              <HolidayDirective from='07/04/2025' to='07/04/2025' label='Independence Day'></HolidayDirective>
             </HolidaysDirective>
             <Inject services={[Selection, DayMarkers]} />
           </GanttComponent>
         </div>
         <div id="action-description">
-        <p>This sample visualizes how to define the holidays in between the project timeline. </p>
+          <p>This sample visualizes how to define the holidays in between the project timeline. </p>
         </div>
 
         <div id="description">
@@ -56,9 +58,8 @@ export class Holidays extends SampleBase<{}, {}> {
           <p>
             You can even assign the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/holidayModel/#cssclass">cssClass</a> to each holiday to change the default color of label and background.
           </p>
-            <p>
-              Gantt component features are segregated into individual feature-wise modules. To use a selection support and event markers we need to inject the
-              <code>Selection</code>, <code>DayMarkers</code> modules.
+          <p>
+            Gantt component features are segregated into individual feature-wise modules. To use a selection support and holiday features, we need to inject the <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.
           </p>
           <br/>
           <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/holidays">documentation section</a>.</p>

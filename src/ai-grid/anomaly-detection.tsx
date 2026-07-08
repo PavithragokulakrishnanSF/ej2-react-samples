@@ -30,6 +30,9 @@ export class AnomalyDetection extends SampleBase<{}, {}> {
                         Production Rate. AI analyzes this data to identify unusual points and explains why they are considered
                         anomalies. When you press the "Detect Anomaly" button, the grid updates to display the anomaly details.
                     </p>
+                    <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                       <a target="_blank" 
+                       href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
                 </div>
                 <AIToast/> 
             </div>

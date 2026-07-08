@@ -312,7 +312,7 @@
   min-height: 0;
 }
 
-.e-kanban-content {
+.claimstatus-kanban .e-kanban-content {
   height: 80% !important;
 }
 
@@ -326,18 +326,6 @@
 .insurance-map-panel .e-map {
   width: 100% !important;
   height: 100% !important;
-}
-
-.app-header {
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
-  gap: 10px;
-}
-
-.header-icon {
-  font-size: 25px;
-  cursor: auto;
 }
 
 .dashboard-title {
@@ -418,14 +406,14 @@
   border-color: #FED7AA;
 }
 
-.fluent .e-panel-header,
-.fluent2 .e-panel-header,
-.bootstrap5_3 .e-panel-header,
-.tailwind .e-panel-header,
-.tailwind3 .e-panel-header,
-.material3 .e-panel-header,
-.bootstrap5_3 .e-panel-header {
+.fluent2 .insurance-page .e-panel-header,
+.tailwind3 .insurance-page .e-panel-header,
+.bootstrap5_3 .insurance-page .e-panel-header {
   background-color: #f9fafb;
+}
+
+.material3-dark .insurance-page .e-card:hover {
+  background-color: #191c1f;
 }
 
 .kanban-card {
@@ -460,7 +448,6 @@
   --ins-accent: #673ab8;
   --ins-bg: rgba(103, 58, 184, 0.08);
 }
-
 /* Color the Policy Type pill per policy */
 .ins-policy--health .insurance-kanban-type {
   background: rgba(230, 74, 25, 0.12);

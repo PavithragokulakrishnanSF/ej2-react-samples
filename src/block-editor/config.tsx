@@ -56,7 +56,7 @@ export const BlockEditorSampleOrder: Object = [
         { 'displayName': 'blockData.json', 'path':'src/block-editor/blockData.json' }
       ]
     },
-        {
+    {
       'path': 'block-editor/template',
       'component': 'TemplateGallery',
       'name': 'Template Gallery',
@@ -81,6 +81,21 @@ export const BlockEditorSampleOrder: Object = [
       'sourceFiles': [
         { 'displayName': 'markdown.tsx', 'path':'src/block-editor/markdown.tsx' },
         { 'displayName': 'markdown.jsx', 'path':'src/block-editor/markdown.jsx' },
+        { 'displayName': 'blockData.json', 'path':'src/block-editor/blockData.json' }
+      ]
+    },
+    {
+      'path': 'block-editor/ai-ask-assistant',
+      'component': 'AskAIAssistant',
+      'name': 'Ask AI Assistant',
+      'type': 'new',
+      'description':'Demonstrates an AI AssistView integrated with Block Editor with sidebar navigation and session management for advanced blockeditor workflows.',
+      'order': '03',
+      'category': 'Smart AI Solutions',
+      'api':'{ "BlockEditorComponent": [ "blocks" ] }',
+      'sourceFiles': [
+        { 'displayName': 'ai-ask-assistant.tsx', 'path':'src/block-editor/ai-ask-assistant.tsx' },
+        { 'displayName': 'ai-ask-assistant.jsx', 'path':'src/block-editor/ai-ask-assistant.jsx' },
         { 'displayName': 'blockData.json', 'path':'src/block-editor/blockData.json' }
       ]
     }

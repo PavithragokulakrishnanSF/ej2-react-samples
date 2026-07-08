@@ -107,6 +107,9 @@ function SemanticFiltering() {
                         pain," it can still show relevant reports even if you search for "stomach" instead of the exact term. The grid
                         dynamically displays related search results using AI.
                     </p>
+                    <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                        <a target="_blank" 
+                        href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
                 </div>
             </div>
         </div>

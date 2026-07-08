@@ -355,7 +355,7 @@ function FamilyTreeDiagram() {
 
                 <div id="action-description">
                     <p>
-                        This sample showcases a family tree built with the Syncfusion<sup>®</sup> EJ2 React Diagram, illustrating complex hierarchical relationships through customizable node templates, interactive hover details, and relation-based highlighting.
+                        This sample showcases a family tree built with the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>, illustrating complex hierarchical relationships through customizable node templates, interactive hover details, and relation-based highlighting.
                     </p>
                 </div>
 

@@ -1132,7 +1132,7 @@ export class TournamentBracket extends SampleBase<{}, {}> {
                 </div>
                 <div id="action-description">
                     <p>
-                        This sample interactively visualizes a UEFA Champions League tournament bracket using the Syncfusion<sup>®</sup> EJ2 React Diagram, showcasing team progression through match results, winning teams, flip-card animations, and informative tooltip.
+                        This sample interactively visualizes a UEFA Champions League tournament bracket using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>, showcasing team progression through match results, winning teams, flip-card animations, and informative tooltip.
                     </p>
                 </div>
                 <div id="description">

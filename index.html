@@ -7,22 +7,24 @@
     var baseref = location.href.split('#')[0].replace(orgin, '');
     document.write('<base href=\"' + baseref + '\">');
     </script>
-
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P3WXFWCW');</script>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W8WD8WN');</script>
+    <script>
+        if (window.location.hostname === 'ej2.syncfusion.com') {
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-W8WD8WN');
+        }
+    </script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="description" content="Explore and learn Syncfusion React UI components library using large collection of feature-wise examples for each components.">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="never"/>
     <title>Demos, Examples of Syncfusion React UI Components</title>
@@ -33,6 +35,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" id="themelink" href="">
     <link rel="stylesheet" type="text/css" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/app-styles.css" />
     <script>
         var orgin = location.origin;
         var baseref = location.href.split('#')[0].replace(orgin, '');
@@ -50,6 +53,7 @@
             }
         }
     </script>
+    <script type="text/javascript" src="Syncfusion_License.js"></script>
 </head>
 
 <body class='e-view'>
@@ -91,7 +95,7 @@
         font-size: 12px;
         line-height: 16px;
         display: inline;">
-        20+ Modern Pure React UI components for 2X faster development
+        30+ Modern Pure React UI components for 2X faster development
         <a
         href="https://react.syncfusion.com/react-ui/overview/introduction"
         class="promo-link"
@@ -206,6 +210,16 @@
                         </svg>
                     </a>
                 </div>
+                <div class="sb-header-item sb-table-cell sb-products-wrapper">
+                    <div id="header-products-switcher" role="button" tabindex="0" class="products-wrapper" title="Other Products selection">
+                        <div id="sb-products-text" class="sb-products-text">
+                            <span class="sb-header-text-left">OTHER PRODUCTS</span>
+                        </div>
+                        <div class="sb-products-switcher-wrapper">
+                            <span id="sb-products-switcher" class="sb-products-switch sb-icons sb-icon-Dropdown"></span>
+                        </div>
+                    </div>
+                </div>
                 <div class="sb-header-item sb-table-cell">
                     <div id="header-theme-switcher" role="button" tabindex="0" class="theme-wrapper" title="Theme selection" class="theme-wrapper">
                         <div id="sb-theme-text" class="sb-theme-text">
@@ -231,7 +245,7 @@
                 <div class="sb-header-item sb-table-cell  sb-header-settings sb-icons"></div>
                 <div class="sb-header-splitter sb-download-splitter"></div>
                 <div class='sb-header-item sb-table-cell sb-download-wrapper'>
-                    <a href='https://www.syncfusion.com/downloads?tag=es-seo-ej2-react-demo-menu-trail' target="_blank" aria-label="Free Trial (Opens in a new window)">                    
+                    <a href='https://www.syncfusion.com/downloads/react?tag=es-seo-react-download-trial' target="_blank" aria-label="Free Trial (Opens in a new window)">                    
                         <button id='download-now' type="button" class='sb-download-btn'>
                             <span class='sb-download-text'>FREE TRIAL</span>
                         </button>                     
@@ -312,12 +326,38 @@
                 </ul>
                 <div class="sb-theme-studio"><a target="_blank" href="https://ej2.syncfusion.com/themestudio/?theme=fluent2" aria-label="Go to Theme Studio">Go to Theme Studio</a></div>
             </div>
+            <div id='products-popup' class='sb-products-popup'>
+                <ul id="productslist" class="options">
+                    <li class="e-list">
+                        <span class="switch-text">PDF Viewer</span>
+                    </li>
+                    <li class="e-list">
+                        <span class="switch-text">Spreadsheet Editor</span>
+                    </li>
+                    <li class="e-list">
+                        <span class="switch-text">Docx Editor</span>
+                    </li>
+                </ul>
+            </div>
             <div id='settings-popup' class='sb-setting-popup'>
                 <div class='sb-setting-header'>
                     <span> Preferences
                     </span>
                 </div>
                 <div class='sb-setting-content'>
+                    <div class='sb-setting-item sb-setting-products-section'>
+                        <div class='setting-label'>
+                            <div class='sb-icons sb-setting-icons sb-icon-products'></div>
+                            <div class='sb-setting-text'>Other Products</div>
+                        </div>
+                        <div class='setting-content'>
+                            <select id='sb-setting-products' class='sb-setting-products-select'>
+                                <option value="pdf">PDF Viewer</option>
+                                <option value="spreadsheet">Spreadsheet Editor</option>
+                                <option value="docx">Docx Editor</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class='sb-setting-item sb-setting-theme-section'>
                         <div class='setting-label'>
                             <div class='sb-icons sb-setting-icons sb-icon-Palette'></div>
@@ -443,7 +483,7 @@
                                             </div>
                                         </div>
                                         <a style="color:#ffff;text-decoration:none;"
-                                            href="https://www.syncfusion.com/downloads?tag=es-seo-ej2-react-demo-ads-trail" aria-label="Try it for free - Opens in a new window">
+                                            href="https://www.syncfusion.com/downloads/react?tag=es-seo-react-download-trial" aria-label="Try it for free - Opens in a new window">
                                             <div class="free-trial">TRY IT FOR FREE</div>
                                         </a>
                                     </div>

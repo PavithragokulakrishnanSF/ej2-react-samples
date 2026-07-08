@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { localData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -9,7 +8,7 @@ const LocalData = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -19,10 +18,10 @@ const LocalData = () => {
     dependency: 'Predecessor',
     child: 'subtasks'
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     position: "35%"
   };
   const projectStartDate: Date = new Date('03/26/2025');
@@ -52,13 +51,12 @@ const LocalData = () => {
       </div>
 
       <div id="description">
-        <p>Gantt can be bound either to local or remote data services.The <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#datasource">dataSource</a> property can be assigned either with the array of JavaScript objects or an instance of <code>DataManager</code>.</p>
+        <p>Gantt can be bound either to local or remote data services. The <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#datasource">dataSource</a> property can be assigned either with the array of JavaScript objects or an instance of <code>DataManager</code>.</p>
         <p>In this demo, an array of JavaScript objects is assigned as data source to the Gantt.</p>
-        <p>Gantt component features are segregated into individual feature-wise modules. To use a selection, inject the
-          <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method.To use markers, inject the
-          <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
+        <p>Gantt component features are segregated into individual feature-wise modules. To use a selection and marker features, we need to inject the <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.
+        </p>
         <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/data-binding#hierarchical-data-binding">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/data-binding#local-data">documentation section</a>.</p>
       </div>
     </div>
   )

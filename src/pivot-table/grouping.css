@@ -16,3 +16,7 @@
 .pivot-table-property-section .e-multiselect {
     padding: 0;
 }
+
+.e-bigger .datecls .e-multi-select-wrapper.e-mob-wrapper .e-delim-view.e-delim-values.e-delim-total {
+    width: 87px !important;
+}

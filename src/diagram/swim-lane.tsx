@@ -442,7 +442,9 @@ export class SwimLane extends SampleBase<{}, {}> {
                             We can also create the swimlane interactively using the swimlane shapes from the symbol palette.
           </p>
           <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
     );
   }

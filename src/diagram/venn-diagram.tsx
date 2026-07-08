@@ -121,7 +121,7 @@ function createConnector(id: string, lineDashArray: string, source: string, targ
     return connector;
 }
 /**
- * Creates a node object for the Syncfusion EJ2 Diagram.
+ * Creates a node object for the React Diagram.
  * @param id The unique identifier for the node.
  * @param offsetX The x-coordinate of the node's position.
  * @param offsetY The y-coordinate of the node's position.
@@ -291,7 +291,7 @@ export class VennDiagram extends SampleBase<{}, {}> {
                 </div>
                 <div id="action-description">
                     <p>
-                        This sample utilizes the Syncfusion<sup>®</sup> EJ2 React Diagram to visualize data science classifications through Venn Diagram.
+                        This sample utilizes the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> to visualize data science classifications through Venn Diagram.
                     </p>
                 </div>
                 <div id="description">

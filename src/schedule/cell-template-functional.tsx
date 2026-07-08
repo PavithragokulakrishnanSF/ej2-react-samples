@@ -63,6 +63,9 @@ const CellTemplate = () => {
           In this demo, the <code>cellTemplate</code> option which accepts the template string is used to customize the cell
           background with specific images and appropriate text on the given date values.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

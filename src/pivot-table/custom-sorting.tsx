@@ -276,7 +276,7 @@ export class CustomSorting extends SampleBase<{}, {}> {
                                         </div>
                                     </td>
                                     <td>
-                                        <div>
+                                        <div id="custom-sorting-members">
                                             <MultiSelectComponent ref={(scope) => { this.membersOrder = scope; }} select={this.onMembersSelect.bind(this)}
                                                 removed={this.onMembersRemove.bind(this)} open={this.open.bind(this)}
                                                 width={"98%"} placeholder="Select headers" id="etype"

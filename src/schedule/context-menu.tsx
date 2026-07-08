@@ -145,6 +145,9 @@ export class ContextMenu extends SampleBase<{}, {}> {
             is set to open for saving or updating the appointments, <code>deleteEvent</code> to delete the selected appointment, and
             <code>selectedDate</code> to navigate to today's date. In mobile devices, the context menu will open when you tap hold on
             the cells or events.</p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

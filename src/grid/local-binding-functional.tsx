@@ -43,6 +43,9 @@ function Localbinding() {
                     More information on the dataBinding feature configuration can be found in this
                     <a target='_blank' href='https://ej2.syncfusion.com/react/documentation/grid/data-binding.html#local-data'> documentation section</a>.
                 </p>
+                <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our 
+            <a target="_blank"
+              href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
             </div>
         </div>
     )

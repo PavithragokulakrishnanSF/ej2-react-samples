@@ -8,7 +8,7 @@ import { ToolbarSettingsModel, FileManager, FileManagerSettingsModel } from '@sy
 import { SampleBase } from '../common/sample-base';
 
 export class FileBrowser extends SampleBase<{}, {}> {
-    private hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
+    private hostUrl: string = 'https://services.syncfusion.com/react/production/';
 
     private toolbarSettings: ToolbarSettingsModel = {
         items: ['FileManager', 'Image']
@@ -16,12 +16,11 @@ export class FileBrowser extends SampleBase<{}, {}> {
 
     private fileManagerSettings: FileManagerSettingsModel = {
         enable: true,
-        path: '/Pictures/Food',
         ajaxSettings: {
-            url: this.hostUrl + 'api/FileManager/FileOperations',
-            getImageUrl: this.hostUrl + 'api/FileManager/GetImage',
-            uploadUrl: this.hostUrl + 'api/FileManager/Upload',
-            downloadUrl: this.hostUrl + 'api/FileManager/Download'
+            url: this.hostUrl + 'api/RichTextEditor/FileOperations',
+            getImageUrl: this.hostUrl + 'api/RichTextEditor/GetImage',
+            uploadUrl: this.hostUrl + 'api/RichTextEditor/Upload',
+            downloadUrl: this.hostUrl + 'api/RichTextEditor/Download'
         }
     }
 

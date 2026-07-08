@@ -113,6 +113,9 @@ export class AutoWrap extends SampleBase<{}, {}> {
             documentation
           </a> section.
         </p>
+        <p>
+          Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+        </p>
       </div>
       </div>
     );

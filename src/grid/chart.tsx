@@ -4,7 +4,7 @@ import { sales } from './data';
 import { CategorySeries, ChartChanges, ChartPopupArgs, GridChart, UpdateChartArgs } from '@syncfusion/ej2-grid-chart';
 import { AccumulationChartModel, ChartModel, IAccLoadedEventArgs, ILoadedEventArgs } from '@syncfusion/ej2-charts';
 import { loadAccumulationChartTheme, loadChartTheme } from './grid-chart-theme-color';
-import { isNullOrUndefined } from '@syncfusion/ej2/base';
+import { isNullOrUndefined } from '@syncfusion/ej2-base';
 import './chart.css';
 import { SampleBase } from '../common/sample-base';
 
@@ -181,6 +181,9 @@ export class GridChartIntegration extends SampleBase<{}, {}> {
               This example uses categories like 'Product' and 'Year' with series data for 'Online', 'Retail' and
               'Revenue' in the chart visualization.
             </p>
+            <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our 
+            <a target="_blank"
+              href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
         </div>
       </div>
     );

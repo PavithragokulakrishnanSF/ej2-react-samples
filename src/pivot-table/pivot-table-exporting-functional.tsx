@@ -99,7 +99,7 @@ function PivotTableExporting () {
                     displayOption={{ view: 'Both' }} toolbar={toolbarOptions} chartSettings={{
                         title: 'Sales Analysis', primaryYAxis: { border: { width: 0 } }, legendSettings: { visible: false, },
                         chartSeries: { type: 'Bar', animation: { enable: false } }
-                    }} toolbarRender={toolbarRender} dataBound={onDataBound}>
+                    }} toolbarRender={toolbarRender.bind(this)} dataBound={onDataBound}>
                     <Inject services={[FieldList, Toolbar, ExcelExport, GroupingBar, VirtualScroll]} />
                 </PivotViewComponent>
             </div>

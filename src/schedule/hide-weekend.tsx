@@ -118,6 +118,9 @@ export class HideWeekend extends SampleBase<{}, {}> {
             Therefore, the remaining days (0, 2, 6 – Sunday, Tuesday and Saturday) are considered as weekend days
             and will be hidden from the views as the <code>showWeekend</code> property is set to false.
           </p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

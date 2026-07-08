@@ -4,7 +4,7 @@ export const ChartSampleOrder: Object = [
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the line series.'
     },
     {
-        'path': 'chart/line', 'component': 'Line', 'type': 'update', 'name': 'Line', 'order': '02', 'category': 'Line Charts',
+        'path': 'chart/line', 'component': 'Line', 'name': 'Line', 'order': '02', 'category': 'Line Charts',
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the line series.'
     },
     {
@@ -128,7 +128,7 @@ export const ChartSampleOrder: Object = [
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the bar series.'
     },
     {
-        'path': 'chart/bar-with-gradient', 'component': 'BarWithGradient', 'name': 'Bar with Gradient', 'order': '04', 'category': 'Bar Charts', 'type': 'new',
+        'path': 'chart/bar-with-gradient', 'component': 'BarWithGradient', 'name': 'Bar with Gradient', 'order': '04', 'category': 'Bar Charts',
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the bar series with gradient.'
     },
     {
@@ -188,8 +188,12 @@ export const ChartSampleOrder: Object = [
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the various radius pie chart.'
     },
     {
-        'path': 'chart/donut-with-gradient', 'component': 'DonutWithGradient', 'name': 'Doughnut With Gradient', 'order': '07', 'category': 'Accumulation Charts', 'type': 'new',
+        'path': 'chart/donut-with-gradient', 'component': 'DonutWithGradient', 'name': 'Doughnut With Gradient', 'order': '07', 'category': 'Accumulation Charts',
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the pie chart with gradient.'
+    },
+    {
+        'path': 'chart/nested-donut', 'component': 'NestedDoughnut', 'name': 'Nested Doughnut', 'order': '07', 'category': 'Accumulation Charts', 'type': 'new', 
+        'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the nested donut charts with multiple series.'
     },
     {
         'path': 'chart/pyramid', 'component': 'Pyramid', 'name': 'Pyramid', 'order': '07', 'category': 'Accumulation Charts',
@@ -204,7 +208,7 @@ export const ChartSampleOrder: Object = [
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the doughnut charts.'
     },
     {
-        'path': 'chart/accumulation-legend-template', 'component': 'AccumulationLegendTemplate', 'name': 'Pie with Legend Template', 'order': '07','category': 'Accumulation Charts', 'type': 'new', 
+        'path': 'chart/accumulation-legend-template', 'component': 'AccumulationLegendTemplate', 'name': 'Pie with Legend Template', 'order': '07','category': 'Accumulation Charts', 
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the legend template in charts.'
     },
     {
@@ -472,7 +476,7 @@ export const ChartSampleOrder: Object = [
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the empty points.'
     },
     {
-        'path': 'chart/chart-legend-template', 'component': 'ChartLegendTemplate', 'name': 'Legend Template', 'order': '15', 'category': 'Chart Customization', 'type': 'new', 
+        'path': 'chart/chart-legend-template', 'component': 'ChartLegendTemplate', 'name': 'Legend Template', 'order': '15', 'category': 'Chart Customization', 
         'description': 'This demo sample for Essential JavaScript2 Chart control demonstrates how to render and configure the legend template'
     },
     {

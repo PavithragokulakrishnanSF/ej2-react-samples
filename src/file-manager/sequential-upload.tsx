@@ -7,7 +7,7 @@ import { FileManagerComponent, Inject, NavigationPane, DetailsView, Toolbar, Too
  */
 export class SequentialUpload extends SampleBase<{}, {}> {
     public fmObj: FileManagerComponent;
-    private hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
+    private hostUrl: string = 'https://physical-service.syncfusion.com/';
 
     public render(): JSX.Element {
         return (
@@ -45,6 +45,9 @@ export class SequentialUpload extends SampleBase<{}, {}> {
 
                 <div id="description">
                     <p>In this demo, a sequential upload is enabled by setting <a href="https://ej2.syncfusion.com/react/documentation/api/file-manager/uploadsettingsmodel/#sequentialUpload" target="_blank">sequentialUpload</a> to <code>true</code> in the File Manager's upload settings. When enabled, files are uploaded one after another in the order they were added, helping preserve the intended sequence and manage bandwidth more effectively.</p>
+                    <p>
+                        Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
+                    </p>          
                 </div>
             </div>
         );

@@ -1,11 +1,10 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, Sort, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, Sort, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel, SortSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { editingData } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class Sorting extends SampleBase<{}, {}> {
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -13,15 +12,15 @@ export class Sorting extends SampleBase<{}, {}> {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-    parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
-  public sortSettings: any = {
+  public sortSettings: SortSettingsModel = {
     columns: [{ field: 'TaskName', direction: 'Ascending' }, { field: 'TaskID', direction: 'Ascending' }]
   };
   public projectStartDate: Date = new Date('03/26/2025');
@@ -38,9 +37,9 @@ export class Sorting extends SampleBase<{}, {}> {
               <ColumnDirective field='TaskID' visible={false} width='80'></ColumnDirective>
               <ColumnDirective field='TaskName' width='250'></ColumnDirective>
               <ColumnDirective field='StartDate'></ColumnDirective>
-              <ColumnDirective field='EndDate' ></ColumnDirective>
-              <ColumnDirective field='Duration' ></ColumnDirective>
-              <ColumnDirective field='Progress' ></ColumnDirective>
+              <ColumnDirective field='EndDate'></ColumnDirective>
+              <ColumnDirective field='Duration'></ColumnDirective>
+              <ColumnDirective field='Progress'></ColumnDirective>
             </ColumnsDirective>
             <Inject services={[Selection, DayMarkers, Sort]} />
           </GanttComponent>
@@ -50,16 +49,13 @@ export class Sorting extends SampleBase<{}, {}> {
         </div>
 
         <div id="description">
-         <p>The sorting feature enables you to order data in a particular direction. It can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#allowselection">allowSelection</a> to true.</p>
-          <p>To sort a Gantt column, click the column header. The icons (ascending) and (descending) specifies the sort direction of a column.</p>
+          <p>The sorting feature enables you to order data in a particular direction. It can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#allowsorting">allowSorting</a> to true.</p>
+          <p>To sort a Gantt column, click the column header. The icons (ascending) and (descending) specify the sort direction of a column.</p>
 
           <p>By default, the multi-sorting feature is enabled in Gantt. To sort multiple columns, hold the <strong>CTRL</strong> key, and then click the column header. To clear sort for a column, hold the <strong>SHIFT</strong> key, and then click the column header.</p>
           <p>In this demo, multiple sorting enabled on load time by assigning multiple columns into <code>sortSettings</code> property.</p>
-          <p>Gantt component features are segregated into individual feature-wise modules.To use a selection, inject the
-        <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method. To use sort, inject the
-        <code>Sort</code> module using the <code>Gantt.Inject(Sort)</code> method.To use markers, inject the
-        <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.</p>
-          <br/>
+          <p>Gantt component features are segregated into individual feature-wise modules. To use a selection, markers and sorting features, we need to inject the <code>Selection</code>, <code>DayMarkers</code> and <code>Sort</code> into the <code>Inject Services</code> section.</p>
+          <br />
           <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/sorting">documentation section</a>.</p>
         </div>
       </div>

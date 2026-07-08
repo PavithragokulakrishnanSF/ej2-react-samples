@@ -116,6 +116,7 @@ function DynamicBinding() {
       pivot.loadPersistData(JSON.stringify(entireReportSettings));
       shouldAutoConfigRef.current = false;
       pivot.refresh();
+      pivot.engineModule = new PivotEngine();
       if (reportSettings.type) delete reportSettings.type;
       return;
     }
@@ -165,14 +166,20 @@ function DynamicBinding() {
             reportSettings.dataSource = csvArray;
             setCurrentData(csvArray);
           } else {
-            // No inline and no URL → fall back to currentData
-            reportSettings.dataSource = currentData;
-            reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+                // No inline and no URL → fall back to currentData
+              if (reportSettings.type === 'JSON' && !reportSettings.url) {
+                  reportSettings.dataSource = Pivot_Data;
+              } else {
+                  reportSettings.dataSource = currentData;
+                  reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+              }
           }
         } catch (e) {
           // Fallback on any error
-          reportSettings.dataSource = currentData;
-          reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+          if (!(reportSettings.url !== '' && reportSettings.type === 'CSV')) {
+            reportSettings.dataSource = currentData;
+            reportSettings.type = pivot.dataSourceSettings.type || 'JSON';
+          }
         }
       } else {
         setCurrentData(reportSettings.dataSource);
@@ -471,7 +478,7 @@ function DynamicBinding() {
         }
         if (itemId === 'remote_report') {
             setDialogType('JSON Report');
-            setRemoteUrl("https://api.jsonbin.io/v3/b/6912d9ecd0ea881f40e12335");
+            setRemoteUrl("https://cdn.syncfusion.com/data/report.json");
             setDialogOpen(true);
             return;
         }
@@ -690,6 +697,10 @@ function DynamicBinding() {
                 jsonData && typeof jsonData === 'object' && 'record' in jsonData
                     ? jsonData.record
                     : jsonData;
+            if (jsonData?.chartSettings?.zoomSettings) {
+                jsonData.chartSettings.zoomSettings.toolbarPosition = {};
+                jsonData.chartSettings.zoomSettings.accessibility = {};
+            }
             const looksLikeReport =
                 !Array.isArray(unwrappedData) &&
                 (unwrappedData?.dataSourceSettings ||
@@ -702,6 +713,7 @@ function DynamicBinding() {
                 const reportSettings =
                     unwrappedData.dataSourceSettings ?? unwrappedData;
                 const isOlapReport = reportSettings?.providerType === 'SSAS';
+                reportSettings.dataSource = Pivot_Data;
                 const pivot = pivotObj.current;
                 if (pivot) {
                     resetPivot();
@@ -937,11 +949,6 @@ function DynamicBinding() {
                                     change={async (e) => {
                                         const v = e.value;
                                         setSelectedCube(v);
-                                        const pivot = pivotObj.current;
-                                        const isOlap = pivot && (pivot.dataSourceSettings as any)?.providerType === 'SSAS';
-                                        if (isOlap && v) {
-                                            await applyOlapBinding({ cube: v });
-                                        }
                                     }}
                                     cssClass="e-input"
                                     style={{ width: '100%' }}
@@ -975,7 +982,7 @@ function DynamicBinding() {
                     </DialogComponent>
                 )}
 
-                <div className='control-section'>
+                <div className='pivot-table-control-section'>
                     <PivotViewComponent
                         id='PivotView'
                         ref={pivotObj}

@@ -157,6 +157,9 @@ export class CommandsSample extends SampleBase<{}, {}> {
                             selectionChange={(args: ISelectionChangeEventArgs) => {
                                 selectionChange(args);
                             }}
+                            created={() => {
+                                diagramInstance.fitToPage();
+                            }}
                         >
                             <Inject services={[UndoRedo, DataBinding, BpmnDiagrams]} />
                         </DiagramComponent>
@@ -182,7 +185,9 @@ export class CommandsSample extends SampleBase<{}, {}> {
                         The flip command is used to give a horizontal or vertical mirror image of the selected node. Use <code>flip</code> and <code>flipMode</code> properties to flip a node along with the port and label.
                     </p>
                     <br />
-                </div>
+                
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
             </div>
         );
     }

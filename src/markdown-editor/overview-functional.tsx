@@ -2,7 +2,7 @@
  * Rich Text Editor markdown preview sample
  */
 import { addClass, Browser, createElement, isNullOrUndefined, KeyboardEventArgs, removeClass } from '@syncfusion/ej2-base';
-import { Image, Inject, IToolbarItems, Link, MarkdownEditor, RichTextEditor, RichTextEditorComponent, Table, Toolbar, ToolbarSettingsModel, ActionCompleteEventArgs, HtmlEditor, ToolbarType } from '@syncfusion/ej2-react-richtexteditor';
+import { Image, Inject, IToolbarItems, Link, MarkdownEditor, RichTextEditor, RichTextEditorComponent, Table, Toolbar, ToolbarSettingsModel, ActionCompleteEventArgs, HtmlEditor, ToolbarType, MarkdownFormatter } from '@syncfusion/ej2-react-richtexteditor';
 import { PaneDirective, PanesDirective, SplitterComponent } from '@syncfusion/ej2-react-layouts';
 import { MarkdownConverter } from '@syncfusion/ej2-markdown-converter';
 import * as React from 'react';
@@ -96,6 +96,7 @@ Inline code: Use \`npm install @syncfusion/ej2-richtexteditor\``;
     let textArea: HTMLElement;
     let srcArea: Element;
     let placeholder: string = 'Enter your text here...';
+    const formatter: MarkdownFormatter = new MarkdownFormatter({ listTags: { 'OL': '1., 2., 3.' } });
     //Rich Text Editor ToolbarSettings
     const toolbarSettings: ToolbarSettingsModel = {
         items: items,
@@ -114,7 +115,7 @@ Inline code: Use \`npm install @syncfusion/ej2-richtexteditor\``;
         rteObj.refreshUI();
     }
     function updateValue() {
-        srcArea.innerHTML =  MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value) as string;
+        srcArea.innerHTML =  MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value, { lineBreak: true }) as string;
     }
     function updateOrientation() { 
         if (Browser.isDevice) {
@@ -124,7 +125,7 @@ Inline code: Use \`npm install @syncfusion/ej2-richtexteditor\``;
     }
     function content1() {
         return (<div className="content">
-            <RichTextEditorComponent id='defaultRTE' ref={(richtexteditor) => { rteObj = richtexteditor; }} editorMode='Markdown'  toolbarSettings={toolbarSettings} height='447px' saveInterval={1} created={onCreate.bind(this)} change={onChange.bind(this)} actionComplete={updateValue.bind(this)} value={value}>
+            <RichTextEditorComponent id='defaultRTE' ref={(richtexteditor) => { rteObj = richtexteditor; }} editorMode='Markdown'  toolbarSettings={toolbarSettings} height='447px' formatter={formatter} saveInterval={1} created={onCreate.bind(this)} change={onChange.bind(this)} actionComplete={updateValue.bind(this)} value={value}>
 
                 <Inject services={[MarkdownEditor, Toolbar, Image, Link, HtmlEditor, Table]} />
             </RichTextEditorComponent>

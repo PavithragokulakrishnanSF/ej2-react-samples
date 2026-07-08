@@ -9,17 +9,22 @@ import { DropDownButtonComponent, ItemModel } from '@syncfusion/ej2-react-splitb
  */
 export class DirectoryUpload extends SampleBase<{},{}> {
     public fmObj: FileManagerComponent;
-    private hostUrl: string = "https://ej2-aspcore-service.azurewebsites.net/";
-    private getItems(): ItemModel[] {
-        return [
-        { text: this.fmObj?.localeObj.getConstant('Folder') },
-        { text: this.fmObj?.localeObj.getConstant('File') }
-        ];
-    }    
+    public dropBtnObj: DropDownButtonComponent;
+    private hostUrl: string = "https://physical-service.syncfusion.com/";
+
+    private onCreated() {
+        if (this.fmObj && this.dropBtnObj) {
+            this.dropBtnObj.content = this.fmObj.localeObj.getConstant('Upload');
+            this.dropBtnObj.items = [
+                { text: this.fmObj?.localeObj?.getConstant('Folder') || 'Folder' },
+                { text: this.fmObj?.localeObj?.getConstant('File') || 'File' },
+            ];
+        }
+    }
+
     private uploadTemplate(){
         return(
-            <DropDownButtonComponent id="dropButton" items={this.getItems()} iconCss='e-icons e-fe-upload' cssClass= "e-tbar-btn e-tbtn-txt" select={this.onSelect.bind(this)} onClick={this.uploadClick.bind(this)}>
-                <span className="e-tbar-btn-text">Upload</span>
+            <DropDownButtonComponent id="dropButton" ref={(scope) => { this.dropBtnObj = scope; }} iconCss='e-icons e-fe-upload' cssClass= "e-tbar-btn e-tbtn-txt" select={this.onSelect.bind(this)} onClick={this.uploadClick.bind(this)} created={this.onCreated.bind(this)} >
             </DropDownButtonComponent>
         );
     }
@@ -87,6 +92,9 @@ export class DirectoryUpload extends SampleBase<{},{}> {
                         <b>Note: </b>File Manager's upload functionality is restricted in the online demos for security reasons. If you need to test upload functionality, please install 
                         <a target="_blank" href="https://www.syncfusion.com/downloads"> Syncfusion Essential Studio </a>on your machine and run the demo.
                      </p>
+                    <p>
+                        Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
+                    </p>
                 </div>
             </div>
         );

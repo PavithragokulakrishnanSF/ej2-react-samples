@@ -638,7 +638,7 @@ export class WorkFlowEditor extends SampleBase<{}, {}> {
         </div>
         <div id="action-description">
           <p>
-            This sample provides a visual representation of a streamlined workflow diagram built using the Syncfusion<sup>®</sup> EJ2 Diagram control with BPMN shapes.
+            This sample provides a visual representation of a streamlined workflow diagram built using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> control with BPMN shapes.
           </p>
         </div>
         <div id="description">

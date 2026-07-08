@@ -128,11 +128,11 @@
     height: 20px;
     content: unset;
 }
-#ColumnMenu .ganttresource,
-#ColumnMenu .ganttprogressTemplate,
-#ColumnMenu .ganttduration,
-#ColumnMenu .ganttstartDate,
-#ColumnMenu .gantttaskName {
+#HeaderTemplate .ganttresource,
+#HeaderTemplate .ganttprogressTemplate,
+#HeaderTemplate .ganttduration,
+#HeaderTemplate .ganttstartDate,
+#HeaderTemplate .gantttaskName {
     margin-right: 8px;
     display: inline-block;
 }

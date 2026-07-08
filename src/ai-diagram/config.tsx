@@ -4,8 +4,9 @@ export const AIDiagramSampleOrder: Object = [
         'component': 'SmartFlowchart', 
         'name': 'Text to Flowchart', 
         'description': 'This demo showcases the Diagram AI feature.', 
-        'order': '01',
+        'order': '02',
         'category': 'Diagram',
+        'ignoreOnBuild': true,
         'sourceFiles': [
             { 'displayName': 'text-to-flowchart.tsx', 'path': 'src/ai-diagram/ai-text-to-flowchart.tsx' }, 
             { 'displayName': 'text-to-flowchart.jsx', 'path': 'src/ai-diagram/ai-text-to-flowchart.jsx' },
@@ -17,8 +18,9 @@ export const AIDiagramSampleOrder: Object = [
         'component': 'smartMindMap', 
         'name': 'Text to MindMap', 
         'description': 'This demo showcases the Diagram AI feature.', 
-        'order': '01',
+        'order': '02',
         'category': 'Diagram',
+        'ignoreOnBuild': true,
         'sourceFiles': [
             { 'displayName': 'text-to-mindmap.tsx', 'path': 'src/ai-diagram/ai-text-to-mindmap.tsx' }, 
             { 'displayName': 'text-to-mindmap.jsx', 'path': 'src/ai-diagram/ai-text-to-mindmap.jsx' },
@@ -30,8 +32,9 @@ export const AIDiagramSampleOrder: Object = [
         'component': 'SmartUMLSequenceDiagram', 
         'name': 'Text to UML Sequence Diagram', 
         'description': 'This demo showcases the Diagram AI feature.', 
-        'order': '01',
+        'order': '02',
         'category': 'Diagram',
+        'ignoreOnBuild': true,
         'sourceFiles': [
             { 'displayName': 'text-to-umlSequenceDiagram.tsx', 'path': 'src/ai-diagram/ai-text-to-umlSequenceDiagram.tsx' }, 
             { 'displayName': 'text-to-umlSequenceDiagram.jsx', 'path': 'src/ai-diagram/ai-text-to-umlSequenceDiagram.jsx' },

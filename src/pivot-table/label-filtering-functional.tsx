@@ -225,36 +225,38 @@ function LabelFilter () {
                     <code> filterSettings</code> object in the pivot table along with the following properties.
                 </p>
                 <table>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '10px 0', width: '100px' }}>
-                            <code>name :</code>
-                        </td>
-                        <td>Specifies the normal field.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>type :</code>
-                        </td>
-                        <td>Specifies the filter type and it should be "Label" in this scenario.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>condition :</code>
-                        </td>
-                        <td>Specifies the operator type like equals, greater than, less than, etc.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>value1 :</code>
-                        </td>
-                        <td> Gets the text to view the filter result. For example, select "DoesNotEquals" and enter "Germany" to exclude this country.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>value2 :</code>
-                        </td>
-                        <td>For conditions like "between" and "not between", this option will be enabled. Enter both start and end text to view the filter result. For example, enter "Germany" and "States" to filter the countries within this range.</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '10px 0', width: '100px' }}>
+                                <code>name :</code>
+                            </td>
+                            <td>Specifies the normal field.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>type :</code>
+                            </td>
+                            <td>Specifies the filter type and it should be "Label" in this scenario.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>condition :</code>
+                            </td>
+                            <td>Specifies the operator type like equals, greater than, less than, etc.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>value1 :</code>
+                            </td>
+                            <td> Gets the text to view the filter result. For example, select "DoesNotEquals" and enter "Germany" to exclude this country.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>value2 :</code>
+                            </td>
+                            <td>For conditions like "between" and "not between", this option will be enabled. Enter both start and end text to view the filter result. For example, enter "Germany" and "States" to filter the countries within this range.</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <br />
                 <p>

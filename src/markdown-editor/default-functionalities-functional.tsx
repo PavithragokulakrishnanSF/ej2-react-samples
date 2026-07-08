@@ -63,7 +63,7 @@ This project is licensed under the **MIT License** – see the LICENSE file for 
         if (mdsource.classList.contains('e-active')) {
             let id: string = rteObj.getID() + 'html-view';
             let htmlPreview: HTMLElement = rteObj.element.querySelector('#' + id);
-            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value) as string;
+            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value, { lineBreak: true }) as string;
         }
     }
     function fullPreview(): void {
@@ -83,7 +83,7 @@ This project is licensed under the **MIT License** – see the LICENSE file for 
             }
             textArea.style.display = 'none';
             htmlPreview.style.display = 'block';
-            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value) as string;
+            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value, { lineBreak: true }) as string;
             mdsource.parentElement.title = 'Code View';
         }
     }

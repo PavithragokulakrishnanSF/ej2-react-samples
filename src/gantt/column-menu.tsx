@@ -1,11 +1,10 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, Filter, Sort, Resize, ColumnMenu, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, Filter, Sort, Resize, ColumnMenu, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { SampleBase } from '../common/sample-base';
 
 export class GanttColumnMenu extends SampleBase<{}, {}> {
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -13,14 +12,14 @@ export class GanttColumnMenu extends SampleBase<{}, {}> {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-    parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 4
-};
+  };
   public projectStartDate: Date = new Date('03/26/2025');
   public projectEndDate: Date = new Date('07/20/2025');
   render() {
@@ -31,7 +30,7 @@ export class GanttColumnMenu extends SampleBase<{}, {}> {
             allowResizing={true} dataSource={projectNewData} highlightWeekends={true} splitterSettings={this.splitterSettings}
             taskFields={this.taskFields} labelSettings={this.labelSettings} height='650px' taskbarHeight={25} rowHeight={46}
             projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate}>
-              <ColumnsDirective>
+            <ColumnsDirective>
               <ColumnDirective field='TaskID' headerText='ID' width='100' ></ColumnDirective>
               <ColumnDirective field='TaskName' headerText='Name' width='250'></ColumnDirective>
               <ColumnDirective field='StartDate'></ColumnDirective>
@@ -44,27 +43,26 @@ export class GanttColumnMenu extends SampleBase<{}, {}> {
           </GanttComponent>
         </div>
         <div id="action-description">
-          <p>This sample demonstrates the default functionalities of the  column menu. Click on multiple icon of each column to open the column menu.</p>
+          <p>This sample demonstrates the default functionalities of the column menu. Click on the menu icon of each column to open the column menu.</p>
         </div>
         <div id="description">
           <p>
-            Gantt has an option to show column menu while clicking multiple icon of each column. The column menu has an integrated option to interact with the features such as sorting, filtering, column chooser, and autoFit.  
+            Gantt has an option to show column menu while clicking the menu icon of each column. The column menu has an integrated option to interact with the features such as sorting, filtering, column chooser, and autoFit.
             This feature can be enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#showcolumnmenu">showColumnMenu</a> to true.
-            The default items are,
+            The default menu items are:
           </p>
           <ul>
             <li><code>SortAscending</code> - Sorts the current column in ascending order.</li>
             <li><code>SortDescending</code> - Sorts the current column in descending order.</li>
-            <li><code>AutoFit</code> - Auto-fit current column.</li>
-            <li><code>AutoFitAll</code> - Auto-fit all columns.</li>
-            <li><code>ColumnChooser</code> - Chooses the column visibility.</li>
+            <li><code>AutoFit</code> - Auto-fits the current column.</li>
+            <li><code>AutoFitAll</code> - Auto-fits all columns.</li>
+            <li><code>ColumnChooser</code> - Toogles the visibility of columns.</li>
             <li><code>Filter</code> - Filters the current column.</li>
           </ul>
           <p>
             In this demo, the column menu feature is enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#showcolumnmenu">showColumnMenu</a> to true with sorting, filtering, column chooser, and autoFit options.</p>
-          <b>Injecting Module:</b>
-          <p>Gantt features are segregated into individual feature-wise modules. To use column menu feature, we need to inject <code>ColumnMenu</code> module into the <code>services</code>.</p>
-          <br />
+          <p>Gantt component features are segregated into individual feature-wise modules. To use Column Menu, selection, filter, resize and sort features, we need to inject the <code>ColumnMenu</code>, <code>Selection</code>, <code>Resize</code>, <code>Filter</code>, and <code>Sort</code> into the <code>Inject Services</code> section.</p> 
+          <br/>
           <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/columns/column-menu">documentation section</a>.</p>
         </div>
       </div>

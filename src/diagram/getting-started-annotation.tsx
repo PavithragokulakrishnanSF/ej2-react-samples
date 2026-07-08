@@ -547,17 +547,17 @@ export class GettingStartedAnnotation extends SampleBase<{}, {}> {
         <div id="description">
           <p>
             This example shows how to add textual descriptions to shapes and how
-            to position them over the shapes. The
+            to position them over the shapes. The 
             <code>annotations</code> property of the node can be used to add
             descriptions.
           </p>
 
           <p>
-            The <code>offset</code>, <code>horizontalAlignment</code>, and<code>
+            The <code>offset</code>, <code>horizontalAlignment</code>, and <code>
               verticalAlignment
             </code>{" "}
             properties of the annotation can be used to customize the position
-            of the descriptions. The <code>bold</code>,<code>italic</code>,{" "}
+            of the descriptions. The <code>bold</code>, <code>italic</code>, {" "}
             <code>fontSize</code>, and <code>fontFamily</code> properties can be
             used to customize the appearance of the descriptions.
           </p>
@@ -567,7 +567,9 @@ export class GettingStartedAnnotation extends SampleBase<{}, {}> {
             the template in the property panel.
           </p>
           <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
     );
   }

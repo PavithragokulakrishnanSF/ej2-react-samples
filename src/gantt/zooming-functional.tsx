@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GanttComponent, Inject, Toolbar, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Toolbar, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel, ToolbarItem } from '@syncfusion/ej2-react-gantt';
 import { zoomingData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -9,7 +8,7 @@ const Zooming = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -19,15 +18,15 @@ const Zooming = () => {
     dependency: 'Predecessor',
     child: 'subtasks'
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 3
   };
   const projectStartDate: Date = new Date('03/26/2025');
   const projectEndDate: Date = new Date('06/01/2025');
-  const toolbar: any = ['ZoomIn', 'ZoomOut', 'ZoomToFit'];
+  const toolbar: ToolbarItem[] = ['ZoomIn', 'ZoomOut', 'ZoomToFit'];
   return (
     <div className='control-pane'>
       <div className='control-section'>
@@ -71,8 +70,12 @@ const Zooming = () => {
         <p>
           To use a zoom support related icons, inject the <code>Toolbar</code> module into the <code>services</code>.
         </p>
+        <br />
+        <p>
+		    Gantt component features are segregated into individual feature-wise modules. To use a zooming feature, we need to inject the <code>Toolbar</code> into the <code>Inject Services</code> section.
+	      </p>
         <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/timeline/zooming">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/time-line/zooming">documentation section</a>.</p>
       </div>
     </div>
   )

@@ -10,3 +10,7 @@
 .kanban-tooltip .e-kanbantooltiptemp td {
     vertical-align: top;
 }
+
+td.CardHeader {
+    padding: 0px !important;
+}

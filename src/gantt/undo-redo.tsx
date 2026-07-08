@@ -1,13 +1,13 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, Filter, Sort, ColumnMenu, Resize,Edit,Reorder,UndoRedo,ContextMenu, ColumnsDirective, ColumnDirective,Toolbar,DayMarkers } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, Filter, Sort, ColumnMenu, Resize, Edit, Reorder, UndoRedo, ContextMenu, ColumnsDirective, ColumnDirective, Toolbar, DayMarkers, EditSettingsModel, LabelSettingsModel, SplitterSettingsModel, ToolbarItem, GanttAction } from '@syncfusion/ej2-react-gantt';
 import { undoRedoData } from './data';
 import { SampleBase } from '../common/sample-base';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
+import './undo-redo.css';
 
 export class GanttUndoRedo extends SampleBase<{}, {}> {
   private ganttInstance: GanttComponent;
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -17,25 +17,25 @@ export class GanttUndoRedo extends SampleBase<{}, {}> {
     dependency: 'Predecessor',
     child: 'subtasks'
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  public editSettings: any = {
+  public editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
     allowTaskbarEditing: true,
     showDeleteConfirmDialog: true
   };
-  public undoRedoActions: any = ['Sorting','Add','ColumnReorder','ColumnResize','ColumnState','Delete','Edit','Filtering','Indent','Outdent','NextTimeSpan','PreviousTimeSpan','RowDragAndDrop','Search'];
+  public undoRedoActions: GanttAction[] = ['Sorting', 'Add', 'ColumnReorder', 'ColumnResize', 'ColumnState', 'Delete', 'Edit', 'Filtering', 'Indent', 'Outdent', 'NextTimeSpan', 'PreviousTimeSpan', 'RowDragAndDrop', 'Search'];
 
-  public splitterSettings: any = {
-    columnIndex: 2
-};
-public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
-                { text: "Undo", tooltipText: "Undo", id: "Undo" },
-                { text: "Redo", tooltipText: "Redo", id: "Redo" }];
-  public toolbarClick(args: ClickEventArgs): void{
+  public splitterSettings: SplitterSettingsModel = {
+    columnIndex: 4
+  };
+  public toolbar: any = ["Add", "Edit", "Update", "Delete", "Cancel",
+    { text: "Undo", tooltipText: "Undo", id: "Undo" },
+    { text: "Redo", tooltipText: "Redo", id: "Redo" }];
+  public toolbarClick(args: ClickEventArgs): void {
     if (args.item.text === "Undo") {
       this.ganttInstance.undo();
     } else if (args.item.text === "Redo") {
@@ -45,8 +45,8 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
   }
   private initializeToolbar() {
     const toolbarInstance = document.querySelector('.e-gantt-toolbar');
-    const undoBtn:any = toolbarInstance.querySelector('[aria-label="Undo"]');
-    const redoBtn :any= toolbarInstance.querySelector('[aria-label="Redo"]');
+    const undoBtn: any = toolbarInstance.querySelector('[aria-label="Undo"]');
+    const redoBtn: any = toolbarInstance.querySelector('[aria-label="Redo"]');
     if (toolbarInstance) {
       if (undoBtn) {
         undoBtn.classList.add('e-overlay');
@@ -68,8 +68,8 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
   };
   private updateBadges = () => {
     const toolbarInstance = document.querySelector('.e-gantt-toolbar');
-    const undoBtn:any = toolbarInstance.querySelector('[aria-label="Undo"]');
-    const redoBtn :any= toolbarInstance.querySelector('[aria-label="Redo"]');
+    const undoBtn: any = toolbarInstance.querySelector('[aria-label="Undo"]');
+    const redoBtn: any = toolbarInstance.querySelector('[aria-label="Redo"]');
     const undoCount = this.ganttInstance.getUndoActions().length;
     const redoCount = this.ganttInstance.getRedoActions().length;
     if (undoBtn) {
@@ -81,7 +81,7 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
         undoBtn.classList.remove("e-overlay");
         undoBtn.style.cursor = "pointer";
         undoBtn.style.pointerEvents = "auto";
-      } 
+      }
     }
 
     if (redoBtn) {
@@ -89,7 +89,7 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
         redoBtn.classList.add('e-overlay');
         redoBtn.style.cursor = "default";
         redoBtn.style.pointerEvents = "none";
-   
+
       } else {
         redoBtn.classList.remove("e-overlay");
         redoBtn.style.cursor = "pointer";
@@ -117,23 +117,23 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
     let badge = button.querySelector(
       '.e-badge.e-badge-danger.e-badge-notification.e-badge-overlap.e-badge-circle'
     );
-    
+
     if (!badge) {
       badge = document.createElement('span');
       badge.className = 'e-badge e-badge-danger e-badge-notification e-badge-overlap e-badge-circle';
       button.appendChild(badge);
     }
 
-    const tailwind3 = document.body.classList.contains('tailwind3') || 
-                     document.body.classList.contains('tailwind3-dark');
-    const bootstrap5 = document.body.classList.contains('bootstrap5.3') || 
-                      document.body.classList.contains('bootstrap5.3-dark');
-    const material3 = document.body.classList.contains('material3-dark') || 
-                     document.body.classList.contains('material3');
-    const fluent2 = document.body.classList.contains('fluent2-dark') || 
-                   document.body.classList.contains('fluent2');
+    const tailwind3 = document.body.classList.contains('tailwind3') ||
+      document.body.classList.contains('tailwind3-dark');
+    const bootstrap5 = document.body.classList.contains('bootstrap5.3') ||
+      document.body.classList.contains('bootstrap5.3-dark');
+    const material3 = document.body.classList.contains('material3-dark') ||
+      document.body.classList.contains('material3');
+    const fluent2 = document.body.classList.contains('fluent2-dark') ||
+      document.body.classList.contains('fluent2');
     const fluent = document.body.classList.contains('fluent-dark') ||
-                  document.body.classList.contains('fluent');
+      document.body.classList.contains('fluent');
 
     if (tailwind3) {
       badge.style.backgroundColor = '#c2410c';
@@ -155,7 +155,7 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
       badge.style.color = '#fff';
       badge.style.paddingTop = '4px';
     }
-    else if(fluent) {
+    else if (fluent) {
       badge.style.backgroundColor = "#fde300";
       badge.style.color = "#000";
       badge.style.paddingTop = "2px";
@@ -165,19 +165,19 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
     badge.style.display = count > 0 ? 'inline-block' : 'none';
   };
   public projectStartDate: Date = new Date('06/24/2025');
-  
+
   public projectEndDate: Date = new Date('08/31/2025');
   render() {
     this.initializeToolbar();
     return (
       <div className='control-pane'>
         <div className='control-section'>
-          <GanttComponent id='ColumnMenu' ref={gantt => this.ganttInstance = gantt} treeColumnIndex={1} showColumnMenu={true} allowFiltering={true} allowSorting={true}
-            allowResizing={true} dataSource={undoRedoData} highlightWeekends={true} splitterSettings={this.splitterSettings}
+          <GanttComponent id='UndoRedo' ref={gantt => this.ganttInstance = gantt} treeColumnIndex={1} showColumnMenu={true} allowFiltering={true} allowSorting={true}
+            allowResizing={true} dataSource={undoRedoData} highlightWeekends={true} splitterSettings={this.splitterSettings} toolbarClick={this.toolbarClick.bind(this)}
             taskFields={this.taskFields} labelSettings={this.labelSettings} height='650px' taskbarHeight={25} rowHeight={46} enableUndoRedo={true} enableContextMenu={true}
             allowReordering={true} editSettings={this.editSettings} toolbar={this.toolbar} undoRedoActions={this.undoRedoActions}
             projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate} actionComplete={this.updateBadges} resizeStop={this.updateBadges}>
-              <ColumnsDirective>
+            <ColumnsDirective>
               <ColumnDirective field='TaskID' headerText='ID' width='100' ></ColumnDirective>
               <ColumnDirective field='TaskName' headerText='Name' width='250'></ColumnDirective>
               <ColumnDirective field='StartDate'></ColumnDirective>
@@ -186,25 +186,28 @@ public toolbar: any = [ "Add", "Edit", "Update", "Delete", "Cancel",
               <ColumnDirective field='Progress'></ColumnDirective>
               <ColumnDirective field='Predecessor' headerText='Dependency'></ColumnDirective>
             </ColumnsDirective>
-            <Inject services={[Selection, Filter, Sort, ColumnMenu, Resize,Edit,Reorder,UndoRedo,ContextMenu,Toolbar,DayMarkers]} />
+            <Inject services={[Selection, Filter, Sort, ColumnMenu, Resize, Edit, Reorder, UndoRedo, ContextMenu, Toolbar, DayMarkers]} />
           </GanttComponent>
         </div>
-         <div id="action-description">
-            <p>This sample showcases the undo-redo functionality in the Gantt Chart, allowing users to revert or reapply their recent actions such as task edits, additions, and deletions.</p>
+        <div id="action-description">
+          <p>This sample showcases the undo-redo functionality in the Gantt Chart, allowing users to revert or reapply their recent actions such as task edits, additions, and deletions.</p>
         </div>
         <div id="description">
-            <p>The undo feature lets users reverse the most recent changes made to tasks, dependencies, columns, or timeline settings. The redo feature restores actions that were previously undone. Both can be triggered using keyboard shortcuts (<code>Ctrl + Z</code> for Undo, <code>Ctrl + Y</code> for Redo) or via toolbar buttons.</p>
-            <p>
-                You can configure which actions are tracked using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#undoredoactions">undoRedoActions</a> property. Supported actions include: 
-                <code>Edit</code>, <code>Add</code>, <code>Delete</code>, <code>Sorting</code>, <code>ColumnReorder</code>, <code>ColumnResize</code>, <code>Search</code>, <code>Filtering</code>, <code>ZoomIn</code>, <code>ZoomOut</code>, <code>ZoomToFit</code>, <code>ColumnState</code>, <code>Indent</code>, <code>Outdent</code>, <code>RowDragAndDrop</code>, <code>TaskbarDragAndDrop</code>, <code>PreviousTimeSpan</code>, and <code>NextTimeSpan</code>
-            </p>
-            <p>The number of undo-redo steps stored can be controlled using the <code>undoRedoStepsCount</code> property, which defaults to 10.</p>
-            <p>
-                In this demo, the undo-redo feature is enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#enableundoredo">
-                enableUndoRedo</a> to <code>true</code>
-            </p>
-            <br/>
-            <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/undo-redo">documentation section</a>.</p>
+          <p>The undo feature lets users reverse the most recent changes made to tasks, dependencies, columns, or timeline settings. The redo feature restores actions that were previously undone. Both can be triggered using keyboard shortcuts (<code>Ctrl + Z</code> for Undo, <code>Ctrl + Y</code> for Redo) or via toolbar buttons.</p>
+          <p>
+            You can configure which actions are tracked using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#undoredoactions">undoRedoActions</a> property. Supported actions include:
+            <code>Edit</code>, <code>Add</code>, <code>Delete</code>, <code>Sorting</code>, <code>ColumnReorder</code>, <code>ColumnResize</code>, <code>Search</code>, <code>Filtering</code>, <code>ZoomIn</code>, <code>ZoomOut</code>, <code>ZoomToFit</code>, <code>ColumnState</code>, <code>Indent</code>, <code>Outdent</code>, <code>RowDragAndDrop</code>, <code>TaskbarDragAndDrop</code>, <code>PreviousTimeSpan</code>, and <code>NextTimeSpan</code>
+          </p>
+          <p>The number of undo-redo steps stored can be controlled using the <code>undoRedoStepsCount</code> property, which defaults to 10.</p>
+          <p>
+            In this demo, the undo-redo feature is enabled by setting <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#enableundoredo">
+              enableUndoRedo</a> to <code>true</code>
+          </p>
+          <p>
+          Gantt control features are segregated into individual feature-wise modules. To use a UndoRedo, Filter, sorting, columnMenu, contextMenu, Edit, Toolbar, Sorting, Resize, Reorder, Selection and markers features, we need to inject the <code>UndoRedo</code>, <code>Filter</code>, <code>Sort</code>,  <code>ColumnMenu</code>,  <code>ContextMenu</code>, <code>Edit</code>, <code>Toolbar</code>, <code>Resize</code>, <code>Reorder</code>, <code>Selection</code>, and <code>DayMarkers</code> into the <code>Inject Services</code> section.
+          </p>
+          <br/>
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/undo-redo">documentation section</a>.</p>
         </div>
 
       </div>

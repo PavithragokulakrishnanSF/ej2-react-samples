@@ -166,32 +166,34 @@ export class Paging extends SampleBase<{}, {}> {
                         properties are explained in-detail below:
                     </p>
                     <table>
-                        <tr>
-                            <td style={{ verticalAlign: "top", padding: "4px 0" }}>
-                                <code>currentRowPage :</code>
-                            </td>
-                            <td>Holds the current page number, row-wise. You can also change the page number at runtime.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: "top", padding: "10px 0", width: '180px' }}>
-                                <code>currentColumnPage :</code>
-                            </td>
-                            <td>Holds the current page number, column-wise. You can also change the page number at runtime.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: "top", padding: "4px 0" }}>
-                                <code>rowPageSize :</code>
-                            </td>
-                            <td>Indicates the number of records to be displayed in each page, row-wise. You can also change the page
-                                size at runtime.</td>
-                        </tr>
-                        <tr>
-                            <td style={{ verticalAlign: "top", padding: "4px 0" }}>
-                                <code>columnPageSize :</code>
-                            </td>
-                            <td>Indicates the number of records to be displayed in each page, column-wise. You can also change the page
-                                size at runtime.</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td style={{ verticalAlign: "top", padding: "4px 0" }}>
+                                    <code>currentRowPage :</code>
+                                </td>
+                                <td>Holds the current page number, row-wise. You can also change the page number at runtime.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: "top", padding: "10px 0", width: '180px' }}>
+                                    <code>currentColumnPage :</code>
+                                </td>
+                                <td>Holds the current page number, column-wise. You can also change the page number at runtime.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: "top", padding: "4px 0" }}>
+                                    <code>rowPageSize :</code>
+                                </td>
+                                <td>Indicates the number of records to be displayed in each page, row-wise. You can also change the page
+                                    size at runtime.</td>
+                            </tr>
+                            <tr>
+                                <td style={{ verticalAlign: "top", padding: "4px 0" }}>
+                                    <code>columnPageSize :</code>
+                                </td>
+                                <td>Indicates the number of records to be displayed in each page, column-wise. You can also change the page
+                                    size at runtime.</td>
+                            </tr>
+                        </tbody>
                     </table>
                     <br />
                     <p>Also, you can customize the paging UI by changing the position, visibility, page size, and other settings for
@@ -199,6 +201,7 @@ export class Paging extends SampleBase<{}, {}> {
                         in-detail below:
                     </p>
                     <table>
+                        <tbody>
                         <tr>
                             <td style={{ verticalAlign: "top", padding: "10px 0", width: '180px' }}>
                                 <code>position :</code>
@@ -263,6 +266,7 @@ export class Paging extends SampleBase<{}, {}> {
                             <td>Allows you to change the appearance of the pager UI by displaying user-defined HTML elements instead of
                                 built-in HTML elements.</td>
                         </tr>
+                        </tbody>
                     </table>
                     <br />
                     <p>

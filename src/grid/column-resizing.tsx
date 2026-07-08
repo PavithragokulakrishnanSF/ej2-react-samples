@@ -58,6 +58,10 @@ export class ColumnResizing extends SampleBase<{}, {}> {
                     Grid features are segregated into individual feature-wise modules. 
                     To use resize feature, inject the<code>Resize</code> module using the <code>services</code>
                     </p>
+                    <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                        <a target="_blank"
+                            href="https://www.syncfusion.com/react-components/react-data-grid">
+                            React Data Grid component</a> page.</p>
 
                 </div>
             </div>

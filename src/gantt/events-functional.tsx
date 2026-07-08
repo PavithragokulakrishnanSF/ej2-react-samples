@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ContextMenu, Reorder, Resize, ColumnMenu, Toolbar, Edit, Filter, Sort, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ContextMenu, Reorder, Resize, ColumnMenu, Toolbar, Edit, Filter, Sort, ColumnsDirective, ColumnDirective, EditSettingsModel, ToolbarItem, LabelSettingsModel, SplitterSettingsModel, ColumnModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
@@ -12,7 +11,7 @@ const Events = () => {
     updateSampleSection();
   }, [])
   let eventLog = useRef<HTMLSpanElement>(null)
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: "TaskID",
     name: "TaskName",
     startDate: "StartDate",
@@ -22,7 +21,7 @@ const Events = () => {
     dependency: "Predecessor",
     parentID: 'ParentId'
   };
-  const columns: any = [
+  const columns: ColumnModel[] = [
     { field: "TaskID", width: 80 },
     { field: "TaskName", width: 250 },
     { field: "StartDate" },
@@ -31,7 +30,7 @@ const Events = () => {
     { field: "Predecessor" },
     { field: "Progress" },
   ];
-  const toolbar: any = [
+  const toolbar: ToolbarItem[] = [
     "Add",
     "Edit",
     "Update",
@@ -41,16 +40,16 @@ const Events = () => {
     "CollapseAll",
     "Search",
   ];
-  const editSettings: any = {
+  const editSettings: EditSettingsModel = {
     allowEditing: true,
     allowAdding: true,
     allowDeleting: true,
     allowTaskbarEditing: true,
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: "TaskName",
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 2,
   };
   const projectStartDate: Date = new Date("03/26/2025");
@@ -258,32 +257,32 @@ const Events = () => {
               title="Event Trace"
               style={{ width: "100%" }}
             >
-            <tbody>
-              <tr>
-                <td>
-                  <div
-                    className="eventarea"
-                    style={{ height: "346px", overflow: "auto" }}
-                  >
-                    <span
-                      className="EventLog"
-                      id="EventLog"
-                      style={{ wordBreak: "normal" }}
-                      ref={eventLog}
-                    ></span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style={{ width: "50%", padding: "20px 10px 10px 80px" }}>
-                  <div>
-                    <ButtonComponent onClick={clear.bind(this)}>
-                      {" "}
-                      Clear{" "}
-                    </ButtonComponent>
-                  </div>
-                </td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>
+                    <div
+                      className="eventarea"
+                      style={{ height: "346px", overflow: "auto" }}
+                    >
+                      <span
+                        className="EventLog"
+                        id="EventLog"
+                        style={{ wordBreak: "normal" }}
+                        ref={eventLog}
+                      ></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ width: "50%", padding: "20px 10px 10px 80px" }}>
+                    <div>
+                      <ButtonComponent onClick={clear.bind(this)}>
+                        {" "}
+                        Clear{" "}
+                      </ButtonComponent>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </PropertyPane>
@@ -313,33 +312,11 @@ const Events = () => {
           and see the <strong>Event Trace</strong> panel for the events emitted.
         </p>
         <p>
-          Gantt component features are segregated into individual feature-wise
-          modules. To use a selection, inject the
-          <code>Selection</code> module using the{" "}
-          <code>Gantt.Inject(Selection)</code> method.To use a sorting, inject
-          the
-          <code>Sort</code> module using the <code>Gantt.Inject(Sort)</code>{" "}
-          method.To reorder column, inject the
-          <code>Reorder</code> module using the{" "}
-          <code>Gantt.Inject(Reorder)</code> method.To resize column width,
-          inject the
-          <code>Resize</code> module using the <code>Gantt.Inject(Resize)</code>{" "}
-          method.To use a contextmenu, inject the
-          <code>Contextmenu</code> module using the{" "}
-          <code>Gantt.Inject(Contextmenu)</code> method.To use a columnmenu,
-          inject the
-          <code>ColumnMenu</code> module using the{" "}
-          <code>Gantt.Inject(ColumnMenu)</code> method.To use a toolbar, inject
-          the
-          <code>Toolbar</code> module using the{" "}
-          <code>Gantt.Inject(Toolbar)</code> method.To use a edit, inject the
-          <code>Edit</code> module using the <code>Gantt.Inject(Edit)</code>{" "}
-          method.To use markers, inject the
-          <code>DayMarkers</code> module using the{" "}
-          <code>Gantt.Inject(DayMarkers)</code> method.
+          Gantt component features are segregated into individual feature-wise modules. To use a selection, markers, contextMenu, reorder, resize, columnMenu, toolbar, edit, filter, and sort, inject the 
+          <code>Selection</code>, <code>DayMarkers</code>, <code>ContextMenu</code>, <code>Reorder</code>, <code>Resize</code>, <code>ColumnMenu</code>, <code>Toolbar</code>, <code>Edit</code>, <code>Filter</code>, and <code>Sort</code> into the <code>Inject Services</code> section.
         </p>
         <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/getting-started#adding-gantt-component">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/events">documentation section</a>.</p>
       </div>
     </div>
   );

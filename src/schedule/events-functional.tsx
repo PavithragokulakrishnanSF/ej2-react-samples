@@ -116,6 +116,9 @@ const Events = () => {
           user can make use of these events, if at some point they need to perform some custom actions or any needed additional
           customizations on the available Scheduler features.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

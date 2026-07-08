@@ -4,7 +4,7 @@ export const AIPivotTableSampleOrder: Object = [
         'component': 'AssistivePivot', 
         'name': 'Assistive Pivot', 
         'description': 'This demo shows the data operations on natural language using AI feature in Pivot Table.', 
-        'order': '01', 
+        'order': '07', 
         'type': 'New', 
         'category': 'Pivot Table',
         'sourceFiles': [
@@ -19,7 +19,7 @@ export const AIPivotTableSampleOrder: Object = [
         'component': 'SmartPivot', 
         'name': 'Smart Pivot', 
         'description': 'This demo showcases the Pivot Table AI feature.', 
-        'order': '01',
+        'order': '07',
         'category': 'Pivot Table',
         'sourceFiles': [
             { 'displayName': 'smart-pivot.tsx', 'path': 'src/ai-pivot-table/ai-smart-pivot.tsx' }, 

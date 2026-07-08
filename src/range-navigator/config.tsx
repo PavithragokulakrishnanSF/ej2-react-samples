@@ -65,6 +65,7 @@ export const RangeNavigatorSampleOrder: Object = [
     },
     {
         'path': 'range-navigator/filter',
+        'ignoreOnBuild': true,
         'component': 'Customization',
         'name': 'Filter',
         'description': 'This demo for Essential JS2 Range Navigator control shows how to bind the filtered values of the range navigator to grid control.',

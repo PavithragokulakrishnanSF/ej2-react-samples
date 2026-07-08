@@ -274,7 +274,35 @@ let htmlSymbolHeight = 100;
 function SymbolPalette() {
   React.useEffect(() => {
     updateSampleSection();
+    renderComplete();
   }, [])
+  function renderComplete() {
+    addEvents();
+  }
+
+  let isMobile: boolean;
+ //Enhances webpage functionality for mobile devices with a click event listener.
+  function addEvents(): void {
+    isMobile = window.matchMedia('(max-width:550px)').matches;
+    if (isMobile) {
+      let paletteIcon: HTMLElement = paletteIconInstance;
+      if (paletteIcon) {
+        paletteIcon.addEventListener('click', openPalette, false);
+      }
+    }
+  }
+// Manages the visibility state of the palette space on the webpage for mobile devices.
+  function openPalette(): void {
+    let paletteSpace: HTMLElement = paletteSpaceInstance;
+    isMobile = window.matchMedia('(max-width:550px)').matches;
+    if (isMobile) {
+      if (!paletteSpace.classList.contains('sb-mobile-palette-open')) {
+        paletteSpace.classList.add('sb-mobile-palette-open');
+      } else {
+        paletteSpace.classList.remove('sb-mobile-palette-open');
+      }
+    }
+  }
   //set Node default value
   function symbolDefaults(symbol: NodeModel): NodeModel {
     if (symbol.shape.type === 'HTML') {
@@ -393,7 +421,9 @@ function SymbolPalette() {
               ></div>
             </div>
             {/* Column 1: Palette */}
-
+            <div
+              id="palette-space" ref={(paletteSpace) => (paletteSpaceInstance = paletteSpace)} className="sb-mobile-palette"
+            >
             <SymbolPaletteComponent
               id="symbolpalette"
               ref={(symbolpal: SymbolPaletteComponent) => (palette = symbolpal)}
@@ -441,6 +471,7 @@ function SymbolPalette() {
               getSymbolInfo={symbolInfo.bind(this)}
               symbolMargin={{ left: 15, right: 15, top: 15, bottom: 15 }}
             />
+          </div>
           </div>
 
           {/* Column 2: Diagram (expands to fill space) */}
@@ -580,7 +611,7 @@ function SymbolPalette() {
       </div>
       <div id="description">
         <p>
-          This example demonstrates how to add shapes to a symbol palette and customize their appearance using the Syncfusion Diagram component. Symbol sizes can be adjusted using the <code>width</code> and <code>height</code> properties via the <code>getSymbolInfo</code> method.
+          This example demonstrates how to add shapes to a symbol palette and customize their appearance using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> component. Symbol sizes can be adjusted using the <code>width</code> and <code>height</code> properties via the <code>getSymbolInfo</code> method.
         </p>
         <p>Additional features include:</p>
         <ul>

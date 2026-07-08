@@ -520,7 +520,7 @@ function VisioImportExport() {
       </div>
       <div id="action-description">
         <p>
-          This sample demonstrates how to import and export Visio diagrams using the Syncfusion<sup>®</sup> EJ2 React Diagram. Any Visio file (.vsdx) can be imported to visualize and edit workflows, and the customized diagram can then be exported back to Visio format (.vsdx) for seamless collaboration and interoperability.
+          This sample demonstrates how to import and export Visio diagrams using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a>. Any Visio file (.vsdx) can be imported to visualize and edit workflows, and the customized diagram can then be exported back to Visio format (.vsdx) for seamless collaboration and interoperability.
         </p>
       </div>
       <div id="description">

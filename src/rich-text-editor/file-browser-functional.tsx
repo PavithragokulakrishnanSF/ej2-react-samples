@@ -10,18 +10,17 @@ function FileBrowser() {
     React.useEffect(() => {
         updateSampleSection();
     }, [])
-    const hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
+    const hostUrl: string = 'https://services.syncfusion.com/react/production/';
     const toolbarSettings: ToolbarSettingsModel = {
         items: ['FileManager', 'Image']
     }
     const fileManagerSettings: FileManagerSettingsModel = {
         enable: true,
-        path: '/Pictures/Food',
         ajaxSettings: {
-            url: hostUrl + 'api/FileManager/FileOperations',
-            getImageUrl: hostUrl + 'api/FileManager/GetImage',
-            uploadUrl: hostUrl + 'api/FileManager/Upload',
-            downloadUrl: hostUrl + 'api/FileManager/Download'
+            url: hostUrl + 'api/RichTextEditor/FileOperations',
+            getImageUrl: hostUrl + 'api/RichTextEditor/GetImage',
+            uploadUrl: hostUrl + 'api/RichTextEditor/Upload',
+            downloadUrl: hostUrl + 'api/RichTextEditor/Download'
         }
     }
     return (

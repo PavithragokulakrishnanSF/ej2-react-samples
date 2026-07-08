@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { useEffect,useState,useRef  } from 'react';
-import { GanttComponent, Inject, Selection, ColumnsDirective, ColumnDirective,VirtualScroll  } from '@syncfusion/ej2-react-gantt';
+import { useEffect, useState, useRef } from 'react';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, ColumnsDirective, ColumnDirective, VirtualScroll, GridLine, TimelineSettingsModel, SplitterSettingsModel, LabelSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
 import { updateSampleSection } from '../common/sample-base';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
@@ -13,19 +12,19 @@ const RemoteData = () => {
   const recordCount = useRef<string>("1000");
   const dataSource: DataManager = new DataManager({
     url: `https://services.syncfusion.com/react/production/api/GanttWebApiRemoteData?count=${recordCount.current}`,
-    adaptor: new WebApiAdaptor,
+    adaptor: new WebApiAdaptor(),
     crossDomain: true
   });
   const [loadTime, setLoadTime] = useState<string>("");
   const [startLoadTime, setStartLoadTime] = useState<Date | null>(new Date());
-  const shouldCalculateLoadTime = useRef<Boolean>(true);
+  const shouldCalculateLoadTime = useRef<boolean>(true);
   const dropdownData = [
     { Text: "1,000 Rows", Value: "1000" },
     { Text: "2,500 Rows", Value: "2500" },
     { Text: "5,000 Rows", Value: "5000" },
   ];
   const dropdownFields = { text: "Text", value: "Value" };
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: "TaskId",
     name: "TaskName",
     startDate: "StartDate",
@@ -37,8 +36,8 @@ const RemoteData = () => {
   };
   const projectStartDate = new Date("12/29/2024");
   const projectEndDate = new Date("03/19/2025");
-  const gridLines: any = "Horizontal";
-  const timelineSettings: any = {
+  const gridLines: GridLine = "Horizontal";
+  const timelineSettings: TimelineSettingsModel = {
     timelineUnitSize: 50,
     topTier: {
       unit: 'Week',
@@ -49,8 +48,8 @@ const RemoteData = () => {
       format: 'dd'
     },
   };
-  
-  const labelSettings: any = {
+
+  const labelSettings: LabelSettingsModel = {
     rightLabel: "TaskName",
     taskLabel: "Progress"
   };
@@ -58,7 +57,7 @@ const RemoteData = () => {
     setStartLoadTime(new Date());
     shouldCalculateLoadTime.current = true;
   };
-  const splitterSettings: any={
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
   const onDropdownChange = (e: any) => {
@@ -70,15 +69,15 @@ const RemoteData = () => {
       shouldCalculateLoadTime.current = false;
       const endLoadTime = new Date();
       const diff = endLoadTime.getTime() - startLoadTime.getTime();
-      setLoadTime((diff/1000).toFixed(2));  
+      setLoadTime((diff / 1000).toFixed(2));
     }
   };
   return (
     <div className='control-pane'>
       <div className='control-section'>
         <div
-          style={{display: "flex",}}>
-         <div style={{ width: "130px",paddingBottom: "10px" }}>
+          style={{ display: "flex", }}>
+          <div style={{ width: "130px", paddingBottom: "10px" }}>
             <DropDownListComponent
               dataSource={dropdownData}
               fields={dropdownFields}
@@ -87,13 +86,13 @@ const RemoteData = () => {
               placeholder="1,000 Rows"
             />
           </div>
-          <span style={{ paddingLeft: "20px", fontSize: "15px", marginTop: "5px"}}>
-          <b>Data initial load time:</b> {loadTime} sec
+          <span style={{ paddingLeft: "20px", fontSize: "15px", marginTop: "5px" }}>
+            <b>Data initial load time:</b> {loadTime} sec
           </span>
         </div>
         <GanttComponent id='RemoteData' dataSource={dataSource} allowSorting={true} dateFormat={'MMM dd, y'}
           treeColumnIndex={1} allowSelection={true} highlightWeekends={false} includeWeekend={true} splitterSettings={splitterSettings}
-          allowUnscheduledTasks={true} projectStartDate={projectStartDate} projectEndDate={projectEndDate} enableVirtualization= {true} enableTimelineVirtualization={true}
+          allowUnscheduledTasks={true} projectStartDate={projectStartDate} projectEndDate={projectEndDate} enableVirtualization={true} enableTimelineVirtualization={true}
           taskFields={taskFields} gridLines={gridLines} timelineSettings={timelineSettings} labelSettings={labelSettings}
           dataBound={onDataBound} height='650px' rowHeight={46} taskbarHeight={25} >
           <ColumnsDirective>
@@ -101,7 +100,7 @@ const RemoteData = () => {
             <ColumnDirective field='TaskName' headerText="Project Activity" width='250' clipMode='EllipsisWithTooltip'></ColumnDirective>
             <ColumnDirective field='StartDate' headerText="Planned Start Date"></ColumnDirective>
             <ColumnDirective field="Duration" headerText="Duration"></ColumnDirective>
-            <ColumnDirective field="Progress"headerText="Completion (%)"></ColumnDirective>
+            <ColumnDirective field="Progress" headerText="Completion (%)"></ColumnDirective>
           </ColumnsDirective>
           <Inject services={[Selection, VirtualScroll]} />
         </GanttComponent>
@@ -119,32 +118,31 @@ const RemoteData = () => {
       <div id="description">
         <p>
           The <code>dataSource</code> property in Gantt Chart can be assigned with the instance of
-          <code>DataManager</code> to bind remote data.
-          The DataManager, which will act as an interface between the service endpoint and the Gantt Chart, will require
+          <code>DataManager</code> to bind remote data. The DataManager, which will act as an interface between the service endpoint and the Gantt Chart, will require
           the below minimal information to interact with service endpoint properly.
+        </p>
+        <ul>
           <li><code>DataManager-&gt;url</code> - Defines the service endpoint to fetch data</li>
-          <li><code>DataManager-&gt;adaptor</code> - Defines the adaptor option. By default, ODataAdaptor is used for remote
-            binding.</li>
-          Adaptor is responsible for processing response and request from/to the service endpoint.
-          <code>@syncfusion/ej2-data</code>
-          package provides some predefined adaptors which are designed to interact with particular service endpoints. They
-          are,
-          <li><code>UrlAdaptor</code> - Use this to interact any remote services. This is the base adaptor for all remote
-            based adaptors.</li>
+          <li><code>DataManager-&gt;adaptor</code> - Defines the adaptor option. By default, ODataAdaptor is used for remote binding.</li>
+        </ul>
+        <p>
+          Adaptor is responsible for processing response and request from/to the service endpoint. The <code>@syncfusion/ej2-data</code> package provides some predefined adaptors which are designed to interact with particular service endpoints. They are:
+        </p>
+        <ul>
+          <li><code>UrlAdaptor</code> - Use this to interact any remote services. This is the base adaptor for all remote based adaptors.</li>
           <li><code>ODataAdaptor</code> - Use this to interact with OData endpoints.</li>
           <li><code>ODataV4Adaptor</code> - Use this to interact with OData V4 endpoints.</li>
           <li><code>WebApiAdaptor</code> - Use this to interact with Web API created under OData standards.</li>
           <li><code>WebMethodAdaptor</code> - Use this to interact with web methods.</li>
-          In this demo, remote data is bound by assigning service data as an instance of <code>DataManager</code> to the
-          <code>dataSource</code>
-          property.
-          More information on the data binding can be found in this documentation section.
+        </ul>
+        <p>
+          In this demo, remote data is bound by assigning service data as an instance of <code>DataManager</code> to the <code>dataSource</code> property. More information on the data binding can be found in this documentation section.
         </p>
         <p>
-          Gantt component features are segregated into individual feature-wise modules. To use a selection feature, inject the
-          <code>Selection</code> module.
+          Gantt component features are segregated into individual feature-wise modules. To use a virtual scroll and selection feature, we need to inject
+          the <code>VirtualScroll</code> and <code>Selection</code> into the <code>Inject Services</code> section.
         </p>
-        <br/>
+        <br />
         <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/data-binding#remote-data">documentation section</a>.</p>
       </div>
     </div>

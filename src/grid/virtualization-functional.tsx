@@ -18,7 +18,6 @@ function Virtualization() {
     let date2: number;
     let flag: boolean = true;
     let enableVirtualization: boolean = true;
-    let loadButton: ButtonComponent | null = null;
     let data: Object[] = [];
     const toolbarOptions: any = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
     const editSettings: any = { allowEditing: true, allowDeleting: true, newRowPosition: 'Top' };
@@ -152,13 +151,17 @@ function Virtualization() {
     };
 
     function onclick() {
-        loadButton.disabled = true;
         if (!data.length) {
             show();
             createVirtualOrderData();
             date1 = new Date().getTime();
             grid.dataSource = data = virtualOrderData;
             grid.editSettings.allowAdding = true;
+        } else {
+            flag = true;
+            show();
+            date1 = new Date().getTime();
+            grid.refresh();
         }
     }
     function show() {
@@ -182,7 +185,7 @@ function Virtualization() {
         <div className='control-pane'>
             <div className='control-section'>
                 <div className='div-button'>
-                    <ButtonComponent cssClass={'e-info'} ref={(btn) => { loadButton = btn; }} onClick={onclick.bind(this)}>Load 100K Data</ButtonComponent>
+                    <ButtonComponent cssClass={'e-info'} onClick={onclick.bind(this)}>Load 100K Data</ButtonComponent>
                     <span id="popup">
                         <span id="gif" className="imagepop"></span>
                     </span>
@@ -194,8 +197,8 @@ function Virtualization() {
                         <ColumnDirective field="OrderID" headerText="Order ID" width={110} isPrimaryKey={true} validationRules={{ required: true }} />
                         <ColumnDirective field="OrderDate" headerText="Order Date" width={140} format="yMd" textAlign="Right" editType="datepickeredit" />
                         <ColumnDirective field="ShipDate" headerText="Ship Date" width={140} format="yMd" textAlign="Right" editType="datepickeredit" />
-                        <ColumnDirective field="OrderStatus" headerText="Order Status" width={140} textAlign="Center" editType="dropdownedit" template={orderStatusTemplate} validationRules={{ required: true }} />
-                        <ColumnDirective field="Priority" headerText="Priority" width={120} textAlign="Center" editType="dropdownedit" template={priorityTemplate} validationRules={{ required: true }} />
+                        <ColumnDirective field="OrderStatus" headerText="Order Status" width={140} textAlign="Center" editType="dropdownedit" template={orderStatusTemplate} validationRules={{ required: true }}/>
+                        <ColumnDirective field="Priority" headerText="Priority" width={120} textAlign="Center" editType="dropdownedit" template={priorityTemplate} />
                         <ColumnDirective field="CustomerName" headerText="Customer Name" width={190} validationRules={{ required: true }} />
                         <ColumnDirective field="CustomerID" headerText="Customer ID" width={110} visible={false} />
                         <ColumnDirective field="Email" headerText="Email" width={200} />
@@ -218,8 +221,8 @@ function Virtualization() {
                         <ColumnDirective field="TaxAmount" headerText="Tax Amount" width={110} format="C2" textAlign="Right" editType="numericedit" edit={{ params: { showSpinButton: false } }} />
                         <ColumnDirective field="ShipFee" headerText="Ship Fee" width={120} format="C2" textAlign="Right" editType="numericedit" edit={{ params: { showSpinButton: false } }} />
                         <ColumnDirective field="TotalAmount" headerText="Total Amount" width={120} format="C2" textAlign="Right" editType="numericedit" edit={{ params: { showSpinButton: false } }} />
-                        <ColumnDirective field="PaymentMethod" headerText="Payment Method" width={140} editType="dropdownedit" template={paymentMethodTemplate} validationRules={{ required: true }} />
-                        <ColumnDirective field="PaymentStatus" headerText="Payment Status" width={140} textAlign="Center" editType="dropdownedit" template={paymentStatusTemplate} validationRules={{ required: true }} />
+                        <ColumnDirective field="PaymentMethod" headerText="Payment Method" width={140} editType="dropdownedit" template={paymentMethodTemplate} validationRules={{ required: true }}/>
+                        <ColumnDirective field="PaymentStatus" headerText="Payment Status" width={140} textAlign="Center" editType="dropdownedit" template={paymentStatusTemplate} validationRules={{ required: true }}/>
                         <ColumnDirective field="Rating" headerText="Delivery Rating" width={160} textAlign="Center" visible={false} template={ratingTemplate} editType="dropdownedit" />
                     </ColumnsDirective>
                     <Inject services={[VirtualScroll, Toolbar, Edit]} />
@@ -232,11 +235,16 @@ function Virtualization() {
             <div id='description'>
                 <p>The virtual scrolling feature in the Grid renders only the rows and columns that are currently visible in the viewport, rather than loading the entire dataset into the DOM. This approach significantly improves performance when working with large data sources by reducing the number of DOM elements.</p>
                 <p>To enable row virtualization, set the
-                    <code>enableVirtualization</code>
+                    <code><a aria-label="API link for documentation" target="_blank"
+                                    className="code" href="http://ej2.syncfusion.com/react/documentation/api/grid/#enablevirtualization">enableVirtualization</a></code>
                     property to <code>true</code>. For column virtualization, set the
-                    <code>enableColumnVirtualization</code> property to <code>true</code>. When using virtualization, it is essential to define the <code>height</code>
+                    <code><a target="_blank" className="code"
+                    href="http://ej2.syncfusion.com/react/documentation/api/grid/#enablecolumnvirtualization">enableColumnVirtualization</a></code> property to <code>true</code>. When using virtualization, it is essential to define the <code><a aria-label="API link for documentation" target="_blank" className="code"
+                    href="http://ej2.syncfusion.com/react/documentation/api/grid/#height">height</a></code>
                     property so that the Grid
-                    can accurately calculate the number of visible rows. For seamless scrolling, set <code>args.enableSeamlessScrolling</code> as <code>true</code> in the Grid's <code>load</code> event. This ensures smooth vertical and horizontal transitions, providing a smoother experience during fast scrolling when virtualization is enabled.
+                    can accurately calculate the number of visible rows. For seamless scrolling, set <code><a target="_blank" className="code"
+                    href="https://ej2.syncfusion.com/react/documentation/api/grid/loadeventargs#enableSeamlessScrolling">args.enableSeamlessScrolling</a></code> as <code>true</code> in the Grid's <code><a target="_blank" className="code"
+                    href="https://ej2.syncfusion.com/react/documentation/api/grid/index-default#load">load</a></code> event. This ensures smooth vertical and horizontal transitions, providing a smoother experience during fast scrolling when virtualization is enabled.
                 </p>
                 <p>
                     In this example, click the "Load 100K Data" button to bind a dataset containing 100,000 rows and 30 columns. Then, scroll vertically and horizontally to experience the virtualized rendering in action. Full data editing support is available with the virtualization feature.
@@ -245,6 +253,9 @@ function Virtualization() {
                 <p>Features of the Grid component are organized into individual, feature-specific modules. To use the virtual scrolling functionality, inject the <code>VirtualScroll</code> module into the <code>services</code>.</p>
                 <p>For more detailed information about virtual scrolling, refer to this <a aria-label="API link for documentation" target="_blank"
                     href="https://ej2.syncfusion.com/react/documentation/grid/scrolling/virtual-scrolling">documentation.</a></p>
+                <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                        <a target="_blank"
+                            href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
             </div>
         </div>
     )

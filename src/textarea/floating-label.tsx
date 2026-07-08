@@ -49,14 +49,16 @@ export class FloatingLabel extends SampleBase<{}, {}> {
                 </div>
                 <div className='col-lg-4 property-section' id="floatinglabel">
                     <PropertyPane title='Properties'>
-                        <table id="property" title="Properties" className="floatinglabel-property">
+                    <table id="property" title="Properties" className="floatinglabel-property">
+                        <tbody>
                             <tr>
                                 <td className="left-side">Float label type </td>
                                 <td>
                                     <DropDownListComponent id="float" value={this.value} dataSource={this.floatLabelData} ref={(dropdownlist) => { this.floatLabelObj = dropdownlist }} fields={this.fields} change={this.floatLabelHandler.bind(this)} />
                                 </td>
                             </tr>
-                        </table>
+                        </tbody>
+                    </table>
                     </PropertyPane>
                 </div>
                 <div id="action-description">

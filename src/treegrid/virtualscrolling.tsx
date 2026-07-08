@@ -150,7 +150,7 @@ export class VirtualScrolling extends SampleBase<{}, {}> {
     };
 
     public actionBegin = (args: any) => {
-        if(args.requestType === 'save') {
+        if(args.requestType === 'save' && args.action !== 'edit') {
             args.data.TaskID = 10000 + Math.floor(Math.random() * 10001);
         }
     }
@@ -229,7 +229,7 @@ export class VirtualScrolling extends SampleBase<{}, {}> {
                         This demo showcases a self‑referential data source containing 10,000 records. In the TreeGrid, the hierarchical relationship is established by mapping the <code>parentIdMapping</code> property to the "ParentID" field and the <code>idMapping</code> property to the "TaskID" field in the data source.
                         The toolbar enables full CRUD operations along with hierarchy management options:
                     </p>
-                     <ul>
+                    <ul>
                         <li><code>Indent</code>: Moves the selected row to become the last child of the row directly above it.</li>
                         <li><code>Outdent</code>: Moves the selected row up one level, making it a sibling of its previous parent.</li>
                     </ul>
@@ -243,6 +243,9 @@ export class VirtualScrolling extends SampleBase<{}, {}> {
                         More information on the Virtual Scrolling can be found in <a target="_blank"
                             href="https://ej2.syncfusion.com/react/documentation/treegrid/virtual-scroll"
                             aria-label="Navigate to the documentation for virtual-scroll in React TreeGrid control">documentation </a> section.
+                    </p>
+                    <p>
+                        Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
                     </p>
                 </div>
             </div>

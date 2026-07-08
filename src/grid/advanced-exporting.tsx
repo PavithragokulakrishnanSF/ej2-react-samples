@@ -215,6 +215,9 @@ export class AdvancedExporting extends SampleBase<{}, {}> {
             <p style={{ fontWeight: 500 }}>Injecting Module:</p>
             <p>Grid features are segregated into individual feature-wise modules. To use exporting feature, we need to inject <code>ExcelExport</code>
               and <code>PdfExport</code> module into the <code>services</code></p>
+            <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our 
+            <a target="_blank"
+              href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
           </div>
         </div>
       </div>

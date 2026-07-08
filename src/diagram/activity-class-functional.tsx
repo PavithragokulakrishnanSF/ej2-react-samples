@@ -500,10 +500,10 @@ function UMLClassDiagram() {
       <div className="control-section">
         <div style={{ width: "100%" }}>
           <div className="sb-mobile-palette-bar">
-            <div id="palette-icon" style={{ float: "right" }} className="e-ddb-icons1 e-toggle-palette"></div>
+            <div id="palette-icon" ref={(paletteIcon) => (paletteIconInstance = paletteIcon)} style={{ float: "right" }} className="e-ddb-icons1 e-toggle-palette"></div>
           </div>
           <div
-            id="palette-space" className="sb-mobile-palette"
+            id="palette-space" ref={(paletteSpace) => (paletteSpaceInstance = paletteSpace)} className="sb-mobile-palette"
           >
             <SymbolPaletteComponent
               id="symbolpalette"
@@ -574,7 +574,9 @@ function UMLClassDiagram() {
                <code>shape</code> can be used to create <code>UMLClass</code> nodes. The <code>shape</code> property of the shape allows you to create UML
                Class shapes.
            </p>
-      </div>
+      
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
     </div>
   );
 }

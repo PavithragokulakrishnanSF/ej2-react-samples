@@ -1,4 +1,4 @@
-// Import React and necessary components from Syncfusion's EJ2 React Diagrams library for building the diagram.
+// Import React and necessary components from React Diagram library for building the diagram.
 import * as React from "react";
 import {
     PointPortModel,
@@ -487,10 +487,10 @@ function Port() {
             </div>
             <div id="description">
                 <p>
-                    This example shows how to add connection ports to shapes. The{" "}
+                    This example shows how to add connection ports to shapes. The {" "}
                     <code>ports</code> property of the node defines the static
-                    connection ports. The <code>offset</code>,
-                    <code>horizontalAlignment</code>, <code>verticalAlignment</code> and{" "}
+                    connection ports. The <code>offset</code>, 
+                    <code>horizontalAlignment</code>, <code>verticalAlignment</code> and {" "}
                     <code>margin</code> properties of the ports define its position.
                 </p>
                 <p>
@@ -503,7 +503,9 @@ function Port() {
                     In this example, the appearance and visibility of the ports can be
                     customized using the options added to the property panel.
                 </p>
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

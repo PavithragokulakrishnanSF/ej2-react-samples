@@ -12,3 +12,8 @@
 .pivot-property-section .e-multiselect {
     padding: 0px !important;
 }
+
+.e-bigger #custom-sorting-members .e-multi-select-wrapper.e-mob-wrapper .e-delim-view.e-delim-values.e-delim-total {
+    width: 60px !important;
+    padding-left: 0px !important;
+}

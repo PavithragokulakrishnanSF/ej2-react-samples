@@ -39,12 +39,14 @@ const FloatingLabel = () => {
             <div className='col-lg-4 property-section' id="floatinglabel">
                 <PropertyPane title='Properties'>
                     <table id="property" title="Properties" className="floatinglabel-property">
-                        <tr>
-                            <td className="left-side">Float label type </td>
-                            <td>
-                                <DropDownListComponent id="float" value={floatLabelType} dataSource={floatLabelData} fields={fields} change={floatLabelHandler.bind(this)} />
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td className="left-side">Float label type </td>
+                                <td>
+                                    <DropDownListComponent id="float" value={floatLabelType} dataSource={floatLabelData} fields={fields} change={floatLabelHandler.bind(this)}/>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </PropertyPane>
             </div>

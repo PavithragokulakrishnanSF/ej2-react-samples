@@ -286,6 +286,9 @@ const FlatData = () => {
                 <p>The File Manager component is used to manage the files and folders in a file system. It supports all the basic file operations such as create, rename, delete, cut, copy, paste, upload, download, and more.</p>
 
                 <p>To load a folder data as an array of JSON objects, use the File Manager component <code><a href="https://ej2.syncfusion.com/react/documentation/api/file-manager/#fileSystemData" target="_blank">fileSystemData</a></code> property.</p>
+                <p>
+                    Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
+                </p>
             </div>
         </div>
     );

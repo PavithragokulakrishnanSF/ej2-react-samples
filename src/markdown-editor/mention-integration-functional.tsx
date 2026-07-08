@@ -58,22 +58,25 @@ function MentionIntegration() {
     const formatter: MarkdownFormatter = new MarkdownFormatter({ listTags: { 'OL': '1., 2., 3.' } });
 
     function markdownConversion(): void {
-        if (mdsource.classList.contains('e-active')) {
+        if (mdsource.firstElementChild.classList.contains('e-md-codeview')) {
             let id: string = rteObj.getID() + 'html-view';
             let htmlPreview: HTMLElement = rteObj.element.querySelector('#' + id);
-            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value) as string;
+            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value, { lineBreak: true }) as string;
         }
     }
     function fullPreview(): void {
         let id: string = rteObj.getID() + 'html-preview';
         let htmlPreview: HTMLElement = rteObj.element.querySelector('#' + id);
-        if (mdsource.classList.contains('e-active')) {
-            mdsource.classList.remove('e-active');
-            mdsource.parentElement.title = 'Preview';
+        if (mdsource.firstElementChild.classList.contains('e-md-codeview')) {
+            mdsource.parentElement.setAttribute('data-content', 'Preview');
+            mdsource.firstElementChild.classList.remove('e-md-codeview');
+            mdsource.firstElementChild.classList.add('e-md-preview');
             textArea.style.display = 'block';
             htmlPreview.style.display = 'none';
         } else {
-            mdsource.classList.add('e-active');
+            mdsource.parentElement.setAttribute('data-content', 'Code View');
+            mdsource.firstElementChild.classList.remove('e-md-preview');
+            mdsource.firstElementChild.classList.add('e-md-codeview');
             if (!htmlPreview) {
                 htmlPreview = createElement('div', { className: 'e-content e-pre-source' });
                 htmlPreview.id = id;
@@ -81,7 +84,7 @@ function MentionIntegration() {
             }
             textArea.style.display = 'none';
             htmlPreview.style.display = 'block';
-            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value) as string;
+            htmlPreview.innerHTML = MarkdownConverter.toHtml((rteObj.contentModule.getEditPanel() as HTMLTextAreaElement).value, { lineBreak: true }) as string;
             mdsource.parentElement.title = 'Code View';
         }
     }
@@ -93,7 +96,7 @@ function MentionIntegration() {
         mdsource = document.getElementById('preview-code');
         mdsource.addEventListener('click', (e: MouseEvent) => {
             fullPreview();
-            if ((e.currentTarget as HTMLElement).classList.contains('e-active')) {
+            if ((e.currentTarget as HTMLElement).parentElement.querySelector('.e-md-codeview')) {
                 rteObj.disableToolbarItem(['Bold', 'Italic', 'StrikeThrough', 'OrderedList',
                     'UnorderedList', 'SuperScript', 'SubScript', 'CreateLink', 'Image', 'CreateTable', 'Formats', 'Blockquote', 'Undo', 'Redo']);
             } else {

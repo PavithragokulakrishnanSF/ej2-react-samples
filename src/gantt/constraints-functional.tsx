@@ -1,14 +1,5 @@
 import * as React from 'react';
-import {
-  GanttComponent,
-  Inject,
-  ColumnsDirective,
-  ColumnDirective,
-  Selection,
-  Toolbar,
-  DayMarkers,
-  Edit,
-} from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, Inject, ColumnsDirective, ColumnDirective, Selection, Toolbar, DayMarkers, Edit, TaskFieldsModel, EditSettingsModel, LabelSettingsModel, SplitterSettingsModel, EventMarkerModel, ToolbarItem } from '@syncfusion/ej2-react-gantt';
 import { useEffect } from 'react';
 import { updateSampleSection } from '../common/sample-base';
 
@@ -33,7 +24,7 @@ const Constraints = () => {
     return map[numValue] || "Unknown";
   };
 
-  const taskFields = {
+  const taskFields: TaskFieldsModel = {
     id: "TaskID",
     name: "TaskName",
     startDate: "StartDate",
@@ -47,7 +38,7 @@ const Constraints = () => {
     notes: "info",
   };
 
-  const editSettings = {
+  const editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
@@ -55,7 +46,7 @@ const Constraints = () => {
     showDeleteConfirmDialog: true,
   };
 
-  const toolbar = [
+  const toolbar: ToolbarItem[] = [
     "Add",
     "Edit",
     "Update",
@@ -67,24 +58,24 @@ const Constraints = () => {
     "Outdent",
   ];
   const RightLabelTemplate = (props) => {
-      getConstraintText(props.ganttProperties.constraintType)
+    return getConstraintText(props.ganttProperties.constraintType);
   };  
   const templateRight: any = RightLabelTemplate;  
-  const labelSettings = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: "TaskName",
     rightLabel: templateRight.bind(this)
   };
 
-  const splitterSettings = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 4,
   };
 
-  const projectStartDate = new Date("03/25/2025");
-  const projectEndDate = new Date("09/28/2025");
+  const projectStartDate: Date = new Date("03/25/2025");
+  const projectEndDate: Date = new Date("09/06/2025");
 
-  const eventMarkers = [
+  const eventMarkers: EventMarkerModel[] = [
     { day: new Date("03/25/2025"), label: "Project StartDate" },
-    { day: new Date("08/31/2025"), label: "Project EndDate" },
+    { day: new Date("08/28/2025"), label: "Project EndDate" },
   ];
 
 
@@ -113,7 +104,7 @@ const Constraints = () => {
             <ColumnDirective
               field="TaskName"
               headerText="Job Name"
-              width="200"
+              width="230"
               clipMode="EllipsisWithTooltip"
             />
             <ColumnDirective field="StartDate" />
@@ -127,7 +118,7 @@ const Constraints = () => {
             <Inject services={[Edit, Selection, Toolbar, DayMarkers]} />
             </GanttComponent>
         <div style={{ float: 'right', margin: '10px' }}>Source:
-          <a href="https://en.wikipedia.org/wiki/Construction" target='_blank'>https://en.wikipedia.org/</a>
+          <a href="https://en.wikipedia.org/wiki/Construction" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Construction</a>
         </div>
       </div>
 
@@ -141,7 +132,7 @@ const Constraints = () => {
         <p>
 	        In Gantt Chart, task constraints define the rules that limit a task's start or end date based on project scheduling needs. The following constraint types are supported:</p>
           <ul>
-	          <li><code>As Soon As Possible</code> - Task starts as early as possible. Default for auto-scheduled tasks.</li>
+	          <li><code>As Soon As Possible</code> - Task starts as early as possible. This is the default constraint type for auto-scheduled tasks.</li>
 	          <li><code>As Late As Possible</code> - Task finishes as late as possible without delaying dependent tasks.</li>
 	          <li><code>Must Start On</code> - Task must start on the specified date.</li>
 	          <li><code>Must Finish On</code> - Task must finish on the specified date.</li>
@@ -152,7 +143,7 @@ const Constraints = () => {
           </ul>
           <br />
           <p>
-            You can assign constraints to a task using the <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/taskFieldsModel/#constraintType">taskFields.constraintType</a></code> and <code><a target="_blank" href="https://ej2.syncfusion.com/documentation/api/gantt/taskFieldsModel/#constraintDate">taskFields.constraintDate</a></code> properties.
+            You can assign constraints to a task using the <code><a target="_blank" rel="noopener noreferrer" href="https://ej2.syncfusion.com/react/documentation/api/gantt/taskfieldsmodel#constrainttype">taskFields.constraintType</a></code> and <code><a target="_blank" rel="noopener noreferrer" href="https://ej2.syncfusion.com/react/documentation/api/gantt/taskfieldsmodel#constraintdate">taskFields.constraintDate</a></code> properties.
             Constraints can also be updated interactively through the task edit dialog.
           </p>
         <p><strong>Handling constraint violation popup:</strong></p>
@@ -169,9 +160,9 @@ const Constraints = () => {
         <p>
             These options are false by default, which means the violation popup appears. To suppress the popup and cancel conflicting changes silently, set the relevant flag(s) to <strong>true</strong>.
         </p>
-        <br />
+        <p>Gantt component features are segregated into individual feature-wise modules. To use editing, toolbar, day markers and selection features, we need to inject <code>Edit</code>, <code>Toolbar</code>, <code>DayMarkers</code> and <code>SelectionService</code> into the <code>Inject Services</code> section.</p>
         <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/task-constraints">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" rel="noopener noreferrer" href="https://ej2.syncfusion.com/react/documentation/gantt/task-constraints">documentation section</a>.</p>
       </div>
     </div>
   );

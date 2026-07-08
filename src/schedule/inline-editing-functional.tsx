@@ -63,6 +63,9 @@ const InlineEditing = () => {
                     <li>For adding an appointment, the appointment will be created based on the selected time and subject once you focused-out or press ENTER key.</li>
                     <li>For editing an appointment, the appointment will be saved based on the modified subject.</li>
                 </ul>
+                <p>
+                    Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                </p>
             </div>
         </div>
     );

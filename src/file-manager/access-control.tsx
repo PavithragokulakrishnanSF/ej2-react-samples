@@ -8,7 +8,7 @@ import { FileManagerComponent, Inject, NavigationPane, Toolbar } from '@syncfusi
  */
 export class Default extends SampleBase<{},{}> {
 
-    private hostUrl: string = "https://ej2-aspcore-service.azurewebsites.net/";
+    private hostUrl: string = "https://physical-service.syncfusion.com/";
     public fmObj: FileManagerComponent;
 
     public render(): JSX.Element {
@@ -40,6 +40,9 @@ export class Default extends SampleBase<{},{}> {
                     </p>
                     <p><b>Note: </b>File Manager’s upload functionality is restricted in the online demos for security reasons. If you need to test upload functionality, please install
                         <a target="_blank" href="https://www.syncfusion.com/downloads">Syncfusion Essential Studio </a>on your machine and run the demo.</p>
+                    <p>
+                        Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
+                    </p>
                 </div>
             </div>
         );

@@ -137,31 +137,33 @@ export class Grouping extends SampleBase<{}, {}> {
                         along with the following properties:
                     </p>
                     <table>
-                        <tr>
-                            <td style = {{verticalAlign:'top',padding: '10px 0',width:'130px'}}>
-                                <code>name:</code>
-                            </td>
-                            <td>Specifies the normal field.</td>
-                        </tr>
-                        <tr>
-                            <td style = {{verticalAlign:'top',padding: '4px 0'}}>
-                                <code>type:</code>
-                            </td>
-                            <td>Specifies the field type for applying the group settings. For example, date formatted fields should be
-                                in Date type and number formatted fields should be in Number type.</td>
-                        </tr>
-                        <tr>
-                            <td style = {{verticalAlign:'top',padding: '4px 0'}}>
-                                <code>groupInterval :</code>
-                            </td>
-                            <td>Specifies the interval for date fields in years, quarters, months, etc.</td>
-                        </tr>
-                        <tr>
-                            <td style = {{verticalAlign:'top',padding: '4px 0'}}>
-                                <code>rangeInterval :</code>
-                            </td>
-                            <td>Specifies the interval value to group the number field.</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td style = {{verticalAlign:'top',padding: '10px 0',width:'130px'}}>
+                                    <code>name:</code>
+                                </td>
+                                <td>Specifies the normal field.</td>
+                            </tr>
+                            <tr>
+                                <td style = {{verticalAlign:'top',padding: '4px 0'}}>
+                                    <code>type:</code>
+                                </td>
+                                <td>Specifies the field type for applying the group settings. For example, date formatted fields should be
+                                    in Date type and number formatted fields should be in Number type.</td>
+                            </tr>
+                            <tr>
+                                <td style = {{verticalAlign:'top',padding: '4px 0'}}>
+                                    <code>groupInterval :</code>
+                                </td>
+                                <td>Specifies the interval for date fields in years, quarters, months, etc.</td>
+                            </tr>
+                            <tr>
+                                <td style = {{verticalAlign:'top',padding: '4px 0'}}>
+                                    <code>rangeInterval :</code>
+                                </td>
+                                <td>Specifies the interval value to group the number field.</td>
+                            </tr>
+                        </tbody>
                     </table><br />
                     <p>
                         More information on the grouping can be found in this <a target="_blank"

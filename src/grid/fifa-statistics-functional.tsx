@@ -388,6 +388,9 @@ function FIFAStatistics() {
           </a></code>
           feature allows custom content in grid cells, creating a rich, interactive display.
         </p>
+        <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our 
+            <a target="_blank"
+              href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
       </div>
     </div>
   )

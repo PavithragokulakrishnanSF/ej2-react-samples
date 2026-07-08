@@ -4,7 +4,7 @@ export const AIMapsSampleOrder: Object = [
         'component': 'WeatherPrediction', 
         'name': 'Weather Prediction', 
         'description': 'This demo showcases the Maps AI feature.', 
-        'order': '01',
+        'order': '06',
         'category': 'Maps',
         'sourceFiles': [
             { 'displayName': 'weather-prediction.tsx', 'path': 'src/ai-maps/ai-weather-prediction.tsx' }, 

@@ -1,13 +1,12 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, Inject, Selection, DayMarkers, ContextMenu, Reorder, Resize, ColumnMenu, Toolbar, Edit, Filter, Sort, ColumnsDirective, ColumnDirective  } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ContextMenu, Reorder, Resize, ColumnMenu, Toolbar, Edit, Filter, Sort, ColumnsDirective, ColumnDirective, EditSettingsModel, ToolbarItem, LabelSettingsModel, SplitterSettingsModel, ColumnModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { SampleBase } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 
 export class Events extends SampleBase<{}, {}> {
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -17,7 +16,7 @@ export class Events extends SampleBase<{}, {}> {
     dependency: 'Predecessor',
     parentID: 'ParentId'
   };
-  public columns: any = [
+  public columns: ColumnModel[] = [
     { field: 'TaskID', width: 80 },
     { field: 'TaskName', width: 250 },
     { field: 'StartDate' },
@@ -26,17 +25,17 @@ export class Events extends SampleBase<{}, {}> {
     { field: 'Predecessor' },
     { field: 'Progress' },
   ];
-  public toolbar: any = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll', 'Search'];
-  public editSettings: any = {
+  public toolbar: ToolbarItem[] = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll', 'Search'];
+  public editSettings: EditSettingsModel = {
     allowEditing: true,
     allowAdding: true,
     allowDeleting: true,
     allowTaskbarEditing: true,
   };
-  public labelSettings: any = {
+  public labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  public splitterSettings: any = {
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
   public projectStartDate: Date = new Date('03/26/2025');
@@ -173,41 +172,41 @@ export class Events extends SampleBase<{}, {}> {
               columnDrop={this.columnDrop.bind(this)} expanding={this.expanding.bind(this)} expanded={this.expanded.bind(this)}
               collapsing={this.collapsing.bind(this)} collapsed={this.collapsed.bind(this)} columnMenuClick={this.columnMenuClick.bind(this)}
               columnMenuOpen={this.columnMenuOpen.bind(this)} contextMenuClick={this.contextMenuClick.bind(this)}
-            contextMenuOpen={this.contextMenuOpen.bind(this)} resizeStart={this.resizeStart.bind(this)} resizing={this.resizing.bind(this)}
+              contextMenuOpen={this.contextMenuOpen.bind(this)} resizeStart={this.resizeStart.bind(this)} resizing={this.resizing.bind(this)}
               resizeStop={this.resizeStop.bind(this)} splitterResizeStart={this.splitterResizeStart.bind(this)}
               splitterResizing={this.splitterResizing.bind(this)} splitterResized={this.splitterResized.bind(this)}
               recordDoubleClick={this.recordDoubleClick.bind(this)} onTaskbarClick={this.onTaskbarClick.bind(this)}
               projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate}>
               <ColumnsDirective>
-              <ColumnDirective field='TaskID' width='100'></ColumnDirective>
-              <ColumnDirective field='TaskName' width='250'></ColumnDirective>
-              <ColumnDirective field='StartDate'></ColumnDirective>
-              <ColumnDirective field='EndDate' ></ColumnDirective>
-              <ColumnDirective field='Duration' ></ColumnDirective>
-              <ColumnDirective field='Predecessor' width={190}></ColumnDirective>
-              <ColumnDirective field='Progress' ></ColumnDirective>
-            </ColumnsDirective>
+                <ColumnDirective field='TaskID' width='100'></ColumnDirective>
+                <ColumnDirective field='TaskName' width='250'></ColumnDirective>
+                <ColumnDirective field='StartDate'></ColumnDirective>
+                <ColumnDirective field='EndDate' ></ColumnDirective>
+                <ColumnDirective field='Duration' ></ColumnDirective>
+                <ColumnDirective field='Predecessor' width={190}></ColumnDirective>
+                <ColumnDirective field='Progress' ></ColumnDirective>
+              </ColumnsDirective>
               <Inject services={[Selection, DayMarkers, ContextMenu, Reorder, Resize, ColumnMenu, Toolbar, Edit, Filter, Sort]} />
             </GanttComponent>
           </div>
           <div className='col-lg-3 property-section'>
             <PropertyPane title='Event Trace'>
               <table id="property" className="property-panel-table" title="Event Trace" style={{ width: '100%' }}>
-              <tbody>
-                <tr>
-                  <td>
-                    <div className="eventarea" style={{ height: '346px', overflow: 'auto' }}>
-                      <span className="EventLog" id="EventLog" style={{ wordBreak: 'normal' }}></span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ width: '50%', padding: '20px 10px 10px 80px' }}>
-                    <div>
-                      <ButtonComponent onClick={this.clear.bind(this)}> Clear </ButtonComponent>
-                    </div>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div className="eventarea" style={{ height: '346px', overflow: 'auto' }}>
+                        <span className="EventLog" id="EventLog" style={{ wordBreak: 'normal' }}></span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ width: '50%', padding: '20px 10px 10px 80px' }}>
+                      <div>
+                        <ButtonComponent onClick={this.clear.bind(this)}> Clear </ButtonComponent>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </PropertyPane>
@@ -220,25 +219,17 @@ export class Events extends SampleBase<{}, {}> {
         <div id="description">
           <p>The Gantt triggers events based on its actions. The events can be used as an extension point to perform custom operations.</p>
           <p>In this demo, perform Gantt actions such as load, created, dataBound, toolbarClick, beforeTooltipRender, actionBegin, actionComplete, cellEdit,
-          endEdit, taskbarEditing, taskbarEdited, rowSelecting, rowSelected, rowDeselecting, rowDeselected, columnDragStart, columnDrag,
-          columnDrop, expanding, expanded, collapsing, collapsed, columnMenuClick, columnMenuOpen, contextMenuClick, contextMenuOpen, resizeStart,
-          resizing, resizeStop, splitterResizeStart, splitterResizing, splitterResized, recordDoubleClick, onTaskbarClick and
-          see the <strong>Event Trace</strong> panel for the events emitted.</p>
+            endEdit, taskbarEditing, taskbarEdited, rowSelecting, rowSelected, rowDeselecting, rowDeselected, columnDragStart, columnDrag,
+            columnDrop, expanding, expanded, collapsing, collapsed, columnMenuClick, columnMenuOpen, contextMenuClick, contextMenuOpen, resizeStart,
+            resizing, resizeStop, splitterResizeStart, splitterResizing, splitterResized, recordDoubleClick, onTaskbarClick and
+            see the <strong>Event Trace</strong> panel for the events emitted.</p>
 
           <p>
-              Gantt component features are segregated into individual feature-wise modules. To use a selection, inject the
-          <code>Selection</code> module using the <code>Gantt.Inject(Selection)</code> method.To use a sorting, inject the
-          <code>Sort</code> module using the <code>Gantt.Inject(Sort)</code> method.To reorder column, inject the
-          <code>Reorder</code> module using the <code>Gantt.Inject(Reorder)</code> method.To resize column width, inject the
-          <code>Resize</code> module using the <code>Gantt.Inject(Resize)</code> method.To use a contextmenu, inject the
-          <code>Contextmenu</code> module using the <code>Gantt.Inject(Contextmenu)</code> method.To use a columnmenu, inject the
-          <code>ColumnMenu</code> module using the <code>Gantt.Inject(ColumnMenu)</code> method.To use a toolbar, inject the
-          <code>Toolbar</code> module using the <code>Gantt.Inject(Toolbar)</code> method.To use a edit, inject the
-          <code>Edit</code> module using the <code>Gantt.Inject(Edit)</code> method.To use markers, inject the
-          <code>DayMarkers</code> module using the <code>Gantt.Inject(DayMarkers)</code> method.
+          Gantt component features are segregated into individual feature-wise modules. To use a selection, markers, contextMenu, reorder, resize, columnMenu, toolbar, edit, filter, and sort, inject the 
+          <code>Selection</code>, <code>DayMarkers</code>, <code>ContextMenu</code>, <code>Reorder</code>, <code>Resize</code>, <code>ColumnMenu</code>, <code>Toolbar</code>, <code>Edit</code>, <code>Filter</code>, and <code>Sort</code> into the <code>Inject Services</code> section.
           </p>
           <br/>
-          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/getting-started#adding-gantt-component">documentation section</a>.</p>
+          <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/events">documentation section</a>.</p>
         </div>
       </div>
     )

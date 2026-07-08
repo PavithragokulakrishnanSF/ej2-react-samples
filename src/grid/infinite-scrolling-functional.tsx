@@ -1,9 +1,11 @@
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GridComponent, ColumnsDirective, ColumnDirective, Inject, InfiniteScroll, VirtualScroll } from '@syncfusion/ej2-react-grids';
+import { GridComponent, ColumnsDirective, ColumnDirective, Inject, InfiniteScroll, VirtualScroll, AggregatesDirective,
+  AggregateDirective, AggregateColumnsDirective, AggregateColumnDirective, Sort, Filter, Aggregate,
+  LoadEventArgs} from '@syncfusion/ej2-react-grids';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { updateSampleSection } from '../common/sample-base';
-import { datasource, virtualData } from './data';
+import { createSalesDataSource, salesDataSource } from './data';
 
 // custom code end
 function InfiniteScrolling() {
@@ -36,12 +38,21 @@ function InfiniteScrolling() {
     }`;
     let grid: GridComponent;
     let data: Object[] = [];
+    const [isLoaded, setIsLoaded] = React.useState(false);
     function onclick() {
         if (!data.length) {
-            datasource();
-            grid.dataSource = data = virtualData;
+            createSalesDataSource(); 
+            grid.dataSource = data = salesDataSource;
+            setIsLoaded(true);
         }
     }
+
+    function load(args: LoadEventArgs) {
+        if (args) {
+            args.enableSeamlessScrolling = true;
+        }
+    }
+
     return (
         <div className='control-pane'>
             <div className='control-section'>
@@ -49,86 +60,93 @@ function InfiniteScrolling() {
                     {SAMPLE_CSS}
                 </style>
                 <div className='div-button'>
-                    <ButtonComponent cssClass={'e-info'} onClick={onclick.bind(this)}>Load 100K Data</ButtonComponent>
+                    <ButtonComponent cssClass={'e-info'} onClick={onclick.bind(this)} disabled={isLoaded}>Load 100K Data</ButtonComponent>
                     <span id="popup">
                         <span id="gif" className="image"></span>
                     </span>
                 </div>
-                <GridComponent dataSource={[]} enableInfiniteScrolling={true} enableColumnVirtualization={true} height={400} pageSettings={{ pageSize: 50 }}
-                    ref={g => grid = g}>
+                <GridComponent id="InfiniteScroll" dataSource={[]} enableInfiniteScrolling={true} enableColumnVirtualization={true} height={400} pageSettings={{ pageSize: 50 }} infiniteScrollSettings={{initialBlocks: 1, enableCache: true}}
+                    ref={g => grid = g} allowSorting={true} allowFiltering={true} filterSettings={{ type: 'CheckBox', enableInfiniteScrolling: true }} load={load.bind(this)} clipMode='EllipsisWithTooltip' rowHeight={40} footerRowHeight={40}>
                     <ColumnsDirective>
-                        <ColumnDirective field='SNo' headerText='S.No' width='140' isPrimaryKey={true}></ColumnDirective>
-                        <ColumnDirective field='FIELD1' headerText='Player Name' width='130' ></ColumnDirective>
-                        <ColumnDirective field='FIELD2' headerText='Year' width='100' ></ColumnDirective>
-                        <ColumnDirective field='FIELD3' headerText='Sports' width='160'></ColumnDirective>
-                        <ColumnDirective field='FIELD4' headerText='Country' width='160'></ColumnDirective>
-                        <ColumnDirective field='FIELD5' headerText='LGID' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD6' headerText='GP' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD7' headerText='GS' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD8' headerText='Minutes' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD9' headerText='Points' width='130' ></ColumnDirective>
-                        <ColumnDirective field='FIELD10' headerText='OREB' width='140' ></ColumnDirective>
-                        <ColumnDirective field='FIELD11' headerText='DREB' width='140' ></ColumnDirective>
-                        <ColumnDirective field='FIELD12' headerText='REB' width='130' ></ColumnDirective>
-                        <ColumnDirective field='FIELD13' headerText='Assists' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD14' headerText='Steals' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD15' headerText='Blocks' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD16' headerText='Turnovers' width='140' ></ColumnDirective>
-                        <ColumnDirective field='FIELD17' headerText='PF' width='100' ></ColumnDirective>
-                        <ColumnDirective field='FIELD18' headerText='FGA' width='150' ></ColumnDirective>
-                        <ColumnDirective field='FIELD19' headerText='FGM' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD20' headerText='FTA' width='150' ></ColumnDirective>
-                        <ColumnDirective field='FIELD21' headerText='FTM' width='140' ></ColumnDirective>
-                        <ColumnDirective field='FIELD22' headerText='Three Attempted' width='170' ></ColumnDirective>
-                        <ColumnDirective field='FIELD23' headerText='Three Made' width='150' ></ColumnDirective>
-                        <ColumnDirective field='FIELD24' headerText='Post GP' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD25' headerText='Post GS' width='120' ></ColumnDirective>
-                        <ColumnDirective field='FIELD26' headerText='Post Minutes' width='150' ></ColumnDirective>
-                        <ColumnDirective field='FIELD27' headerText='Post Points' width='140' ></ColumnDirective>
-                        <ColumnDirective field='FIELD28' headerText='Post OREB' width='160' ></ColumnDirective>
-                        <ColumnDirective field='FIELD29' headerText='Post DREB' width='160' ></ColumnDirective>
-                        <ColumnDirective field='FIELD30' headerText='Post REB' width='160'></ColumnDirective>
+                        <ColumnDirective field='ProductId' headerText='Product ID' isPrimaryKey={true} width='130' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='ProductName' headerText='Product Name' width='200'></ColumnDirective>
+                        <ColumnDirective field='GrossAmount' headerText='Gross Amount' width='180' format='C2' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='NetAmount' headerText='Net Amount' width='180' format='C2' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='ProfitMargin' headerText='Profit (%)' width='180'></ColumnDirective>
+                        <ColumnDirective field='AchievementPercent' headerText='Achievement (%)' width='190'></ColumnDirective>
+                        <ColumnDirective field='SalesQty' headerText='Sales Quantity' width='150' textAlign='Right' ></ColumnDirective>
+                        <ColumnDirective field='UnitPrice' headerText='Price' width='120' format='C2' textAlign='Right' ></ColumnDirective>
+                        <ColumnDirective field='Month' headerText='Month' width='120' ></ColumnDirective>
+                        <ColumnDirective field='Category' headerText='Category' width='130'></ColumnDirective>
+                        <ColumnDirective field='SubCategory' headerText='Sub Category' width='150' visible={false}></ColumnDirective>
+                        <ColumnDirective field='Brand' headerText='Brand' width='120' ></ColumnDirective>
+                        <ColumnDirective field='City' headerText='City' width='130'></ColumnDirective>
+                        <ColumnDirective field='State' headerText='State' width='120' ></ColumnDirective>
+                        <ColumnDirective field='Country' headerText='Country' width='160'></ColumnDirective>
+                        <ColumnDirective field='Region' headerText='Region' width='120' ></ColumnDirective>
+                        <ColumnDirective field='Discount' headerText='Discount (%)' width='140' textAlign='Right' format='N0'></ColumnDirective>
+                        <ColumnDirective field='Tax' headerText='Tax (%)' width='120' textAlign='Right' format='N2'></ColumnDirective>
+                        <ColumnDirective field='ShippingCost' headerText='Shipping Cost' width='150' format='C2' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='Profit' headerText='Profit' width='160' format='C2' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='Target' headerText='Target'  width='120' format='C2' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='Forecast' headerText='Forecast' width='150' format='C2' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='SalesRep' headerText='Sales Reporter' width='150'></ColumnDirective>
+                        <ColumnDirective field='Manager' headerText='Manager' width='150'></ColumnDirective>
+                        <ColumnDirective field='Channel' headerText='Channel' width='130'></ColumnDirective>
+                        <ColumnDirective field='Quarter' headerText='Quarter' width='120' textAlign='Center'></ColumnDirective>
+                        <ColumnDirective field='Year' headerText='Year' width='150' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='ReturnQty' headerText='Return Quantity' width='160' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='ReturnAmount' headerText='Return Amount' width='160' format='C2' textAlign='Right'></ColumnDirective>
+                        <ColumnDirective field='Remarks' headerText='Remarks' width='200'></ColumnDirective>
                     </ColumnsDirective>
-                    <Inject services={[InfiniteScroll, VirtualScroll]} />
+                    <AggregatesDirective>
+                        <AggregateDirective>
+                            <AggregateColumnsDirective>
+                                <AggregateColumnDirective field='SalesQty' type='Sum' format='N0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                                <AggregateColumnDirective field='GrossAmount' type='Sum' format='C0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                                <AggregateColumnDirective field='NetAmount' type='Sum' format='C0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                                <AggregateColumnDirective field='ShippingCost' type='Sum' format='C0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                                <AggregateColumnDirective field='Profit' type='Sum' format='C0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                                <AggregateColumnDirective field='Forecast' type='Sum' format='C0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                                <AggregateColumnDirective field='ReturnQty' type='Sum' format='N0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                                <AggregateColumnDirective field='ReturnAmount' type='Sum' format='C0' footerTemplate='${Sum}'></AggregateColumnDirective>
+                            </AggregateColumnsDirective>
+                        </AggregateDirective>
+                    </AggregatesDirective>
+                    <Inject services={[InfiniteScroll, VirtualScroll, Filter, Sort, Aggregate]} />
                 </GridComponent>
             </div>
             <div id="action-description">
-                <p>This sample demonstrates the Grid component with the infinite scrolling feature. You can use the scrollbar or navigation keys or the mouse wheel to perform the infinite scroll action.
+                <p>
+                    This sample showcases the infinite scrolling capability of the Grid, designed to handle large datasets seamlessly. Click the “Load 100K Data” button to populate the Grid with data, then scroll vertically and horizontally to dynamically load rows and columns, ensuring smooth navigation.
                 </p>
             </div>
             <div id='description'>
-            <p>
-                    The Grid Infinite scrolling feature enables the loading of data using the lazy loading concept, where buffer data is loaded only when the scrollbar reaches the end of the scroller. 
-                    To enable Infinite scrolling, set the <code><a target="_blank" className="code"
-                    href="https://ej2.syncfusion.com/react/documentation/api/grid/#enableinfinitescrolling">
-                    enableInfiniteScrolling </a></code> property to true. Additionally, you can efficiently display a multiple columns without performance degradation using the clumn virtualization feature. 
-                    Enable column virtualization by setting the <code><a target="_blank" className="code"
-                    href="http://ej2.syncfusion.com/react/documentation/api/grid/#enablecolumnvirtualization">
-                    enableColumnVirtualization</a></code> property to true.
+                <p>
+                    Infinite scrolling uses a lazy loading mechanism, where data is fetched automatically as the user scrolls to the end of the Grid. This behavior is enabled by setting the <code><a target="_blank" className="code"
+                        href="https://ej2.syncfusion.com/react/documentation/api/grid/#enableinfinitescrolling">enableInfiniteScrolling</a></code> property to <code>true</code> and defining the Grid’s <code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/api/grid/#height">height</a></code> property.
                 </p>
-                    <p>
-                        Note: The <code><a target="_blank" className="code"
-                            href="https://ej2.syncfusion.com/react/documentation/api/grid/#height">
-                            height</a></code> property must be defined when enabling the <code><a target="_blank" className="code"
-                                href="https://ej2.syncfusion.com/react/documentation/api/grid/#enableinfinitescrolling">
-                                enableInfiniteScrolling </a></code>.
-                    </p>
-                    <p>
-                    This sample demonstrates the Grid component with the infinite scrolling feature.
-                    </p>
-                    <p style={{ fontWeight: 500 }}>Injecting Module:</p>
-                    <p>Grid component features are separated into feature-wise modules.
-                         To use the InfiniteScrolling feature, inject the <code>InfiniteScroll</code> module into the <code>services</code>.</p>
-                    <p>
-                        To utilize column virtualization, you must integrate the <code>VirtualScroll</code> module,
-                        and for infinite scrolling, integrate the <code>InfiniteScroll</code> module into your services.
-                    </p>
-                    <p>
-                More information on the infinite scrolling can be found in this
-                <a target="_blank" 
-                href="https://ej2.syncfusion.com/react/documentation/grid/scrolling/infinite-scrolling">
-                documentation section</a>.
-            </p>
+                <p>
+                    The Grid also supports column virtualization, which renders only the visible columns to improve performance when working with a large number of columns. Column virtualization can be enabled by setting the <code><a target="_blank" className="code"
+                        href="http://ej2.syncfusion.com/react/documentation/api/grid/#enablecolumnvirtualization">enableColumnVirtualization</a></code> property to <code>true</code>.
+                    Additionally, column virtualization integrates seamlessly with aggregate operations, ensuring that calculations like
+                    <code>Sum</code>, <code>Average</code>, etc., remain accurate and are displayed correctly during horizontal scrolling.
+                </p>
+                <p>
+                    <strong>Injecting Module:</strong>
+                </p>
+                <p>
+                    Features of the Grid component are organized into individual, feature-specific modules. To use infinite scrolling and column virtualization with aggregates, inject the required modules <code>InfiniteScroll</code>, <code>VirtualScroll</code> and <code>Aggregate</code> into the <code>services</code>.
+                </p>
+                <p>
+                    More information on the infinite scrolling can be found in the
+                    <a target="_blank"
+                        href="https://ej2.syncfusion.com/react/documentation/grid/scrolling/infinite-scrolling"> documentation section</a>.
+                </p>
+                <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                    <a target="_blank"
+                        href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
             </div>
         </div>
     )

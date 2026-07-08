@@ -125,6 +125,9 @@ export class Group extends SampleBase<{}, {}> {
                         Note: If the <code>group</code> property is not defined, then the default scheduler will be rendered with no grouping on layout,
                         but the appointments of all the resources will be displayed on a single scheduler.
                     </p>
+                    <p>
+                        Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                    </p>
                 </div>
             </div>
         );

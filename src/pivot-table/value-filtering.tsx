@@ -28,7 +28,7 @@ let dataSourceSettings: IDataOptions = {
 };
 let fieldCollections: { [key: string]: FilterModel } = {};
 let operators: string[] = ['Equals', 'DoesNotEquals', 'GreaterThan', 'GreaterThanOrEqualTo',
-    'LessThan', 'LessThanOrEqualTo', 'Between', 'NotBetween'];
+    'LessThan', 'LessThanOrEqualTo', 'Between', 'NotBetween', 'Top', 'Bottom'];
 let fields: string[] = ['Country', 'Products', 'Year'];
 let measures: { [key: string]: Object }[] = [
     { value: 'In_Stock', text: 'In Stock' },
@@ -63,8 +63,8 @@ export class ValueFilter extends SampleBase<{}, {}> {
             type: 'Value',
             measure: measuresddl.value as string,
             condition: operatorddl.value as Operators,
-            value1: valueInput1.value === null ? '1' : valueInput1.value.toString(),
-            value2: valueInput2.value === null ? '1' : valueInput2.value.toString()
+            value1: valueInput1.value === null ? '1' : valueInput1?.value?.toString(),
+            value2: valueInput2.value === null ? '1' : valueInput2?.value?.toString()
         }];
         pivotObj.dataSourceSettings.filterSettings = filterOptions;
     }
@@ -87,7 +87,7 @@ export class ValueFilter extends SampleBase<{}, {}> {
     }
 
     onMeasureChange(args: ChangeEventArgs): void {
-        this.setFilters(fieldsddl.value as string, args.value as string, operatorddl.value as Operators, valueInput1.value.toString(), valueInput2.value.toString());
+        this.setFilters(fieldsddl.value as string, args.value as string, operatorddl.value as Operators, valueInput1?.value?.toString(), valueInput2?.value?.toString());
     }
 
     onOperatorChange(args: ChangeEventArgs): void {
@@ -96,15 +96,15 @@ export class ValueFilter extends SampleBase<{}, {}> {
         } else {
             (document.querySelector('.input2cls') as HTMLElement).style.display = 'none';
         }
-        this.setFilters(fieldsddl.value as string, measuresddl.value as string, args.value as Operators, valueInput1.value.toString(), valueInput2.value.toString());
+        this.setFilters(fieldsddl.value as string, measuresddl.value as string, args.value as Operators, valueInput1?.value?.toString(), valueInput2?.value?.toString());
     }
 
     onValue1Change(e: NumericEventArgs): void {
-        this.setFilters(fieldsddl.value as string, measuresddl.value as string, operatorddl.value as Operators, e.value.toString(), valueInput2.value.toString());
+        this.setFilters(fieldsddl.value as string, measuresddl.value as string, operatorddl.value as Operators, e?.value?.toString(), valueInput2?.value?.toString());
     }
 
     onValue2Change(e: NumericEventArgs): void {
-        this.setFilters(fieldsddl.value as string, measuresddl.value as string, operatorddl.value as Operators, valueInput1.value.toString(), e.value.toString());
+        this.setFilters(fieldsddl.value as string, measuresddl.value as string, operatorddl.value as Operators, valueInput1?.value?.toString(), e?.value?.toString());
     }
 
     ondataBound(args: any): void {
@@ -213,6 +213,7 @@ export class ValueFilter extends SampleBase<{}, {}> {
                         <code> filterSettings</code> object in the pivot table along with the following properties.
                     </p>
                     <table>
+                        <tbody>
                         <tr>
                             <td style={{ verticalAlign: 'top', padding: '10px 0', width: '100px' }}>
                                 <code>name :</code>
@@ -249,6 +250,7 @@ export class ValueFilter extends SampleBase<{}, {}> {
                             </td>
                             <td>For conditions like "between" and "not between", this option will be enabled. Enter both start and end value to view the filter result. For example, enter "9590" and "17500" to filter the grand totals within this range.</td>
                         </tr>
+                        </tbody>
                     </table>
                     <br />
                     <p>

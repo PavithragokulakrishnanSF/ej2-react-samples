@@ -899,6 +899,9 @@ export class EmployeeShiftManagement extends SampleBase<{}, EmployeeShiftManagem
             <strong>Filtering</strong>
           </p>
           <p>Filter shifts by role or employee name in the agenda view to check staff availability and for shift management.</p>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

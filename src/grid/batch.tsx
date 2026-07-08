@@ -1,82 +1,122 @@
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GridComponent, ColumnsDirective, ColumnDirective, Edit, Toolbar, Page, Inject, Sort, BeforeAutoFillEventArgs, FilterSettingsModel, Filter } from '@syncfusion/ej2-react-grids';
-import { data } from './data';
+import { GridComponent, ColumnsDirective, ColumnDirective, Edit, Toolbar, Page, Inject, Sort, BeforeAutoFillEventArgs, FilterSettingsModel, Filter, SelectionSettingsModel,
+  AggregatesDirective, AggregateDirective, AggregateColumnsDirective, AggregateColumnDirective, Aggregate
+} from '@syncfusion/ej2-react-grids';
+import { inventoryStoreData } from './data';
+import './batch.css';
 import { SampleBase } from '../common/sample-base';
 
 export class BatchEdit extends SampleBase<{}, {}> {
-  public toolbarOptions: any = ['Add', 'Delete', 'Update', 'Cancel'];
-  public filterSettings: FilterSettingsModel = {type: 'Excel'};
-  public editSettings: any = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Batch' };
-  public editparams: any = { params: { popupHeight: '300px' } };
-  public customeridRule: Object = { required: true, minLength: 5};
-  public freightRule: Object = { required: true, min: 0, number: true};
-  public orderidRules: Object = { required: true, number: true };
+  private gridRef: GridComponent | null = null;
+  public toolbarOptions: any = ['Add', 'Delete', 'Update', 'Cancel', 'Undo', 'Redo'];
+  public filterSettings: FilterSettingsModel = {type: 'CheckBox'};
+  public editSettings: any = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Batch', enableUndoRedo: true };
   public pageSettings: Object = { pageCount: 5 };
+  public selectionSettings: SelectionSettingsModel = { mode: 'Cell', type: 'Multiple' };
+  private getCategoryFromProduct = (productName: any): any => {
+    const item = inventoryStoreData.find((data) => data.Product === productName);
+    return item ? item.Category : '';
+  };
+
+  private beforeBatchSave = (args: any): void => {
+    const changes: any = this.gridRef.getBatchChanges() as any;
+    changes.addedRecords.forEach((row: any) => {
+      row.Category = this.getCategoryFromProduct(row.Product);
+    });
+  };
+
+  private cellEdit = (args: any): void => {
+    if (args.type === 'edit' && args.columnName === 'Product') {
+      args.cancel = true;
+    }
+  };
+
+  private categoryTemplate = (props: any) => {
+    const category = (props.Category || this.getCategoryFromProduct(props.Product) || '').toString();
+    let cls = 'e-cat-default';
+    if (category === 'IT Asset') cls = 'e-cat-it-asset';
+    else if (category === 'IT Infrastructure') cls = 'e-cat-it-infrastructure';
+    else if (category === 'Admin') cls = 'e-cat-admin';
+    else if (category === 'Security') cls = 'e-cat-security';
+    else if (category === 'Facilities') cls = 'e-cat-facilities';
+    else if (category === 'Finance') cls = 'e-cat-finance';
+    else if (category === 'Sales') cls = 'e-cat-Sales';
+    else if (category === 'Marketing') cls = 'e-cat-marketing';
+    else if (category === 'Training') cls = 'e-cat-training';
+
+    return (
+      <div>
+        <div style={{ fontWeight: 600 }}>{props.Product}</div>
+        <span className={`e-category-badge ${cls}`} style={{ marginTop: '6px' }}>
+          {category}
+        </span>
+      </div>
+    );
+  };
+  
 
   render() {
     return (
       <div className='control-pane'>
         <div className='control-section'>
-          <div className='col-md-9'>
-              <GridComponent dataSource={data} pageSettings={this.pageSettings} allowSorting={true} toolbar={this.toolbarOptions} allowPaging={true} editSettings={this.editSettings} allowFiltering={true} filterSettings={this.filterSettings}>
+              <GridComponent id="BatchEdit" dataSource={inventoryStoreData} pageSettings={this.pageSettings} allowSorting={true} toolbar={this.toolbarOptions} allowPaging={true} editSettings={this.editSettings} allowFiltering={true} 
+                filterSettings={this.filterSettings} selectionSettings={this.selectionSettings} height={400} clipMode='EllipsisWithTooltip' cellEdit={this.cellEdit} beforeBatchSave={this.beforeBatchSave} ref={(grid) => this.gridRef = grid}>
                 <ColumnsDirective>
-                  <ColumnDirective field='OrderID' headerText='Order ID' width='120' textAlign='Right' validationRules={this.orderidRules} isPrimaryKey={true}></ColumnDirective>
-                  <ColumnDirective field='CustomerName' headerText='Customer Name' width='150' validationRules={this.customeridRule}></ColumnDirective>
-                  <ColumnDirective field='Freight' headerText='Freight' width='120' format='C2' textAlign='Right' validationRules={this.freightRule} editType='numericedit' ></ColumnDirective>
-                  <ColumnDirective field='OrderDate' headerText='Order Date' editType='datepickeredit' format='yMd' width='170'></ColumnDirective>
-                  <ColumnDirective field='ShipCountry' headerText='Ship Country' width='150' editType='dropdownedit' edit={this.editparams} ></ColumnDirective>
-                </ColumnsDirective>
-                <Inject services={[Page, Toolbar, Edit, Sort, Filter]} />
+                  <ColumnDirective field='ID' headerText='ID' width='150' textAlign='Right' isPrimaryKey={true} validationRules={{ required: true }}></ColumnDirective>
+                  <ColumnDirective field='Product' headerText='Product Name' width='160' template={this.categoryTemplate} editType='dropdownedit' defaultValue='MacBook Pro'></ColumnDirective>
+                  <ColumnDirective field='VendorA' headerText='Vendor A (units)' textAlign='Right' width='160' editType='numericedit' edit={{ params: { showSpinButton: false } }}></ColumnDirective>
+                  <ColumnDirective field='VendorB' headerText='Vendor B (units)' textAlign='Right' width='160' editType='numericedit' edit={{ params: { showSpinButton: false } }}></ColumnDirective>
+                  <ColumnDirective field='VendorC' headerText='Vendor C (units)' textAlign='Right' width='160' editType='numericedit' edit={{ params: { showSpinButton: false } }}></ColumnDirective>
+                  <ColumnDirective field='VendorD' headerText='Vendor D (units)' textAlign='Right' width='160' editType='numericedit' edit={{ params: { showSpinButton: false } }}></ColumnDirective>
+                  <ColumnDirective field='UnitPrice' headerText='Price (per unit)' format='C2' width='160' textAlign='Right' editType='numericedit' edit={{ params: { showSpinButton: false } }} validationRules={{ required: true, min: 1 }}></ColumnDirective>
+              </ColumnsDirective>
+              <AggregatesDirective>
+                <AggregateDirective>
+                  <AggregateColumnsDirective>
+                    <AggregateColumnDirective field='VendorA' type='Sum' format='N' footerTemplate='Total: ${Sum}' />
+                    <AggregateColumnDirective field='VendorB' type='Sum' format='N' footerTemplate='Total: ${Sum}' />
+                    <AggregateColumnDirective field='VendorC' type='Sum' format='N' footerTemplate='Total: ${Sum}' />
+                    <AggregateColumnDirective field='VendorD' type='Sum' format='N' footerTemplate='Total: ${Sum}' />
+                  </AggregateColumnsDirective>
+                </AggregateDirective>
+              </AggregatesDirective>
+                <Inject services={[Page, Toolbar, Edit, Sort, Filter, Aggregate]} />
               </GridComponent>
-            </div>
-
 
         <div id="action-description">
-          <p>This sample demonstrates CRUD operations in Grid. You can perform CRUD operations as follows,</p>
-         <ul>
-                <li><code>Add</code> -  To add a new record, click the add toolbar button. </li>
-                <li><code>Edit</code> - To edit record, double-click a cell. </li>
-                <li><code>Delete</code> - To delete record, click the toolbar delete button after selecting a row. </li>
-                <li><code>Update</code> and <code>Cancel</code> - Save or discard changes by clicking the toolbar update and cancel button respectively.</li>
-            </ul>
+            <p>
+              This sample demonstrates the batch editing capabilities of the Grid, allowing users to perform multiple CRUD operations and save them to the data source in a single action. It showcases efficient data editing with bulk update and undo/redo support.
+            </p>
         </div>
         <div id="description">
-            <p> Grid supports CRUD operations and they can be configured using
-              <code><a target="_blank" className="code" href="https://ej2.syncfusion.com/react/documentation/api/grid/editSettings/">
-              editSettings</a></code>. It has the following modes to manipulate the datasource.
-            </p>
-            <ul>
-              <li><code>Normal</code></li>
-              <li><code>Dialog</code></li>
-              <li><code>Batch</code></li>
-            </ul>
             <p>
-              In this demo, the Batch mode is enabled for editing by defining the <code><a target="_blank" className="code"
-                href="https://ej2.syncfusion.com/react/documentation/api/grid/editSettings/#mode">
-                editSettings.mode
-              </a></code> as <code>batch</code>. You can start editing by double clicking a cell and changing the cell value.
-              The edited cell will be highlighted while navigating to a new cell.
-              You can bulk save the edited data to the datasource by clicking the toolbar's <code>update</code> button or by externally
-              invoking the <code><a target="_blank" className="code"
-                href="https://ej2.syncfusion.com/react/documentation/api/grid/edit/#batchsave">
-                batchSave
-              </a></code> method.
-            </p>
-            <p style={{ fontWeight: 500 }}>Injecting Module:</p>
-            <p>
-              Grid features are separated into feature-wise modules. To use the editing feature, inject the
-              <code><a target="_blank" className="code"
-                href="https://ej2.syncfusion.com/react/documentation/api/grid/edit/">
-                Edit
-              </a></code> module into the <code>services</code>.
+              The Grid supports multiple editing modes such as <code>Normal</code>, <code>Dialog</code>, <code>Batch</code>, and <code>Cell</code>, which can be configured using the <code><a target="_blank" className="code"
+                href="https://ej2.syncfusion.com/react/documentation/api/grid/editSettings/">editSettings</a></code> property. Batch mode is enabled by setting <code><a target="_blank" className="code"
+                href="https://ej2.syncfusion.com/react/documentation/api/grid/editSettings/#mode">editSettings.mode</a></code> to <code>Batch</code>. The Grid also supports undo and redo functionality in this mode, enabling users to reverse or reapply changes during an editing session. This feature is enabled by setting <code><a target="_blank" className="code"
+                href="https://ej2.syncfusion.com/react/documentation/api/grid/editSettings/#enableundoredo">editSettings.enableUndoRedo</a></code> to <code>true</code> and include the <code>Undo</code> and <code>Redo</code> items in the <code><a target="_blank" className="code"
+                href="https://ej2.syncfusion.com/react/documentation/api/grid/index-default#toolbar">toolbar</a></code>.
             </p>
             <p>
-            More information on the batch editing can be found in this 
+              With Batch editing, bulk data changes can be made efficiently. Editing begins by double‑clicking a cell and modifying its value. The edited 
+              cell is highlighted when moving to another cell, making changes easy to track. All modifications remain local until they are explicitly saved.
+              The modified records are saved to the data source by clicking the toolbar’s “Update” button, which performs a bulk save operation.
+            </p>
+            <p>
+              <strong>Injecting Module:</strong>
+            </p>
+            <p>
+              Features of the Grid component are organized into individual, feature-specific modules. To use the editing and toolbar functionality, inject the required modules 
+              <code>Edit</code> and <code>Toolbar</code> into the <code>services</code>.
+            </p>
+            <p>
+             More information on the batch editing can be found in this 
             <a target="_blank"
-              href="https://ej2.syncfusion.com/react/documentation/grid/editing/batch-editing">
-              documentation section</a>.
+              href="https://ej2.syncfusion.com/react/documentation/grid/editing/batch-editing"> documentation section</a>.
           </p>
+          <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our 
+            <a target="_blank"
+              href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
           </div>
         </div>
       </div>

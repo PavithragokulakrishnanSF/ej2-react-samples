@@ -13,7 +13,7 @@ const CustomThumbnail = () => {
         updateSampleSection();
     }, [])
 
-    let hostUrl: string = "https://ej2-aspcore-service.azurewebsites.net/";
+    let hostUrl: string = "https://physical-service.syncfusion.com/";
     return(
         <div>
             <div className="control-section">
@@ -52,6 +52,9 @@ const CustomThumbnail = () => {
                 <p>
                     <b>Note: </b>File Manager's upload functionality is restricted in the online demos for security reasons. If you need to test upload functionality, please install 
                     <a target="_blank" href="https://www.syncfusion.com/downloads"> Syncfusion Essential Studio </a>on your machine and run the demo.
+                </p>
+                <p>
+                    Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
                 </p>
             </div>
         </div>

@@ -6,7 +6,7 @@ import { FileManagerComponent, Inject, NavigationPane, DetailsView, Toolbar } fr
 import { DropDownButtonComponent, ItemModel } from '@syncfusion/ej2-react-splitbuttons';
 import './template.css';
 
-const hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
+const hostUrl: string = 'https://physical-service.syncfusion.com/';
 
 const actionItems: ItemModel[] = [
   { text: 'Open', iconCss: 'e-icons e-folder-open' },
@@ -64,7 +64,8 @@ const Template = () => {
       mp3: 'background-audio',
       docx: 'background-doc',
       txt: 'background-txt',
-      xlsx: 'background-xlsx'
+      xlsx: 'background-xlsx',
+      zip: 'background-zip',
     };
 
     if (!item.isFile) return 'file-icon background-folder';
@@ -299,6 +300,9 @@ const Template = () => {
               File operations such as Open, Delete, Download, and Refresh are handled through a dropdown menu option showed in each item,
               and the <code>select</code> initiates each action to the corresponding File Manager methods (<code>openFile</code>,
               <code>downloadFiles</code>, <code>deleteFiles</code>, and <code>refreshFiles</code>).
+          </p>
+          <p>
+              Looking for the full React File Manager component overview, features, pricing, and documentation? Visit the <a target="_blank" href="https://www.syncfusion.com/react-components/react-file-manager">React File Manager</a> page.
           </p>
         </div>
     </div>

@@ -1,13 +1,12 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
 import { extend } from '@syncfusion/ej2-base';
-import { GanttComponent, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Selection, DayMarkers, ColumnsDirective, ColumnDirective, LabelSettingsModel, SplitterSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { projectNewData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
 import { MultiSelectComponent, CheckBoxSelection } from '@syncfusion/ej2-react-dropdowns';
-import { CheckBoxComponent, CheckBox } from '@syncfusion/ej2-react-buttons';
+import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
 
 const emptyCss = `
 .property-panel-table div {
@@ -60,7 +59,7 @@ const WorkWeek = () => {
       ganttInstance.current.timelineModule.refreshTimeline();
     }
   }
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -68,15 +67,15 @@ const WorkWeek = () => {
     duration: 'Duration',
     progress: 'Progress',
     dependency: 'Predecessor',
-    parentID:'ParentId'
+    parentID: 'ParentId'
   };
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName'
   };
-  const workWeek: any = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  const workWeek: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const projectStartDate: Date = new Date('03/26/2025');
   const projectEndDate: Date = new Date('07/20/2025');
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 1
   };
   return (
@@ -101,30 +100,30 @@ const WorkWeek = () => {
         <div className='col-lg-4 property-section'>
           <PropertyPane title='Properties'>
             <table id="property" className="property-panel-table" title="Properties" style={{ width: '100%' }}>
-            
+
               <colgroup>
                 <col style={{ width: '30%' }} />
                 <col style={{ width: '70%' }} />
               </colgroup>
               <tbody>
-              <tr>
-                <td style={{ width: '30%' }}>
-                  <div>
-                    <label htmlFor="WorkWeek">Working Days</label>
-                  </div>
-                </td>
-                <td style={{ width: '70%',paddingBottom: '10px' }}>
-                  <div style={{ paddingTop: '0px' }}>
-                  <MultiSelectComponent ref={multiselectObj} id="WorkWeek" style={{ padding: '2px' }} mode="CheckBox" value={defaultValue}
-                      dataSource={workDays} showDropDownIcon={true} popupHeight='350px' fields={{ text: 'day', value: 'id' }}
-                      select={select.bind(this)} removed={removed.bind(this)}>
-                      <Inject services={[CheckBoxSelection]}></Inject>
-                    </MultiSelectComponent>
-                  </div>
-                </td>
-              </tr>
                 <tr>
-                  <td style={{ width: '42%', paddingBottom: '10px',paddingTop: '10px' }}>
+                  <td style={{ width: '30%' }}>
+                    <div>
+                      <label htmlFor="WorkWeek">Working Days</label>
+                    </div>
+                  </td>
+                  <td style={{ width: '70%', paddingBottom: '10px' }}>
+                    <div style={{ paddingTop: '0px' }}>
+                      <MultiSelectComponent ref={multiselectObj} id="WorkWeek" style={{ padding: '2px' }} mode="CheckBox" value={defaultValue}
+                        dataSource={workDays} showDropDownIcon={true} popupHeight='350px' fields={{ text: 'day', value: 'id' }}
+                        select={select.bind(this)} removed={removed.bind(this)}>
+                        <Inject services={[CheckBoxSelection]}></Inject>
+                      </MultiSelectComponent>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ width: '42%', paddingBottom: '10px', paddingTop: '10px' }}>
                     <div>Show Weekend</div>
                   </td>
                   <td style={{ width: '70%' }}>
@@ -134,7 +133,7 @@ const WorkWeek = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ width: '30%', paddingBottom: '10px',paddingTop: '10px' }}>
+                  <td style={{ width: '30%', paddingBottom: '10px', paddingTop: '10px' }}>
                     <div>Highlight Weekends</div>
                   </td>
                   <td style={{ width: '70%' }}>
@@ -157,18 +156,17 @@ const WorkWeek = () => {
 
       <div id="description">
         <p>
-          In this example, you can customize which days of the week are considered working days using the <a target="_blank" href="https://helpej2.syncfusion.com/react/documentation/api/gantt/#workweek">workWeek</a> property.
-          Simply select your preferred working days from the dropdown list in the property panel, and they will be applied to the Gantt Chart. Weekends can be highlighted using the <a target="_blank" href="https://helpej2.syncfusion.com/react/documentation/api/gantt/#highlightweekends">highlightweekends</a> property for easy identification.
+          In this example, you can customize which days of the week are considered working days using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#workweek">workWeek</a> property.
+          Simply select your preferred working days from the dropdown list in the property panel, and they will be applied to the Gantt Chart. Weekends can be highlighted using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#highlightweekends">highlightweekends</a> property for easy identification.
         </p>
         <p>
-          Non-working days are visible by default in the Gantt Chart timeline, their visibility can be customized using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineSettingsModel/#showWeekend">timelineSettings.showWeekend</a> property. Setting this to false will hide non-working days from the timeline.
+          Non-working days are visible by default in the Gantt Chart timeline, their visibility can be customized using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/timelineSettingsModel/#showweekend">timelineSettings.showWeekend</a> property. Setting this to false will hide non-working days from the timeline.
         </p>
         <p>
-          Gantt component features are segregated into individual feature-wise modules. To use a selection support and event markers we need to inject the
-          <code>Selection</code>, <code>DayMarkers</code> modules.
+          Gantt component features are segregated into individual feature-wise modules. To use a selection support and event marker features, we need to inject the <code>Selection</code> and <code>DayMarkers</code> into the <code>Inject Services</code> section.
         </p>
-        <br/>
-    <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/task-scheduling#weekendnon-working-days">documentation section</a>.</p>
+        <br />
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/scheduling-tasks#configure-work-week">documentation section</a>.</p>
       </div>
     </div>
   );

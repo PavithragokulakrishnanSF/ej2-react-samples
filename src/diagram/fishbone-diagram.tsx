@@ -1,4 +1,4 @@
-// Import React and necessary components from Syncfusion's EJ2 React Diagrams library for building the Fishbone diagram.
+// Import React and necessary components from React Diagram library for building the Fishbone diagram.
 import * as React from "react";
 import {
     HierarchicalTree,
@@ -216,7 +216,9 @@ export class Fishbone extends SampleBase<{}, {}> {
                         <code>HierarchicalTree</code> module into <code>services</code>.
                     </p>
                     <br />
-                </div>
+                
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
             </div>
         );
     }

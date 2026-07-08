@@ -1,7 +1,6 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GanttComponent, Inject, DayMarkers, ColumnsDirective, ColumnDirective, EventMarkersDirective, EventMarkerDirective, Selection } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, DayMarkers, ColumnsDirective, ColumnDirective, EventMarkersDirective, EventMarkerDirective, Selection, LabelSettingsModel, SplitterSettingsModel, TimelineSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { customizedData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 import './taskbar-template.css'
@@ -10,7 +9,7 @@ const Taskbar = () => {
   useEffect(() => {
     updateSampleSection();
   }, [])
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskId',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -18,11 +17,11 @@ const Taskbar = () => {
     dependency: 'Predecessor',
     child: 'subtasks'
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 1
   };
   let dayWorkingTime: any = [{ from: 0, to: 24 }];
-  const timelineSettings: any = {
+  const timelineSettings: TimelineSettingsModel = {
     timelineUnitSize: 70,
     topTier: {
       unit: 'Hour',
@@ -41,7 +40,7 @@ const Taskbar = () => {
   const eventMarkerDay5: Date = new Date('03/05/2025 08:24:00 PM');
   const eventMarkerDay6: Date = new Date('03/05/2025 08:31:00 PM');
   const eventMarkerDay7: Date = new Date('03/05/2025 08:47:00 PM');
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     leftLabel: 'TaskName',
   };
   const tooltipTemplate = (props): any => {
@@ -64,13 +63,13 @@ const Taskbar = () => {
     taskbar: template.bind(this),
   };
   const taskbarTemplate = (props): any => {
-    if (props.TaskName == 'Oscar moments') {
+    if (props.TaskName === 'Oscar moments') {
       return (<div className="e-gantt-child-taskbar e-custom-moments" style={{ height: "100%", borderRadius: "5px" }}>
         {
           props.ganttProperties.duration < 4 ?
-            <img className="moments" src="src/gantt/images/moments.svg" height="32" width="32" alt='Oscar Moment svg'/> :
+            <img className="moments" src="src/gantt/images/moments.svg" height="32" width="32" alt='Oscar Moment svg' /> :
             <div>
-              <img className="moments" src="src/gantt/images/moments.svg" height="32" width="32" alt='Oscar Moment svg'/>
+              <img className="moments" src="src/gantt/images/moments.svg" height="32" width="32" alt='Oscar Moment svg' />
               <span className="e-task-label" style={{
                 position: "absolute",
                 top: "15px",
@@ -82,20 +81,20 @@ const Taskbar = () => {
                 textOverflow: "ellipsis",
                 height: "90%",
                 lineHeight: "1.2",
-                }}>{props.Performance}
+              }}>{props.Performance}
               </span>
             </div>
         }
 
       </div>);
     }
-    else if (props.TaskName == 'Oscar performance') {
+    else if (props.TaskName === 'Oscar performance') {
       return (<div className="e-gantt-child-taskbar e-custom-performance" style={{ height: "100%", borderRadius: "5px" }}>
         {
           props.ganttProperties.duration <= 5 ?
             <img className="face-mask" src="src/gantt/images/face-mask.svg" height="32" width="32" alt='Oscar Performance svg' /> :
             <div>
-              <img className="face-mask" src="src/gantt/images/face-mask.svg" height="32" width="32" alt='Oscar Performance svg'/>
+              <img className="face-mask" src="src/gantt/images/face-mask.svg" height="32" width="32" alt='Oscar Performance svg' />
               <span className="e-task-label e-oscar-performance" style={{
                 position: "absolute",
                 top: "15px",
@@ -107,7 +106,7 @@ const Taskbar = () => {
                 textOverflow: "ellipsis",
                 height: "90%",
                 lineHeight: "1.2",
-                }}>{props.Performance}
+              }}>{props.Performance}
               </span>
             </div>
         }
@@ -117,10 +116,10 @@ const Taskbar = () => {
       return (
         <div className="e-gantt-parent-taskbar e-custom-parent" style={{ height: "100%", borderRadius: "5px", textOverflow: "ellipsis" }}>
           {props.ganttProperties.duration < 4 ?
-            <img className="oscar" src="src/gantt/images/oscar.svg" height="32" width="32" alt='Oscar svg'/> :
+            <img className="oscar" src="src/gantt/images/oscar.svg" height="32" width="32" alt='Oscar svg' /> :
             props.Winner && props.Movie ?
               <div>
-                <img className="oscar" src="src/gantt/images/oscar.svg" height="32" width="32" alt='Oscar svg'/>
+                <img className="oscar" src="src/gantt/images/oscar.svg" height="32" width="32" alt='Oscar svg' />
                 <span className="e-task-label" style={{
                   position: "absolute",
                   top: "8px",
@@ -130,7 +129,7 @@ const Taskbar = () => {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  }}>{props.Winner}
+                }}>{props.Winner}
                 </span>
                 <span className="e-task-label" style={{
                   position: "absolute",
@@ -141,11 +140,11 @@ const Taskbar = () => {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  }}>{props.Movie}
+                }}>{props.Movie}
                 </span>
               </div> : props.Movie ?
                 <div>
-                  <img className="oscar" src="src/gantt/images/oscar.svg" height="32" width="32" alt='Oscar svg'/>
+                  <img className="oscar" src="src/gantt/images/oscar.svg" height="32" width="32" alt='Oscar svg' />
                   <span className="e-task-label e-oscar-movie" style={{
                     position: "absolute",
                     top: "15px",
@@ -155,7 +154,7 @@ const Taskbar = () => {
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    }}>{props.Movie}
+                  }}>{props.Movie}
                   </span>
                 </div> :
                 <span className="e-task-label"></span>
@@ -166,18 +165,20 @@ const Taskbar = () => {
 
   };
   const childTaskbarTemplate: any = taskbarTemplate.bind(this);
-  const milstoneTemplate = (props: any) => {
+  const milestoneTemplate = (props: any) => {
     return (
-      <div className="e-gantt-milestone"  style={{ marginTop: "3px", width: "41px",
-        height: "41px", backgroundColor: "#7ab748", border: "0", position: "absolute", left: "-2px", top: "4px" }}>
+      <div className="e-gantt-milestone" style={{
+        marginTop: "3px", width: "41px",
+        height: "41px", backgroundColor: "#7ab748", border: "0", position: "absolute", left: "-2px", top: "4px"
+      }}>
         <div style={{ position: "absolute", top: "4px" }}>
-          <img className="moments" src="src/gantt/images/moments.svg" height="24" width="48" style={{ zIndex: 1, top: '1.5px', left:'-3px',transform: 'rotate(-45deg)', position: "absolute" }} alt="Moments svg"/>
+          <img className="moments" src="src/gantt/images/moments.svg" height="24" width="48" style={{ zIndex: 1, top: '1.5px', left: '-3px', transform: 'rotate(-45deg)', position: "absolute" }} alt="Moments svg" />
         </div>
       </div>
     );
   };
 
-  const milestone: any = milstoneTemplate.bind(this);
+  const milestone: any = milestoneTemplate.bind(this);
   const projectStartDate: any = new Date('03/05/2025 06:00 PM');
   const projectEndDate: any = new Date('03/05/2025 09:50 PM');
   return (
@@ -229,12 +230,10 @@ const Taskbar = () => {
           is assigned with the ID of a SCRIPT element whose content is used as the template.
         </p>
         <p>
-          Gantt component features are segregated into individual feature-wise modules. To use markers, inject the
-          <code>DayMarkers</code> module. To use a selection, inject the
-          <code>Selection</code> module.
+          Gantt component features are segregated into individual feature-wise modules. To use markers and selection features, we need to inject the <code>DayMarkers</code> and <code>Selection</code> into the <code>Inject Services</code> section.
         </p>
-        <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/appearance-customization#taskbar-template">documentation section</a>.</p>
+        <br />
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/taskbar#customize-taskbar-templates">documentation section</a>.</p>
       </div>
     </div>
   )

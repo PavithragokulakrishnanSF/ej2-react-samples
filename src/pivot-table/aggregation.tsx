@@ -47,7 +47,7 @@ export class Aggregation extends SampleBase<{}, {}> {
         { 'value': 'Avg', 'text': 'Average' }, { 'value': 'Median', 'text': 'Median' }, { 'value': 'DistinctCount', 'text': 'Distinct Count' },
         { 'value': 'Product', 'text': 'Product' }, { 'value': 'Index', 'text': 'Index' },
         { 'value': 'PopulationStDev', 'text': 'Population StDev' }, { 'value': 'SampleStDev', 'text': 'Sample StDev' },
-        { 'value': 'RunningTotals', 'text': 'Running Totals' }, { 'value': 'DifferenceFrom', 'text': 'Difference From' },
+        { 'value': 'RunningTotals', 'text': 'Running Totals' }, { value: 'PercentageOfRunningTotals', text: '% of Running Totals' }, { 'value': 'DifferenceFrom', 'text': 'Difference From' },
         { 'value': 'PercentageOfDifferenceFrom', 'text': '% of Difference From' }, { 'value': 'PercentageOfGrandTotal', 'text': '% of Grand Total' },
         { 'value': 'PercentageOfColumnTotal', 'text': '% of Column Total' }, { 'value': 'PercentageOfRowTotal', 'text': '% of Row Total' },
         { 'value': 'PercentageOfParentTotal', 'text': '% of Parent Total' }, { 'value': 'PercentageOfParentColumnTotal', 'text': '% of Parent Column Total' },
@@ -59,7 +59,7 @@ export class Aggregation extends SampleBase<{}, {}> {
         { 'value': 'Sum', 'text': 'Sum' }, { 'value': 'Avg', 'text': 'Average' }, { 'value': 'Median', 'text': 'Median' },
         { 'value': 'Product', 'text': 'Product' }, { 'value': 'Index', 'text': 'Index' },
         { 'value': 'PopulationStDev', 'text': 'Population StDev' }, { 'value': 'SampleStDev', 'text': 'Sample StDev' },
-        { 'value': 'RunningTotals', 'text': 'Running Totals' }, { 'value': 'DifferenceFrom', 'text': 'Difference From' },
+        { 'value': 'RunningTotals', 'text': 'Running Totals' }, { value: 'PercentageOfRunningTotals', text: '% of Running Totals' }, { 'value': 'DifferenceFrom', 'text': 'Difference From' },
         { 'value': 'PercentageOfDifferenceFrom', 'text': '% of Difference From' }, { 'value': 'PercentageOfGrandTotal', 'text': '% of Grand Total' },
         { 'value': 'PercentageOfColumnTotal', 'text': '% of Column Total' }, { 'value': 'PercentageOfRowTotal', 'text': '% of Row Total' },
         { 'value': 'PercentageOfParentTotal', 'text': '% of Parent Total' }, { 'value': 'PercentageOfParentColumnTotal', 'text': '% of Parent Column Total' },
@@ -158,7 +158,7 @@ export class Aggregation extends SampleBase<{}, {}> {
                     </p>
                     <p>
                         <code>Sum</code>, <code>Average</code>, <code>Median</code>, <code>Min</code>, <code>Max</code>, <code>Count</code>, <code>Distinct Count</code>, <code>Product</code>,
-                        <code>Index</code>, <code>Population StDev</code>, <code>Sample StDev</code>, <code>Population Var</code>, <code>Sample Var</code>, <code>Running Totals</code>,
+                        <code>Index</code>, <code>Population StDev</code>, <code>Sample StDev</code>, <code>Population Var</code>, <code>Sample Var</code>, <code>Running Totals</code>, <code>% of Running Totals</code>,
                         <code>Difference From</code>, <code>% of Difference From</code>, <code>% of Grand Total</code>, <code>% of Column Total</code>, <code>% of Row Total</code>,
                         <code>% of Parent Total</code>, <code>% of Parent Column Total</code>, <code>% of Parent Row Total.</code>
                     </p>

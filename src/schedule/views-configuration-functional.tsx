@@ -71,8 +71,11 @@ const ViewConfigurations = () => {
           In this demo, the  <code>views</code> property is defined to accept the array of view options and therefore for each view,
           it is possible to set different configurations. In day view, the the <code>startHour</code> is set to 7 and <code>endHour</code> set to 18
           whereas in week view, the same is set as 9 and 19 respectively. Also, the <code>showWeekend</code> property is set to false
-          only on week view along with different timescale interval. The customized template is applied to the events on Agenda view and on month view,
-          the grouping functionality is enabled by setting <code>group</code> property.
+          only on week view along with different timescale interval. The customized template is applied to the events on Agenda view and on month
+          view, the grouping functionality is enabled by setting <code>group</code> property.
+        </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
         </p>
       </div>
     </div>

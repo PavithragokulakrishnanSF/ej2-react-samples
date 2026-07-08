@@ -289,12 +289,12 @@ export class HierarchicalModel extends SampleBase<{}, {}> {
           <p>
             In this example, you can see how to generate a hierarchical tree
             from external data sources. You can also customize the spacing
-            between the objects in the tree. You can use the
-            <code>horizontalSpacing</code> and
-            <code>verticalSpacing</code> properties of
+            between the objects in the tree. You can use the 
+            <code>horizontalSpacing</code> and 
+            <code>verticalSpacing</code> properties of 
             <code>layout</code> to customize the space between the objects in
-            the tree. You can use the
-            <code>layoutOrientation</code> property of
+            the tree. You can use the 
+            <code>layoutOrientation</code> property of 
             <code>layout</code> to change the orientation of the tree.
           </p>
           <p>
@@ -306,14 +306,16 @@ export class HierarchicalModel extends SampleBase<{}, {}> {
           <p>
             Diagram component's features are segregated into individual
             feature-wise modules. To generate diagrams from external data
-            source, we need to Inject
+            source, we need to Inject 
             <code>DataBinding</code> module into <code>services</code>. To
             automatically arrange the objects in a hierarchical structure, we
-            need to Inject
+            need to Inject 
             <code>HierarchicalTree</code> module into <code>services</code>.
           </p>
           <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
     );
   }

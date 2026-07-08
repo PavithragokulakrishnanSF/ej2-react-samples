@@ -2659,7 +2659,7 @@ export class HRManagementDashboard extends SampleBase<Props, State> {
                             className="dockmaincontent"
                         >
                             <div>
-                                <div className="app-page" style={{ padding: '16px', background: '#ffffff' }}>
+                                <div className="app-hr-management-page" style={{ padding: '16px', background: '#ffffff' }}>
                                     {this.renderDashboard()}
                                 </div>
                             </div>

@@ -38,6 +38,9 @@ const OverlapEvents = () => {
             </div>
             <div id="description">
                 <p> This example uses the Scheduler's <code>allowOverlap</code> API to prevent overlapping events. By default, it's <code>true</code>, allowing overlaps. When set to <code>false</code>, events cannot be added, edited, dragged, or resized to overlap with others.</p>
+                <p>
+                    Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                </p>
             </div>
         </div>
     );

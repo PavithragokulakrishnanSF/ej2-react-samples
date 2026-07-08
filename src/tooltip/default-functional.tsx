@@ -34,15 +34,16 @@
          <div className='col-lg-4 property-section'>
            <PropertyPane title='Properties'>
              <table id='property' title='Properties' className='property-panel-table' style={{ width: '100%' }}>
+               <tbody>
                <tr>
                <td style={{ width: '30%', paddingTop: '4px'  }}>
                <div>Position</div>
                  </td>
                  <td style={{ width: '70%', paddingRight: '10px' }}>
                    <div>
-                     <select id='ddl' name='ddl' onChange={change.bind(this)} className='form-control' style={{ padding: '6px' }} aria-label="positions" >
+                     <select id='ddl' name='ddl' value={position} onChange={change.bind(this)} className='form-control' style={{ padding: '6px' }} aria-label="positions" >
                        <option value="TopLeft">Top Left</option>
-                       <option value="TopCenter" selected>Top Center</option>
+                       <option value="TopCenter">Top Center</option>
                        <option value="TopRight">Top Right</option>
                        <option value="BottomLeft">Bottom Left</option>
                        <option value="BottomCenter">Bottom Center</option>
@@ -57,6 +58,7 @@
                    </div>
                  </td>
                </tr>
+               </tbody>
              </table>
            </PropertyPane>
          </div>

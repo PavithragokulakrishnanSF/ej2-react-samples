@@ -1,55 +1,54 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GanttComponent, DayMarkers, Inject, Selection, Toolbar, Edit, ColumnsDirective, ColumnDirective, WorkUnit } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, DayMarkers, Inject, Selection, Toolbar, Edit, ColumnsDirective, ColumnDirective, WorkUnit, EditSettingsModel, LabelSettingsModel, ResourceFieldsModel, SplitterSettingsModel, ToolbarItem, TaskType, EditDialogFieldSettingsModel, AddDialogFieldSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { resourceAllocationData, resourceAllocationResources } from './data';
 import { updateSampleSection } from '../common/sample-base';
-import { IEditCell } from '@syncfusion/ej2-grids';
+import { IEditCell } from '@syncfusion/ej2-react-grids';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { DataManager } from '@syncfusion/ej2-data';
 
 const ResourceAllocation = () => {
   useEffect(() => {
     updateSampleSection();
-  }, [])    
+  }, [])
   const resColumnTemplate = (props): any => {
     if (props.ganttProperties.resourceNames) {
       if (props.ganttProperties.resourceNames.split('[')[0].includes('Rose Fuller')) {
         return (
-          <div style={{ width:'150px', height:'24px', borderRadius:'100px', backgroundColor:'#1c5d8e', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
+          <div style={{ width: '150px', height: '24px', borderRadius: '100px', backgroundColor: '#1c5d8e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
           </div>
         );
       }
 
       if (props.ganttProperties.resourceNames.split('[')[0].includes('Fuller King')) {
         return (
-          <div style={{ width:'150px', height:'24px', borderRadius:'100px', backgroundColor:'#4a7537', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
+          <div style={{ width: '150px', height: '24px', borderRadius: '100px', backgroundColor: '#4a7537', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
           </div>
         );
       }
 
       if (props.ganttProperties.resourceNames.split('[')[0].includes('Van Jack')) {
         return (
-          <div style={{ width:'150px', height:'24px', borderRadius:'100px', backgroundColor:'#b24531', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
+          <div style={{ width: '150px', height: '24px', borderRadius: '100px', backgroundColor: '#b24531', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
           </div>
         );
       }
 
       if (props.ganttProperties.resourceNames.split('[')[0].includes('Bergs Anton')) {
         return (
-          <div style={{ width:'150px', height:'24px', borderRadius:'100px', backgroundColor:'#a53576', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
+          <div style={{ width: '150px', height: '24px', borderRadius: '100px', backgroundColor: '#a53576', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
           </div>
         );
       }
 
       if (props.ganttProperties.resourceNames.split('[')[0].includes('Tamer Vinet')) {
         return (
-          <div style={{ width:'150px', height:'24px', borderRadius:'100px', backgroundColor:'#635688', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
+          <div style={{ width: '150px', height: '24px', borderRadius: '100px', backgroundColor: '#635688', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'white', fontWeight: 500 }}>{props.ganttProperties.resourceNames}</span>
           </div>
         );
       }
@@ -59,7 +58,7 @@ const ResourceAllocation = () => {
   }
   const template: any = resColumnTemplate.bind(this);
   let dropdownlistObj: DropDownList;
-  let ganttInstance: any;
+  let ganttInstance: GanttComponent;
   const dropdownlist: IEditCell = {
     read: () => {
       // Get the selected value from the dropdown
@@ -67,7 +66,7 @@ const ResourceAllocation = () => {
       if (value === null) {
         // If no value is selected, retain the existing resource(s)
         value = ganttInstance.treeGridModule.currentEditRow[ganttInstance.taskFields.resourceInfo];
-      } 
+      }
       else {
         // Update the resource info with the selected value
         ganttInstance.treeGridModule.currentEditRow[ganttInstance.taskFields.resourceInfo] = [value];
@@ -80,7 +79,7 @@ const ResourceAllocation = () => {
     write: (args: any) => {
       // Ensure the currentEditRow object is initialized
       ganttInstance.treeGridModule.currentEditRow = {};
-                
+
       // Retrieve the existing resource(s) from the row data or set default
       let existingResourceIds: any = ganttInstance.treeGridModule.getResourceIds(args.rowData);
       let selectedValue: any = (existingResourceIds && existingResourceIds.length > 0) ? existingResourceIds[0] : null;
@@ -98,7 +97,7 @@ const ResourceAllocation = () => {
       dropdownlistObj.appendTo(args.element as HTMLElement);
     }
   };
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -111,8 +110,8 @@ const ResourceAllocation = () => {
     resourceInfo: 'resources',
     type: 'taskType'
   };
-  const taskType: any = "FixedWork";
-  const resourceFields: any = {
+  const taskType: TaskType = "FixedWork";
+  const resourceFields: ResourceFieldsModel = {
     id: 'resourceId',
     name: 'resourceName',
     unit: 'unit'
@@ -121,45 +120,45 @@ const ResourceAllocation = () => {
     if (args.data.ganttProperties.resourceNames) {
       let resourceName: string = args.data.ganttProperties.resourceNames;
       if (resourceName.split('[')[0].includes('Rose Fuller')) {
-          args.taskbarBgColor = '#539ed6';
-          args.milestoneColor = '#539ed6';
-          args.progressBarBgColor = '#1c5d8e';
-          args.taskbarBorderColor = '#1c5d8e';
-          if (args.data.ganttProperties.progress === 0) {
-            args.taskLabelColor = 'black';
-          }
+        args.taskbarBgColor = '#539ed6';
+        args.milestoneColor = '#539ed6';
+        args.progressBarBgColor = '#1c5d8e';
+        args.taskbarBorderColor = '#1c5d8e';
+        if (args.data.ganttProperties.progress === 0) {
+          args.taskLabelColor = 'black';
+        }
       } else if (resourceName.split('[')[0].includes('Van Jack')) {
-          args.taskbarBgColor = '#ff826b';
-          args.milestoneColor = '#ff826b';
-          args.progressBarBgColor = '#b24531';
-          args.taskbarBorderColor = '#b24531';
-          if (args.data.ganttProperties.progress === 0) {
-            args.taskLabelColor = 'black';
-          }
+        args.taskbarBgColor = '#ff826b';
+        args.milestoneColor = '#ff826b';
+        args.progressBarBgColor = '#b24531';
+        args.taskbarBorderColor = '#b24531';
+        if (args.data.ganttProperties.progress === 0) {
+          args.taskLabelColor = 'black';
+        }
       } else if (resourceName.split('[')[0].includes('Bergs Anton')) {
-          args.taskbarBgColor = '#ef6fbb';
-          args.milestoneColor = '#ef6fbb';
-          args.progressBarBgColor = '#a53576';
-          args.taskbarBorderColor = '#a53576';
-          if (args.data.ganttProperties.progress === 0) {
-            args.taskLabelColor = 'black';
-          }
+        args.taskbarBgColor = '#ef6fbb';
+        args.milestoneColor = '#ef6fbb';
+        args.progressBarBgColor = '#a53576';
+        args.taskbarBorderColor = '#a53576';
+        if (args.data.ganttProperties.progress === 0) {
+          args.taskLabelColor = 'black';
+        }
       } else if (resourceName.split('[')[0].includes('Fuller King')) {
-          args.taskbarBgColor = '#87b972';
-          args.milestoneColor = '#87b972';
-          args.progressBarBgColor = '#4a7537';
-          args.taskbarBorderColor = '#4a7537';
-          if (args.data.ganttProperties.progress === 0) {
-            args.taskLabelColor = 'black';
-         }
+        args.taskbarBgColor = '#87b972';
+        args.milestoneColor = '#87b972';
+        args.progressBarBgColor = '#4a7537';
+        args.taskbarBorderColor = '#4a7537';
+        if (args.data.ganttProperties.progress === 0) {
+          args.taskLabelColor = 'black';
+        }
       } else if (resourceName.split('[')[0].includes('Tamer Vinet')) {
-          args.taskbarBgColor = '#a496cf';
-          args.milestoneColor = '#a496cf';
-          args.progressBarBgColor = '#635688';
-          args.taskbarBorderColor = '#635688';
-          if (args.data.ganttProperties.progress === 0) {
-            args.taskLabelColor = 'black';
-          }
+        args.taskbarBgColor = '#a496cf';
+        args.milestoneColor = '#a496cf';
+        args.progressBarBgColor = '#635688';
+        args.taskbarBorderColor = '#635688';
+        if (args.data.ganttProperties.progress === 0) {
+          args.taskLabelColor = 'black';
+        }
       }
     }
     if (args.taskbarType === 'ParentTask') {
@@ -170,26 +169,26 @@ const ResourceAllocation = () => {
       }
     }
   };
-  const editSettings: any = {
+  const editSettings: EditSettingsModel = {
     allowAdding: true,
     allowEditing: true,
     allowDeleting: true,
     allowTaskbarEditing: true,
     showDeleteConfirmDialog: true
   };
-  const editDialogFields: any = [
+  const editDialogFields: EditDialogFieldSettingsModel[] = [
     { type: 'Resources' }
   ];
-  const addDialogFields: any = [
+  const addDialogFields: AddDialogFieldSettingsModel[] = [
     { type: 'Resources' }
   ];
-  function cellEdit (args: any) {
+  function cellEdit(args: any) {
     // Restrict editing based on row data
     if (args.rowData.hasChildRecords) {
       args.cancel = true; // Cancel editing for this specific cell
     }
   };
-  function actionBegin (args: any) {
+  function actionBegin(args: any) {
     if (args.requestType === 'beforeOpenEditDialog' || args.requestType === 'beforeOpenAddDialog') {
       // Restrict editing based on row data for dialog
       if (args.rowData.hasChildRecords) {
@@ -199,7 +198,7 @@ const ResourceAllocation = () => {
       args.Resources.columns.splice(0, 1);
     }
   };
-  function actionComplete (args: any) {
+  function actionComplete(args: any) {
     if (args.requestType === 'add' && !args.data.TaskName) {
       let taskName: string = 'Task Name ' + args.data.TaskID;
       args.data.TaskName = taskName;
@@ -207,13 +206,13 @@ const ResourceAllocation = () => {
       args.data.taskData.TaskName = taskName;
     }
   };
-  const toolbar: any = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll'];
-  const splitterSettings: any = {
+  const toolbar: ToolbarItem[] = ['Add', 'Edit', 'Update', 'Delete', 'Cancel', 'ExpandAll', 'CollapseAll'];
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 2
   };
   const projectStartDate: Date = new Date('03/26/2025');
   const projectEndDate: Date = new Date('07/28/2025');
-  const labelSettings: any = {
+  const labelSettings: LabelSettingsModel = {
     rightLabel: 'resources',
     taskLabel: '${Progress}%'
   };
@@ -221,18 +220,18 @@ const ResourceAllocation = () => {
   return (
     <div className='control-pane'>
       <div className='control-section'>
-        <GanttComponent id='resource' dataSource={resourceAllocationData}  ref={gantt => ganttInstance = gantt} treeColumnIndex={1}
+        <GanttComponent id='resource' dataSource={resourceAllocationData} ref={gantt => ganttInstance = gantt} treeColumnIndex={1}
           allowSelection={true} highlightWeekends={true} toolbar={toolbar} editSettings={editSettings}
           projectStartDate={projectStartDate} projectEndDate={projectEndDate} resourceFields={resourceFields}
           taskFields={taskFields} taskType={taskType} labelSettings={labelSettings} splitterSettings={splitterSettings}
-          height='650px' taskbarHeight={25} rowHeight={46} resources={resourceAllocationResources} workUnit={workUnit}  queryTaskbarInfo={queryTaskbarInfo}
-          addDialogFields= {addDialogFields} editDialogFields={editDialogFields} actionBegin={actionBegin} actionComplete={actionComplete} cellEdit={cellEdit}>
+          height='650px' taskbarHeight={25} rowHeight={46} resources={resourceAllocationResources} workUnit={workUnit} queryTaskbarInfo={queryTaskbarInfo}
+          addDialogFields={addDialogFields} editDialogFields={editDialogFields} actionBegin={actionBegin} actionComplete={actionComplete} cellEdit={cellEdit}>
           <ColumnsDirective>
-            <ColumnDirective field='TaskID' visible={false} ></ColumnDirective>
+            <ColumnDirective field='TaskID' visible={false}></ColumnDirective>
             <ColumnDirective field='TaskName' headerText='Task Name' width='180'></ColumnDirective>
             <ColumnDirective field='resources' headerText='Resources' width='190' template={template} edit={dropdownlist}></ColumnDirective>
-            <ColumnDirective field='work' width='110'></ColumnDirective>
-            <ColumnDirective field='Duration' width='150'></ColumnDirective>
+            <ColumnDirective field='work' headerText='Work' width='110'></ColumnDirective>
+            <ColumnDirective field='Duration' headerText='Duration' width='150'></ColumnDirective>
             <ColumnDirective field='taskType' headerText='Task Type' width='150'></ColumnDirective>
           </ColumnsDirective>
           <Inject services={[Selection, DayMarkers, Toolbar, Edit]} />
@@ -242,7 +241,7 @@ const ResourceAllocation = () => {
         <p>This sample demonstrates the options to allocate one or more resources to tasks based on the task requirement.
           The Work is the total labor hours necessary to complete a task. Work can be mapped from the data source field using the property <code>work</code> and when the work value is mapped from the data source,
           the end date and duration of the task will be calculated automatically based on the work and resource unit values from the data source.
-          Work can be measured in hours, days and minutes. It is measured in ‘hours’ scale by default and this can be changed by using the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt#workunit">workUnit</a> property.
+          Work can be measured in hours, days and minutes. It is measured in 'hours' scale by default and this can be changed by using the <code>workUnit</code> property.
         </p>
       </div>
       <div id="description">
@@ -257,12 +256,10 @@ const ResourceAllocation = () => {
         <p><code>FixedWork</code>: Work field will remain constant while updating resource unit or duration fields.</p>
         <p><code>FixedUnit</code>: Resource units will remain constant while updating duration or work field.</p>
         <p>
-          Gantt component features are segregated into individual feature-wise modules. To use a selection, inject the
-          <code>Selection</code> module.To use markers, inject the <code>DayMarkers</code> module.
-          To edit resource unit, task type and duration, inject the <code>Toolbar</code> and <code>Edit</code> module.
+          Gantt component features are segregated into individual feature-wise modules. To use a selection, markers, edit and toolbar features, we need to inject the <code>Selection</code>, <code>DayMarkers</code>, <code>Toolbar</code> and <code>Edit</code> into the <code>Inject Services</code> section.
         </p>
         <br/>
-        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/nextjs-getting-started#add-syncfusion-react-component">documentation section</a>.</p>
+        <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/resources">documentation section</a>.</p>
       </div>
     </div>
   )

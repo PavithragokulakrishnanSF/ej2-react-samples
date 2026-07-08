@@ -315,7 +315,7 @@ function HyperLink () {
                                     <td>
                                         <div className="textcls">
                                             <MaskedTextBoxComponent id="text" ref={(scope) => { textInput = scope; }} value={''}
-                                                width={'100%'} placeholder='Example: "FY 2022.In Stock"'>
+                                                width={'100%'} placeholder='Example: "FY 2025.In Stock"'>
                                             </MaskedTextBoxComponent>
                                         </div>
                                     </td>
@@ -364,48 +364,50 @@ function HyperLink () {
                     The following options are available for setting the hyperlinks:
                 </p>
                 <table>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '10px 0', width: '180px;' }}>
-                            <code>All cells :</code>
-                        </td>
-                        <td>Allows to set the visibility of hyperlink to all cells.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>Row headers :</code>
-                        </td>
-                        <td>Allows to set the visibility of hyperlink to row headers.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>Column headers :</code>
-                        </td>
-                        <td>Allows to set the visibility of hyperlink to column headers.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>Value cells :</code>
-                        </td>
-                        <td>Allows to set the visibility of hyperlink to value cells.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>Summary cells :</code>
-                        </td>
-                        <td>Allows to set the visibility of hyperlink to summary cells.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>Condition based option :</code>
-                        </td>
-                        <td>Allows to set the visibility of hyperlink to value and summary cells based on the applied condition like less than, greater than, equals, etc.</td>
-                    </tr>
-                    <tr>
-                        <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
-                            <code>Header based option :</code>
-                        </td>
-                        <td>Allows to set the visibility of hyperlink to specific row/column based on the given header text.</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '10px 0', width: '180px' }}>
+                                <code>All cells :</code>
+                            </td>
+                            <td>Allows to set the visibility of hyperlink to all cells.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>Row headers :</code>
+                            </td>
+                            <td>Allows to set the visibility of hyperlink to row headers.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>Column headers :</code>
+                            </td>
+                            <td>Allows to set the visibility of hyperlink to column headers.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>Value cells :</code>
+                            </td>
+                            <td>Allows to set the visibility of hyperlink to value cells.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>Summary cells :</code>
+                            </td>
+                            <td>Allows to set the visibility of hyperlink to summary cells.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>Condition based option :</code>
+                            </td>
+                            <td>Allows to set the visibility of hyperlink to value and summary cells based on the applied condition like less than, greater than, equals, etc.</td>
+                        </tr>
+                        <tr>
+                            <td style={{ verticalAlign: 'top', padding: '4px 0' }}>
+                                <code>Header based option :</code>
+                            </td>
+                            <td>Allows to set the visibility of hyperlink to specific row/column based on the given header text.</td>
+                        </tr>
+                    </tbody>
                 </table><br />
                 <p>
                     More information on the hyperlink can be found in this <a target='_blank'

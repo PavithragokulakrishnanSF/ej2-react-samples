@@ -1,8 +1,7 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
 import { DropDownListComponent, ChangeEventArgs } from '@syncfusion/ej2-react-dropdowns';
-import { GanttComponent, Inject, Filter, ColumnsDirective, ColumnDirective, Selection } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, Inject, Filter, ColumnsDirective, ColumnDirective, Selection, LabelSettingsModel, SplitterSettingsModel, TimelineSettingsModel, DayWorkingTimeModel } from '@syncfusion/ej2-react-gantt';
 import { filteredData } from './data';
 import { updateSampleSection } from '../common/sample-base';
 import { PropertyPane } from '../common/property-pane';
@@ -32,7 +31,7 @@ const Filtering = () => {
     ganttInstance.current.filterSettings.hierarchyMode = mode;
     ganttInstance.current.clearFiltering();
   }
-  const taskFields: any = {
+  const taskFields: TaskFieldsModel = {
     id: 'TaskID',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -43,7 +42,7 @@ const Filtering = () => {
   };
   const projectStartDate = new Date('07/16/2025 02:00:00 AM');
   const projectEndDate = new Date('07/25/2025');
-  const timelineSettings: any = {
+  const timelineSettings: TimelineSettingsModel = {
     timelineUnitSize: 70,
     topTier: {
       format: 'MMM dd, yyyy',
@@ -54,11 +53,11 @@ const Filtering = () => {
       format: 'h.mm a'
     },
   };
-  const splitterSettings: any = {
+  const splitterSettings: SplitterSettingsModel = {
     columnIndex: 3
   };
-  const dayWorkingTime: any = [{ from: 0, to: 24 }]
-  const labelSettings: any = {
+  const dayWorkingTime: DayWorkingTimeModel[] = [{ from: 0, to: 24 }]
+  const labelSettings: LabelSettingsModel = {
     rightLabel: 'TaskName'
   };
   const actionCompleteEvent = (args): any => {
@@ -90,13 +89,13 @@ const Filtering = () => {
         </GanttComponent>
         <div style={{ float: 'right', margin: '10px' }}>Source:
           <a href="https://en.wikipedia.org/wiki/Apollo_11#Launch_and_flight_to_lunar_orbit"
-            target='_blank'>https://en.wikipedia.org/</a>
+            target='_blank'>https://en.wikipedia.org/wiki/Apollo_11</a>
         </div>
       </div>
       <div className='col-md-3 property-section'>
         <PropertyPane title='Properties'>
           <table id='property' title='Properties' className='property-panel-table' style={{ width: '100%' }}>
-          <tbody>
+            <tbody>
               <tr>
                 <td style={{ width: '30%' }}>
                   <div style={{ paddingTop: '10px' }}> Filter Type </div>
@@ -154,9 +153,9 @@ const Filtering = () => {
           </ul>
         </div>
         <p>
-          Gantt component features are segregated into individual feature-wise modules. To use the filtering feature, inject the <code>Filter</code> module. To enable toolbar support, inject the <code>Toolbar</code> module. To enable selection, inject the <code>Selection</code> module.
+          Gantt component features are segregated into individual feature-wise modules. To use the filtering and selection features, we need to inject the <code>Filter</code> and <code>Selection</code> into the <code>Inject Services</code> section.
         </p>
-        <br/>
+        <br />
         <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/filtering/filtering">documentation section</a>.</p>
       </div>
     </div>

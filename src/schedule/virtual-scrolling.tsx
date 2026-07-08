@@ -85,6 +85,9 @@ export class VirtualScrolling extends SampleBase<{}, {}> {
                         resources and its associated events. To enable the dynamic loading of events and resources in the
                         Scheduler, set the <code>allowVirtualScrolling</code> property to <code>true</code> within the
                         view-specific settings.</p>
+                    <p>
+                        Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                    </p>
                 </div>
             </div>
         );

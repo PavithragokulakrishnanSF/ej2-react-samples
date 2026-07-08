@@ -69,6 +69,9 @@ const ReadonlyEvents = () => {
           the <code>IsReadonly</code> field of past events. By doing so, the <code>aria-readonly</code> attribute
           gets added into the event element and differentiate it from the other normal events.
         </p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

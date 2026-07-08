@@ -3145,7 +3145,7 @@ export class FinanceDashboard extends SampleBase<{}, FinanceDashboardState> {
 
               {/* Main content area */}
               <div className="cs-content">
-                <div className="app-page" style={{ padding: '16px', background: '#ffffff' }}>
+                <div className="app-finance-page" style={{ padding: '16px', background: '#ffffff' }}>
                   {this.renderDashboard()}
                 </div>
               </div>

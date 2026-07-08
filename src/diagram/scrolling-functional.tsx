@@ -155,21 +155,56 @@ Diagram.Inject(UndoRedo);
   ];
 
   const sample_css = `
-  .diagram-scroll .property-panel-header{
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-    font-weight: 600;
-    font-size: 15px;
-  }
-  .diagram-scroll .db-text-input {
-      width: calc(100% - 15px);
-      padding: 2px 2px 0px 0px;
-  }
-  
-  .diagram-scroll .row{
-    margin-right:-15px;
-    margin-left:-15px;
-  }`;
+    .diagram-scroll .property-panel-header{
+      padding-top: 2px !important;
+      padding-bottom: 2px !important;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .diagram-scroll .db-text-input {
+        width: calc(100% - 15px);
+        padding: 2px 2px 0px 0px;
+    }
+
+    @media (max-width: 550px) {
+
+        .diagram-scroll .sb-mobile-palette {
+            z-index: 19;
+            position: absolute;
+            display: none;
+            transition: transform 300ms linear, visibility 0s linear 300ms;
+            width: 39% !important;
+            height:100%;
+        }
+
+        .diagram-scroll .sb-mobile-property-panel {
+            width: 60% !important;;
+            float: left !important;
+        }
+        
+        .diagram-scroll .sb-mobile-palette.sb-mobile-palette-open {
+            display: block !important;
+        }
+
+        .diagram-scroll .sb-mobile-diagram {
+            width: 100% !important;;
+            height: 100%;
+            float: left;
+            left: 0px;
+        }
+
+    }
+    
+    .diagram-scroll .sb-mobile-palette-open {
+        position: absolute;
+        display: block;
+    }
+    
+    .diagram-scroll .row{
+      margin-right:-15px;
+      margin-left:-15px;
+    }`;
+
 let diagramInstance: DiagramComponent;
 let fontFamily:any;
 let scrollableDivInstance:any;
@@ -342,7 +377,7 @@ function ScrollingSample() {
                <Inject services={[UndoRedo]} />
               </DiagramComponent>
             </div>
-            <div id="properties" style={{ width: '20%', float: 'right' }}>
+            <div id="properties" className ="sb-mobile-property-panel" style={{ width: '20%', float: 'right' }}>
             <div className="property-panel-header">Properties</div>
             <div className="row db-prop-row">
               <div
@@ -646,7 +681,9 @@ function ScrollingSample() {
                 The scrollSettings <code>autoScrollBorder</code> property is used to specify the distance from the edge of a control at which auto-scrolling should occur. 
             </p>
             <br />
-        </div>
+        
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
       </div>
   );
 }

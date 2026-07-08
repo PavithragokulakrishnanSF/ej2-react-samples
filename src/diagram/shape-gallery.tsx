@@ -155,7 +155,9 @@ export class ShapeGallery extends SampleBase<{}, {}> {
                         <code>BpmnDiagrams</code> module into <code>services</code>.
                     </p>
                     <br />
-                </div>
+                
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
             </div>
         );
     }

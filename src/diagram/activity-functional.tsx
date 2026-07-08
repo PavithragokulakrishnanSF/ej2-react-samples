@@ -1,4 +1,4 @@
-// Importing React and necessary components from Syncfusion's EJ2 React Diagrams library for building the UML Activity diagram.
+// Importing React and necessary components from React Diagram library for building the UML Activity diagram.
 import * as React from "react";
 import {
     SnapConstraints,
@@ -202,10 +202,6 @@ const SAMPLE_CSS = `
   position: absolute;
   display: block;
   right: 15px;
-}
-
-.diagram-UML .e-toggle-palette::before {
-  content: "\e700"
 }`;
 
 // Define the function UmlActivityDiagram
@@ -379,7 +375,9 @@ function UmlActivityDiagram() {
                     activity shapes.
                 </p>
                 <br />
-            </div>
+            
+        <p>Looking for the full React Diagram component overview, features, pricing, and documentation? Visit the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> page.</p>
+</div>
         </div>
     );
 }

@@ -27,7 +27,11 @@ const PieMaps = () => {
         { from: 15, to: 59, color: '#557C5C', label: '25-54 years' },
         { from: 60, to: 100, color: '#5E55E2', label: '55-64 years' },
     ];
-    const onMapsLoad = (): void => {
+    const onMapsLoad = (args: ILoadedEventArgs): void => {
+        let markers = document.getElementById(args.maps.element.id + '_LayerIndex_0_Markers_Template_Group');
+        if (markers) {
+            markers.style.overflow = 'visible';
+        }
         let chart: AccumulationChart = new AccumulationChart({
             background: 'transparent',
             width: '70',
@@ -237,7 +241,7 @@ const PieMaps = () => {
                                     <MarkerDirective visible={true} animationDuration={0} template='<div id="marker3" style="top:-5px;left:10px;height:150px;width:200px;position: absolute !important;"></div>' dataSource={[{ 'latitude': 10.555037013237452, 'longitude': -64.1160548956648 }]}/>
                                     <MarkerDirective visible={true} animationDuration={0} template='<div id="marker4" style="top:-5px;left:55px;height:150px;width:200px;position: absolute !important;"></div>' dataSource={[ { 'latitude': 9.774059122564566, 'longitude': 108.77498325892299 }]}/>
                                     <MarkerDirective visible={true} animationDuration={0} template='<div id="marker5" style="top:-40px;left:85px;height:130px;width:200px;position: absolute !important;"></div>' dataSource={[{ 'latitude': -52.313430655959614, 'longitude': -66.26827567737013 }]}/>
-                                    <MarkerDirective visible={true} animationDuration={0} template='<div id="marker6" style="top:35px;left:65px;height:150px;width:200px;position: absolute !important;"></div>' dataSource={[{ 'latitude': -23.725011735951796, 'longitude': 132.978515625 }]}/>
+                                    <MarkerDirective visible={true} animationDuration={0} template='<div id="marker6" style="top:35px;left:40px;height:150px;width:200px;position: absolute !important;"></div>' dataSource={[{ 'latitude': -23.725011735951796, 'longitude': 132.978515625 }]}/>
                                 </MarkersDirective>
                             </LayerDirective>
                         </LayersDirective>

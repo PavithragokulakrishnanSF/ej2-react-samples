@@ -1,12 +1,11 @@
-import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { GanttComponent, ColumnsDirective, ColumnDirective, Selection, Inject } from '@syncfusion/ej2-react-gantt';
+import { GanttComponent, TaskFieldsModel, ColumnsDirective, ColumnDirective, Selection, Inject, TimelineSettingsModel, LabelSettingsModel, SplitterSettingsModel, TooltipSettingsModel } from '@syncfusion/ej2-react-gantt';
 import { baselineData } from './data';
 import { SampleBase } from '../common/sample-base';
 import './baseline.css'
 
 export class Baseline extends SampleBase<{}, {}> {
-private ganttInstance: GanttComponent;
+  private ganttInstance: GanttComponent;
   private themeColors = {
     'material3': {
       onTime: '#F0FDF4',
@@ -75,7 +74,7 @@ private ganttInstance: GanttComponent;
 
   state = { currentTheme: 'material3' };
 
-  public taskFields: any = {
+  public taskFields: TaskFieldsModel = {
     id: 'TaskId',
     name: 'TaskName',
     startDate: 'StartDate',
@@ -89,10 +88,10 @@ private ganttInstance: GanttComponent;
     progress: 'Progress'
   };
 
-  public projectStartDate = new Date('07/02/2025');
-  public projectEndDate = new Date('09/15/2025');
+  public projectStartDate: Date = new Date('07/02/2025');
+  public projectEndDate: Date = new Date('09/15/2025');
 
-  public timelineSettings: any = {
+  public timelineSettings: TimelineSettingsModel = {
     topTier: {
       unit: 'Month',
       format: 'MMMM yyyy'
@@ -104,9 +103,9 @@ private ganttInstance: GanttComponent;
 
 
   private getCurrentTheme = (): any => {
-        const themeClasses = Object.keys(this.themeColors); // Extract theme names from themeColors
-        const currentTheme = themeClasses.find(theme => document.body.classList.contains(theme));
-        return currentTheme || 'material3'; // Default theme
+    const themeClasses = Object.keys(this.themeColors); // Extract theme names from themeColors
+    const currentTheme = themeClasses.find(theme => document.body.classList.contains(theme));
+    return currentTheme || 'material3'; // Default theme
   };
 
   componentDidMount() {
@@ -116,7 +115,7 @@ private ganttInstance: GanttComponent;
   private parentTaskbarTemplate = (props: any) => (
     <div className="e-gantt-parent-taskbar e-row-expand e-custom-parent" style={{ height: '10px', marginTop: '17px', background: '#F3F4F6', border: '1px solid #9CA3AF', borderRadius: '5px', textOverflow: 'ellipsis' }}>
       <div className="e-gantt-parent-progressbar e-custom-progress" style={{ height: '100%', width: `${props.ganttProperties.progressWidth}px`, background: '#9CA3AF', borderRadius: '5px' }}></div>
-      <span className="e-label" style={{ position: 'absolute', top: '0px', right: '6px', fontSize: '12px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin:'0px'}}>
+      <span className="e-label" style={{ position: 'absolute', top: '0px', right: '6px', fontSize: '12px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', margin: '0px' }}>
         {props.TaskName} | {this.ganttInstance.getFormatedDate(props.ganttProperties.startDate)} - {this.ganttInstance.getFormatedDate(props.ganttProperties.endDate)} | {props.ganttProperties.duration} days
       </span>
     </div>
@@ -128,7 +127,7 @@ private ganttInstance: GanttComponent;
     }
     return null;
   };
-  public splitterSettings: any={
+  public splitterSettings: SplitterSettingsModel = {
     columnIndex: 4,
   };
   private tooltipTemplate = (props: any) => (
@@ -154,21 +153,21 @@ private ganttInstance: GanttComponent;
       </tbody>
     </table>
   );
-  public template: any=this.tooltipTemplate;
+  public template: any = this.tooltipTemplate;
   private queryTaskbarInfo = (args: any) => {
     const newTheme = this.getCurrentTheme();
     if (newTheme !== this.state.currentTheme) {
-      this.state.currentTheme=newTheme;
+      this.setState({ currentTheme: newTheme });
     }
     const colors = this.themeColors[this.state.currentTheme];
     const taskbarColor = !args.data.ganttProperties.baselineStartDate ||
-                        !args.data.ganttProperties.baselineEndDate ||
-                        args.data.ganttProperties.startDate <= args.data.ganttProperties.baselineStartDate
-                        ? colors.onTime : colors.delayed;
+      !args.data.ganttProperties.baselineEndDate ||
+      args.data.ganttProperties.startDate <= args.data.ganttProperties.baselineStartDate
+      ? colors.onTime : colors.delayed;
     const progressColor = !args.data.ganttProperties.baselineStartDate ||
-                         !args.data.ganttProperties.baselineEndDate ||
-                         args.data.ganttProperties.startDate <= args.data.ganttProperties.baselineStartDate
-                         ? colors.onTimeProgress : colors.delayedProgress;
+      !args.data.ganttProperties.baselineEndDate ||
+      args.data.ganttProperties.startDate <= args.data.ganttProperties.baselineStartDate
+      ? colors.onTimeProgress : colors.delayedProgress;
     if (args.taskbarType !== 'ParentTask') {
       if (this.state.currentTheme === 'material3' || this.state.currentTheme === 'material3-dark') {
         if (args.taskbarType !== 'Milestone') {
@@ -183,7 +182,7 @@ private ganttInstance: GanttComponent;
       args.taskbarBorderColor = progressColor;
       args.progressBarBgColor = progressColor;
     }
-    args.baselineColor=colors.baseline
+    args.baselineColor = colors.baseline
   };
 
   private queryCellInfo = (args: any) => {
@@ -205,27 +204,28 @@ private ganttInstance: GanttComponent;
     }
   };
 
-  public labelSettings: any = {
-    rightLabel: this.rightLabelTemplate
+  public labelSettings: LabelSettingsModel = {
+    rightLabel: this.rightLabelTemplate as any
   };
 
-  public tooltipSettings: any = {
+  public tooltipSettings: TooltipSettingsModel = {
     taskbar: this.template.bind(this),
   };
   render() {
     return (
       <div className='control-pane'>
         <div className='control-section'>
-          <GanttComponent id='Baseline' ref={gantt => this.ganttInstance = gantt} dataSource={baselineData} renderBaseline={true} parentTaskbarTemplate={this.parentTaskbarTemplate}
-            treeColumnIndex={1} allowSelection={true} projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate} splitterSettings={this.splitterSettings}
+          <GanttComponent id='Baseline' ref={gantt => this.ganttInstance = gantt} dataSource={baselineData} renderBaseline={true} labelSettings={this.labelSettings} parentTaskbarTemplate={this.parentTaskbarTemplate}
+            treeColumnIndex={0} allowSelection={true} projectStartDate={this.projectStartDate} projectEndDate={this.projectEndDate} splitterSettings={this.splitterSettings}
             taskFields={this.taskFields} timelineSettings={this.timelineSettings} includeWeekend={true} queryCellInfo={this.queryCellInfo} queryTaskbarInfo={this.queryTaskbarInfo}
             height='650px' taskbarHeight={25} rowHeight={46} tooltipSettings={this.tooltipSettings} >
             <ColumnsDirective>
-              <ColumnDirective field='TaskName' headerText='Service Name' width='250' clipMode='EllipsisWithTooltip'></ColumnDirective>
-              <ColumnDirective field='BaselineStartDate' headerText='Planned start time' ></ColumnDirective>
-              <ColumnDirective field='BaselineEndDate' headerText='Planned end time' ></ColumnDirective>
-              <ColumnDirective field='StartDate' headerText='Start time' ></ColumnDirective>
-              <ColumnDirective field='EndDate' headerText='End time' ></ColumnDirective>
+              <ColumnDirective field='TaskName' headerText='Task Name' width='200' />
+              <ColumnDirective field='StartDate' width='130' />
+              <ColumnDirective field='Duration' width='125' />
+              <ColumnDirective field='BaselineStartDate' headerText='Baseline StartDate' width='195' />
+              <ColumnDirective field='baselineDur' headerText='Baseline Duration' type='string' editType='stringedit' width='195' />
+              <ColumnDirective field='variance' headerText='Variance' allowEditing={false} width='130' />
             </ColumnsDirective>
             <Inject services={[Selection]} />
           </GanttComponent>
@@ -238,22 +238,17 @@ private ganttInstance: GanttComponent;
           <p>This sample visualizes the complete car service schedule using the React Gantt Chart. Baselines are enabled to highlight deviations between planned and actual service dates, helping track schedule accuracy across all tasks and milestones.</p>
         </div>
         <div id="description">
-          <p> In this demo sample, the baseline feature in the React Gantt Chart, which helps visualize the variance between planned and actual task 
-          schedules. Baselines provide a clear reference for tracking project deviations and are rendered for all task types including child tasks, 
-          parent tasks, and milestones.</p>
-          <p>To enable baselines in the React Gantt Chart, set the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#renderbaseline">renderBaseline</a> property to <code>true</code> and define the planned schedule using the 
-          <code>baselineStartDate</code> field. You can either specify the <code>baselineEndDate</code> directly or use the <code>baselineDuration</code> property to calculate it 
-          automatically. Setting <code>baselineDuration</code> to zero is particularly useful for milestones, as it clearly marks a planned point in time. 
-          The appearance of baselines can be customized using the <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#baselinecolor">baselineColor</a></code> property to visually distinguish planned timelines from actual 
-          task progress.timelines from actual progress.</p>
-          
-          <p>
-            Gantt component features are segregated into individual feature-wise modules. To use a selection support, inject the
-            <code>Selection</code> module.
-          </p>
-          <br></br>
+          <p> In this demo sample, the baseline feature in the React Gantt Chart helps visualize the variance between planned and actual task
+            schedules. Baselines provide a clear reference for tracking project deviations and are rendered for all task types including child tasks,
+            parent tasks, and milestones.</p>
+          <p>To enable baselines in the React Gantt Chart, set the <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#renderbaseline">renderBaseline</a> property to <code>true</code> and define the planned schedule using the
+            <code>baselineStartDate</code> field. You can either specify the <code>baselineEndDate</code> directly or use the <code>baselineDuration</code> property to calculate it
+            automatically. Setting <code>baselineDuration</code> to zero is particularly useful for milestones, as it clearly marks a planned point in time.
+            The appearance of baselines can be customized using the <code><a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/gantt/#baselinecolor">baselineColor</a></code> property to visually distinguish planned timelines from actual task progress.</p>
+          <p>Gantt component features are segregated into individual feature-wise modules. To use Selection feature, we need to inject the <code>Selection</code> into the <code>Inject Services</code> section.</p>
+          <br/>
           <p>More information on the Essential<sup>®</sup> React Gantt Chart can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/gantt/baseline">documentation section</a>.</p>
-      </div>
+        </div>
       </div>
     )
   }

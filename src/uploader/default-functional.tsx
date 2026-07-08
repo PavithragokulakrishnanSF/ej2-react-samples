@@ -55,22 +55,22 @@ const Default = () => {
     return (
         <div className = 'control-pane' ref={dropContainerRef}>
             <div className='control-section row uploadpreview'>
-            <div className='col-lg-9'>
-            <div className='upload_wrapper'>
-                {/* Render Uploader */}
-                <UploaderComponent id='UploadFiles' type='file' ref = {uploadObj} asyncSettings = {asyncSettings} failure={onFailure.bind(this)} removing= {onRemoveFile.bind(this)} autoUpload={isAutoUpload} sequentialUpload={isSequentialUpload}></UploaderComponent>
-            </div>
-            </div>
-            <div className='property-section col-lg-3' id="uploader">
-                <PropertyPane title='Properties'>
-                    <div className = 'panel-style'>
-                        <CheckBoxComponent checked={true} label='Auto Upload' change={onChange.bind(this)}></CheckBoxComponent>
+                <div className='col-lg-9'>
+                    <div className='upload_wrapper'>
+                        {/* Render Uploader */}
+                        <UploaderComponent id='UploadFiles' type='file' ref={uploadObj} asyncSettings={asyncSettings} failure={onFailure.bind(this)} removing={onRemoveFile.bind(this)} autoUpload={isAutoUpload} sequentialUpload={isSequentialUpload}></UploaderComponent>
                     </div>
-                    <div className = 'panel-style'>
-                        <CheckBoxComponent checked={false} label='Sequential Upload' change={onChanged.bind(this)}></CheckBoxComponent>
-                    </div>
-                </PropertyPane>
-            </div>
+                </div>
+                <div className='property-section col-lg-3' id="uploader">
+                    <PropertyPane title='Properties'>
+                        <div className='panel-style'>
+                            <CheckBoxComponent checked={true} label='Auto Upload' change={onChange.bind(this)}></CheckBoxComponent>
+                        </div>
+                        <div className='panel-style'>
+                            <CheckBoxComponent checked={false} label='Sequential Upload' change={onChanged.bind(this)}></CheckBoxComponent>
+                        </div>
+                    </PropertyPane>
+                </div>
             </div>
             <div id="action-description">
                 <p>
@@ -84,11 +84,6 @@ const Default = () => {
                 <p>You can manage the files in server after received the uploaded files. When the files are successfully uploaded to server, the remove button will be change to bin button. The uploaded files can be removed by click on the bin button.</p>
                 <p>The progress bar displays for each file upload to denote its upload progress. Once the file upload gets success, the progress bar disappear and corresponding upload status message will be displayed in same place.</p>
                 <p>More information on the Uploader instantiation can be found in this <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/getting-started/">documentation section</a>.</p>
-                <p>In this example, the backend service used in the saveUrl and removeUrl endpoints for saving and removing files is intended for demonstration purposes only. The uploaded files are subjected to thorough validation, including verification of file names and the application of security checks. Therefore, this service is not recommended for production use, and the configuration of a custom backend save and remove service is advised. Additional implementation details can be found in the
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/async#server-side-configuration-for-save-action">saveUrl</a> and
-            <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/uploader/async#server-side-configuration-for-remove-action">removeUrl</a>
-            documentation.
-          </p>
             </div>
         </div>
     );

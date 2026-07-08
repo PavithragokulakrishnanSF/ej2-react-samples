@@ -17,14 +17,14 @@ const Toolbar = () => {
         updateSampleSection();
     }, [])
     const [strokeWidth, setStrokeWidth] = useState<number>(2);
-    const [bgColor, setBgColor] = useState<string>('');
-    const [strokeColor, setStrokeColor] = useState<string>('rgb(0, 0, 0)');
     const [isSignDisabled, setIsSignDisabled] = useState<boolean>(false);
     let singnatureObj = useRef<SignatureComponent>(null);
     let strokeColorObj = useRef<ColorPickerComponent>(null);
     let bgColorObj = useRef<ColorPickerComponent>(null);
     let saveBtnObj = useRef<SplitButtonComponent>(null);
     let toolbarObj = useRef<ToolbarComponent>(null);
+    let bgColorRef = useRef<string>('');
+    let strokeColorRef = useRef<string>('rgb(0, 0, 0)');
     
     const change = (args: ChangeEventArgs): void => {
         setIsSignDisabled(args.checked);
@@ -178,7 +178,8 @@ const Toolbar = () => {
             }
             let selElem: HTMLElement = strokeColorObj.current.element.nextElementSibling.querySelector('.e-selected-color') as HTMLElement;
             selElem.style.borderBottomColor = args.currentValue.rgba;
-            setStrokeColor(args.currentValue.rgba);
+            strokeColorRef.current = args.currentValue.rgba;
+            singnatureObj.current.strokeColor = args.currentValue.rgba;
         }
 
         return (
@@ -205,7 +206,8 @@ const Toolbar = () => {
                 return;
             }
             let selElem: HTMLElement = bgColorObj.current.element.nextElementSibling.querySelector('.e-selected-color') as HTMLElement;
-            setBgColor(args.currentValue.rgba);
+            bgColorRef.current = args.currentValue.rgba;
+            singnatureObj.current.backgroundColor = args.currentValue.rgba;
             selElem.style.borderBottomColor = args.currentValue.rgba;
         }
 
@@ -253,7 +255,7 @@ const Toolbar = () => {
                         </ItemsDirective>
                     </ToolbarComponent>
                     <div id="signature-control">
-                        <SignatureComponent maxStrokeWidth={strokeWidth} backgroundColor={bgColor} strokeColor={strokeColor} id="signature" change={onChange} ref={singnatureObj} disabled={isSignDisabled}></SignatureComponent>
+                        <SignatureComponent maxStrokeWidth={strokeWidth} backgroundColor={bgColorRef.current} strokeColor={strokeColorRef.current} id="signature" change={onChange} ref={singnatureObj} disabled={isSignDisabled}></SignatureComponent>
                     </div>
                 </div>
             </div>

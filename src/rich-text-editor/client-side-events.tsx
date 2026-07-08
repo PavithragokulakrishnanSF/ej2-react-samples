@@ -40,12 +40,11 @@ export class RTEEvents extends SampleBase<{}, {}> {
     };
     private fileManagerSettings: FileManagerSettingsModel = {
         enable: true,
-        path: '/Pictures/Food',
         ajaxSettings: {
-            url: 'https://ej2-aspcore-service.azurewebsites.net/api/FileManager/FileOperations',
-            getImageUrl: 'https://ej2-aspcore-service.azurewebsites.net/api/FileManager/GetImage',
-            uploadUrl: 'https://ej2-aspcore-service.azurewebsites.net/api/FileManager/Upload',
-            downloadUrl: 'https://ej2-aspcore-service.azurewebsites.net/api/FileManager/Download'
+            url: 'https://services.syncfusion.com/react/production/api/RichTextEditor/FileOperations',
+            getImageUrl: 'https://services.syncfusion.com/react/production/api/RichTextEditor/GetImage',
+            uploadUrl: 'https://services.syncfusion.com/react/production/api/RichTextEditor/Upload',
+            downloadUrl: 'https://services.syncfusion.com/react/production/api/RichTextEditor/Download'
         }
     }
     public ClearClick(): void {

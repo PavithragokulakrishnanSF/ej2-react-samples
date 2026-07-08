@@ -15,6 +15,7 @@ export class FilterMenu extends SampleBase<{}, {}> {
 
     private gridInstance: GridComponent;
     private checkBoxInstance: CheckBoxComponent;
+    private immediateCheckBoxInstance: CheckBoxComponent;
     public hostUrl: string = 'https://services.syncfusion.com/react/production/';
     public data: DataManager = new DataManager({ url: this.hostUrl + 'api/UrlDataSource', adaptor: new UrlAdaptor  });
     public query: Query = new Query().addParams('dataCount', '10000');
@@ -27,17 +28,24 @@ export class FilterMenu extends SampleBase<{}, {}> {
     private fields: Object = { text: 'text', value: 'value' };
     public onChange(sel: { itemData: { text: string, value: string } }): void {
         this.checkBoxInstance.checked = false;
-        this.gridInstance.filterSettings.enableInfiniteScrolling = false; 
+        this.immediateCheckBoxInstance.checked = false;
+        this.gridInstance.filterSettings.enableInfiniteScrolling = false;
+        this.gridInstance.filterSettings.mode = 'Default';
         this.gridInstance.filterSettings.type = sel.itemData.value as FilterType;
         this.gridInstance.clearFiltering();
         if (this.gridInstance.filterSettings.type === 'Excel' || this.gridInstance.filterSettings.type === 'CheckBox') {
             this.checkBoxInstance.disabled = false;
+            this.immediateCheckBoxInstance.disabled = false;
         } else {
             this.checkBoxInstance.disabled = true;
+            this.immediateCheckBoxInstance.disabled = true;
         }
     }
     public checkboxOnChange(args: ChangeEventArgs): void {
         this.gridInstance.filterSettings.enableInfiniteScrolling = args.checked; 
+    }
+    public immediateCheckboxOnChange(args: ChangeEventArgs): void {
+        this.gridInstance.filterSettings.mode = args.checked ? 'Immediate' : 'Default';
     }
     render() {
         return (
@@ -47,12 +55,17 @@ export class FilterMenu extends SampleBase<{}, {}> {
                         {SAMPLE_CSS}
                     </style>
                     <div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
                         <div style={{ padding: '14px', display: 'inline-block' }}>
                             <DropDownListComponent id="ddlelement" dataSource={this.filterType} fields={this.fields} change={this.onChange.bind(this)} index={0} popupHeight="150px" width="200px" />
                         </div>
-                            <CheckBoxComponent ref={checkBox => this.checkBoxInstance = checkBox} disabled={true} label='Enable OnDemand: ' labelPosition='Before' change={this.checkboxOnChange.bind(this)}></CheckBoxComponent>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                            <CheckBoxComponent ref={checkBox => this.checkBoxInstance = checkBox} disabled={true} label='Enable OnDemand ' labelPosition='Before' change={this.checkboxOnChange.bind(this)}></CheckBoxComponent>            
+                            <CheckBoxComponent ref={checkBox => this.immediateCheckBoxInstance = checkBox} disabled={true} label='Enable Immediate Filter ' labelPosition='Before' change={this.immediateCheckboxOnChange.bind(this)}></CheckBoxComponent> 
+                        </div>
+                        </div>
                     </div>
-                    <GridComponent dataSource={this.data} query={this.query} allowSorting={true} allowPaging={true} ref={grid => this.gridInstance = grid} pageSettings={{ pageSize: 10, pageCount: 5 }} allowFiltering={true} filterSettings={this.filterSettings}>
+                    <GridComponent dataSource={this.data} query={this.query} allowSorting={true} allowPaging={true} ref={grid => this.gridInstance = grid} pageSettings={{ pageSize: 10, pageCount: 5 }} allowFiltering={true} filterSettings={this.filterSettings} clipMode='EllipsisWithTooltip'>
                         <ColumnsDirective>
                         <ColumnDirective field='EmployeeID' headerText='Employee ID' width='120' textAlign='Right'></ColumnDirective>
                         <ColumnDirective field='Employees' headerText='Employee Name' width='150'></ColumnDirective>
@@ -64,34 +77,46 @@ export class FilterMenu extends SampleBase<{}, {}> {
                 </div>
                 <div id="action-description">
                     <p>
-                    This sample demonstrates the grid's multiple-type filter functionality and user interface.
+                    This sample demonstrates the filtering capabilities of the Grid using multiple filter types. It shows how users can interact with different filtering options to refine and view data efficiently.
                     </p>
                 </div>
 
                 <div id='description'>
-                    <p>The filtering feature enables the user to view a reduced number of records based on the filter criteria. It can be enabled by setting the <code><a target='_blank' className='code'
-                            href='https://ej2.syncfusion.com/react/documentation/api/grid/#allowfiltering'>allowFiltering
-                   </a></code> property to true.</p>
-                    <p>The grid supports the following filter types:</p>
+                    The filtering feature allows users to display only the matching records based on filter criteria. To enable filtering, set the <code><a target="_blank" className="code"
+                        href="https://ej2.syncfusion.com/react/documentation/api/grid#allowfiltering">allowFiltering</a></code> property to <code>true</code>.
+                    The Grid supports the following filter types:
                     <ul>
-                        <li><code>FilterBar</code></li>
-                        <li><code>Menu</code></li>
-                        <li><code>CheckBox</code></li>
-                        <li><code>Excel</code></li>
+                        <li><code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/grid/filtering/filter-menu">Menu</a></code></li>
+                        <li><code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/grid/filtering/excel-like-filter">CheckBox</a></code></li>
+                        <li><code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/grid/filtering/excel-like-filter">Excel</a></code></li>
                     </ul>
                     <p>
-                        You can change the filter type by setting <code><a target='_blank' className='code'
-                        href='https://ej2.syncfusion.com/react/documentation/api/grid/filterSettings/#type'>
-                        filterSettings-&gt;type</a>
-                        </code>.
+                        These can be configured using the <code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/api/grid/filterSettings/#type">filterSettings.type</a></code> property. In this sample, the Menu filter is enabled by default, and you can switch to "CheckBox" or "Excel" filters using the dropdown.
+                        When using "CheckBox" or "Excel" filters, the Grid provides two enhancements:
                     </p>
-                    <p>In this demo, the filter menu is enabled by default. You can switch to other filter types using the dropdown.</p>
-                    <p>Additionally, we have an on-demand data fetch functionality and UI for the checkbox/Excel filter type. It can be enabled by setting the <code><a target="_blank" className="code"
-                        href="">filterSettings-&gt;enableInfiniteScrolling</a></code> property to true. In this demo, on-demand data fetch is not enabled by default. To enable the on-demand data fetch for the checkbox/Excel filter type, the Enable OnDemand option must be checked after selecting the checkBox/Excel filter type using the dropdown menu.</p>
-                    <p>The Grid now supports improved <code>in</code> and <code>not in</code> filter operators, allowing users to filter multiple values within the same column. When the menu filter is enabled, a Syncfusion MultiSelect Dropdown component with checkboxes appears to select the <code>in</code> or <code>not in</code> operators.</p>
-                    <p>More information on the filter configuration can be found in this
+                    <ul>
+                        <li><strong>On-demand loading (Performance)</strong> loads data only when needed, improving speed and efficiency with large datasets. This can be enabled by setting <code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/api/grid/filtersettings#enableinfinitescrolling">filterSettings.enableInfiniteScrolling</a></code> property to <code>true</code>.</li>
+                        <li><strong>Immediate filtering (UI Experience)</strong> applies filters instantly as soon as you check or uncheck items, giving smoother interaction. This can be enabled by setting <code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/api/grid/filterSettings/#mode">filterSettings.mode</a></code> property to <code>Immediate</code>.</li>
+                    </ul>
+                    <p>
+                        <strong>Injecting Module:</strong>
+                    </p>
+                    <p>
+                        Features of the Grid component are organized into individual, feature-specific modules. To use filtering functionality, inject the required modules <code>Filter</code> into the <code>services</code>.
+                    </p>
+                    <p>
+                        More information on the filter configuration can be found in the
                         <a target="_blank" href="https://ej2.syncfusion.com/react/documentation/api/grid/#filtersettings"> documentation section</a>.
                     </p>
+                    <p>Looking for the full React Data Grid component overview, features, pricing, and documentation? Visit our
+                        <a target="_blank"
+                            href="https://www.syncfusion.com/react-components/react-data-grid"> React Data Grid component</a> page.</p>
                 </div>
             </div>
         )

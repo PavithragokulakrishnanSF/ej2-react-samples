@@ -46,6 +46,9 @@ function MonthAgendaView() {
           <strong>Module Injection</strong>
         </p>
         <p>To work with Month Agenda view on Scheduler – it is necessary to inject the MonthAgenda module using <code>services</code> property under <code>Inject</code> tag.</p>
+        <p>
+          Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+        </p>
       </div>
     </div>
   );

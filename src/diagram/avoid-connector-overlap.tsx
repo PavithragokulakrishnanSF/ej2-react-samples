@@ -295,17 +295,16 @@ export class AvoidConnectorOverlapDiagram extends SampleBase<{}, {}> {
                 </div>
                 <div id="description">
                     <p>
-                        This example showcases a circuit diagram created using the Syncfusion<sup>®</sup> Diagram control. It
-                        demonstrates the
-                        <code><a target="_blank" className="code"
-                            href="https://ej2.syncfusion.com/react/documentation/diagram/constraints#diagram-constraints">AvoidLineOverlapping</a></code>
+                        This example showcases a circuit diagram created using the <a href="https://www.syncfusion.com/react-components/react-diagram" target="_blank">React Diagram</a> control. It
+                        demonstrates the <code><a target="_blank" className="code"
+                            href="https://ej2.syncfusion.com/react/documentation/diagram/constraints#diagram-constraints">AvoidLineOverlapping</a></code> 
                         feature, which ensures that connectors do not visually overlap by automatically adjusting line segments for
                         better visualization of connections.
                     </p>
                     <br />
                     <p>
-                        To use this feature we need to inject the <code>AvoidLineOverlapping</code> module in our diagram project into
-                        <code>services</code> and enable the <b>AvoidLineOverlapping</b> feature in the
+                        To use this feature we need to inject the <code>AvoidLineOverlapping</code> module in our diagram project into 
+                        <code>services</code> and enable the <b>AvoidLineOverlapping</b> feature in the 
                         <code><a target="_blank" className="code"
                             href="https://ej2.syncfusion.com/react/documentation/diagram/constraints#diagram-constraints">DiagramConstraints</a></code> property.
                     </p>

@@ -95,7 +95,7 @@ export class OtpAPI extends SampleBase<{}, OTPState> {
                         </div>
                     </div>
                     </div>
-                    <div className="col-lg-4 property-section">
+                    <div className="col-lg-4 property-section otp-property-panel">
                         <PropertyPane title='Properties'>
                             <table id="property" title="Properties">
                                 <tbody>

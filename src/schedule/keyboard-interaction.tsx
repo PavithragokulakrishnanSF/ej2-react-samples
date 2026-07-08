@@ -164,6 +164,9 @@ export class KeyboardInteraction extends SampleBase<{}, {}> {
               </tr>
             </tbody>
           </table>
+          <p>
+            Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+          </p>
         </div>
       </div>
     );

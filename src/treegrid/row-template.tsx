@@ -78,6 +78,9 @@ export class RowTemplate extends SampleBase<{}, {}> {
     <p>
         In this demo, we have presented Employee Information with Employee Photo and employee details like Name, Address etc.
     </p>
+    <p>
+        Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+    </p>
 </div>
 </div>
         )

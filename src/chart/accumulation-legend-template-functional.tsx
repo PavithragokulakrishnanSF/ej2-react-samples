@@ -45,9 +45,7 @@ const AccumulationLegendTemplate = () => {
     '<span class="e-legend-desc" style="font-size:' + (Browser.isDevice ? '10px' : '12px') + '; margin-top:' + (Browser.isDevice ? '0px' : '2px') + '; line-height:' + (Browser.isDevice ? '12px' : '15px') + '; white-space:normal; overflow-wrap:break-word; word-break:break-word; max-width:' + (Browser.isDevice ? '130px' : '220px') + ';"></span>' +
     '</div>' +
     '</div>';
-  const onChartLoad = (args: IAccLoadedEventArgs): void => {
-    document.getElementById('accumulationLegendFunctional').setAttribute('title', '');
-  };
+
   const legendRender = (args: ILegendRenderEventArgs): void => {
     const matched = data.find((d) => d.x === args.text);
     const desc: string = matched ? matched.description : '';
@@ -78,7 +76,7 @@ const AccumulationLegendTemplate = () => {
           subTitle='Source: Wikipedia.org'
           titleStyle={{
             position: 'Custom',
-            x: Browser.isDevice ? 150 : 383,
+            x: Browser.isDevice ? 150 : 492,
             y: 22.75
           }}
           tooltip={{
@@ -89,7 +87,6 @@ const AccumulationLegendTemplate = () => {
           enableBorderOnMouseMove={false}
           legendRender={legendRender}
           load={load}
-          loaded={onChartLoad.bind(this)}
           legendSettings={{
             visible: true,
             width: Browser.isDevice ? '35%' : '20%',

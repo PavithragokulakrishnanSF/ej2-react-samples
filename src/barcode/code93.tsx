@@ -71,7 +71,7 @@ export class Code93 extends SampleBase<{}, {}> {
               </div>
             </div>
             <div className='allowedText'>
-              <span style={{ fontWeight: 600 }}> Allowed Input characters :</span>  This bar code support 0-9 , * , -'
+              <span style={{ fontWeight: 600 }}> Allowed Input characters :</span>  This bar code support 0-9 , -'
             </div>
           </div>
         </div>

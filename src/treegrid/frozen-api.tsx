@@ -128,6 +128,9 @@ export class FrozenAPI extends SampleBase<{}, {}> {
               need to inject <code><a target="_blank" className="code"
                 href="https://ej2.syncfusion.com/react/documentation/treegrid/scrolling/#frozen-rows-and-columns">Freeze
               </a></code> module into the <code>services</code></p>
+            <p>
+                Looking for the full React Tree Grid component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-tree-grid">React Tree Grid component</a> page.
+            </p>
           </div>
 
         </div>

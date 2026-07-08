@@ -97,6 +97,9 @@ const AddRemoveResources = () => {
                     <code>removeResource</code> method is used which accepts the index (position from where the resource to be removed) and resource name (within
                     which level, the resource object presents) as parameters.
                 </p>
+                <p>
+                    Looking for the full React Scheduler component overview, features, pricing, and documentation? Visit our <a target="_blank" href="https://www.syncfusion.com/react-components/react-scheduler">React Scheduler</a> component page.
+                </p>
             </div>
         </div>
     );

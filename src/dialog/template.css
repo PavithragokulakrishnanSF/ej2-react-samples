@@ -88,7 +88,7 @@
 .target-element .e-dialog .e-dlg-header-content {
     padding: 6px;
 }
-.e-bigger.e-dialog .e-dlg-header-content, .e-bigger .target-element .e-dialog .e-dlg-header-content {
+.target-element .e-bigger.e-dialog .e-dlg-header-content, .e-bigger .target-element .e-dialog .e-dlg-header-content {
     padding: 8px;
 }
 .target-element .e-open-icon::before {
